@@ -20,14 +20,11 @@
         <!--View Controller-->
         <scene sceneID="xnu-Bs-0Mv">
             <objects>
-                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="S1c-mL-zIB" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SquareBreathingViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="S1c-mL-zIB" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QkV-Ci-9ji"/>
                         <viewControllerLayoutGuide type="bottom" id="ch7-aD-ECV"/>
                     </layoutGuides>
-                    <string key="storyboardIdentifier" base64-UTF8="YES">
-FlNxdWFyZUJyZWF0aGluZ1ZpZXdDb250cm9sbGVyA
-</string>
                     <view key="view" contentMode="scaleToFill" id="xrn-54-ddb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
