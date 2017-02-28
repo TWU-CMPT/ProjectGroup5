@@ -20,14 +20,11 @@
         <!--View Controller-->
         <scene sceneID="xnu-Bs-0Mv">
             <objects>
-                <viewController id="S1c-mL-zIB" sceneMemberID="viewController">
+                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="S1c-mL-zIB" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QkV-Ci-9ji"/>
                         <viewControllerLayoutGuide type="bottom" id="ch7-aD-ECV"/>
                     </layoutGuides>
-                    <string key="restorationIdentifier" base64-UTF8="YES">
-FlNxdWFyZUJyZWF0aGluZ1ZpZXdDb250cm9sbGVyA
-</string>
                     <string key="storyboardIdentifier" base64-UTF8="YES">
 FlNxdWFyZUJyZWF0aGluZ1ZpZXdDb250cm9sbGVyA
 </string>
