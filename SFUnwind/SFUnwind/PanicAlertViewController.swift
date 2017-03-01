@@ -15,24 +15,65 @@ class PanicAlertViewController: UIViewController{
     
     // Properties:
     //******************
+    // Alert file paths (constants):
+    let alertFile01 = "alert01"
+    let alertFile02 = "alert02.txt"
+    let alertFile03 = "alert03.txt"
+    let alertFile04 = "alert04.txt"
+    let alertFile05 = "alert05.txt"
     
     // Send buttons:
-    @IBOutlet weak var contact1BtnText: UIButton!
+    //@IBOutlet weak var contact1BtnText: UIButton!
 
 
-    
-    // Contact name text:
-    @IBOutlet weak var contact1Text: UILabel! // Debug: Trying to make the text change when I press a button
-
-    
+    // Contact name text labels:
+    @IBOutlet weak var contact1Text: UILabel! //
 
     // Actions:
-    //******************
 
     @IBAction func contact1BtnPressed(_ sender: Any) {
         contact1Text.text = "Button pressed!"
     }
     
-
     
-}
+    
+    // Class methods:
+    //********************
+    
+    // View load: Initialize the screen. Called once, when the view is initialized
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Set the contact label text:
+        print("DEBUG FILE SPEW:")
+        print(alertFile01)
+        
+        var contact1TextValues = getStoredAlerts(filename: alertFile01) // Load alert01.txt to alert05.txt
+        
+        contact1TextValues?.forEach{ // Loop through each value and print it, if the values are not nil
+            print($0)
+        }
+    }
+    
+    // Load any pre-saved alerts stored in txt file. Called once per alert
+    // Return: An array of strings read line by line from the file
+    func getStoredAlerts(filename: String) -> [String]? {
+        
+        // Attempt to load the file: Handle errors if it can't be found
+        guard let theFile = Bundle.main.path(forResource: filename, ofType: "txt") else {
+            
+            print ("DEBUG: Error! File \(filename) not found!") // Print a debug error message...
+            
+            return nil // Return nill if the file can't be found
+        }
+        
+        do { // Extract the file contents, and return them as a split string array
+            let fileContents = try String(contentsOfFile: theFile)
+            return fileContents.components(separatedBy: "\n")
+        } catch _ as NSError { // Handle any exception: Return a nil if we have any issues
+            return nil
+        }
+    }
+    
+    
+} // End panic alert view controller class
