@@ -14,10 +14,10 @@
 		EB04A4831E6615F400BD2859 /* SFUnwindTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB04A4821E6615F400BD2859 /* SFUnwindTests.swift */; };
 		EB04A48E1E6615F400BD2859 /* SFUnwindUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB04A48D1E6615F400BD2859 /* SFUnwindUITests.swift */; };
 		EB04A49C1E661A0300BD2859 /* SFUnwindPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB04A49B1E661A0300BD2859 /* SFUnwindPageViewController.swift */; };
-		EB4F7EB21E667A5600C3AEDE /* PanicAlertFiles in Resources */ = {isa = PBXBuildFile; fileRef = EB4F7EB11E667A5600C3AEDE /* PanicAlertFiles */; };
 		EB7359111E665162004A0EB0 /* SquareBreathingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7359101E665162004A0EB0 /* SquareBreathingViewController.swift */; };
 		EB7359131E66520C004A0EB0 /* GroundingExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7359121E66520C004A0EB0 /* GroundingExerciseViewController.swift */; };
 		EB7359151E665240004A0EB0 /* PositiveAffirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7359141E665240004A0EB0 /* PositiveAffirmationViewController.swift */; };
+		EB75021F1E673AE800D9EC56 /* PanicAlertFiles in Resources */ = {isa = PBXBuildFile; fileRef = EB75021E1E673AE800D9EC56 /* PanicAlertFiles */; };
 		EB999C911E665A93006D41FE /* PanicAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB999C901E665A93006D41FE /* PanicAlertViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,10 +52,10 @@
 		EB04A48D1E6615F400BD2859 /* SFUnwindUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFUnwindUITests.swift; sourceTree = "<group>"; };
 		EB04A48F1E6615F400BD2859 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB04A49B1E661A0300BD2859 /* SFUnwindPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SFUnwindPageViewController.swift; sourceTree = "<group>"; };
-		EB4F7EB11E667A5600C3AEDE /* PanicAlertFiles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PanicAlertFiles; sourceTree = "<group>"; };
 		EB7359101E665162004A0EB0 /* SquareBreathingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquareBreathingViewController.swift; sourceTree = "<group>"; };
 		EB7359121E66520C004A0EB0 /* GroundingExerciseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroundingExerciseViewController.swift; sourceTree = "<group>"; };
 		EB7359141E665240004A0EB0 /* PositiveAffirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PositiveAffirmationViewController.swift; sourceTree = "<group>"; };
+		EB75021E1E673AE800D9EC56 /* PanicAlertFiles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PanicAlertFiles; sourceTree = "<group>"; };
 		EB999C901E665A93006D41FE /* PanicAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanicAlertViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,7 +107,7 @@
 		EB04A46C1E6615F400BD2859 /* SFUnwind */ = {
 			isa = PBXGroup;
 			children = (
-				EB4F7EB11E667A5600C3AEDE /* PanicAlertFiles */,
+				EB75021E1E673AE800D9EC56 /* PanicAlertFiles */,
 				EB04A46D1E6615F400BD2859 /* AppDelegate.swift */,
 				EB04A4711E6615F400BD2859 /* Main.storyboard */,
 				EB04A4741E6615F400BD2859 /* Assets.xcassets */,
@@ -251,7 +251,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB04A4781E6615F400BD2859 /* LaunchScreen.storyboard in Resources */,
-				EB4F7EB21E667A5600C3AEDE /* PanicAlertFiles in Resources */,
+				EB75021F1E673AE800D9EC56 /* PanicAlertFiles in Resources */,
 				EB04A4751E6615F400BD2859 /* Assets.xcassets in Resources */,
 				EB04A4731E6615F400BD2859 /* Main.storyboard in Resources */,
 			);
