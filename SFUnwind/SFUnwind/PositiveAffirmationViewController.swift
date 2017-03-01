@@ -9,7 +9,7 @@
 import UIKit
 
 
-// This is the main view controller for the SFUnwind "Panic Alert" feature
+// This is the main view controller for the SFUnwind "Positive Affirmation" feature
 // Primary programmer: Joseph
 class PositiveAffirmationViewController: UIViewController{
     
