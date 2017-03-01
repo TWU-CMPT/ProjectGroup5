@@ -16,7 +16,7 @@ class PanicAlertViewController: UIViewController{
     // Properties:
     //******************
     // Alert file paths (constants):
-    let alertFile01 = "alert01"
+    let alertFile01 = "SFUnwind/PanicAlertFiles/alert01"
     let alertFile02 = "alert02.txt"
     let alertFile03 = "alert03.txt"
     let alertFile04 = "alert04.txt"
@@ -47,6 +47,9 @@ class PanicAlertViewController: UIViewController{
         // Set the contact label text:
         print("DEBUG FILE SPEW:")
         print(alertFile01)
+        let fileManager = FileManager.default
+        let currentPath = fileManager.currentDirectoryPath
+        print("Current app working directory: \(currentPath)")
         
         var contact1TextValues = getStoredAlerts(filename: alertFile01) // Load alert01.txt to alert05.txt
         
@@ -60,7 +63,10 @@ class PanicAlertViewController: UIViewController{
     func getStoredAlerts(filename: String) -> [String]? {
         
         // Attempt to load the file: Handle errors if it can't be found
-        guard let theFile = Bundle.main.path(forResource: filename, ofType: "txt") else {
+       // let bundle = Bundle.main
+       // let path = bundle.path(forResource: "alert01", ofType: "txt")
+        
+        guard let theFile = Bundle.main.path(forResource: "alert01", ofType: "txt") else {
             
             print ("DEBUG: Error! File \(filename) not found!") // Print a debug error message...
             
