@@ -14,6 +14,7 @@
 		EB04A4831E6615F400BD2859 /* SFUnwindTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB04A4821E6615F400BD2859 /* SFUnwindTests.swift */; };
 		EB04A48E1E6615F400BD2859 /* SFUnwindUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB04A48D1E6615F400BD2859 /* SFUnwindUITests.swift */; };
 		EB04A49C1E661A0300BD2859 /* SFUnwindPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB04A49B1E661A0300BD2859 /* SFUnwindPageViewController.swift */; };
+		EB6FDFCD1E664A61000358D5 /* PanicAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6FDFCC1E664A61000358D5 /* PanicAlertViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		EB04A48D1E6615F400BD2859 /* SFUnwindUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFUnwindUITests.swift; sourceTree = "<group>"; };
 		EB04A48F1E6615F400BD2859 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB04A49B1E661A0300BD2859 /* SFUnwindPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SFUnwindPageViewController.swift; sourceTree = "<group>"; };
+		EB6FDFCC1E664A61000358D5 /* PanicAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanicAlertViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				EB04A4761E6615F400BD2859 /* LaunchScreen.storyboard */,
 				EB04A4791E6615F400BD2859 /* Info.plist */,
 				EB04A49B1E661A0300BD2859 /* SFUnwindPageViewController.swift */,
+				EB6FDFCC1E664A61000358D5 /* PanicAlertViewController.swift */,
 			);
 			path = SFUnwind;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 			files = (
 				EB04A49C1E661A0300BD2859 /* SFUnwindPageViewController.swift in Sources */,
 				EB04A46E1E6615F400BD2859 /* AppDelegate.swift in Sources */,
+				EB6FDFCD1E664A61000358D5 /* PanicAlertViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,6 +522,7 @@
 				EB04A4941E6615F400BD2859 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EB04A4951E6615F400BD2859 /* Build configuration list for PBXNativeTarget "SFUnwindTests" */ = {
 			isa = XCConfigurationList;
@@ -526,6 +531,7 @@
 				EB04A4971E6615F400BD2859 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EB04A4981E6615F400BD2859 /* Build configuration list for PBXNativeTarget "SFUnwindUITests" */ = {
 			isa = XCConfigurationList;
@@ -534,6 +540,7 @@
 				EB04A49A1E6615F400BD2859 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
