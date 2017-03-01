@@ -17,10 +17,10 @@
             </objects>
             <point key="canvasLocation" x="-495" y="83"/>
         </scene>
-        <!--View Controller-->
+        <!--Square Breathing View Controller-->
         <scene sceneID="xnu-Bs-0Mv">
             <objects>
-                <viewController storyboardIdentifier="SquareBreathingViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="S1c-mL-zIB" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SquareBreathingViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="S1c-mL-zIB" customClass="SquareBreathingViewController" customModule="SFUnwind" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QkV-Ci-9ji"/>
                         <viewControllerLayoutGuide type="bottom" id="ch7-aD-ECV"/>
@@ -44,10 +44,10 @@
             </objects>
             <point key="canvasLocation" x="193.125" y="81.25"/>
         </scene>
-        <!--View Controller-->
+        <!--Grounding Feature View Controller-->
         <scene sceneID="rp5-ZD-1Vk">
             <objects>
-                <viewController restorationIdentifier="GroundingExerciseViewController" storyboardIdentifier="GroundingExerciseViewController" id="XSJ-Gk-wV9" sceneMemberID="viewController">
+                <viewController restorationIdentifier="GroundingExerciseViewController" storyboardIdentifier="GroundingExerciseViewController" id="XSJ-Gk-wV9" customClass="GroundingFeatureViewController" customModule="SFUnwind" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nLa-eI-hBz"/>
                         <viewControllerLayoutGuide type="bottom" id="W2c-JR-rVc"/>
@@ -71,10 +71,10 @@
             </objects>
             <point key="canvasLocation" x="853.125" y="81.25"/>
         </scene>
-        <!--View Controller-->
+        <!--Positive Affirmation View Controller-->
         <scene sceneID="nrW-yZ-yG7">
             <objects>
-                <viewController restorationIdentifier="PositiveAffirmationViewController" storyboardIdentifier="PositiveAffirmationViewController" id="Ykn-5N-1a3" sceneMemberID="viewController">
+                <viewController restorationIdentifier="PositiveAffirmationViewController" storyboardIdentifier="PositiveAffirmationViewController" id="Ykn-5N-1a3" customClass="PositiveAffirmationViewController" customModule="SFUnwind" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UNn-oU-bMf"/>
                         <viewControllerLayoutGuide type="bottom" id="x8j-M8-M5g"/>
@@ -117,6 +117,11 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KdU-E2-FW3">
+                                <rect key="frame" x="16" y="334" width="288" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="PanicTestButton"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.98639394464557606" green="0.65366481890404859" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>

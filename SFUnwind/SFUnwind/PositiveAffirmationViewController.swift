@@ -1,5 +1,5 @@
 //
-//  PanicAlertViewController.swift
+//  PositiveAffirmationViewController.swift
 //  SFUnwind
 //
 //  Created by A B on 2017-02-28.
@@ -10,7 +10,8 @@ import UIKit
 
 
 // This is the main view controller for the SFUnwind "Panic Alert" feature
-// Primary programmer: Adam
-class PanicAlertViewController: UIViewController{
+// Primary programmer: Joseph
+class PositiveAffirmationViewController: UIViewController{
     
 }
+
