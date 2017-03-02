@@ -7,11 +7,11 @@
 //
 
 import UIKit
-
+import ContactsUI
 
 // This is the main view controller for the SFUnwind "Panic Alert" feature
 // Primary programmer: Adam
-class PanicAlertViewController: UIViewController{
+class PanicAlertViewController: UIViewController, CNContactPickerDelegate {
     
     // Properties:
     //******************
@@ -24,10 +24,19 @@ class PanicAlertViewController: UIViewController{
     // Contact 1: Create/send
     @IBOutlet weak var contact1CreateSendBtn: UIButton! // Outlet
     @IBAction func contact1CreateSendBtn(_ sender: UIButton) { // Action
+        
     }
+    
     // Contact 1: Edit
     @IBOutlet weak var contact1EditBtn: UIButton! // Outlet
     @IBAction func contact1EditBtn(_ sender: Any) { // Action
+        let theContactView = CNContactPickerViewController()    // Create a CNContactPickerViewController object
+        theContactView.delegate = self                          // Set the current class, which inherits from the CNContactPickerDelegate class, as the view's delegate
+        present(theContactView, animated:true, completion: nil) // Display the view within the current view, to allow the user to select a contact
+        
+        // TO DO: Catch the information from the selected contact!!
+        
+        
     }
     
     
