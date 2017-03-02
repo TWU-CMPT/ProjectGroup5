@@ -129,28 +129,40 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Create"/>
                                 <connections>
-                                    <action selector="contact1BtnPressed:" destination="IBj-8c-3wa" eventType="touchUpInside" id="JzG-L6-CFF"/>
+                                    <action selector="contact1CreateSendBtn:" destination="IBj-8c-3wa" eventType="touchUpInside" id="qpn-hE-jHB"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="07e-cY-JaP">
-                                <rect key="frame" x="223" y="131" width="81" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xTP-wO-Wnd">
+                                <rect key="frame" x="259" y="131" width="53" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Send"/>
+                                <state key="normal" title="Create"/>
+                                <connections>
+                                    <action selector="contact2CreateSendBtn:" destination="IBj-8c-3wa" eventType="touchUpInside" id="0Vr-uH-zXg"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TSY-4K-jDB">
-                                <rect key="frame" x="223" y="188" width="81" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z4x-1O-hMU">
+                                <rect key="frame" x="259" y="188" width="53" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Send"/>
+                                <state key="normal" title="Create"/>
+                                <connections>
+                                    <action selector="contact3CreateSendBtn:" destination="IBj-8c-3wa" eventType="touchUpInside" id="hij-7G-qp6"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0bK-Jc-PLp">
-                                <rect key="frame" x="223" y="245" width="81" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vzl-DK-Hm3">
+                                <rect key="frame" x="259" y="245" width="53" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Send"/>
+                                <state key="normal" title="Create"/>
+                                <connections>
+                                    <action selector="contact4CreateSendBtn:" destination="IBj-8c-3wa" eventType="touchUpInside" id="9Yj-7t-GdA"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hd9-mJ-VaD">
-                                <rect key="frame" x="223" y="302" width="81" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cku-Ai-ric">
+                                <rect key="frame" x="259" y="302" width="53" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Send"/>
+                                <state key="normal" title="Create"/>
+                                <connections>
+                                    <action selector="contact5CreateSendBtn:" destination="IBj-8c-3wa" eventType="touchUpInside" id="brS-Po-Hup"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AEc-9Q-ZMM">
                                 <rect key="frame" x="16" y="65" width="35" height="49"/>
@@ -256,15 +268,60 @@
                                 <rect key="frame" x="214" y="74" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Edit"/>
+                                <connections>
+                                    <action selector="contact1EditBtn:" destination="IBj-8c-3wa" eventType="touchUpInside" id="Uwi-xX-k2V"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ln2-WN-h7y">
+                                <rect key="frame" x="214" y="131" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Edit"/>
+                                <connections>
+                                    <action selector="contact2EditBtn:" destination="IBj-8c-3wa" eventType="touchUpInside" id="U8n-5U-dLu"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Or-Qa-3hJ">
+                                <rect key="frame" x="214" y="188" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Edit"/>
+                                <connections>
+                                    <action selector="contact3EditBtn:" destination="IBj-8c-3wa" eventType="touchUpInside" id="Oau-Up-x0g"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DmO-nz-lvX">
+                                <rect key="frame" x="214" y="245" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Edit"/>
+                                <connections>
+                                    <action selector="contact4EditBtn:" destination="IBj-8c-3wa" eventType="touchUpInside" id="7dn-Qw-wDC"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mDy-RF-v2Z">
+                                <rect key="frame" x="214" y="302" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Edit"/>
+                                <connections>
+                                    <action selector="contact5EditBtn:" destination="IBj-8c-3wa" eventType="touchUpInside" id="27z-Xr-JwO"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.98639394464557606" green="0.65366481890404859" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
+                        <outlet property="contact1CreateSendBtn" destination="KdU-E2-FW3" id="lcF-lW-fJT"/>
+                        <outlet property="contact1EditBtn" destination="HsE-2U-Nwp" id="3Vq-5r-UIU"/>
                         <outlet property="contact1Text" destination="ZVV-9P-0vW" id="WG7-Iw-UeJ"/>
+                        <outlet property="contact2CreateSendBtn" destination="xTP-wO-Wnd" id="tp2-Xa-Ukn"/>
+                        <outlet property="contact2EditBtn" destination="Ln2-WN-h7y" id="C8b-Jx-FKc"/>
                         <outlet property="contact2Text" destination="LY2-IF-xR3" id="Uvw-Ly-KDr"/>
+                        <outlet property="contact3CreateSendBtn" destination="z4x-1O-hMU" id="0Ph-Pe-fH8"/>
+                        <outlet property="contact3EditBtn" destination="1Or-Qa-3hJ" id="GPP-eQ-SlJ"/>
                         <outlet property="contact3Text" destination="if6-VR-wo1" id="WSF-AJ-h2P"/>
+                        <outlet property="contact4CreateSendBtn" destination="Vzl-DK-Hm3" id="mtO-rB-fKH"/>
+                        <outlet property="contact4EditBtn" destination="DmO-nz-lvX" id="MNQ-sW-Azj"/>
                         <outlet property="contact4Text" destination="EbG-OK-SId" id="VEh-6U-HT3"/>
+                        <outlet property="contact5CreateSendBtn" destination="Cku-Ai-ric" id="Rps-wx-JQ0"/>
+                        <outlet property="contact5EditBtn" destination="mDy-RF-v2Z" id="8XK-1a-EXd"/>
                         <outlet property="contact5Text" destination="e3D-RL-tEQ" id="Zik-xb-Byx"/>
                     </connections>
                 </viewController>
