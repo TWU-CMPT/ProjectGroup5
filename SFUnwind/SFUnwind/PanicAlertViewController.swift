@@ -15,22 +15,26 @@ class PanicAlertViewController: UIViewController{
     
     // Properties:
     //******************
+    
+    
+    
+    
     // Alert file paths (constants):
-    let alertFile01 = "SFUnwind/PanicAlertFiles/alert01"
-    let alertFile02 = "alert02.txt"
-    let alertFile03 = "alert03.txt"
-    let alertFile04 = "alert04.txt"
-    let alertFile05 = "alert05.txt"
+    let alertFile01 = "alert01"
+    let alertFile02 = "alert02"
+    let alertFile03 = "alert03"
+    let alertFile04 = "alert04"
+    let alertFile05 = "alert05"
     
     // Send buttons:
     //@IBOutlet weak var contact1BtnText: UIButton!
-
-
+    
+    
     // Contact name text labels:
     @IBOutlet weak var contact1Text: UILabel! //
-
+    
     // Actions:
-
+    
     @IBAction func contact1BtnPressed(_ sender: Any) {
         contact1Text.text = "Button pressed!"
     }
@@ -43,13 +47,9 @@ class PanicAlertViewController: UIViewController{
     // View load: Initialize the screen. Called once, when the view is initialized
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Set the contact label text:
-        print("DEBUG FILE SPEW:")
-        print(alertFile01)
-        let fileManager = FileManager.default
-        let currentPath = fileManager.currentDirectoryPath
-        print("Current app working directory: \(currentPath)")
+        print("DEBUG: \(alertFile01) FILE CONTENTS:")
         
         var contact1TextValues = getStoredAlerts(filename: alertFile01) // Load alert01.txt to alert05.txt
         
@@ -61,21 +61,14 @@ class PanicAlertViewController: UIViewController{
     // Load any pre-saved alerts stored in txt file. Called once per alert
     // Return: An array of strings read line by line from the file
     func getStoredAlerts(filename: String) -> [String]? {
-        
-        // Attempt to load the file: Handle errors if it can't be found
-       // let bundle = Bundle.main
-       // let path = bundle.path(forResource: "alert01", ofType: "txt")
-        
-        guard let theFile = Bundle.main.path(forResource: "alert01", ofType: "txt") else {
-            
-            print ("DEBUG: Error! File \(filename) not found!") // Print a debug error message...
-            
+        // Attempt to open the file:
+        guard let theFile = Bundle.main.path( forResource: filename, ofType: "txt", inDirectory: "PanicAlertFiles") else {
             return nil // Return nill if the file can't be found
         }
         
         do { // Extract the file contents, and return them as a split string array
             let fileContents = try String(contentsOfFile: theFile)
-            return fileContents.components(separatedBy: "\n")
+            return fileContents.components(separatedBy: "\n") // Return the file contents as an array, with each line as an element
         } catch _ as NSError { // Handle any exception: Return a nil if we have any issues
             return nil
         }
