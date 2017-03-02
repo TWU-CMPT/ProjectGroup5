@@ -19,22 +19,68 @@ class PanicAlertViewController: UIViewController{
     // Panic Alert file names (constants). The name of each panic alert text file to be loaded:
     let alertFiles = ["alert01", "alert02", "alert03", "alert04", "alert05"] // Store the alert file names in a (constant) array, to allow easier iteration through each.
     
-    // Send buttons:
-
+    // UI buttons:
+    
+    // Contact 1: Create/send
+    @IBOutlet weak var contact1CreateSendBtn: UIButton! // Outlet
+    @IBAction func contact1CreateSendBtn(_ sender: UIButton) { // Action
+    }
+    // Contact 1: Edit
+    @IBOutlet weak var contact1EditBtn: UIButton! // Outlet
+    @IBAction func contact1EditBtn(_ sender: Any) { // Action
+    }
+    
+    
+    // Contact 2: Create/send
+    @IBOutlet weak var contact2CreateSendBtn: UIButton! // Outlet
+    @IBAction func contact2CreateSendBtn(_ sender: Any) { // Action
+    }
+    // Contact 2: Edit
+    @IBOutlet weak var contact2EditBtn: UIButton! // Outlet
+    @IBAction func contact2EditBtn(_ sender: Any) { // Action
+    }
+    
+    
+    // Contact 3: Create/send
+    @IBOutlet weak var contact3CreateSendBtn: UIButton! // Outlet
+    @IBAction func contact3CreateSendBtn(_ sender: Any) { // Action
+    }
+    // Contact 3: Edit
+    @IBOutlet weak var contact3EditBtn: UIButton! // Outlet
+    @IBAction func contact3EditBtn(_ sender: Any) { // Action
+    }
+    
+    
+    // Contact 4: Create/send
+    @IBOutlet weak var contact4CreateSendBtn: UIButton! // Outlet
+    @IBAction func contact4CreateSendBtn(_ sender: Any) { // Action
+    }
+    // Contact 4: Edit
+    @IBOutlet weak var contact4EditBtn: UIButton! // Outlet
+    @IBAction func contact4EditBtn(_ sender: Any) { // Action
+    }
+    
+    
+    // Contact 5: Create/send
+    @IBOutlet weak var contact5CreateSendBtn: UIButton! // Outlet
+    @IBAction func contact5CreateSendBtn(_ sender: Any) { // Action
+    }
+    // Contact 5: Edit
+    @IBOutlet weak var contact5EditBtn: UIButton! // Outlet
+    @IBAction func contact5EditBtn(_ sender: Any) { // Action
+    }
+    
     
     
     // Contact name text labels:
-    @IBOutlet weak var contact1Text: UILabel! //
-    @IBOutlet weak var contact2Text: UILabel!
-    @IBOutlet weak var contact3Text: UILabel!
-    @IBOutlet weak var contact4Text: UILabel!
-    @IBOutlet weak var contact5Text: UILabel!
+    @IBOutlet weak var contact1Text: UILabel! // Contact 1
+    @IBOutlet weak var contact2Text: UILabel! // Contact 2
+    @IBOutlet weak var contact3Text: UILabel! // Contact 3
+    @IBOutlet weak var contact4Text: UILabel! // Contact 4
+    @IBOutlet weak var contact5Text: UILabel! // Contact 5
     
-    // Actions:
     
-    @IBAction func contact1BtnPressed(_ sender: Any) {
-        contact1Text.text = "Button pressed!"
-    }
+
     
     
     
@@ -65,49 +111,72 @@ class PanicAlertViewController: UIViewController{
             // Set the alert name text:
             switch contactNumber{
             case 1: // Contact 1
-                if (currentAlertText?.count)! < 3 { // Handle empty or malformed alert files: Set the label to blank
-                    contact1Text.text = "Create" // Set the contact name text label to the first line in the alert file
+                if (currentAlertText?.count)! < 3 { // Handle empty or malformed alert files: Set the label to blank, and button to "create"
+                    contact1Text.text = ""                            // Set the contact name text label to the first line in the alert file
+                    contact1CreateSendBtn.setTitle("Create", for: .normal)    // Update the send/create button text
+                    contact1EditBtn.isHidden = true
                     
                 } else{ // Otherwise, set the contact name text label to the first line in the alert file
                     contact1Text.text = currentAlertText?[0]
+                    contact1CreateSendBtn.setTitle("Send", for: .normal)
+                    contact1EditBtn.isHidden = false
                 }
 
             case 2: // Contact 2
                 if (currentAlertText?.count)! < 3 { // Handle empty or malformed alert files: Set the label to blank
-                    contact1Text.text = "Create" // Set the contact name text label to the first line in the alert file
+                    contact2Text.text = ""                            // Set the contact name text label to the first line in the alert file
+                    contact2CreateSendBtn.setTitle("Create", for: .normal)    // Update the send/create button text
+                    contact2EditBtn.isHidden = true
                     
                 } else{ // Otherwise, set the contact name text label to the first line in the alert file
                     contact2Text.text = currentAlertText?[0]
+                    contact2CreateSendBtn.setTitle("Send", for: .normal)
+                    contact2EditBtn.isHidden = false
                 }
                 
             case 3: // Contact 3
                 if (currentAlertText?.count)! < 3 { // Handle empty or malformed alert files: Set the label to blank
-                    contact3Text.text = "Create" // Set the contact name text label to the first line in the alert file
+                    contact3Text.text = ""                            // Set the contact name text label to the first line in the alert file
+                    contact3CreateSendBtn.setTitle("Create", for: .normal)    // Update the send/create button text
+                    contact3EditBtn.isHidden = true
                     
                 } else{ // Otherwise, set the contact name text label to the first line in the alert file
                     contact3Text.text = currentAlertText?[0]
+                    contact3CreateSendBtn.setTitle("Send", for: .normal)
+                    contact3EditBtn.isHidden = false
                 }
                 
             case 4: // Contact 4
                 if (currentAlertText?.count)! < 3 { // Handle empty or malformed alert files: Set the label to blank
-                    contact4Text.text = "Create" // Set the contact name text label to the first line in the alert file
+                    contact4Text.text = ""                            // Set the contact name text label to the first line in the alert file
+                    contact4CreateSendBtn.setTitle("Create", for: .normal)    // Update the send/create button text
+                    contact4EditBtn.isHidden = true
                     
                 } else{ // Otherwise, set the contact name text label to the first line in the alert file
                     contact4Text.text = currentAlertText?[0]
+                    contact4CreateSendBtn.setTitle("Send", for: .normal)
+                    contact4EditBtn.isHidden = false
                 }
                 
             case 5: // Contact 5
                 if (currentAlertText?.count)! < 3 { // Handle empty or malformed alert files: Set the label to blank
-                    contact5Text.text = "Create" // Set the contact name text label to the first line in the alert file
+                    contact5Text.text = ""                            // Set the contact name text label to the first line in the alert file
+                    contact5CreateSendBtn.setTitle("Create", for: .normal)    // Update the send/create button text
+                     contact5EditBtn.isHidden = true
                     
                 } else{ // Otherwise, set the contact name text label to the first line in the alert file
                     contact5Text.text = currentAlertText?[0]
+                    contact5CreateSendBtn.setTitle("Send", for: .normal)
+                    contact5EditBtn.isHidden = false
                 }
                 
             default: // We should never reach this point. Break.
                 break
                 
             }
+            
+            // TO DO :
+            // Set edit buttons to myIBButton.hidden = true
         
 //            // Debug: Spew the contents of the string array we recieved
 //            print("DEBUG: \(alert) FILE CONTENTS:")
