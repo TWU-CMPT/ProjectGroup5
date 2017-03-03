@@ -42,8 +42,8 @@ class PositiveAffirmationViewController: UIViewController{
                                         enteredText = theTextFields[0].text!
                                         self?.Label.text = String(describing: enteredText)
                                     };print(String(enteredText))
-            })
-        self.present(alert, animated: true, completion: nil)*/
+            })*/
+        self.present(alert, animated: true, completion: nil)
     }
 
     
