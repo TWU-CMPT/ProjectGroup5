@@ -31,7 +31,7 @@ class PositiveAffirmationViewController: UIViewController{
             }))
         let textField = alert.textFields![0]
         print("Text field: \(textField.text)")
-        
+        /*
         // fkfkfkfkfkfk
         //alert.addAction(UIAlertAction(title: "Submit", style: .default, handler: { (UIAlertAction) in print(String(enterdtext))
         var enteredText:String
@@ -45,7 +45,7 @@ class PositiveAffirmationViewController: UIViewController{
             })
         self.present(alert, animated: true, completion: nil)
     }
-
+*/
     
     
     override func viewDidLoad() {
