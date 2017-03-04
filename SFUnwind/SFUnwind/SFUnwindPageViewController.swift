@@ -1,94 +1,95 @@
 //
-//  SFUnwindPageViewController.swift
-//  SFUnwind
+// SFUnwindPageViewController.swift - Primary View Controller for the SFUnwind application
+// SFUnwind
+// Project Group 5: SFU CMPT 276
+// Primary programmer: Adam Badke
+// Contributing Programmers: David Magaril
+// Known issues: None
 //
-//  Created by A B on 2017-02-28.
-//  Copyright © 2017 CMPT 276 - Group 5. All rights reserved.
-//
+// Note: All files in this project conform to the coding standard included in the SFUnwind HW3 Quality Assurance Documentation
 
-//import Foundation
 import UIKit
 
 class SFUnwindPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     // Array of feature screen pages
-    lazy var VCArr: [UIViewController] = {
+    lazy var theViewControllers: [UIViewController] = {
         return [self.VCInstance(name: "SquareBreathingViewController"),
                 self.VCInstance(name: "GroundingExerciseViewController"),
                 self.VCInstance(name: "PositiveAffirmationViewController"),
                 self.VCInstance(name: "PanicAlertViewController")]
     }()
     
+    // UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate protocol functions:
+    //*******************************************************************************************************
+    // Load the main storyboard:
     private func VCInstance(name: String) -> UIViewController {
         return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: name)
     }
     
-    
+    // Called every time the view loads:
     override func viewDidLoad() {
         super.viewDidLoad()
         self.dataSource = self
         self.delegate = self
-        if let firstVC = VCArr.first {
+        if let firstVC = theViewControllers.first {
             setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
         }
     }
     
-    
-    // In terms of navigation direction. For example, for 'UIPageViewControllerNavigationOrientationHorizontal', view controllers coming 'before' would be to the left of the argument view controller, those coming 'after' would be to the right.
-    // Return 'nil' to indicate that no more progress can be made in the given direction.
-    // For gesture-initiated transitions, the page view controller obtains view controllers via these methods, so use of setViewControllers:direction:animated:completion: is not required.
-    
-    // Before
+    // Move to previous page: Load the previous view controller
     public func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController?{
-        guard let viewControllerIndex = VCArr.index(of: viewController) else {
+        guard let viewControllerIndex = theViewControllers.index(of: viewController) else {
             return nil
         }
         let previousIndex = viewControllerIndex - 1
         
-        guard previousIndex >= 0 else { // Allow the loop around from the last page back to the beginning
-            return VCArr.last
+        // Infinite scroll: Loops from the first page to the last
+        guard previousIndex >= 0 else {
+            return theViewControllers.last
         }
         
-        guard VCArr.count > previousIndex else { // Prevent out of bounds crashes (Safety feature)
+        // Catch out of bounds indexes, return nil to prevent crashes
+        guard theViewControllers.count > previousIndex else {
             return nil
         }
         
-        return VCArr[previousIndex]
+        // Return the previous view controller
+        return theViewControllers[previousIndex]
         
     }
     
-    // After
+    // Move to next page: Load the next view controller
     public func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController?{
-        guard let viewControllerIndex = VCArr.index(of: viewController) else {
+        guard let viewControllerIndex = theViewControllers.index(of: viewController) else {
             return nil
         }
         let nextIndex = viewControllerIndex + 1
         
-        guard nextIndex < VCArr.count else { // Allow the loop around from the last page back to the beginning
-            return VCArr.first
+        // Infinite scroll: Loops from the first page to the last
+        guard nextIndex < theViewControllers.count else {
+            return theViewControllers.first
         }
         
-        guard VCArr.count > nextIndex else { // Prevent out of bounds crashes (Safety feature)
+        // Catch out of bounds indexes, return nil to prevent crashes
+        guard theViewControllers.count > nextIndex else {
             return nil
         }
         
-        return VCArr[nextIndex]    }
+        // Return the next view controller
+        return theViewControllers[nextIndex]    }
     
     
-    // A page indicator will be visible if both methods are implemented, transition style is 'UIPageViewControllerTransitionStyleScroll', and navigation orientation is 'UIPageViewControllerNavigationOrientationHorizontal'.
-    // Both methods are called in response to a 'setViewControllers:...' call, but the presentation index is updated automatically in the case of gesture-driven navigation.
-    
-    // Controls page view Dots: To be updated with menu graphics!!!
+    // Controls page view Dots: PLACEHOLDER: To be updated with menu graphics
     public func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return VCArr.count
+        return theViewControllers.count
     }
     
-    
+    // Controls page view Dots: PLACEHOLDER: To be updated with menu graphics
     public func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-        guard let firstViewController = viewControllers?.first, let firstViewControllerIndex = VCArr.index(of: firstViewController) else {
+        guard let firstViewController = viewControllers?.first, let firstViewControllerIndex = theViewControllers.index(of: firstViewController) else {
             return 0
         }
-        
         return firstViewControllerIndex
     }
 

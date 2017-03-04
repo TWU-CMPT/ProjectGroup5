@@ -1,16 +1,15 @@
 //
-//  GroundingExerciseViewController.swift
-//  SFUnwind
+// GroundingExerciseViewController.swift - View Controller for the Grounding Exercise Feature screen
+// SFUnwind
+// Project Group 5: SFU CMPT 276
+// Primary programmer: David Magaril
+// Contributing Programmers:
+// Known issues: ???????
 //
-//  Created by A B on 2017-02-28.
-//  Copyright © 2017 CMPT 276 - Group 5. All rights reserved.
-//
+// Note: All files in this project conform to the coding standard included in the SFUnwind HW3 Quality Assurance Documentation
 
 import UIKit
 
-
-// This is the main view controller for the SFUnwind "5-4-3-2-1 Grounding" feature
-// Primary programmer: David
 class GroundingFeatureViewController: UIViewController{
     
 }

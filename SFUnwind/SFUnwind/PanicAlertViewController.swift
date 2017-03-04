@@ -1,16 +1,17 @@
 //
-//  PanicAlertViewController.swift
-//  SFUnwind
+// PanicAlertViewController.swift - View Controller for the Panic Alert Feature screen
+// SFUnwind
+// Project Group 5: SFU CMPT 276
+// Primary programmer: Adam Badke #301310785
+// Contributing Programmers:
+// Known issues: None
 //
-//  Created by A B on 2017-02-28.
-//  Copyright © 2017 CMPT 276 - Group 5. All rights reserved.
-//
+// Note: All files in this project conform to the coding standard included in the SFUnwind HW3 Quality Assurance Documentation
+
 
 import UIKit
 import ContactsUI
 
-// This is the main view controller for the SFUnwind "Panic Alert" feature
-// Primary programmer: Adam
 class PanicAlertViewController: UIViewController, CNContactPickerDelegate {
     
     // Properties:
