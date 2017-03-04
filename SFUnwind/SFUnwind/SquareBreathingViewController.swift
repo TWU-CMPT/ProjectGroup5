@@ -13,26 +13,45 @@ import UIKit
 // Primary programmer: Berke
 class SquareBreathingViewController: UIViewController{
  
-    @IBOutlet weak var localTimer: UILabel!
-    var sessionTime = Timer()            //NSTimer will be used
-    var sessionTimeCounter = 0         //Session time added (Will be formatted to XX:XX)
-
-
-
+    @IBOutlet weak var sessionTimer: UILabel!
+    var sessionTimeSeconds = 0
+    var sessionTimeMinute = 5
+    var sessionTracker = Timer()
+    var sesssionTrackerActive: Bool = false
     
-    func sessionTimeManager(){                      //This func is called by selector of restartButton every sec
-    sessionTimeCounter += 1
-    localTimer.text = String(sessionTimeCounter)
-
-    }
-
-    @IBAction func restartButton(_ sender: UIButton) {
+    
+    func sessionTimeManager(){
         
-        sessionTime = Timer.init(timeInterval: 1, target: self, selector: #selector(SquareBreathingViewController.sessionTimeManager), userInfo: nil, repeats: true)
+        sessionTimeSeconds-=1                                               //Decrement Seconds
+        sessionTimer.text = "0" + String(sessionTimeMinute) + ":" + String(sessionTimeSeconds) ///Print time
+        if(sessionTimeSeconds < 10){
+            sessionTimer.text = "0" + String(sessionTimeMinute) + ":0" + String(sessionTimeSeconds)
+            if(sessionTimeSeconds <= -1){
+                sessionTracker.invalidate()
+                sessionTimer.text = "FINISHED"
+            }
+        }
+        else if(sessionTimeSeconds == 60){                                   //If a min has passed
+            sessionTimer.text = "0" + String(sessionTimeMinute)+":00"
+        }
     }
     
     
     
-
-   
+    @IBAction func restartButton(_ sender: Any) {
+    sessionTracker = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(SquareBreathingViewController.sessionTimeManager), userInfo: nil, repeats: true)
+        if(sessionTimeSeconds == 0 && sessionTimeMinute != 0){
+            sessionTimeMinute-=1
+            sessionTimeSeconds = 60
+        }
+    
+        else{                                               //If pressed again
+            sessionTracker.invalidate()                         //Stop
+            sessionTimeSeconds = 60                             //Reset
+            sessionTimeMinute = 4                               //Reset
+            sessionTimer.text = "05:00"                         //Print to screen
+    
+    
+        }
+    }
 }
