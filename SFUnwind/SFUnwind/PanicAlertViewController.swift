@@ -15,6 +15,7 @@ import UIKit
 import ContactsUI
 import MessageUI
 
+
 class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMessageComposeViewControllerDelegate {
     
     // Properties:
@@ -259,15 +260,15 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
             
             // Write to the file
             do {
+                
                 // Extract the information from the recieved contact:
                 let nameData = contactProperty.contact.givenName + " " + contactProperty.contact.familyName
                 
+                // Hard coded alert message: This will be replaced in future versions of the app
                 let alertMessage = "I'm having a panic attack. Are you able to call or meet with me?"
-                
-//                let numberData = (contactProperty.contact.phoneNumbers[0].value).value(forKey: "digits") as! String
-                
-                // Extract the selected phone number:
-                let numberData = contactProperty.value as! String
+
+                // Get the phone number
+                let numberData = contactProperty.contact.phoneNumbers[0].value.stringValue
                 
                 let fileData = nameData + "\n" + numberData + "\n" + alertMessage // Assemble the extracted data for storage
                 
@@ -289,8 +290,11 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
     
     // Display the contact select screen
     func displayContactSelector(){
+        
         let theContactView = CNContactPickerViewController()    // Create a CNContactPickerViewController object
         theContactView.delegate = self                          // Set the current class, which inherits from the CNContactPickerDelegate class, as the view's delegate
+
+        theContactView.displayedPropertyKeys = [CNContactPhoneNumbersKey]
         
         // TO DO: Restrict the information visible in the contact picker to names and mobile phone numbers
         
@@ -338,9 +342,9 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
     }
     // Handle contact selection:
     public func contactPicker(_ picker: CNContactPickerViewController, didSelect theContactProperty: CNContactProperty){
-
+        
         // Ensure the user has selected a phone number:
-        if theContactProperty.label == CNContactPhoneNumbersKey {
+        if theContactProperty.key == CNContactPhoneNumbersKey {
             // Pass the contact for processing and storing:
             setStoredAlert(contactProperty: theContactProperty)
         }
