@@ -15,6 +15,9 @@
 		EB04A48E1E6615F400BD2859 /* SFUnwindUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB04A48D1E6615F400BD2859 /* SFUnwindUITests.swift */; };
 		EB04A49C1E661A0300BD2859 /* SFUnwindPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB04A49B1E661A0300BD2859 /* SFUnwindPageViewController.swift */; };
 		EB0E51BB1E6CB59000180F9D /* PanicAlertViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0E51BA1E6CB59000180F9D /* PanicAlertViewControllerTests.swift */; };
+		EB0E51BD1E6CB5FB00180F9D /* SquareBreathingViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0E51BC1E6CB5FB00180F9D /* SquareBreathingViewControllerTests.swift */; };
+		EB0E51BF1E6CB60C00180F9D /* GroundingExerciseViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0E51BE1E6CB60C00180F9D /* GroundingExerciseViewControllerTests.swift */; };
+		EB0E51C11E6CB61F00180F9D /* PositiveAffirmationsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0E51C01E6CB61F00180F9D /* PositiveAffirmationsViewControllerTests.swift */; };
 		EB1679BB1E68A32400E55484 /* PositiveAffirmationFiles in Resources */ = {isa = PBXBuildFile; fileRef = EB1679B81E68A32400E55484 /* PositiveAffirmationFiles */; };
 		EB1679BC1E68A32400E55484 /* SquareBreathingFiles in Resources */ = {isa = PBXBuildFile; fileRef = EB1679B91E68A32400E55484 /* SquareBreathingFiles */; };
 		EB7359111E665162004A0EB0 /* SquareBreathingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7359101E665162004A0EB0 /* SquareBreathingViewController.swift */; };
@@ -56,6 +59,9 @@
 		EB04A48F1E6615F400BD2859 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB04A49B1E661A0300BD2859 /* SFUnwindPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SFUnwindPageViewController.swift; sourceTree = "<group>"; };
 		EB0E51BA1E6CB59000180F9D /* PanicAlertViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanicAlertViewControllerTests.swift; sourceTree = "<group>"; };
+		EB0E51BC1E6CB5FB00180F9D /* SquareBreathingViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquareBreathingViewControllerTests.swift; sourceTree = "<group>"; };
+		EB0E51BE1E6CB60C00180F9D /* GroundingExerciseViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroundingExerciseViewControllerTests.swift; sourceTree = "<group>"; };
+		EB0E51C01E6CB61F00180F9D /* PositiveAffirmationsViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PositiveAffirmationsViewControllerTests.swift; sourceTree = "<group>"; };
 		EB1679B81E68A32400E55484 /* PositiveAffirmationFiles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PositiveAffirmationFiles; sourceTree = "<group>"; };
 		EB1679B91E68A32400E55484 /* SquareBreathingFiles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SquareBreathingFiles; sourceTree = "<group>"; };
 		EB7359101E665162004A0EB0 /* SquareBreathingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquareBreathingViewController.swift; sourceTree = "<group>"; };
@@ -136,6 +142,9 @@
 				EB04A4821E6615F400BD2859 /* SFUnwindTests.swift */,
 				EB04A4841E6615F400BD2859 /* Info.plist */,
 				EB0E51BA1E6CB59000180F9D /* PanicAlertViewControllerTests.swift */,
+				EB0E51BC1E6CB5FB00180F9D /* SquareBreathingViewControllerTests.swift */,
+				EB0E51BE1E6CB60C00180F9D /* GroundingExerciseViewControllerTests.swift */,
+				EB0E51C01E6CB61F00180F9D /* PositiveAffirmationsViewControllerTests.swift */,
 			);
 			path = SFUnwindTests;
 			sourceTree = "<group>";
@@ -302,6 +311,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB0E51C11E6CB61F00180F9D /* PositiveAffirmationsViewControllerTests.swift in Sources */,
+				EB0E51BF1E6CB60C00180F9D /* GroundingExerciseViewControllerTests.swift in Sources */,
+				EB0E51BD1E6CB5FB00180F9D /* SquareBreathingViewControllerTests.swift in Sources */,
 				EB04A4831E6615F400BD2859 /* SFUnwindTests.swift in Sources */,
 				EB0E51BB1E6CB59000180F9D /* PanicAlertViewControllerTests.swift in Sources */,
 			);

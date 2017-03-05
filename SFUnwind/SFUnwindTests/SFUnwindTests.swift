@@ -1,10 +1,10 @@
 //
-//  SFUnwindTests.swift
-//  SFUnwindTests
+// SFUnwindTests.swift - Tests for the SFUnwindPageViewController.swift file
+// SFUnwind
+// Project Group 5: SFU CMPT 276
+// Primary programmer: All
 //
-//  Created by A B on 2017-02-28.
-//  Copyright © 2017 CMPT 276 - Group 5. All rights reserved.
-//
+// Note: All files in this project conform to the coding standard included in the SFUnwind HW3 Quality Assurance Documentation
 
 import XCTest
 @testable import SFUnwind
