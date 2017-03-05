@@ -27,7 +27,7 @@ class SFUnwindPageViewController: UIPageViewController, UIPageViewControllerData
         return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: name)
     }
     
-    // Called every time the view loads:
+    // Called the first time this view controller loads:
     override func viewDidLoad() {
         super.viewDidLoad()
         self.dataSource = self
