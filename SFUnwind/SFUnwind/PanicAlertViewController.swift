@@ -6,7 +6,6 @@
 // Contributing Programmers:
 // Known issues: 
 // - The iPhone simulator does not load the messaging app when sending an alert message. However, this feature DOES work on a physical device.
-// - Selects the first number for any contact by default
 //
 // Note: All files in this project conform to the coding standard included in the SFUnwind HW3 Quality Assurance Documentation
 
