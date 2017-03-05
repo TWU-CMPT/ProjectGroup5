@@ -1,19 +1,25 @@
 //
-//  SFUnwindTests.swift
-//  SFUnwindTests
+// SFUnwindTests.swift - Tests for the SFUnwindPageViewController.swift file
+// SFUnwind
+// Project Group 5: SFU CMPT 276
+// Primary programmer: All
 //
-//  Created by A B on 2017-02-28.
-//  Copyright © 2017 CMPT 276 - Group 5. All rights reserved.
-//
+// Note: All files in this project conform to the coding standard included in the SFUnwind HW3 Quality Assurance Documentation
 
 import XCTest
 @testable import SFUnwind
 
 class SFUnwindTests: XCTestCase {
     
+    var theSFUnwindPageViewController: SFUnwindPageViewController? // Add an instance of the panic alert view controller object to this test class
+    
+    // Put setup code here. This method is called before the invocation of each test method in the class.
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        
+        let theStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main) // Create a storyboard object to use for our tests
+        
+        theSFUnwindPageViewController = theStoryboard.instantiateInitialViewController() as! SFUnwindPageViewController? // Create a SFUnwindPageViewController object for our tests
     }
     
     override func tearDown() {
@@ -21,16 +27,22 @@ class SFUnwindTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    // Test the page turning counter: Should always return 4
+    func testPresentationCount(){
+        
+        let _ = theSFUnwindPageViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
+        
+        let result = theSFUnwindPageViewController!.presentationCount(for: theSFUnwindPageViewController!)
+        XCTAssert(result == 4)
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    // Test the page turning counter display: Should return [0, 4]
+    func testPresentationIndex(){
+        let _ = theSFUnwindPageViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
+        
+        let result = theSFUnwindPageViewController!.presentationIndex(for: theSFUnwindPageViewController!)
+
+        XCTAssert(result >= 0 && result < 4)
     }
     
 }

@@ -1,16 +1,15 @@
 //
-//  SquareBreathingViewController.swift
-//  SFUnwind
+// SquareBreathingController.swift - View Controller for the "Square Breathing" feature screen
+// SFUnwind
+// Project Group 5: SFU CMPT 276
+// Primary programmer: Berke Boz
+// Contributing Programmers:
+// Known issues: ???????
 //
-//  Created by A B on 2017-02-28.
-//  Copyright © 2017 CMPT 276 - Group 5. All rights reserved.
-//
+// Note: All files in this project conform to the coding standard included in the SFUnwind HW3 Quality Assurance Documentation
 
 import UIKit
 
-
-// This is the main view controller for the SFUnwind "Square Breathing" feature
-// Primary programmer: Berke
 class SquareBreathingViewController: UIViewController{
  
     @IBOutlet weak var sessionTimer: UILabel!
