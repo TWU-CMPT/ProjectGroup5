@@ -100,6 +100,8 @@ class SquareBreathingViewController: UIViewController{
         }
         else{
             
+            
+            
             sessionTracker.invalidate()                         //Stops timer
             sessionTimeSeconds = 60                             //Reset
             sessionTimeMinute = 4                               //Reset
