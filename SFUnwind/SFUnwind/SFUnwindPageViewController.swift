@@ -80,7 +80,7 @@ class SFUnwindPageViewController: UIPageViewController, UIPageViewControllerData
         return theViewControllers[nextIndex]    }
     
     
-    // Controls page view Dots: PLACEHOLDER: To be updated with menu graphics
+    // Controls the number of page view Dots: PLACEHOLDER: To be updated with menu graphics
     public func presentationCount(for pageViewController: UIPageViewController) -> Int {
         return theViewControllers.count
     }

@@ -232,6 +232,7 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
     
     // Save alert contact text data to a txt file. Called when creating/editing an alert
     // Argument: contactProperty - A CNContactProperty object, recieved from the CNContactPicker as selected by the user
+    // Note: This function requires UI interaction and must be manually tested on a physical iOS device
     func setStoredAlert(contactProperty: CNContactProperty){
         
         // Get the documents directory:
@@ -288,6 +289,7 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
     
     
     // Display the contact select screen
+    // Note: This function requires UI interaction and must be manually tested on a physical iOS device
     func displayContactSelector(){
         
         let theContactView = CNContactPickerViewController()    // Create a CNContactPickerViewController object
@@ -303,6 +305,7 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
     
     // Handle the create/send button functionality
     // Argument: contactIndex - The array index of the relevant alert file to use [0, 5]
+    // Note: This function requires UI interaction and must be manually tested on a physical iOS device
     func handleCreateSendBtn(contactIndex: Int){
         // Create a new contact if none exists:
         if alertExists[contactIndex] == false {
@@ -319,6 +322,7 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
     
     
     // Send a pre-formatted alert message using the iOS messenger app:
+    // Note: This function requires UI interaction and must be manually tested on a physical iOS device
     func sendAlertMessage(message: String, phoneNumber: String){
         // Create a text message view controller, and insert our alert data into it:
         if (MFMessageComposeViewController.canSendText() ){
