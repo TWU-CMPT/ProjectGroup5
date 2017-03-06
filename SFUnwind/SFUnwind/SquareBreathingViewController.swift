@@ -80,9 +80,11 @@ class SquareBreathingViewController: UIViewController{
         
         else if(sessionTimeSeconds < 10 && sessionTimeMinute == 0){             //If no mins left
             sessionTimer.text = "0" + String(sessionTimeMinute) + ":0" + String(sessionTimeSeconds)
+
             if(sessionTimeSeconds <= -1){                                       //Detects if timer is finished
                 sessionTracker.invalidate()                                     //Stops the timer
                 sessionTimer.text = "FINISHED"
+
             }
         }
         else if(sessionTimeSeconds < 10 && sessionTimeMinute != 0 ){            //If Session Seconds is a one digit number
