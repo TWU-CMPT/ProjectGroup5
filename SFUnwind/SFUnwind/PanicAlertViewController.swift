@@ -15,7 +15,7 @@ import ContactsUI
 import MessageUI
 
 
-class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMessageComposeViewControllerDelegate {
+class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMessageComposeViewControllerDelegate, CNContactViewControllerDelegate {
     
     // Properties:
     //******************
@@ -268,7 +268,7 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
                 let alertMessage = "I'm having a panic attack. Are you able to call or meet with me?"
 
                 // Get the phone number
-                let numberData = contactProperty.contact.phoneNumbers[0].value.stringValue
+                let numberData = (contactProperty.value as! CNPhoneNumber).stringValue
                 
                 let fileData = nameData + "\n" + numberData + "\n" + alertMessage // Assemble the extracted data for storage
                 
@@ -295,9 +295,8 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
         let theContactView = CNContactPickerViewController()    // Create a CNContactPickerViewController object
         theContactView.delegate = self                          // Set the current class, which inherits from the CNContactPickerDelegate class, as the view's delegate
 
+        // Restrict the information visible in the contact picker to names and mobile phone numbers
         theContactView.displayedPropertyKeys = [CNContactPhoneNumbersKey]
-        
-        // TO DO: Restrict the information visible in the contact picker to names and mobile phone numbers
         
         present(theContactView, animated:true, completion: nil) // Display the contact picker view within the current view, to allow the user to select a contact. Triggers the CNContactPickerDelegate protocol functions (below)
     }
