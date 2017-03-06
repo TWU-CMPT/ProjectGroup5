@@ -22,6 +22,10 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>This application will access the phone's camera in order to obtain photos.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This application will access the phone's photo library in order to edit photos.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
