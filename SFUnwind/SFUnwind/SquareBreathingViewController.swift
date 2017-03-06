@@ -19,24 +19,52 @@ class SquareBreathingViewController: UIViewController{
     var sessionTimeMinute = 4                           //Set Minute
     var sessionTracker = Timer()
     var sesssionTrackerActive: Bool = false             //A boolean statement is used to keep track of the state of RE/START button. sesssionTrackerActive acts like On/Off button
+
     
     
-    
-    
-    var totalTimerSeconds = 0                           //FILE I/O NEEDED
-    var totalTimerMinute = 0                            //FILE I/O NEEDED
+    var totalTimerSeconds: Int = 0
+    var totalTimerMinute: Int = 0
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        totalTimer.text = "00:00"                       //WILL BE CHANGED
+                                                //totalTimer.text = "00:00"
+        loadTimer()
+        if(totalTimerMinute < 10 && totalTimerSeconds < 10 ){
+            totalTimer.text = "0" + String(totalTimerMinute) + ":0" + String(totalTimerSeconds)
+        }
+        else if(totalTimerMinute < 10 && totalTimerSeconds >= 10){
+            totalTimer.text = "0" + String(totalTimerMinute) + ":" + String(totalTimerSeconds)
+        }
         
+        else if(totalTimerMinute >= 10 && totalTimerSeconds < 10){
+            totalTimer.text = String(totalTimerMinute) + ":0" + String(totalTimerSeconds)
+        }
         
-        
+        else if(totalTimerMinute >= 10 && totalTimerSeconds >= 10){
+            totalTimer.text = String(totalTimerMinute) + ":" + String(totalTimerSeconds)
+        }
     }
     
 
+    func saveTimer(){
+        UserDefaults.standard.set(totalTimerMinute, forKey: "totalMins")
+        UserDefaults.standard.set(totalTimerSeconds, forKey: "totalSecs")
+        UserDefaults.standard.synchronize()
 
+    
+    }
+    
+    func loadTimer(){
+        if let loadedMins = UserDefaults.standard.value(forKey:  "totalMins") as? Int{
+            totalTimerMinute = loadedMins
+
+        }
+        if let loadedSecs = UserDefaults.standard.value(forKey: "totalSecs") as? Int{
+            totalTimerSeconds = loadedSecs
+
+        }
+    }
     
     func timeManager(){
         
@@ -52,9 +80,11 @@ class SquareBreathingViewController: UIViewController{
         
         else if(sessionTimeSeconds < 10 && sessionTimeMinute == 0){             //If no mins left
             sessionTimer.text = "0" + String(sessionTimeMinute) + ":0" + String(sessionTimeSeconds)
+
             if(sessionTimeSeconds <= -1){                                       //Detects if timer is finished
                 sessionTracker.invalidate()                                     //Stops the timer
                 sessionTimer.text = "FINISHED"
+
             }
         }
         else if(sessionTimeSeconds < 10 && sessionTimeMinute != 0 ){            //If Session Seconds is a one digit number
@@ -92,7 +122,7 @@ class SquareBreathingViewController: UIViewController{
     @IBAction func restartButton(_ sender: Any) {               //Re/Start button
         
     sesssionTrackerActive = !(sesssionTrackerActive)            //Boolean statement acts like on/off button with reset functionality
-        
+    saveTimer()
         if(sesssionTrackerActive == true){
             sessionTracker = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(SquareBreathingViewController.timeManager), userInfo: nil, repeats: true)  //Call timeManager() once in every second
             
@@ -106,11 +136,11 @@ class SquareBreathingViewController: UIViewController{
             sessionTimeMinute = 4                               //Reset
             sessionTimer.text = "05:00"                         //Print to screen
         }
-      
 
     }
-    
     @IBOutlet weak var totalTimer: UILabel!
+    
+    
     
 }
 
@@ -129,11 +159,3 @@ class SquareBreathingViewController: UIViewController{
 //
 //
 
-//Missing Features
-//
-//      - Main Timer is not implemented yet                     DONE
-//      - Main Timer file I/O not implemented yet
-//
-//
-//
-//
