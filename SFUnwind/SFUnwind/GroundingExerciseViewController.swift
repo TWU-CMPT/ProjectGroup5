@@ -21,6 +21,9 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
             imagePicker.delegate = self
             imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
             imagePicker.allowsEditing = false
+            imagePicker.cameraCaptureMode = .photo
+            imagePicker.showsCameraControls = true
+            imagePicker.modalPresentationStyle = .fullScreen
             self.present(imagePicker, animated: true, completion: nil)
         } else {
             let alertVC = UIAlertController(title: "No Camera", message: "Sorry, this device has no camera", preferredStyle: .alert)
