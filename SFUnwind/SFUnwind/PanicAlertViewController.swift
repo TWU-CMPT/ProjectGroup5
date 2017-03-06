@@ -1,37 +1,41 @@
 //
-//  PanicAlertViewController.swift
-//  SFUnwind
+// PanicAlertViewController.swift - View Controller for the Panic Alert Feature screen
+// SFUnwind
+// Project Group 5: SFU CMPT 276
+// Primary programmer: Adam Badke #301310785
+// Contributing Programmers:
+// Known issues: 
+// - The iPhone simulator does not load the messaging app when sending an alert message. However, this feature DOES work on a physical device.
 //
-//  Created by A B on 2017-02-28.
-//  Copyright © 2017 CMPT 276 - Group 5. All rights reserved.
-//
+// Note: All files in this project conform to the coding standard included in the SFUnwind HW3 Quality Assurance Documentation
+
 
 import UIKit
 import ContactsUI
+import MessageUI
 
-// This is the main view controller for the SFUnwind "Panic Alert" feature
-// Primary programmer: Adam
-class PanicAlertViewController: UIViewController, CNContactPickerDelegate {
+
+class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMessageComposeViewControllerDelegate {
     
     // Properties:
     //******************
     
     // Panic Alert file names (constants). The name of each panic alert text file to be loaded:
     let alertFiles = ["alert01", "alert02", "alert03", "alert04", "alert05"] // Store the alert file names in a (constant) array, to allow easier iteration through each.
-    var alertExists = [false, false, false, false, false] // A boolean array: Tracks wheter or not the current contact has an alert or not
+    var alertExists = [false, false, false, false, false] // A boolean array: Tracks wheter or not the current contact has a pre-created alert or not
     
     var currentContact = 0      // Tracker variable: Lets us keep track of which contact is being interacted with. 0 (default) indicates no tracker, 1-5 correspond with contacts 1-5
+    
     // UI buttons:
+    //************
     
     // Contact 1: Create/send
     @IBOutlet weak var contact1CreateSendBtn: UIButton! // Outlet
     @IBAction func contact1CreateSendBtn(_ sender: UIButton) { // Action
+        // User has tapped the Create/Send button:
         currentContact = 1                                      // Update the contract tracking variable
-        if alertExists[0] == false {
-            displayContactSelector()                                // Call the function selector
-        }
+        handleCreateSendBtn(contactIndex: 0)                    // Call the generic create/send button handler
     }
-    
     // Contact 1: Edit
     @IBOutlet weak var contact1EditBtn: UIButton! // Outlet
     @IBAction func contact1EditBtn(_ sender: Any) { // Action
@@ -39,15 +43,11 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate {
         displayContactSelector()                                // Call the function selector
     }
     
-
-    
     // Contact 2: Create/send
     @IBOutlet weak var contact2CreateSendBtn: UIButton! // Outlet
     @IBAction func contact2CreateSendBtn(_ sender: Any) { // Action
         currentContact = 2                                      // Update the contract tracking variable
-        if alertExists[1] == false {
-            displayContactSelector()                                // Call the function selector
-        }
+        handleCreateSendBtn(contactIndex: 1)                    // Call the generic create/send button handler
     }
     // Contact 2: Edit
     @IBOutlet weak var contact2EditBtn: UIButton! // Outlet
@@ -60,9 +60,7 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate {
     @IBOutlet weak var contact3CreateSendBtn: UIButton! // Outlet
     @IBAction func contact3CreateSendBtn(_ sender: Any) { // Action
         currentContact = 3                                      // Update the contract tracking variable
-        if alertExists[2] == false {
-            displayContactSelector()                                // Call the function selector
-        }
+        handleCreateSendBtn(contactIndex: 2)                    // Call the generic create/send button handler
     }
     // Contact 3: Edit
     @IBOutlet weak var contact3EditBtn: UIButton! // Outlet
@@ -75,9 +73,7 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate {
     @IBOutlet weak var contact4CreateSendBtn: UIButton! // Outlet
     @IBAction func contact4CreateSendBtn(_ sender: Any) { // Action
         currentContact = 4                                      // Update the contract tracking variable
-        if alertExists[3] == false {
-            displayContactSelector()                                // Call the function selector
-        }
+        handleCreateSendBtn(contactIndex: 3)                    // Call the generic create/send button handler
     }
     // Contact 4: Edit
     @IBOutlet weak var contact4EditBtn: UIButton! // Outlet
@@ -90,9 +86,7 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate {
     @IBOutlet weak var contact5CreateSendBtn: UIButton! // Outlet
     @IBAction func contact5CreateSendBtn(_ sender: Any) { // Action
         currentContact = 5                                      // Update the contract tracking variable
-        if alertExists[4] == false {
-            displayContactSelector()                                // Call the function selector
-        }
+        handleCreateSendBtn(contactIndex: 4)                    // Call the generic create/send button handler
     }
     // Contact 5: Edit
     @IBOutlet weak var contact5EditBtn: UIButton! // Outlet
@@ -110,9 +104,6 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate {
     @IBOutlet weak var contact5Text: UILabel! // Contact 5
     
     
-
-    
-    
     
     // PanicAlertViewController Class methods/functions:
     //**************************************************
@@ -120,31 +111,23 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate {
     // ViewDidLoad: This function is called once when the PanicAlertViewController.swift object is first initialized.
     // This function is used to trigger the various UI updates required to set up the screen
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad() // Call the superclass's viewDidLoad function
         
-        // DEBUG:
-        //setStoredAlert()
-        
-        
-        
-        // Call the alert list initialization function, which updates the UI elements with the correct text:
+        // Call the alert list initialization function, which updates the UI elements with the correct, loaded text:
         initializeAlertList()
-        
-
     }
+    
     
     // Initialize the alert list. Loads the alert details from file, and sets up the UI to display the correct values
     func initializeAlertList() {
-        
-        // Set the contact label text:
         
         // Load each alert file:
         var contactNumber = 1 // Loop iterator variable
         for alert in alertFiles{ // Loop, loading each alert file listed in the array of alert filenames
             
-            var currentAlertText = getStoredAlerts(filename: alert) // Load the current alert filename (ie. alert01.txt to alert05.txt), as an array of strings
+            var currentAlertText = getStoredAlerts(filename: alert) // Load the current alert filename (ie. alert01.txt to alert05.txt) from the documents directory, as an array of strings
             
-            // Set the alert name text:
+            // Set the alert name label text:
             switch contactNumber{
             case 1: // Contact 1
                 if currentAlertText == nil || (currentAlertText?.count)! < 3 { // Handle empty or malformed alert files: Set the label to blank, and button to "create"
@@ -219,47 +202,41 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate {
                 break
                 
             }
-        
-//            // Debug: Spew the contents of the string array we recieved
-//            print("DEBUG: \(alert) FILE CONTENTS:")
-//            currentAlertText?.forEach{ // Loop through each value and print it, if the values are not nil
-//                print($0)
-//            }
-            
             contactNumber += 1 // Increment the contact counter
         }// end for
 
     } // end initializeAlertList()
     
-    // Load alert text data stored in a txt file. Called once per alert
+    
+    // Load alert text data stored in a txt file. Called once per alert at initialization, and whenever alerts are sent
     // Argument: filename - A string, containing the filename of the text file to be loaded. Note: Filename does NOT include the .txt extension, as this is passed as an argument to the iOS file manager bundle.
     // Return: An array of strings read line by line from the file, or nil if the file was empty
     func getStoredAlerts(filename: String) -> [String]? {
         
         // Attempt to open the file:
-        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-            let path = dir.appendingPathComponent(filename) // Append the filename to the path
+        if let theDocumentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let thePath = theDocumentsDirectory.appendingPathComponent(filename) // Append the filename to the path
             
             // Read from the file:
             do {
-                let fileContents = try String(contentsOf: path, encoding: String.Encoding.utf8)
+                let fileContents = try String(contentsOf: thePath, encoding: String.Encoding.utf8)
                 return fileContents.components(separatedBy: "\n") // Return the file contents as an array, with each line as an element
             }
-            catch {
+            catch { // Handle read errors: Return nil
                 return nil
             }
-
         }
-
-        return nil // Return nil, if something went wrong
-        
+        return nil // Return nil: We should only reach this if something went wrong
     }
     
+    
     // Save alert contact text data to a txt file. Called when creating/editing an alert
+    // Argument: contactProperty - A CNContactProperty object, recieved from the CNContactPicker as selected by the user
+    // Note: This function requires UI interaction and must be manually tested on a physical iOS device
     func setStoredAlert(contactProperty: CNContactProperty){
         
         // Get the documents directory:
-        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+        if let theDocumentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
             
             // Select the right filename
             var filename = String()
@@ -279,17 +256,24 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate {
             }
             
             // Append the filename to the documents directory:
-            let path = dir.appendingPathComponent(filename)
+            let thePath = theDocumentsDirectory.appendingPathComponent(filename)
             
             // Write to the file
             do {
+                
                 // Extract the information from the recieved contact:
                 let nameData = contactProperty.contact.givenName + " " + contactProperty.contact.familyName
-                let numberData = "123456789"
-                let fileData = nameData + "\n" + numberData + "\nThis is my alert message!" // TEMPORARY! Need to expand on this!!!!!!!!!!!!!!!!!!
                 
-                // Update the file with the extracted information:
-                try fileData.write(to: path, atomically: false, encoding: String.Encoding.utf8)
+                // Hard coded alert message: This will be replaced in future versions of the app
+                let alertMessage = "I'm having a panic attack. Are you able to call or meet with me?"
+
+                // Get the phone number
+                let numberData = contactProperty.contact.phoneNumbers[0].value.stringValue
+                
+                let fileData = nameData + "\n" + numberData + "\n" + alertMessage // Assemble the extracted data for storage
+                
+                // Update the alert file with the extracted information:
+                try fileData.write(to: thePath, atomically: false, encoding: String.Encoding.utf8)
 
             }
             catch {
@@ -305,9 +289,13 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate {
     
     
     // Display the contact select screen
+    // Note: This function requires UI interaction and must be manually tested on a physical iOS device
     func displayContactSelector(){
+        
         let theContactView = CNContactPickerViewController()    // Create a CNContactPickerViewController object
         theContactView.delegate = self                          // Set the current class, which inherits from the CNContactPickerDelegate class, as the view's delegate
+
+        theContactView.displayedPropertyKeys = [CNContactPhoneNumbersKey]
         
         // TO DO: Restrict the information visible in the contact picker to names and mobile phone numbers
         
@@ -315,30 +303,70 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate {
     }
     
     
-    // CNContactPickerDelegate protocol functions:
+    // Handle the create/send button functionality
+    // Argument: contactIndex - The array index of the relevant alert file to use [0, 5]
+    // Note: This function requires UI interaction and must be manually tested on a physical iOS device
+    func handleCreateSendBtn(contactIndex: Int){
+        // Create a new contact if none exists:
+        if alertExists[contactIndex] == false {
+            displayContactSelector()                            // Call the function selector
+        }
+        else { //  Otherwise, send the alert if one exists:
+            let theAlert = getStoredAlerts(filename: alertFiles[contactIndex]) // Get the alert message from the file
+            
+            if (theAlert?.count)! >= 3 { // Ensure the alert message file is not malformed
+                sendAlertMessage(message: (theAlert?[2])!, phoneNumber: (theAlert?[1])!) // Insert the alert elements into a text message
+            }
+        }
+    }
     
-    /*!
-     * @abstract Invoked when the picker is closed.
-     * @discussion The picker will be dismissed automatically after a contact or property is picked.
-     */
+    
+    // Send a pre-formatted alert message using the iOS messenger app:
+    // Note: This function requires UI interaction and must be manually tested on a physical iOS device
+    func sendAlertMessage(message: String, phoneNumber: String){
+        // Create a text message view controller, and insert our alert data into it:
+        if (MFMessageComposeViewController.canSendText() ){
+            let txtMsgView = MFMessageComposeViewController() // Create the controller
+            txtMsgView.body = message // Insert the alert message text into the message body
+            txtMsgView.recipients = [phoneNumber] // Insert the alert phone number into the message phone number field
+            
+            // Display the text message view:
+            txtMsgView.messageComposeDelegate = self
+            present(txtMsgView, animated: true, completion: nil)
+        }
+    }
+    
+    
+    // CNContactPickerDelegate protocol functions:
+    //********************************************
+    // Handle cancel button
     public func contactPickerDidCancel(_ picker: CNContactPickerViewController){
-        print("Cancelled!")
         currentContact = 0      // Update our contact tracking variable. 0 = default
     }
-    
-    
-    // CNContactPickerViewController delegate method:
-    // This is invoked when the user selects a single contact or property.
+    // Handle contact selection:
     public func contactPicker(_ picker: CNContactPickerViewController, didSelect theContactProperty: CNContactProperty){
-        print("Contact property selected!")
         
-        // Pass the contact for processing and storing:
-        setStoredAlert(contactProperty: theContactProperty)
-        
+        // Ensure the user has selected a phone number:
+        if theContactProperty.key == CNContactPhoneNumbersKey {
+            // Pass the contact for processing and storing:
+            setStoredAlert(contactProperty: theContactProperty)
+        }
+        else { // Otherwise, reset the current contact tracker and do nothing
+            currentContact = 0
+        }
     }
     
     
-
+    // MFMessageComposeViewControllerDelegate protocol functions:
+    //***********************************************************
+    // Handle dismissing:
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    // Handle view removal:
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = false
+    }
     
     
 } // End panic alert view controller class
