@@ -8,6 +8,7 @@
 // Note: All files in this project conform to the coding standard included in the SFUnwind HW3 Quality Assurance Documentation
 
 import XCTest
+import ContactsUI
 @testable import SFUnwind
 
 class PanicAlertViewControllerTests: XCTestCase {
@@ -36,6 +37,56 @@ class PanicAlertViewControllerTests: XCTestCase {
     // Tests:
     //*****************
     
+    func testContactCreateSendEditBtns(){
+        let _ = thePanicAlertViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
+        thePanicAlertViewController?.initializeAlertList() // Call the initializer function
+        
+        var result = ( (thePanicAlertViewController?.contact1CreateSendBtn.currentTitle == "Create" && thePanicAlertViewController?.contact1EditBtn.isHidden == true)
+        || ( thePanicAlertViewController?.alertExists[0] == true && thePanicAlertViewController?.contact1CreateSendBtn.currentTitle == "Send")
+        )
+        XCTAssert(result)
+        
+        result = ( (thePanicAlertViewController?.contact2CreateSendBtn.currentTitle == "Create" && thePanicAlertViewController?.contact2EditBtn.isHidden == true)
+            || ( thePanicAlertViewController?.alertExists[1] == true && thePanicAlertViewController?.contact2CreateSendBtn.currentTitle == "Send")
+        )
+        XCTAssert(result)
+        
+        result = ( (thePanicAlertViewController?.contact3CreateSendBtn.currentTitle == "Create" && thePanicAlertViewController?.contact3EditBtn.isHidden == true)
+            || ( thePanicAlertViewController?.alertExists[2] == true && thePanicAlertViewController?.contact3CreateSendBtn.currentTitle == "Send")
+        )
+        XCTAssert(result)
+        
+        result = ( (thePanicAlertViewController?.contact4CreateSendBtn.currentTitle == "Create" && thePanicAlertViewController?.contact4EditBtn.isHidden == true)
+            || ( thePanicAlertViewController?.alertExists[3] == true && thePanicAlertViewController?.contact4CreateSendBtn.currentTitle == "Send")
+        )
+        XCTAssert(result)
+        
+        result = ( (thePanicAlertViewController?.contact5CreateSendBtn.currentTitle == "Create" && thePanicAlertViewController?.contact5EditBtn.isHidden == true)
+            || ( thePanicAlertViewController?.alertExists[4] == true && thePanicAlertViewController?.contact5CreateSendBtn.currentTitle == "Send")
+        )
+        XCTAssert(result)
+        
+    }
+    
+    // Test the viewDidLoad() function:
+    func testViewDidLoad(){
+        // We can tell that our viewDidLoad function has been called as our buttons are no longer nil:
+        var result = (thePanicAlertViewController?.contact1CreateSendBtn.currentTitle != nil)
+        XCTAssert(result)
+        
+        result = (thePanicAlertViewController?.contact2CreateSendBtn.currentTitle != nil)
+        XCTAssert(result)
+        
+        result = (thePanicAlertViewController?.contact3CreateSendBtn.currentTitle != nil)
+        XCTAssert(result)
+        
+        result = (thePanicAlertViewController?.contact4CreateSendBtn.currentTitle != nil)
+        XCTAssert(result)
+        
+        result = (thePanicAlertViewController?.contact5CreateSendBtn.currentTitle != nil)
+        XCTAssert(result)
+    }
+    
     // Test the getStoredAlerts() function:
     func testGetStoredAlerts() {
         // Call the function we want to test and get it's return value:
@@ -61,6 +112,7 @@ class PanicAlertViewControllerTests: XCTestCase {
         let invalidAlert = thePanicAlertViewController?.getStoredAlerts(filename: "alert0")
         XCTAssert(invalidAlert == nil) // The function should return nil for invalid filenames
     }
+
     
     // Test the UI Labels
     func testInitializeAlertList(){
@@ -90,4 +142,23 @@ class PanicAlertViewControllerTests: XCTestCase {
         
     }
     
+    // Test the contact picker's cancel delegate function
+    func testContactPickerDidCancel(){
+        let fakeCntrl = CNContactPickerViewController()
+        thePanicAlertViewController?.contactPickerDidCancel(fakeCntrl)
+        XCTAssert(thePanicAlertViewController?.currentContact == 0)
+    }
+    
+    // Test the contact picker's contact selection delegate function
+    func testContactPicker(){
+        thePanicAlertViewController?.currentContact = 6 // Set an out of bounds value to make sure we handle it
+        
+        thePanicAlertViewController?.contactPicker(CNContactPickerViewController(), didSelect: CNContactProperty())
+        XCTAssert(thePanicAlertViewController?.currentContact == 0)
+    }
+    
+    
+    
 }
+
+

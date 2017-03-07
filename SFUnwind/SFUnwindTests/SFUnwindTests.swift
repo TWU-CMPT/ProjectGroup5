@@ -27,6 +27,15 @@ class SFUnwindTests: XCTestCase {
         super.tearDown()
     }
     
+    // Test the viewDidLoad() function has assigned the correct member variables
+    func testViewDidLoad(){
+        let _ = theSFUnwindPageViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
+            XCTAssert(theSFUnwindPageViewController?.dataSource as? SFUnwindPageViewController == theSFUnwindPageViewController)
+        
+        XCTAssert(theSFUnwindPageViewController?.delegate as? SFUnwindPageViewController == theSFUnwindPageViewController)
+    
+    }
+    
     // Test the page turning counter: Should always return 4
     func testPresentationCount(){
         
