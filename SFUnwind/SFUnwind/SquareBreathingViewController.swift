@@ -121,7 +121,7 @@ class SquareBreathingViewController: UIViewController{
         super.viewDidLoad()
                                                 //totalTimer.text = "00:00"
         loadTimer()
-        print("entered")
+
         if(totalTimerMinute < 10 && totalTimerSeconds < 10 ){
             totalTimer.text = "0" + String(totalTimerMinute) + ":0" + String(totalTimerSeconds)
         }
@@ -166,7 +166,7 @@ class SquareBreathingViewController: UIViewController{
     func loadTimer(){
         if let loadedMins = UserDefaults.standard.value(forKey:  "totalMins") as? Int{
             totalTimerMinute = loadedMins
-            print("timerWorks")
+
         }
         if let loadedSecs = UserDefaults.standard.value(forKey: "totalSecs") as? Int{
             totalTimerSeconds = loadedSecs
@@ -178,7 +178,7 @@ class SquareBreathingViewController: UIViewController{
         
         sessionTimeSeconds-=1                                                  //Decrement Seconds
         totalTimerSeconds+=1                                                   //Increment Seconds
-        print("timeManagerWorks")
+
 
         if(sessionTimeSeconds == 0 && sessionTimeMinute != 0){                 //If Remaining mins != 0
             sessionTimer.text = "0" + String(sessionTimeMinute)+":00"
@@ -226,7 +226,7 @@ class SquareBreathingViewController: UIViewController{
     
     
     @IBAction func restartButton(_ sender: Any) {               //Re/Start button
-        print("activated")
+
     sesssionTrackerActive = !(sesssionTrackerActive)            //Boolean statement acts like on/off button with reset functionality
     saveTimer()
         if(sesssionTrackerActive == true){
