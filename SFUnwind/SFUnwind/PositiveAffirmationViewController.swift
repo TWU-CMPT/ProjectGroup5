@@ -93,6 +93,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         picker.delegate = self
         picker.dataSource = self
         textTime.inputView = picker
+        
     }
     
     override func didReceiveMemoryWarning() {
