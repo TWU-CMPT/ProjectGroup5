@@ -30,29 +30,29 @@ class Draw: UIView {
         let components: [CGFloat] = [0.0, 0.0, 1.0, 1.0]
         let color = CGColor(colorSpace: colorSpace, components: components)
         lineLeft?.setStrokeColor(color!)
-        lineLeft?.move(to: CGPoint(x: 90, y: 300))
-        lineLeft?.addLine(to: CGPoint(x: 90, y: 195))
+        lineLeft?.move(to: CGPoint(x: 40, y: 190))
+        lineLeft?.addLine(to: CGPoint(x: 40, y: 85))
         lineLeft?.strokePath()
         
         let lineRight = UIGraphicsGetCurrentContext()
         lineRight?.setLineWidth(4.0)
         lineRight?.setStrokeColor(color!)
-        lineRight?.move(to: CGPoint(x: 230, y: 300))
-        lineRight?.addLine(to: CGPoint(x: 230, y: 195))
+        lineRight?.move(to: CGPoint(x: 180, y: 190))
+        lineRight?.addLine(to: CGPoint(x: 180, y: 85))
         lineRight?.strokePath()
         
         let lineTop = UIGraphicsGetCurrentContext()
         lineTop?.setLineWidth(4.0)
         lineTop?.setStrokeColor(color!)
-        lineTop?.move(to: CGPoint(x: 117, y: 175))
-        lineTop?.addLine(to: CGPoint(x: 200, y: 175))
+        lineTop?.move(to: CGPoint(x: 67, y: 65))
+        lineTop?.addLine(to: CGPoint(x: 150, y: 65))
         lineTop?.strokePath()
         
         let lineBot = UIGraphicsGetCurrentContext()
         lineBot?.setLineWidth(4.0)
         lineBot?.setStrokeColor(color!)
-        lineBot?.move(to: CGPoint(x: 117, y: 315))
-        lineBot?.addLine(to: CGPoint(x: 204, y: 315))
+        lineBot?.move(to: CGPoint(x: 67, y: 205))
+        lineBot?.addLine(to: CGPoint(x: 154, y: 205))
         lineBot?.strokePath()
         
         let circleTopLeft = UIGraphicsGetCurrentContext()
@@ -60,7 +60,7 @@ class Draw: UIView {
         circleTopLeft?.saveGState()
         circleTopLeft?.setLineWidth(4.0)
         circleTopLeft?.setStrokeColor(UIColor.blue.cgColor)
-        let rectangle = CGRect(x: 60,y: 135,width: 60,height: 60)
+        let rectangle = CGRect(x: 10,y: 25,width: 60,height: 60)
         circleTopLeft?.addEllipse(in: rectangle)
         circleTopLeft?.strokePath()
 
@@ -69,7 +69,7 @@ class Draw: UIView {
         circleTopRight?.saveGState()
         circleTopRight?.setLineWidth(4.0)
         circleTopRight?.setStrokeColor(UIColor.blue.cgColor)
-        let rectangle2 = CGRect(x: 200,y: 135,width: 60,height: 60)
+        let rectangle2 = CGRect(x: 150,y: 25,width: 60,height: 60)
         circleTopRight?.addEllipse(in: rectangle2)
         circleTopRight?.strokePath()
 
@@ -78,7 +78,7 @@ class Draw: UIView {
         circleBotLeft?.saveGState()
         circleBotLeft?.setLineWidth(4.0)
         circleBotLeft?.setStrokeColor(UIColor.blue.cgColor)
-        let rectangle3 = CGRect(x: 60,y: 300,width: 60,height: 60)
+        let rectangle3 = CGRect(x: 10,y: 190,width: 60,height: 60)
         circleBotLeft?.addEllipse(in: rectangle3)
         circleBotLeft?.strokePath()
 
@@ -87,7 +87,7 @@ class Draw: UIView {
         circleBotRight?.saveGState()
         circleBotRight?.setLineWidth(4.0)
         circleBotRight?.setStrokeColor(UIColor.blue.cgColor)
-        let rectangle4 = CGRect(x: 200,y: 300,width: 60,height: 60)
+        let rectangle4 = CGRect(x: 150,y: 190,width: 60,height: 60)
         circleBotRight?.addEllipse(in: rectangle4)
         circleBotRight?.strokePath()
         
@@ -121,7 +121,7 @@ class SquareBreathingViewController: UIViewController{
         super.viewDidLoad()
                                                 //totalTimer.text = "00:00"
         loadTimer()
-        //print(totalTimer)
+        print("entered")
         if(totalTimerMinute < 10 && totalTimerSeconds < 10 ){
             totalTimer.text = "0" + String(totalTimerMinute) + ":0" + String(totalTimerSeconds)
         }
@@ -141,11 +141,11 @@ class SquareBreathingViewController: UIViewController{
         
 
         
-        let k = Draw(frame: CGRect(x: 0, y: 0, width: 1000, height: 1000))
+        let k = Draw(frame: CGRect(x: 50, y: 110, width: 1000, height: 1000))
         
-        k.draw(CGRect(
+       k.draw(CGRect(
            origin: CGPoint(x: 50, y: 50),
-           size: CGSize(width: 100, height: 100)));
+           size: CGSize(width: 0, height: 0)));
         self.view.addSubview(k)
         
         
@@ -166,7 +166,7 @@ class SquareBreathingViewController: UIViewController{
     func loadTimer(){
         if let loadedMins = UserDefaults.standard.value(forKey:  "totalMins") as? Int{
             totalTimerMinute = loadedMins
-
+            print("timerWorks")
         }
         if let loadedSecs = UserDefaults.standard.value(forKey: "totalSecs") as? Int{
             totalTimerSeconds = loadedSecs
@@ -178,7 +178,7 @@ class SquareBreathingViewController: UIViewController{
         
         sessionTimeSeconds-=1                                                  //Decrement Seconds
         totalTimerSeconds+=1                                                   //Increment Seconds
-        
+        print("timeManagerWorks")
 
         if(sessionTimeSeconds == 0 && sessionTimeMinute != 0){                 //If Remaining mins != 0
             sessionTimer.text = "0" + String(sessionTimeMinute)+":00"
@@ -226,7 +226,7 @@ class SquareBreathingViewController: UIViewController{
     
     
     @IBAction func restartButton(_ sender: Any) {               //Re/Start button
-        
+        print("activated")
     sesssionTrackerActive = !(sesssionTrackerActive)            //Boolean statement acts like on/off button with reset functionality
     saveTimer()
         if(sesssionTrackerActive == true){
