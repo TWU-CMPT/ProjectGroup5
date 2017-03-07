@@ -19,11 +19,14 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
     
     @IBOutlet weak var mainLabel: UILabel!
     
+    @IBOutlet weak var captureButton: UIButton!
+    
     var strings = ["[SEE]", "[TOUCH]", "[HEAR]"] // Scroll through these.
     var stringCount = 0 // Current index of strings
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        captureButton.layer.cornerRadius=20
         mainLabel.text = strings[stringCount]
     }
     
