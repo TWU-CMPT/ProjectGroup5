@@ -10,6 +10,46 @@
 
 import UIKit
 
+
+class Draw: UIView {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func draw(_ rect: CGRect)
+    {
+        self.backgroundColor = UIColor .clear
+        let line = UIGraphicsGetCurrentContext()
+        line?.setLineWidth(2.0)
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let components: [CGFloat] = [0.0, 0.0, 1.0, 1.0]
+        let color = CGColor(colorSpace: colorSpace, components: components)
+        line?.setStrokeColor(color!)
+        line?.move(to: CGPoint(x: 30, y: 30))
+        line?.addLine(to: CGPoint(x: 30, y: 80))
+        line?.strokePath()
+        
+        
+        let set = UIGraphicsGetCurrentContext()
+        
+        set?.saveGState()
+        set?.setLineWidth(4.0)
+        set?.setStrokeColor(UIColor.blue.cgColor)
+        let rectangle = CGRect(x: 30,y: 30,width: 200,height: 200)
+        set?.addEllipse(in: rectangle)
+        set?.strokePath()
+        set?.restoreGState()
+        
+    }
+
+    
+}
+
 class SquareBreathingViewController: UIViewController{
  
     
@@ -22,11 +62,14 @@ class SquareBreathingViewController: UIViewController{
     var sessionTracker = Timer()
     var sesssionTrackerActive: Bool = false             //A boolean statement is used to keep track of the state of RE/START button. sesssionTrackerActive acts like On/Off button
 
-    
+
     
     var totalTimerSeconds: Int = 0
     var totalTimerMinute: Int = 0
 
+
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,10 +90,30 @@ class SquareBreathingViewController: UIViewController{
         else if(totalTimerMinute >= 10 && totalTimerSeconds >= 10){
             totalTimer.text = String(totalTimerMinute) + ":" + String(totalTimerSeconds)
         }
-            print(sessionTimeSeconds)
-            print(sessionTimeMinute)
+        
+        
+        
+        //let k = Draw(frame: CGRect(
+         //   origin: CGPoint(x: 50, y: 50),
+          //  size: CGSize(width: 1000, height: 100)))
+        
+        
+        let k = Draw(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        
+        k.draw(CGRect(
+           origin: CGPoint(x: 50, y: 50),
+           size: CGSize(width: 100, height: 100)));
+        self.view.addSubview(k)
+        
+        
+        
+        
+        
     }
     
+
+
+
 
     func saveTimer(){
         UserDefaults.standard.set(totalTimerMinute, forKey: "totalMins")
@@ -99,10 +162,8 @@ class SquareBreathingViewController: UIViewController{
             sessionTimer.text = "0" + String(sessionTimeMinute) + ":" + String(sessionTimeSeconds)
         }
             
-            
-        
-        
 
+        
         
 
         if(totalTimerSeconds == 60){                                            //Set 60 secs to 0 secs and increment min
