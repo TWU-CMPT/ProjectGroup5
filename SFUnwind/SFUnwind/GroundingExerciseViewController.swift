@@ -50,7 +50,6 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         }
     }
     
-
     
     
     /*
