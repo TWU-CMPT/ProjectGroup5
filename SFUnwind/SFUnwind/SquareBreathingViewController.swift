@@ -12,9 +12,10 @@ import UIKit
 
 class SquareBreathingViewController: UIViewController{
  
-    @IBOutlet weak var sessionTimer: UILabel!
+    
     
     @IBOutlet weak var totalTimer: UILabel!
+    @IBOutlet weak var sessionTimer: UILabel!
     
     var sessionTimeSeconds = 60                         //Set Seconds
     var sessionTimeMinute = 4                           //Set Minute
@@ -46,6 +47,8 @@ class SquareBreathingViewController: UIViewController{
         else if(totalTimerMinute >= 10 && totalTimerSeconds >= 10){
             totalTimer.text = String(totalTimerMinute) + ":" + String(totalTimerSeconds)
         }
+            print(sessionTimeSeconds)
+            print(sessionTimeMinute)
     }
     
 
