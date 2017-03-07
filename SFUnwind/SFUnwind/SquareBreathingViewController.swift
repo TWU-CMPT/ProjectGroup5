@@ -14,6 +14,7 @@ class SquareBreathingViewController: UIViewController{
  
     @IBOutlet weak var sessionTimer: UILabel!
     
+    @IBOutlet weak var totalTimer: UILabel!
     
     var sessionTimeSeconds = 60                         //Set Seconds
     var sessionTimeMinute = 4                           //Set Minute
@@ -30,6 +31,7 @@ class SquareBreathingViewController: UIViewController{
         super.viewDidLoad()
                                                 //totalTimer.text = "00:00"
         loadTimer()
+        //print(totalTimer)
         if(totalTimerMinute < 10 && totalTimerSeconds < 10 ){
             totalTimer.text = "0" + String(totalTimerMinute) + ":0" + String(totalTimerSeconds)
         }
@@ -138,7 +140,6 @@ class SquareBreathingViewController: UIViewController{
         }
 
     }
-    @IBOutlet weak var totalTimer: UILabel!
     
     
     
