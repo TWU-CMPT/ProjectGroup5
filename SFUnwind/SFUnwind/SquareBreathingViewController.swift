@@ -24,26 +24,72 @@ class Draw: UIView {
     override func draw(_ rect: CGRect)
     {
         self.backgroundColor = UIColor .clear
-        let line = UIGraphicsGetCurrentContext()
-        line?.setLineWidth(2.0)
+        let lineLeft = UIGraphicsGetCurrentContext()
+        lineLeft?.setLineWidth(4.0)
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         let components: [CGFloat] = [0.0, 0.0, 1.0, 1.0]
         let color = CGColor(colorSpace: colorSpace, components: components)
-        line?.setStrokeColor(color!)
-        line?.move(to: CGPoint(x: 30, y: 30))
-        line?.addLine(to: CGPoint(x: 30, y: 80))
-        line?.strokePath()
+        lineLeft?.setStrokeColor(color!)
+        lineLeft?.move(to: CGPoint(x: 90, y: 300))
+        lineLeft?.addLine(to: CGPoint(x: 90, y: 195))
+        lineLeft?.strokePath()
         
+        let lineRight = UIGraphicsGetCurrentContext()
+        lineRight?.setLineWidth(4.0)
+        lineRight?.setStrokeColor(color!)
+        lineRight?.move(to: CGPoint(x: 230, y: 300))
+        lineRight?.addLine(to: CGPoint(x: 230, y: 195))
+        lineRight?.strokePath()
         
-        let set = UIGraphicsGetCurrentContext()
+        let lineTop = UIGraphicsGetCurrentContext()
+        lineTop?.setLineWidth(4.0)
+        lineTop?.setStrokeColor(color!)
+        lineTop?.move(to: CGPoint(x: 117, y: 175))
+        lineTop?.addLine(to: CGPoint(x: 200, y: 175))
+        lineTop?.strokePath()
         
-        set?.saveGState()
-        set?.setLineWidth(4.0)
-        set?.setStrokeColor(UIColor.blue.cgColor)
-        let rectangle = CGRect(x: 30,y: 30,width: 200,height: 200)
-        set?.addEllipse(in: rectangle)
-        set?.strokePath()
-        set?.restoreGState()
+        let lineBot = UIGraphicsGetCurrentContext()
+        lineBot?.setLineWidth(4.0)
+        lineBot?.setStrokeColor(color!)
+        lineBot?.move(to: CGPoint(x: 117, y: 315))
+        lineBot?.addLine(to: CGPoint(x: 204, y: 315))
+        lineBot?.strokePath()
+        
+        let circleTopLeft = UIGraphicsGetCurrentContext()
+        
+        circleTopLeft?.saveGState()
+        circleTopLeft?.setLineWidth(4.0)
+        circleTopLeft?.setStrokeColor(UIColor.blue.cgColor)
+        let rectangle = CGRect(x: 60,y: 135,width: 60,height: 60)
+        circleTopLeft?.addEllipse(in: rectangle)
+        circleTopLeft?.strokePath()
+
+        let circleTopRight = UIGraphicsGetCurrentContext()
+        
+        circleTopRight?.saveGState()
+        circleTopRight?.setLineWidth(4.0)
+        circleTopRight?.setStrokeColor(UIColor.blue.cgColor)
+        let rectangle2 = CGRect(x: 200,y: 135,width: 60,height: 60)
+        circleTopRight?.addEllipse(in: rectangle2)
+        circleTopRight?.strokePath()
+
+        let circleBotLeft = UIGraphicsGetCurrentContext()
+        
+        circleBotLeft?.saveGState()
+        circleBotLeft?.setLineWidth(4.0)
+        circleBotLeft?.setStrokeColor(UIColor.blue.cgColor)
+        let rectangle3 = CGRect(x: 60,y: 300,width: 60,height: 60)
+        circleBotLeft?.addEllipse(in: rectangle3)
+        circleBotLeft?.strokePath()
+
+        let circleBotRight = UIGraphicsGetCurrentContext()
+        
+        circleBotRight?.saveGState()
+        circleBotRight?.setLineWidth(4.0)
+        circleBotRight?.setStrokeColor(UIColor.blue.cgColor)
+        let rectangle4 = CGRect(x: 200,y: 300,width: 60,height: 60)
+        circleBotRight?.addEllipse(in: rectangle4)
+        circleBotRight?.strokePath()
         
     }
 
@@ -93,12 +139,9 @@ class SquareBreathingViewController: UIViewController{
         
         
         
-        //let k = Draw(frame: CGRect(
-         //   origin: CGPoint(x: 50, y: 50),
-          //  size: CGSize(width: 1000, height: 100)))
+
         
-        
-        let k = Draw(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        let k = Draw(frame: CGRect(x: 0, y: 0, width: 1000, height: 1000))
         
         k.draw(CGRect(
            origin: CGPoint(x: 50, y: 50),
@@ -111,9 +154,6 @@ class SquareBreathingViewController: UIViewController{
         
     }
     
-
-
-
 
     func saveTimer(){
         UserDefaults.standard.set(totalTimerMinute, forKey: "totalMins")
