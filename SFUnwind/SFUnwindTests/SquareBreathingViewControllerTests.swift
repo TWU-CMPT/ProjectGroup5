@@ -55,7 +55,7 @@ class SquareBreathingViewControllerTests: XCTestCase {
             theSquareBreathingViewController?.timeManager()
         }
         
-        theSquareBreathingViewController?.saveMinutesTimer(totalTimerMinute: 5)// Saved to a non-zero value for testing seconds
+        var _ = theSquareBreathingViewController?.saveMinutesTimer(totalTimerMinute: 5)// Saved to a non-zero value for testing seconds
         
         XCTAssertEqual(resultedSessionTimeSeconds, theSquareBreathingViewController?.sessionTimeSeconds)    //Does seconds get back to 60 after 0
         
@@ -86,8 +86,8 @@ class SquareBreathingViewControllerTests: XCTestCase {
         let currentSeconds = theSquareBreathingViewController?.loadSecondsTimer()   //Load previous data
         let currentMinutes = theSquareBreathingViewController?.loadMinutesTimer()   //Load previous data
         
-        theSquareBreathingViewController?.saveMinutesTimer(totalTimerMinute: testMinutes)   //Save new data
-        theSquareBreathingViewController?.saveSecondsTimer(totalTimerSeconds: testSeconds)  //Save new data
+        var _ = theSquareBreathingViewController?.saveMinutesTimer(totalTimerMinute: testMinutes)   //Save new data
+        var _ = theSquareBreathingViewController?.saveSecondsTimer(totalTimerSeconds: testSeconds)  //Save new data
         
         XCTAssertNotEqual(currentSeconds, testSeconds)
         XCTAssertNotEqual(currentMinutes, testMinutes)
