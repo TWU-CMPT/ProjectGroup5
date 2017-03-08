@@ -50,6 +50,8 @@ class PositiveAffirmationViewControllerTests: XCTestCase {
         result = (thePositiveAffirmationVIdeController?.Label == nil)
         XCTAssert(result)
     }
+    
+    // Test the previous button
     func testPrevious(){
         // Start the view of the page.
         let _ = thePositiveAffirmationVIdeController?.view
@@ -57,6 +59,7 @@ class PositiveAffirmationViewControllerTests: XCTestCase {
         XCTAssert(((thePositiveAffirmationVIdeController?.Previous(testButton)) != nil))    //test the button works or not
     }
     
+    // Test the next button
     func testNext(){
         // Start the view of the page.
         let _ = thePositiveAffirmationVIdeController?.view
@@ -64,6 +67,7 @@ class PositiveAffirmationViewControllerTests: XCTestCase {
         XCTAssert(((thePositiveAffirmationVIdeController?.Next(testButton)) != nil))    //test the button works or not
     }
     
+    // Test the notifications UI
     func testNotifications(){
         // Start the view of the page.
         let _ = thePositiveAffirmationVIdeController?.view
@@ -71,27 +75,12 @@ class PositiveAffirmationViewControllerTests: XCTestCase {
         XCTAssert(((thePositiveAffirmationVIdeController?.scheduleNotification(testButton)) != nil))    //test the button works or not
     }
     
+    // Test the create mantra feature
     func testCreateMantra(){
         // Start the view of the page.
         let _ = thePositiveAffirmationVIdeController?.view
         let testButton = UIButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         XCTAssert(((thePositiveAffirmationVIdeController?.Create(testButton)) != nil))  //test the button works or not
     }
-    
-
-    
-    
-//    func testExample() {
-//        // This is an example of a functional test case.
-//        // Use XCTAssert and related functions to verify your tests produce the correct results.
-//    }
-//    
-//    func testPerformanceExample() {
-//        // This is an example of a performance test case.
-//        self.measure {
-//            // Put the code you want to measure the time of here.
-//        }
-//    }
-    
 }
 
