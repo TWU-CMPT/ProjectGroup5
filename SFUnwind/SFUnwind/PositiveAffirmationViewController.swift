@@ -13,7 +13,7 @@ import UserNotifications
 
 class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
     
-    //Create button
+    //Create button - not on verson 1
     @IBAction func Create(_ sender: AnyObject) {
         //create am alert
         let alert = UIAlertController(title: "Enter Mantra", message: "Write down the mantra you like", preferredStyle: UIAlertControllerStyle.alert)
