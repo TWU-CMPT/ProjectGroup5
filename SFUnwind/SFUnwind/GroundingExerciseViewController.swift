@@ -42,7 +42,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
     // GroundingFeatureViewController Class methods/functions:
     //**************************************************
     
-    // ViewDidLoad: This function is called once when the GroundingExerciseViewController.swift object is first initialized.
+    // ViewDidLoad: This function is called once the GroundingExerciseViewController.swift object is first initialized.
     // This function is used to start up the UI elements, and add the alert reply as needed.
     override func viewDidLoad() {
         super.viewDidLoad()

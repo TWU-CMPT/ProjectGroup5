@@ -47,7 +47,7 @@ class GroundingFeatureViewControllerTests: XCTestCase {
         XCTAssert(theGroundingExerciseViewController?.captureButton.layer.cornerRadius == 20)
     }
     // Test the imagePickerController view
-    func tesIimagePickerController(){
+    func testImagePickerController(){
         // Start the view of the page.
         let _ = theGroundingExerciseViewController?.view
         // Take measure of the current goal index
