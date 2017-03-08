@@ -78,7 +78,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     var data = ["Never", "weekly", "Daily", "hourly"]
     var picker = UIPickerView()
     
-    
+    // Called once when the view loads for the first time
     override func viewDidLoad() {
         super.viewDidLoad()
         //make the date picker works
@@ -88,6 +88,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         
     }
     
+    // Check if we've recieved a memory warning.
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()// dispose of any resources that can be recreated.
     }
@@ -112,6 +113,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return data[row]
     }
+    
     //DatePicker
     @available(iOS 10.0, *)
     @IBAction func scheduleNotification(_ sender: AnyObject) {
