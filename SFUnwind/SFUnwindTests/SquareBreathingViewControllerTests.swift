@@ -125,22 +125,6 @@ class SquareBreathingViewControllerTests: XCTestCase {
         
     }
     
-    func testSaveLoadTimer(){
-        let _ = theSquareBreathingViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
-
-        let testSeconds = 90
-        let testMinutes = 100
-        
-        let currentSeconds = theSquareBreathingViewController?.loadSecondsTimer()   //Load previous data
-        let currentMinutes = theSquareBreathingViewController?.loadMinutesTimer()   //Load previous data
-        
-        var _ = theSquareBreathingViewController?.saveMinutesTimer(totalTimerMinute: testMinutes)   //Save new data
-        var _ = theSquareBreathingViewController?.saveSecondsTimer(totalTimerSeconds: testSeconds)  //Save new data
-        
-        XCTAssertNotEqual(currentSeconds, testSeconds)
-        XCTAssertNotEqual(currentMinutes, testMinutes)
-    }
-    
     func testReStartButtonInitialized(){
     
         XCTAssertNotNil(theSquareBreathingViewController?.restartButton(sender: AnyClass.self))
