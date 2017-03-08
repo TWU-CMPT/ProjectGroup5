@@ -7,17 +7,61 @@
 //
 
 import UIKit
+import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate{
+    
     var window: UIWindow?
-
-
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        //notification thing - start
+        if #available(iOS 10.0, *) {
+            let center = UNUserNotificationCenter.current()
+            center.delegate = self
+            center.requestAuthorization(options: [.alert, .sound, .badge]) { (Bool, error) in
+                if error != nil {
+                    //Handle error
+                    print(error!)
+                }
+            }
+            
+            //let actionOne = UNNotificationAction(identifier: "actionOne", title: "Open app", options: [.foreground])
+            //let categoryOne = UNNotificationCategory(identifier: "notificationID1", actions: [actionOne], intentIdentifiers: [], options: [])
+            //center.setNotificationCategories([categoryOne])
+        }
         return true
     }
+    
+    
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .sound, .badge])
+    }
+    
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        if response.actionIdentifier == "actionOne" {
+            DispatchQueue.main.async(execute: {
+                self.notificationActionTapped()
+            })
+        }
+    }
+    
+    @available(iOS 10.0, *)
+    func notificationActionTapped(){
+        let alert = UIAlertController(title: "Hi", message: "Welcome back!", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: {(UIAlertAction) in
+            //Do something
+        }))
+        let pushedViewController = (self.window?.rootViewController as! UINavigationController).viewControllers
+        let presentedViewController = pushedViewController[pushedViewController.count - 1]
+        presentedViewController.present(alert, animated: true, completion: nil)
+    }
+    //notification thing - end
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

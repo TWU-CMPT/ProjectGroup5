@@ -9,6 +9,7 @@
 // Note: All files in this project conform to the coding standard included in the SFUnwind HW3 Quality Assurance Documentation
 
 import UIKit
+import UserNotifications
 
 class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
     
@@ -84,6 +85,9 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     //fixed 10 postivite affirmations
     var fixed = ["I am awesome!", "I am the architect of my life; I build its foundation and choose its contents.", "Today, I am brimming with energy and overflowing with joy.", "My body is healthy; my mind is brilliant; my soul is tranquil.", "I am superior to negative thoughts and low actions.", "I have been given endless talents which I begin to utilize today.", "I forgive those who have harmed me in my past and peacefully detach from them.", "A river of compassion washes away my anger and replaces it with love.", "I am guided in my every step by Spirit who leads me towards what I must know and do.", "I possess the qualities needed to be extremely successful.", "My ability to conquer  my challenges is limitless; my potential to succeed is infinite."]
     
+    //DatePicker
+    @IBOutlet weak var datePicker: UIDatePicker!
+    
     var data = ["Never", "weekly", "Daily", "hourly"]
     var picker = UIPickerView()
     
@@ -115,6 +119,30 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return data[row]
+    }
+    //DatePicker
+    @available(iOS 10.0, *)
+    @IBAction func scheduleNotification(_ sender: AnyObject) {
+        let center = UNUserNotificationCenter.current() //set up a current value to a var
+        
+        let content = UNMutableNotificationContent()
+        content.title = "How are you doing today"   //set up a title
+        content.body = "This is just a sample"  //set up a body
+        content.sound = UNNotificationSound.default()   //make the default sound
+        content.categoryIdentifier = "notificationID1"  //ID the above categories
+        
+        //3s testting
+        //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
+        
+        let triggerTime = Calendar.current.dateComponents([.hour, .minute], from: datePicker.date)  //send notification at a time when the user wants to
+        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerTime, repeats: true)   //make a trigger
+        let identifier = "LocalNotificationIdentifier"  //set up a identifier
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger) //test the error case
+        center.add(request){ (error) in
+            if error != nil {
+                print(error!)
+            }
+        }
     }
 }
 
