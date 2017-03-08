@@ -39,6 +39,10 @@ class SquareBreathingViewControllerTests: XCTestCase {
     // Tests:
     //*****************
     
+    func testViewDidLoad(){
+        let _ = theSquareBreathingViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
+    }
+    
     func testSessionSecondsTimeManager(){
         let _ = theSquareBreathingViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
         let previousSessionTimeSeconds = theSquareBreathingViewController?.sessionTimeSeconds
