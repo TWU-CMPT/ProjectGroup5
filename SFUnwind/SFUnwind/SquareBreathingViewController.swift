@@ -3,16 +3,17 @@
 // SFUnwind
 // Project Group 5: SFU CMPT 276
 // Primary programmer: Berke Boz
-// Contributing Programmers:
+// Contributing Programmers: Adam Badke
 // Known issues: Timer does not stop when pages are changed, this won't be fixed until animation is implemented
 //
 // Note: All files in this project conform to the coding standard included in the SFUnwind HW3 Quality Assurance Documentation
 
 import UIKit
 
-
+// Square Object (Contained by the main Square Breathing screen view controller)
 class Draw: UIView {
-    
+    // Square visual code:
+    //********************
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -20,12 +21,12 @@ class Draw: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // Draw the square on screen
     override func draw(_ rect: CGRect)
     {
-        self.backgroundColor = UIColor .clear           //Make backgound transparent
-        
-        
-        let lineLeft = UIGraphicsGetCurrentContext()            //Initialize Lines and Rectangles
+        self.backgroundColor = UIColor .clear           //Make backgound
+        //Initialize Lines and Rectangles
+        let lineLeft = UIGraphicsGetCurrentContext()
         let lineRight = UIGraphicsGetCurrentContext()
         let lineTop = UIGraphicsGetCurrentContext()
         let lineBot = UIGraphicsGetCurrentContext()
@@ -33,19 +34,16 @@ class Draw: UIView {
         let circleTopRight = UIGraphicsGetCurrentContext()
         let circleBotLeft = UIGraphicsGetCurrentContext()
         let circleBotRight = UIGraphicsGetCurrentContext()
-        
 
         let colorSpace = CGColorSpaceCreateDeviceRGB()  //Set color
         let components: [CGFloat] = [0.0, 0.0, 1.0, 1.0]//Set color
         let color = CGColor(colorSpace: colorSpace, components: components)
-        
         
         lineLeft?.setLineWidth(4.0)                     //Adjust line width
         lineLeft?.setStrokeColor(color!)    //Set color
         lineLeft?.move(to: CGPoint(x: 40, y: 190))  //Move to coordinates
         lineLeft?.addLine(to: CGPoint(x: 40, y: 85))//Add line to given coordinates
         lineLeft?.strokePath()
-        
 
         lineRight?.setLineWidth(4.0)//Adjust line width
         lineRight?.setStrokeColor(color!)//Set color
@@ -53,21 +51,17 @@ class Draw: UIView {
         lineRight?.addLine(to: CGPoint(x: 180, y: 85))  //Move to coordinates
         lineRight?.strokePath()//Add line to given coordinates
         
-
         lineTop?.setLineWidth(4.0)//Adjust line width
         lineTop?.setStrokeColor(color!)//Set color
         lineTop?.move(to: CGPoint(x: 67, y: 65))
         lineTop?.addLine(to: CGPoint(x: 150, y: 65))  //Move to coordinates
         lineTop?.strokePath()//Add line to given coordinates
         
-
         lineBot?.setLineWidth(4.0)//Adjust line width
         lineBot?.setStrokeColor(color!)//Set color
         lineBot?.move(to: CGPoint(x: 67, y: 205))
         lineBot?.addLine(to: CGPoint(x: 154, y: 205))  //Move to coordinates
         lineBot?.strokePath()//Add line to given coordinates
-        
-
         
         circleTopLeft?.saveGState()
         circleTopLeft?.setLineWidth(4.0)//Adjust line width
@@ -76,8 +70,6 @@ class Draw: UIView {
         circleTopLeft?.addEllipse(in: rectangle)
         circleTopLeft?.strokePath()//Add line to given coordinates
 
-
-        
         circleTopRight?.saveGState()
         circleTopRight?.setLineWidth(4.0)//Adjust line width
         circleTopRight?.setStrokeColor(UIColor.blue.cgColor)//Set color
@@ -85,8 +77,6 @@ class Draw: UIView {
         circleTopRight?.addEllipse(in: rectangle2)
         circleTopRight?.strokePath()//Add line to given coordinates
 
-
-        
         circleBotLeft?.saveGState()
         circleBotLeft?.setLineWidth(4.0)//Adjust line width
         circleBotLeft?.setStrokeColor(UIColor.blue.cgColor)//Set color
@@ -94,48 +84,41 @@ class Draw: UIView {
         circleBotLeft?.addEllipse(in: rectangle3)
         circleBotLeft?.strokePath()//Add line to given coordinates
 
-
-        
         circleBotRight?.saveGState()
         circleBotRight?.setLineWidth(4.0)//Adjust line width
         circleBotRight?.setStrokeColor(UIColor.blue.cgColor)//Set color
         let rectangle4 = CGRect(x: 150,y: 190,width: 60,height: 60)//Set coordinates
         circleBotRight?.addEllipse(in: rectangle4)
         circleBotRight?.strokePath()//Add line to given coordinates
-        
     }
-
-    
 }
 
+// Main SquareBreathing view controller object
 class SquareBreathingViewController: UIViewController{
  
-    
-    
+    // Buttons
     @IBOutlet weak var totalTimer: UILabel!
     @IBOutlet weak var sessionTimer: UILabel!
     
+    // UI Timer Parameters
     var sessionTimeSeconds = 60                         //Set Seconds
     var sessionTimeMinute = 4                           //Set Minute
     var sessionTracker = Timer()
     var sesssionTrackerActive: Bool = false             //A boolean statement is used to keep track of the state of RE/START button. sesssionTrackerActive acts like On/Off button
 
-
-    
     var totalTimerSeconds: Int = 0
     var totalTimerMinute: Int = 0
 
-
     
-    
-    
+    // Called once when this object is first instanciated
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad() // Call the super class
         
+        // Load the timer data:
         var _ = loadSecondsTimer()
         var _ = loadMinutesTimer()
         
-        //Statements for displaying the time correctly
+        // Format the timer output: Display the time correctly
         if(totalTimerMinute < 10 && totalTimerSeconds < 10 ){
             totalTimer.text = "0" + String(totalTimerMinute) + ":0" + String(totalTimerSeconds)
         }
@@ -151,34 +134,27 @@ class SquareBreathingViewController: UIViewController{
             totalTimer.text = String(totalTimerMinute) + ":" + String(totalTimerSeconds)
         }
         
-        
-        
-
-        
         let customAnimation = Draw(frame: CGRect(x: 50, y: 110, width: 1000, height: 1000))   //Initialize a frame
         customAnimation.draw(CGRect(origin: CGPoint(x: 50, y: 50),size: CGSize(width: 0, height: 0))); //Draw the animation
         self.view.addSubview(customAnimation)
         
-        
-        
-        
-        
     }
     
-
+    // Save the seconds value of the timer to the device
     func saveSecondsTimer(totalTimerSeconds: Int) -> Int{
         UserDefaults.standard.set(totalTimerSeconds, forKey: "totalSecs") //Set Seconds
         UserDefaults.standard.synchronize()
         return totalTimerSeconds
     }
-
+    
+    // Save the minutes value of the timer to the device
     func saveMinutesTimer(totalTimerMinute: Int) -> Int{
         UserDefaults.standard.set(totalTimerMinute, forKey: "totalMins")    //Set Minutes
         UserDefaults.standard.synchronize()
         return totalTimerMinute
     }
     
-    
+    // Load the seconds data from the device
     func loadSecondsTimer() -> Int{
         if let loadedSecs = UserDefaults.standard.value(forKey: "totalSecs") as? Int{    //Load seconds
             totalTimerSeconds = loadedSecs
@@ -186,6 +162,7 @@ class SquareBreathingViewController: UIViewController{
         return totalTimerSeconds
     }
     
+    // Load the minutes data from the device
     func loadMinutesTimer() -> Int{
         if let loadedMins = UserDefaults.standard.value(forKey:  "totalMins") as? Int{    //Load minutes
             totalTimerMinute = loadedMins
@@ -194,6 +171,7 @@ class SquareBreathingViewController: UIViewController{
         return totalTimerMinute
     }
     
+    // Handle the timer as it is being displayed on the screen:
     func timeManager(){
         
         sessionTimeSeconds-=1                                                  //Decrement Seconds
@@ -221,9 +199,6 @@ class SquareBreathingViewController: UIViewController{
         else{                                                                   //Casually prints time
             sessionTimer.text = "0" + String(sessionTimeMinute) + ":" + String(sessionTimeSeconds)
         }
-            
-
-        
         
 
         if(totalTimerSeconds == 60){                                            //Set 60 secs to 0 secs and increment min
@@ -240,11 +215,9 @@ class SquareBreathingViewController: UIViewController{
             totalTimer.text = String(totalTimerMinute) + ":" + String(totalTimerSeconds)
 
         }
-   
     }
     
-    
-    
+    // Handle time control. Start/Restart the timer based on user input:
     @IBAction func restartButton(_ sender: Any) {               //Re/Start button
 
     sesssionTrackerActive = !(sesssionTrackerActive)            //Boolean statement acts like on/off button with reset functionality
@@ -263,9 +236,6 @@ class SquareBreathingViewController: UIViewController{
         }
 
     }
-    
-    
-    
 }
 
 
