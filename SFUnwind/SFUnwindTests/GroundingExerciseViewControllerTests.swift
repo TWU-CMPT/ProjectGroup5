@@ -33,24 +33,25 @@ class GroundingFeatureViewControllerTests: XCTestCase {
     // Tests:
     //*****************
     
-    func testMainLabelsShowingProperly() {
+    // Test the viewDidLoad function
+    func testViewDidLoad() {
         // See if it's nil before loading page.
-        XCTAssert(theGroundingExerciseViewController?.mainLabel == nil)
+        XCTAssert(theGroundingExerciseViewController?.goalDisplay == nil)
         // Start the view of the page.
         let _ = theGroundingExerciseViewController?.view
         // Check if the text is now not nothing.
-        XCTAssert(theGroundingExerciseViewController?.mainLabel.text != nil)
+        XCTAssert(theGroundingExerciseViewController?.goalDisplay.text != nil)
         // Check if the main goal display is correct
-        XCTAssert(theGroundingExerciseViewController?.mainLabel.text == theGroundingExerciseViewController?.strings[(theGroundingExerciseViewController?.stringCount)!])
+        XCTAssert(theGroundingExerciseViewController?.goalDisplay.text == theGroundingExerciseViewController?.goalString[(theGroundingExerciseViewController?.goalIndex)!])
         // Check if corner radius is correct
         XCTAssert(theGroundingExerciseViewController?.captureButton.layer.cornerRadius == 20)
     }
-    
+    // Test the imagePickerController view
     func tesIimagePickerController(){
         // Start the view of the page.
         let _ = theGroundingExerciseViewController?.view
         // Take measure of the current goal index
-        let testCheckCount = theGroundingExerciseViewController?.stringCount
+        let testCheckCount = theGroundingExerciseViewController?.goalIndex
         // Create a test picture
         let examplePic = UIImage(named: "ImageExample")
         // Create a test anyObject dictionary
@@ -59,12 +60,13 @@ class GroundingFeatureViewControllerTests: XCTestCase {
         let imagePicker = UIImagePickerController()
         // Call function
         theGroundingExerciseViewController?.imagePickerController(imagePicker, didFinishPickingImage: examplePic, editingInfo : dictionary)
+        // WARNING: It is called by the camera, and never runs by direct call. Except here. We are testing if the camera success results in change in strings. Camera always puts in valid data through argument.
         // Test if goal index was incremented
-        XCTAssert(testCheckCount! == (theGroundingExerciseViewController?.stringCount)! - 1)
+        XCTAssert(testCheckCount! == (theGroundingExerciseViewController?.goalIndex)! - 1)
         // Test if goal string is correct as well
-        XCTAssert((theGroundingExerciseViewController?.mainLabel.text)! == theGroundingExerciseViewController?.strings[testCheckCount!+1])
+        XCTAssert((theGroundingExerciseViewController?.goalDisplay.text)! == theGroundingExerciseViewController?.goalString[testCheckCount!+1])
     }
-    
+    // Test the imagePickerController view
     func testCameraButtonAction(){
         // Start the view of the page.
         let _ = theGroundingExerciseViewController?.view
@@ -76,12 +78,12 @@ class GroundingFeatureViewControllerTests: XCTestCase {
         }
         else{
             // Assert that the title for alert is correct
-            XCTAssert(theGroundingExerciseViewController?.alertVC.title == "For Testing")
+            XCTAssert(theGroundingExerciseViewController?.theAlert.title == "For Testing")
             // Call Function
             theGroundingExerciseViewController?.cameraButtonAction(testButton)
             // WARNING: No invalid data for input. Any actual invalid data prevents compiling, or crashes testing program. Argument is there just to see if it actually came from a button or not. Anything else crashes.
             // Assert that the title change for the alert was recognized
-            XCTAssert(theGroundingExerciseViewController?.alertVC.title == "No Camera")
+            XCTAssert(theGroundingExerciseViewController?.theAlert.title == "No Camera")
         }
     }
     
