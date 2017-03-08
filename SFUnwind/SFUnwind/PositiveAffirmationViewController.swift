@@ -39,7 +39,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         self.present(alert, animated: true, completion: nil)    //present it
     }
     
-    //Delete button
+    //Delete button - not on verson 1
     @IBAction func DeleteAlert(_ sender: AnyObject) {
         
     }

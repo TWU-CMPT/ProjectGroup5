@@ -54,29 +54,31 @@ class PositiveAffirmationViewControllerTests: XCTestCase {
         // Start the view of the page.
         let _ = thePositiveAffirmationVIdeController?.view
         let testButton = UIButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        XCTAssert(((thePositiveAffirmationVIdeController?.Previous(testButton)) != nil))
+        XCTAssert(((thePositiveAffirmationVIdeController?.Previous(testButton)) != nil))    //test the button works or not
     }
     
     func testNext(){
         // Start the view of the page.
         let _ = thePositiveAffirmationVIdeController?.view
         let testButton = UIButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        XCTAssert(((thePositiveAffirmationVIdeController?.Next(testButton)) != nil))
+        XCTAssert(((thePositiveAffirmationVIdeController?.Next(testButton)) != nil))    //test the button works or not
     }
     
     func testNotifications(){
         // Start the view of the page.
         let _ = thePositiveAffirmationVIdeController?.view
         let testButton = UIButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        XCTAssert(((thePositiveAffirmationVIdeController?.scheduleNotification(testButton)) != nil))
+        XCTAssert(((thePositiveAffirmationVIdeController?.scheduleNotification(testButton)) != nil))    //test the button works or not
     }
     
     func testCreateMantra(){
         // Start the view of the page.
         let _ = thePositiveAffirmationVIdeController?.view
         let testButton = UIButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        XCTAssert(((thePositiveAffirmationVIdeController?.Create(testButton)) != nil))
+        XCTAssert(((thePositiveAffirmationVIdeController?.Create(testButton)) != nil))  //test the button works or not
     }
+    
+
     
     
 //    func testExample() {
