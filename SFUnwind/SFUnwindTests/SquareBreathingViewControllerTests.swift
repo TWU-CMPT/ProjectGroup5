@@ -41,6 +41,20 @@ class SquareBreathingViewControllerTests: XCTestCase {
     
     func testViewDidLoad(){
         let _ = theSquareBreathingViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
+        // Check if the values for totalTime were set.
+        XCTAssert(theSquareBreathingViewController?.totalTimerSeconds != nil)
+        XCTAssert(theSquareBreathingViewController?.totalTimerMinute != nil)
+        
+    }
+    
+    func testSaveSecondsTimer(){
+        let _ = theSquareBreathingViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
+        // Here we test valid and invalid data for this function.
+        XCTAssert(255 == theSquareBreathingViewController?.saveSecondsTimer(totalTimerSeconds: 255))
+        XCTAssert(UserDefaults.standard.value(forKey: "totalMins") as! Int? == 255)
+        XCTAssert(-200 == theSquareBreathingViewController?.saveSecondsTimer(totalTimerSeconds: -200))
+        XCTAssert(0 == theSquareBreathingViewController?.saveSecondsTimer(totalTimerSeconds: 0))
+        
     }
     
     func testSessionSecondsTimeManager(){
