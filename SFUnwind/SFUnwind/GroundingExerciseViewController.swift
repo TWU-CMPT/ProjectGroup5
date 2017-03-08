@@ -23,15 +23,15 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
     
     var strings = ["[SEE]", "[TOUCH]", "[HEAR]"] // Scroll through these.
     var stringCount = 0 // Current index of strings
-    let alertVC = UIAlertController(title: "No Camera", message: "Sorry, this device has no camera", preferredStyle: .alert) // Create alerts
-    let okaAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+    let alertVC = UIAlertController(title: "For Testing", message: "Sorry, this device has no camera", preferredStyle: .alert) // Create alerts
+    let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         captureButton.layer.cornerRadius=20
         mainLabel.text = strings[stringCount]
-        alertVC.addAction(okaAction)
+        alertVC.addAction(theOkAction)
     }
     // This
     @IBAction func cameraButtonAction(_ sender: UIButton) { // Capture Button
@@ -50,7 +50,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
             imagePicker.modalPresentationStyle = .fullScreen // Redudant, kinda
             self.present(imagePicker, animated: true, completion: {imagePicker.cameraOverlayView = zlabel}) // Activate the camera!
         } else { // You get this if you do not have a camera.
-            
+            alertVC.title = "No Camera"
             present(alertVC, animated: true, completion: nil) //Present alert
         }
     }
