@@ -51,10 +51,40 @@ class SquareBreathingViewControllerTests: XCTestCase {
         let _ = theSquareBreathingViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
         // Here we test valid and invalid data for this function.
         XCTAssert(255 == theSquareBreathingViewController?.saveSecondsTimer(totalTimerSeconds: 255))
-        XCTAssert(UserDefaults.standard.value(forKey: "totalMins") as! Int? == 255)
         XCTAssert(-200 == theSquareBreathingViewController?.saveSecondsTimer(totalTimerSeconds: -200))
         XCTAssert(0 == theSquareBreathingViewController?.saveSecondsTimer(totalTimerSeconds: 0))
-        
+    }
+    
+    func testSaveMinutesTimer(){
+        let _ = theSquareBreathingViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
+        // Here we test valid and invalid data for this function.
+        XCTAssert(255 == theSquareBreathingViewController?.saveMinutesTimer(totalTimerMinute: 255))
+        XCTAssert(-200 == theSquareBreathingViewController?.saveMinutesTimer(totalTimerMinute: -200))
+        XCTAssert(0 == theSquareBreathingViewController?.saveMinutesTimer(totalTimerMinute: 0))
+    }
+    
+    func testLoadSecondsTimer(){
+        let _ = theSquareBreathingViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
+        // Here we test valid and invalid data for this function.
+        XCTAssert(255 == theSquareBreathingViewController?.saveSecondsTimer(totalTimerSeconds: 255))
+        // Then we test if it's loaded correctly
+        XCTAssert(255 == theSquareBreathingViewController?.loadSecondsTimer())
+        XCTAssert(-200 == theSquareBreathingViewController?.saveSecondsTimer(totalTimerSeconds: -200))
+        XCTAssert(-200 == theSquareBreathingViewController?.loadSecondsTimer())
+        XCTAssert(0 == theSquareBreathingViewController?.saveSecondsTimer(totalTimerSeconds: 0))
+        XCTAssert(0 == theSquareBreathingViewController?.loadSecondsTimer())
+    }
+    
+    func testLoadMinutesTimer(){
+        let _ = theSquareBreathingViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
+        // Here we test valid and invalid data for this function.
+        XCTAssert(255 == theSquareBreathingViewController?.saveMinutesTimer(totalTimerMinute: 255))
+        // Then we test if it's loaded correctly
+        XCTAssert(255 == theSquareBreathingViewController?.loadMinutesTimer())
+        XCTAssert(-200 == theSquareBreathingViewController?.saveMinutesTimer(totalTimerMinute: -200))
+        XCTAssert(-200 == theSquareBreathingViewController?.loadMinutesTimer())
+        XCTAssert(0 == theSquareBreathingViewController?.saveMinutesTimer(totalTimerMinute: 0))
+        XCTAssert(0 == theSquareBreathingViewController?.loadMinutesTimer())
     }
     
     func testSessionSecondsTimeManager(){
