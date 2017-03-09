@@ -30,8 +30,8 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
     //************
     
     // Contact 1: Create/send
-    @IBOutlet weak var contact1CreateSendBtn: UIButton! // Outlet
-    @IBAction func contact1CreateSendBtn(_ sender: UIButton) { // Action
+    @IBOutlet weak var contact1CreateSendBtn: UIButton!
+    @IBAction func contact1CreateSendBtn(_ sender: Any) {
         // User has tapped the Create/Send button:
         currentContact = 1                                      // Update the contract tracking variable
         handleCreateSendBtn(contactIndex: 0)                    // Call the generic create/send button handler
