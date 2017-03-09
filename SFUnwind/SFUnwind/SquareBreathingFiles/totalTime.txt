@@ -1,1 +1,0 @@
-Berke: Use this file to save and load the "total time" data for the activity

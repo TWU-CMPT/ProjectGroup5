@@ -1,6 +1,0 @@
-Sally McGregor
-459123987
-Hi Sally, it's me. I'm having a panic attack
-and I've stored my message to you
-on seperate lines.
-I sure hope that it still works!
