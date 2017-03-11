@@ -28,7 +28,9 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
     
     // UI buttons:
     //************
-    
+
+
+
     // Contact 1: Create/send
     @IBOutlet weak var contact1CreateSendBtn: UIButton!
     @IBAction func contact1CreateSendBtn(_ sender: Any) {
@@ -112,6 +114,12 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
     // This function is used to trigger the various UI updates required to set up the screen
     override func viewDidLoad() {
         super.viewDidLoad() // Call the superclass's viewDidLoad function
+        contact4CreateSendBtn.setTitle("DEBUG", for: UIControlState.application)
+        contact4CreateSendBtn.setTitle("DEBUG2", for: UIControlState.disabled)
+        contact4CreateSendBtn.setTitle("DEBUG3", for: UIControlState.focused)
+        contact4CreateSendBtn.setTitle("DEBUG4", for: UIControlState.highlighted)
+        contact4CreateSendBtn.setTitle("DEBUG5", for: UIControlState.reserved)
+        contact4CreateSendBtn.setTitle("DEBUG6", for: UIControlState.selected)
         
         // Call the alert list initialization function, which updates the UI elements with the correct, loaded text:
         initializeAlertList()
@@ -137,9 +145,11 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
                     alertExists[0] = false
                 } else{ // Otherwise, set the contact name text label to the first line in the alert file
                     contact1Text.text = currentAlertText?[0]
+                    contact1CreateSendBtn.updateUserActivityState(NSUserActivity(activityType: "normal"))
                     contact1CreateSendBtn.setTitle("Send", for: .normal)
                     contact1EditBtn.isHidden = false
                     alertExists[0] = true
+                    print ("debug")
                 }
 
             case 2: // Contact 2
