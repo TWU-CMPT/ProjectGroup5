@@ -95,6 +95,41 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
         displayContactSelector()                                // Call the function selector
     }
     
+    
+//    let theContactView = CNContactPickerViewController()    // Create a CNContactPickerViewController object
+//    theContactView.delegate = self                          // Set the current class, which inherits from the CNContactPickerDelegate class, as the view's delegate
+//    
+//    // Restrict the information visible in the contact picker to names and mobile phone numbers
+//    theContactView.displayedPropertyKeys = [CNContactPhoneNumbersKey]
+//    
+//    present(theContactView, animated:true, completion: nil) // Display the contact picker view within the current view, to allow the user to select a contact. Triggers the CNContactPickerDelegate protocol functions (below)
+    
+    // Help button
+    @IBAction func helpButton(_ sender: Any) {
+        
+//        let popup = HelpViewController()
+//        
+//        present(popup, animated: true, completion: nil)
+        
+        
+        
+        
+        
+//        //var popup = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() as! HelpViewController
+//        let popup = HelpViewController()
+//
+//        
+//        self.addChildViewController( popup )
+//        
+//        popup.view.frame = self.view.frame
+//        
+//        self.view.addSubview( popup.view )
+//        
+//        popup.didMove(toParentViewController: self)
+
+    }
+    
+    
     // Numeric labels
     @IBOutlet weak var row1NumericLabel: UILabel!
     @IBOutlet weak var row2NumericLabel: UILabel!
@@ -174,7 +209,6 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
                     contact1CreateSendBtn.setTitle("Send", for: .normal)
                     contact1EditBtn.isHidden = false
                     alertExists[0] = true
-                    print ("debug")
                 }
 
             case 2: // Contact 2
