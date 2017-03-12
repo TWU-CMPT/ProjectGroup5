@@ -29,8 +29,6 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
     // UI buttons:
     //************
 
-
-
     // Contact 1: Create/send
     @IBOutlet weak var contact1CreateSendBtn: UIButton!
     @IBAction func contact1CreateSendBtn(_ sender: Any) {
@@ -97,6 +95,13 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
         displayContactSelector()                                // Call the function selector
     }
     
+    // Numeric labels
+    @IBOutlet weak var row1NumericLabel: UILabel!
+    @IBOutlet weak var row2NumericLabel: UILabel!
+    @IBOutlet weak var row3NumericLabel: UILabel!
+    @IBOutlet weak var row4NumericLabel: UILabel!
+    @IBOutlet weak var row5NumericLabel: UILabel!
+    
     
     // Contact name text labels:
     @IBOutlet weak var contact1Text: UILabel! // Contact 1
@@ -106,6 +111,11 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
     @IBOutlet weak var contact5Text: UILabel! // Contact 5
     
     
+    // Counselling contact links
+    @IBOutlet weak var CounsellingWeblink: UIButton!
+    @IBOutlet weak var CounsellingPhoneLabel: UILabel!
+    @IBOutlet weak var CounsellingPhoneLink: UIButton!
+    
     
     // PanicAlertViewController Class methods/functions:
     //**************************************************
@@ -114,15 +124,30 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
     // This function is used to trigger the various UI updates required to set up the screen
     override func viewDidLoad() {
         super.viewDidLoad() // Call the superclass's viewDidLoad function
-        contact4CreateSendBtn.setTitle("DEBUG", for: UIControlState.application)
-        contact4CreateSendBtn.setTitle("DEBUG2", for: UIControlState.disabled)
-        contact4CreateSendBtn.setTitle("DEBUG3", for: UIControlState.focused)
-        contact4CreateSendBtn.setTitle("DEBUG4", for: UIControlState.highlighted)
-        contact4CreateSendBtn.setTitle("DEBUG5", for: UIControlState.reserved)
-        contact4CreateSendBtn.setTitle("DEBUG6", for: UIControlState.selected)
         
         // Call the alert list initialization function, which updates the UI elements with the correct, loaded text:
         initializeAlertList()
+        
+
+        // Handle formatting of numeric row labels
+        row1NumericLabel.numberOfLines = 0
+        row1NumericLabel.adjustsFontSizeToFitWidth = true
+        row2NumericLabel.numberOfLines = 0
+        row2NumericLabel.adjustsFontSizeToFitWidth = true
+        row3NumericLabel.numberOfLines = 0
+        row3NumericLabel.adjustsFontSizeToFitWidth = true
+        row4NumericLabel.numberOfLines = 0
+        row4NumericLabel.adjustsFontSizeToFitWidth = true
+        row5NumericLabel.numberOfLines = 0
+        row5NumericLabel.adjustsFontSizeToFitWidth = true
+        
+        // Handle formatting of the SFU Counselling contact information:
+        CounsellingWeblink.titleLabel?.numberOfLines = 0
+        CounsellingWeblink.titleLabel?.adjustsFontSizeToFitWidth = true
+        CounsellingPhoneLink.titleLabel?.numberOfLines = 0
+        CounsellingPhoneLink.titleLabel?.adjustsFontSizeToFitWidth = true
+        CounsellingPhoneLabel.numberOfLines = 0
+        CounsellingPhoneLabel.adjustsFontSizeToFitWidth = true
     }
     
     
