@@ -15,7 +15,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     
     //Create button - not on verson 1
     @IBAction func Create(_ sender: AnyObject) {
-        //create am alert
+        //create an alert
         let alert = UIAlertController(title: "Enter Mantra", message: "Write down the mantra you like", preferredStyle: UIAlertControllerStyle.alert)
         
         //add textField
@@ -27,6 +27,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             let textField0 = alert.textFields?[0]   //take the input text
             print(textField0?.text!)    //print
             self.Label.text = textField0?.text! //change the label to the next same as the user input
+            self.fixed.append((textField0?.text!)!)
         })
         
         alert.addAction(saveAction) //run the save action
@@ -41,23 +42,51 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     
     //Delete button - not on verson 1
     @IBAction func DeleteAlert(_ sender: AnyObject) {
+        //create an alert
+        let alert = UIAlertController(title: "Are you sure?", message: " ", preferredStyle: UIAlertControllerStyle.alert)
         
+        //delete aciton
+        let deleteAction = UIAlertAction(title: "submit", style: UIAlertActionStyle.default, handler: { (action:UIAlertAction) -> Void in
+            if self.index == self.fixed.count - 1{
+                self.fixed.remove(at: self.index - 1)
+                self.index -= 1
+            }else if(self.index == 0){
+                self.fixed.remove(at: self.fixed.count - 1)
+            }
+        })
+        
+        alert.addAction(deleteAction) //run the delete action
+        
+        //Cancel action
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil)
+        
+        alert.addAction(cancelAction)   //run the cancel action
+        
+        self.present(alert, animated: true, completion: nil)    //present it
     }
     
     //Previous button
     @IBAction func Previous(_ sender: AnyObject) {
-        if index > 0 {
+        if index > -1 {
             Label.text = fixed[index]   //change the labe; text to the previous one
             index = index - 1
         }
+        if index == -1{
+            index = fixed.count - 1
+        }
+        print(index)
     }
     
     //Next button
     @IBAction func Next(_ sender: AnyObject) {
-        if index < fixed.count - 1 {
+        if index < fixed.count + 1 {
             Label.text = fixed[index]   //change the labe; text to the next one
             index = index + 1
         }
+        if index == fixed.count{
+            index = 0
+        }
+        print(index)
     }
     
     //Label
@@ -66,10 +95,14 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     
     @IBOutlet weak var textTime: UITextField!
     
-    var index = 0   //index of the position of the list
+    var index = 1   //index of the position of the list
     
     //fixed 10 postivite affirmations
-    var fixed = ["I am awesome!", "I am the architect of my life; I build its foundation and choose its contents.", "Today, I am brimming with energy and overflowing with joy.", "My body is healthy; my mind is brilliant; my soul is tranquil.", "I am superior to negative thoughts and low actions.", "I have been given endless talents which I begin to utilize today.", "I forgive those who have harmed me in my past and peacefully detach from them.", "A river of compassion washes away my anger and replaces it with love.", "I am guided in my every step by Spirit who leads me towards what I must know and do.", "I possess the qualities needed to be extremely successful.", "My ability to conquer  my challenges is limitless; my potential to succeed is infinite."]
+    //    var fixed = ["I am awesome!", "I am the architect of my life; I build its foundation and choose its contents.", "Today, I am brimming with energy and overflowing with joy.", "My body is healthy; my mind is brilliant; my soul is tranquil.", "I am superior to negative thoughts and low actions.", "I have been given endless talents which I begin to utilize today.", "I forgive those who have harmed me in my past and peacefully detach from them.", "A river of compassion washes away my anger and replaces it with love.", "I am guided in my every step by Spirit who leads me towards what I must know and do.", "I possess the qualities needed to be extremely successful.", "My ability to conquer  my challenges is limitless; my potential to succeed is infinite."]
+    //
+    
+    var fixed = [" ","1","2","3","4","5","6","7"]
+    
     
     //DatePicker
     @IBOutlet weak var datePicker: UIDatePicker!
