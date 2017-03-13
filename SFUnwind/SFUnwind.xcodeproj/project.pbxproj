@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		80F94BC01E76879800F553A2 /* circle-png-25308.png in Resources */ = {isa = PBXBuildFile; fileRef = 80F94BBF1E76879800F553A2 /* circle-png-25308.png */; };
 		EB04A46E1E6615F400BD2859 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB04A46D1E6615F400BD2859 /* AppDelegate.swift */; };
 		EB04A4731E6615F400BD2859 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB04A4711E6615F400BD2859 /* Main.storyboard */; };
 		EB04A4751E6615F400BD2859 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB04A4741E6615F400BD2859 /* Assets.xcassets */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		80F94BBF1E76879800F553A2 /* circle-png-25308.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle-png-25308.png"; sourceTree = "<group>"; };
 		EB04A46A1E6615F400BD2859 /* SFUnwind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SFUnwind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB04A46D1E6615F400BD2859 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB04A4721E6615F400BD2859 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 		EB04A46C1E6615F400BD2859 /* SFUnwind */ = {
 			isa = PBXGroup;
 			children = (
+				80F94BBF1E76879800F553A2 /* circle-png-25308.png */,
 				EB04A46D1E6615F400BD2859 /* AppDelegate.swift */,
 				EB04A4711E6615F400BD2859 /* Main.storyboard */,
 				EB04A4741E6615F400BD2859 /* Assets.xcassets */,
@@ -254,6 +257,7 @@
 			files = (
 				EB04A4781E6615F400BD2859 /* LaunchScreen.storyboard in Resources */,
 				EB04A4751E6615F400BD2859 /* Assets.xcassets in Resources */,
+				80F94BC01E76879800F553A2 /* circle-png-25308.png in Resources */,
 				EB04A4731E6615F400BD2859 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

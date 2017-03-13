@@ -30,50 +30,72 @@ class Draw: UIView {
     {
         self.backgroundColor = UIColor .clear           //Make backgound
         //Initialize Lines and Rectangles
-        let lineLeft = UIGraphicsGetCurrentContext()
-        let lineRight = UIGraphicsGetCurrentContext()
-        let lineTop = UIGraphicsGetCurrentContext()
-        let lineBot = UIGraphicsGetCurrentContext()
+
+
+
+
         let circleTopLeft = UIGraphicsGetCurrentContext()
-        let circleTopRight = UIGraphicsGetCurrentContext()
-        let circleBotLeft = UIGraphicsGetCurrentContext()
-        let circleBotRight = UIGraphicsGetCurrentContext()
-        
-        let colorSpace = CGColorSpaceCreateDeviceRGB()  //Set color
-        let components: [CGFloat] = [0.0, 0.0, 1.0, 1.0]//Set color
-        let color = CGColor(colorSpace: colorSpace, components: components)
-        
-        lineLeft?.setLineWidth(4.0)                     //Adjust line width
-        lineLeft?.setStrokeColor(color!)    //Set color
-        lineLeft?.move(to: CGPoint(x: 40, y: 190))  //Move to coordinates
-        lineLeft?.addLine(to: CGPoint(x: 40, y: 85))//Add line to given coordinates
-        lineLeft?.strokePath()
-        
-        lineRight?.setLineWidth(4.0)//Adjust line width
-        lineRight?.setStrokeColor(color!)//Set color
-        lineRight?.move(to: CGPoint(x: 180, y: 190))
-        lineRight?.addLine(to: CGPoint(x: 180, y: 85))  //Move to coordinates
-        lineRight?.strokePath()//Add line to given coordinates
-        
-        lineTop?.setLineWidth(4.0)//Adjust line width
-        lineTop?.setStrokeColor(color!)//Set color
-        lineTop?.move(to: CGPoint(x: 67, y: 65))
-        lineTop?.addLine(to: CGPoint(x: 150, y: 65))  //Move to coordinates
-        lineTop?.strokePath()//Add line to given coordinates
-        
-        lineBot?.setLineWidth(4.0)//Adjust line width
-        lineBot?.setStrokeColor(color!)//Set color
-        lineBot?.move(to: CGPoint(x: 67, y: 205))
-        lineBot?.addLine(to: CGPoint(x: 154, y: 205))  //Move to coordinates
-        lineBot?.strokePath()//Add line to given coordinates
-        
         circleTopLeft?.saveGState()
         circleTopLeft?.setLineWidth(4.0)//Adjust line width
         circleTopLeft?.setStrokeColor(UIColor.blue.cgColor)//Set color
-        let rectangle = CGRect(x: 10,y: 25,width: 60,height: 60)//Set coordinates
-        circleTopLeft?.addEllipse(in: rectangle)
-        circleTopLeft?.strokePath()//Add line to given coordinates
+        var rectangle = CGRect(x: 10,y: 25,width: 20,height: 60)
+        //circleTopLeft?.strokeEllipse(in: rectangle)
+
         
+    
+        //Add line to given coordinates
+        UIView.animate(withDuration: 5.0, delay: 2.0, options: .curveEaseOut, animations:{
+        
+        //rectangle = rectangle.insetBy(dx: 90, dy: 90)
+        
+        circleTopLeft?.strokeEllipse(in: rectangle)
+        
+        
+
+        },completion:nil)
+        
+        
+        
+        
+        //let colorSpace = CGColorSpaceCreateDeviceRGB()  //Set color
+        //let components: [CGFloat] = [0.0, 0.0, 1.0, 1.0]//Set color
+        //let color = CGColor(colorSpace: colorSpace, components: components)
+        
+        /*
+         let lineLeft = UIGraphicsGetCurrentContext()
+         lineLeft?.setLineWidth(4.0)                     //Adjust line width
+         lineLeft?.setStrokeColor(color!)    //Set color
+         lineLeft?.move(to: CGPoint(x: 40, y: 190))  //Move to coordinates
+         lineLeft?.addLine(to: CGPoint(x: 40, y: 85))//Add line to given coordinates
+         lineLeft?.strokePath()
+         
+         let lineRight = UIGraphicsGetCurrentContext()
+         lineRight?.setLineWidth(4.0)//Adjust line width
+         lineRight?.setStrokeColor(color!)//Set color
+         lineRight?.move(to: CGPoint(x: 180, y: 190))
+         lineRight?.addLine(to: CGPoint(x: 180, y: 85))  //Move to coordinates
+         lineRight?.strokePath()//Add line to given coordinates
+         
+         let lineTop = UIGraphicsGetCurrentContext()
+         lineTop?.setLineWidth(4.0)//Adjust line width
+         lineTop?.setStrokeColor(color!)//Set color
+         lineTop?.move(to: CGPoint(x: 67, y: 65))
+         lineTop?.addLine(to: CGPoint(x: 150, y: 65))  //Move to coordinates
+         lineTop?.strokePath()//Add line to given coordinates
+         
+         let lineBot = UIGraphicsGetCurrentContext()
+         lineBot?.setLineWidth(4.0)//Adjust line width
+         lineBot?.setStrokeColor(color!)//Set color
+         lineBot?.move(to: CGPoint(x: 67, y: 205))
+         lineBot?.addLine(to: CGPoint(x: 154, y: 205))  //Move to coordinates
+         lineBot?.strokePath()//Add line to given coordinates
+         */
+        
+        
+        
+        /*
+        
+        let circleTopRight = UIGraphicsGetCurrentContext()
         circleTopRight?.saveGState()
         circleTopRight?.setLineWidth(4.0)//Adjust line width
         circleTopRight?.setStrokeColor(UIColor.blue.cgColor)//Set color
@@ -81,6 +103,7 @@ class Draw: UIView {
         circleTopRight?.addEllipse(in: rectangle2)
         circleTopRight?.strokePath()//Add line to given coordinates
         
+        let circleBotLeft = UIGraphicsGetCurrentContext()
         circleBotLeft?.saveGState()
         circleBotLeft?.setLineWidth(4.0)//Adjust line width
         circleBotLeft?.setStrokeColor(UIColor.blue.cgColor)//Set color
@@ -88,11 +111,16 @@ class Draw: UIView {
         circleBotLeft?.addEllipse(in: rectangle3)
         circleBotLeft?.strokePath()//Add line to given coordinates
         
+        let circleBotRight = UIGraphicsGetCurrentContext()
         circleBotRight?.saveGState()
         circleBotRight?.setLineWidth(4.0)//Adjust line width
         circleBotRight?.setStrokeColor(UIColor.blue.cgColor)//Set color
         let rectangle4 = CGRect(x: 150,y: 190,width: 60,height: 60)//Set coordinates
         circleBotRight?.addEllipse(in: rectangle4)
         circleBotRight?.strokePath()//Add line to given coordinates
+        
+         */
     }
+    
+
 }

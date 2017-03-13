@@ -23,10 +23,12 @@ class SquareBreathingViewController: UIViewController{
     var sessionTimeSeconds = 60                         //Set Seconds
     var sessionTimeMinute = 4                           //Set Minute
     var sessionTracker = Timer()
+    var animationTimer = Timer()
     var sesssionTrackerActive: Bool = false             //A boolean statement is used to keep track of the state of RE/START button. sesssionTrackerActive acts like On/Off button
 
     var totalTimerSeconds: Int = 0
     var totalTimerMinute: Int = 0
+
 
     
     // Called once when this object is first instanciated
@@ -52,10 +54,17 @@ class SquareBreathingViewController: UIViewController{
         else if(totalTimerMinute >= 10 && totalTimerSeconds >= 10){
             totalTimer.text = String(totalTimerMinute) + ":" + String(totalTimerSeconds)
         }
+       
+        
+        /*
         
         let customAnimation = Draw(frame: CGRect(x: 50, y: 110, width: 1000, height: 1000))   //Initialize a frame
         customAnimation.draw(CGRect(origin: CGPoint(x: 50, y: 50),size: CGSize(width: 0, height: 0))); //Draw the animation
         self.view.addSubview(customAnimation)
+*/
+        
+        
+        
         
     }
     
@@ -135,6 +144,16 @@ class SquareBreathingViewController: UIViewController{
         }
     }
     
+    func animationManager(){
+        UIView.animate(withDuration: 2, delay: 0, options: .curveEaseOut, animations:{
+            self.circleImage.transform = CGAffineTransform(scaleX: 2, y: 2)
+        }, completion:nil)
+        UIView.animate(withDuration: 2, delay: 2.2, options: .curveEaseOut, animations:{
+            self.circleImage.transform = CGAffineTransform(scaleX: 1, y: 1)
+        }, completion:nil)
+        
+    }
+    
     // Handle time control. Start/Restart the timer based on user input:
     @IBAction func restartButton(_ sender: Any) {               //Re/Start button
 
@@ -143,17 +162,21 @@ class SquareBreathingViewController: UIViewController{
         var _ = saveSecondsTimer(totalTimerSeconds:totalTimerSeconds)
         
         if(sesssionTrackerActive == true){
+            timeManager()
             sessionTracker = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(SquareBreathingViewController.timeManager), userInfo: nil, repeats: true)  //Call timeManager() once in every second
-            
+            animationManager()
+           animationTimer = Timer.scheduledTimer(timeInterval: 4.2, target: self, selector: #selector(SquareBreathingViewController.animationManager), userInfo: nil, repeats: true)
         }
         else{
             sessionTracker.invalidate()                         //Stops timer
             sessionTimeSeconds = 60                             //Reset
             sessionTimeMinute = 4                               //Reset
             sessionTimer.text = "05:00"                         //Print to screen
+            animationTimer.invalidate()
         }
-
+        
     }
+    @IBOutlet weak var circleImage: UIImageView!
 }
 
 

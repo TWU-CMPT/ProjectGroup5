@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vSk-QB-SEX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vSk-QB-SEX">
     <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -74,10 +74,15 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="circle-png-25308.png" translatesAutoresizingMaskIntoConstraints="NO" id="1LT-ZV-W1b">
+                                <rect key="frame" x="35" y="124" width="67" height="67"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.44313725490196076" green="0.74117647058823533" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
+                        <outlet property="circleImage" destination="1LT-ZV-W1b" id="2Mq-AM-M2Z"/>
                         <outlet property="sessionTimer" destination="qdM-su-kh1" id="Q9f-jN-Fnf"/>
                         <outlet property="totalTimer" destination="VpD-SW-FJN" id="xCp-MY-df5"/>
                     </connections>
@@ -742,4 +747,7 @@
             <point key="canvasLocation" x="2175" y="958"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="circle-png-25308.png" width="1280" height="1254"/>
+    </resources>
 </document>
