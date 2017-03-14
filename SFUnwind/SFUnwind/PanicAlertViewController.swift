@@ -28,10 +28,10 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
     
     // UI buttons:
     //************
-    
+
     // Contact 1: Create/send
-    @IBOutlet weak var contact1CreateSendBtn: UIButton! // Outlet
-    @IBAction func contact1CreateSendBtn(_ sender: UIButton) { // Action
+    @IBOutlet weak var contact1CreateSendBtn: UIButton!
+    @IBAction func contact1CreateSendBtn(_ sender: Any) {
         // User has tapped the Create/Send button:
         currentContact = 1                                      // Update the contract tracking variable
         handleCreateSendBtn(contactIndex: 0)                    // Call the generic create/send button handler
@@ -96,6 +96,48 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
     }
     
     
+//    let theContactView = CNContactPickerViewController()    // Create a CNContactPickerViewController object
+//    theContactView.delegate = self                          // Set the current class, which inherits from the CNContactPickerDelegate class, as the view's delegate
+//    
+//    // Restrict the information visible in the contact picker to names and mobile phone numbers
+//    theContactView.displayedPropertyKeys = [CNContactPhoneNumbersKey]
+//    
+//    present(theContactView, animated:true, completion: nil) // Display the contact picker view within the current view, to allow the user to select a contact. Triggers the CNContactPickerDelegate protocol functions (below)
+    
+    // Help button
+    @IBAction func helpButton(_ sender: Any) {
+        
+//        let popup = HelpViewController()
+//        
+//        present(popup, animated: true, completion: nil)
+        
+        
+        
+        
+        
+//        //var popup = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() as! HelpViewController
+//        let popup = HelpViewController()
+//
+//        
+//        self.addChildViewController( popup )
+//        
+//        popup.view.frame = self.view.frame
+//        
+//        self.view.addSubview( popup.view )
+//        
+//        popup.didMove(toParentViewController: self)
+
+    }
+    
+    
+    // Numeric labels
+    @IBOutlet weak var row1NumericLabel: UILabel!
+    @IBOutlet weak var row2NumericLabel: UILabel!
+    @IBOutlet weak var row3NumericLabel: UILabel!
+    @IBOutlet weak var row4NumericLabel: UILabel!
+    @IBOutlet weak var row5NumericLabel: UILabel!
+    
+    
     // Contact name text labels:
     @IBOutlet weak var contact1Text: UILabel! // Contact 1
     @IBOutlet weak var contact2Text: UILabel! // Contact 2
@@ -103,6 +145,11 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
     @IBOutlet weak var contact4Text: UILabel! // Contact 4
     @IBOutlet weak var contact5Text: UILabel! // Contact 5
     
+    
+    // Counselling contact links
+    @IBOutlet weak var CounsellingWeblink: UIButton!
+    @IBOutlet weak var CounsellingPhoneLabel: UILabel!
+    @IBOutlet weak var CounsellingPhoneLink: UIButton!
     
     
     // PanicAlertViewController Class methods/functions:
@@ -115,6 +162,27 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
         
         // Call the alert list initialization function, which updates the UI elements with the correct, loaded text:
         initializeAlertList()
+        
+
+        // Handle formatting of numeric row labels
+        row1NumericLabel.numberOfLines = 0
+        row1NumericLabel.adjustsFontSizeToFitWidth = true
+        row2NumericLabel.numberOfLines = 0
+        row2NumericLabel.adjustsFontSizeToFitWidth = true
+        row3NumericLabel.numberOfLines = 0
+        row3NumericLabel.adjustsFontSizeToFitWidth = true
+        row4NumericLabel.numberOfLines = 0
+        row4NumericLabel.adjustsFontSizeToFitWidth = true
+        row5NumericLabel.numberOfLines = 0
+        row5NumericLabel.adjustsFontSizeToFitWidth = true
+        
+        // Handle formatting of the SFU Counselling contact information:
+        CounsellingWeblink.titleLabel?.numberOfLines = 0
+        CounsellingWeblink.titleLabel?.adjustsFontSizeToFitWidth = true
+        CounsellingPhoneLink.titleLabel?.numberOfLines = 0
+        CounsellingPhoneLink.titleLabel?.adjustsFontSizeToFitWidth = true
+        CounsellingPhoneLabel.numberOfLines = 0
+        CounsellingPhoneLabel.adjustsFontSizeToFitWidth = true
     }
     
     
@@ -137,6 +205,7 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
                     alertExists[0] = false
                 } else{ // Otherwise, set the contact name text label to the first line in the alert file
                     contact1Text.text = currentAlertText?[0]
+                    contact1CreateSendBtn.updateUserActivityState(NSUserActivity(activityType: "normal"))
                     contact1CreateSendBtn.setTitle("Send", for: .normal)
                     contact1EditBtn.isHidden = false
                     alertExists[0] = true
