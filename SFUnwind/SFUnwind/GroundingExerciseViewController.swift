@@ -36,6 +36,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
     
     // UI Labels:
     //************
+    @IBOutlet weak var helpButton: UIButton!
     
     // Grounding Exercise Current Goal Display
     @IBOutlet weak var goalDisplay: UILabel!
@@ -98,6 +99,13 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
             stillImageOutput.outputSettings = [AVVideoCodecKey: AVVideoCodecJPEG]
             self.cameraSession.addOutput(stillImageOutput)
         }
+    }
+    // Modify help screen
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //let DestViewController : HelpViewController = segue.destination as!HelpViewController
+        let nav = segue.destination as! UINavigationController
+        let svc = nav.topViewController as! HelpViewController
+        svc.helpString = "OMG"
     }
     
     // cameraButtonAction: This function is called when the user presses the appropiate button.

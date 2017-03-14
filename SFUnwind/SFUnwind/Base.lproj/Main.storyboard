@@ -136,6 +136,14 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W4I-r0-oK5">
+                                <rect key="frame" x="258" y="65" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Help"/>
+                                <connections>
+                                    <segue destination="mo9-19-gvB" kind="presentation" id="aKK-q2-j2Z"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.44313725490196076" green="0.74117647058823533" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -660,7 +668,7 @@
                                         <state key="normal" title="Help"/>
                                         <connections>
                                             <action selector="helpButton:" destination="IBj-8c-3wa" eventType="touchUpInside" id="Mmz-aA-Txw"/>
-                                            <segue destination="zjK-4w-zSl" kind="presentation" id="nVQ-2G-BRS"/>
+                                            <segue destination="mo9-19-gvB" kind="presentation" id="nVQ-2G-BRS"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -736,10 +744,35 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="p72-9b-P4c"/>
+                    <connections>
+                        <outlet property="helpScreenText" destination="h1l-bD-aQB" id="hpe-Cp-6hE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SEf-pg-I7J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2175" y="958"/>
+            <point key="canvasLocation" x="3172.5" y="957.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="RjX-1j-1Rd">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mo9-19-gvB" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="l53-Ji-nlv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="zjK-4w-zSl" kind="relationship" relationship="rootViewController" id="Lej-5q-ioN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KdK-Mb-Psh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2175" y="957.5"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="aKK-q2-j2Z"/>
+    </inferredMetricsTieBreakers>
 </document>

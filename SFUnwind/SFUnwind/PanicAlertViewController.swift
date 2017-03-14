@@ -185,6 +185,13 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
         CounsellingPhoneLabel.adjustsFontSizeToFitWidth = true
     }
     
+    // Sorry just testing ~ David Magaril
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let nav = segue.destination as! UINavigationController
+        let svc = nav.topViewController as! HelpViewController
+        svc.helpString = "OMG2"
+    }
+    
     
     // Initialize the alert list. Loads the alert details from file, and sets up the UI to display the correct values
     func initializeAlertList() {
