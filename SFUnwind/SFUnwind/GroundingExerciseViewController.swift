@@ -21,12 +21,20 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
     
     // Grounding Exercise Current Index (constant).
     var goalIndex = 0
+    var currentTotalIndex = 0
+    var innerGoalIndex = 0
+    var maxGoal = 5
+    let totalMax = ((1+2+3+4+5)*3)
+    var allViews = [UIImageView]()
+    
     
     // Grounding Exercise Camera Failure Alert.
     let theAlert = UIAlertController(title: "For Testing", message: "Sorry, this device has no camera", preferredStyle: .alert)
     
     // Grounding Exercise Camera Failure Alert Reply.
     let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+    
+    let sizeOfThumb = (UIScreen.main.bounds.width/5.0)
     
     // UI Buttons:
     //************
@@ -72,6 +80,9 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        for _ in 1...self.totalMax {
+            self.allViews.append(UIImageView())
+        }
         captureButton.layer.cornerRadius=20
         goalDisplay.text = goalString[goalIndex]
         theAlert.addAction(theOkAction)
@@ -119,10 +130,37 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
                     let cgImageRef = CGImage.init(jpegDataProviderSource: dataProvider!, decode: nil, shouldInterpolate: true, intent: .defaultIntent)
                     let image = UIImage.init(cgImage: cgImageRef!, scale: 1.0, orientation: .right)
                     // do something with image
-                    self.goalIndex+=1 // Move index
-                    self.goalIndex = self.goalIndex % 3
-                    self.goalDisplay.text = self.goalString[self.goalIndex]
-                    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+                    self.allViews[self.currentTotalIndex] = UIImageView(image: image)
+                    self.allViews[self.currentTotalIndex].frame = CGRect(x: self.sizeOfThumb*CGFloat(self.innerGoalIndex), y: 0.0, width: self.sizeOfThumb, height: self.sizeOfThumb)
+                     self.allViews[self.currentTotalIndex].tag = 60 + self.currentTotalIndex
+                    if(self.innerGoalIndex == 0){
+                        for hider in 0...self.currentTotalIndex {
+                            self.allViews[hider].isHidden = true
+                        }
+                    }
+                    self.allViews[self.currentTotalIndex].isHidden = false
+                    self.view.addSubview(self.allViews[self.currentTotalIndex])
+                    self.currentTotalIndex+=1
+                    self.innerGoalIndex+=1
+                    if(self.innerGoalIndex==self.maxGoal){
+                        self.innerGoalIndex=0
+                        self.goalIndex+=1 // Move index
+                        if(self.goalIndex == 3){
+                            self.maxGoal-=1
+                            self.goalIndex = 0
+                        }
+                        self.goalDisplay.text = self.goalString[self.goalIndex]
+                        if(self.maxGoal==0){
+                            for remover in 0...self.totalMax-1 {
+                                if let taggedView = self.view.viewWithTag(60+remover) {
+                                    taggedView.removeFromSuperview()
+                                }
+                            }
+                            self.maxGoal=5
+                            self.currentTotalIndex = 0
+                        }
+                    }
+                    //UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
                 })
             }
         } else { // You get this if you do not have a camera.
