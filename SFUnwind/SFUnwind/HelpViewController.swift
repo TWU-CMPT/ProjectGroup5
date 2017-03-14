@@ -19,8 +19,9 @@ class HelpViewController: UIViewController {
     
     var helpString = String()
     
+    @IBOutlet weak var closeButton: UIButton!
     
-    @IBAction func closeHelpScreen(_ sender: Any) {
+    @IBAction func closeHelpScreen(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
     
@@ -29,7 +30,13 @@ class HelpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         helpScreenText.text = helpString
+        helpScreenText.sizeToFit()
+        helpScreenText.numberOfLines = 0
         print("DEBUG: Help screen viewDidLoad called!!!")
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //self.navigationController?.isNavigationBarHidden = true
     }
 
 } // End Help view controller

@@ -186,10 +186,10 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
     }
     
     // Sorry just testing ~ David Magaril
+    // Modify help screen
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let nav = segue.destination as! UINavigationController
-        let svc = nav.topViewController as! HelpViewController
-        svc.helpString = "OMG2"
+        let nav = segue.destination as! HelpViewController
+        nav.helpString = "Find the Dragon Balls! Look out for them all!\nCome and hunt those Dragon Balls with me.\nGotta heed the call of the magic Dragon Balls!\nWhat a great adventure this will be.\nSet a course for action, adventure doesn't wait!\nA fantastic journey for your dreams -- a thrilling mystery!"
     }
     
     

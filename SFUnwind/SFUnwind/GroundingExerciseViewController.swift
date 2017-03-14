@@ -102,10 +102,8 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
     }
     // Modify help screen
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //let DestViewController : HelpViewController = segue.destination as!HelpViewController
-        let nav = segue.destination as! UINavigationController
-        let svc = nav.topViewController as! HelpViewController
-        svc.helpString = "OMG"
+        let nav = segue.destination as! HelpViewController
+        nav.helpString = "OMG\nommmmmmmmmmgmggmgmmgmggmgmmggmgmgmgmgmgmgmgmgmgmmggmgmgmgmgmgmgmgmgmgmgmgmgmgmgmgm\nHello"
     }
     
     // cameraButtonAction: This function is called when the user presses the appropiate button.

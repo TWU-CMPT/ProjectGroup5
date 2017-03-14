@@ -141,7 +141,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Help"/>
                                 <connections>
-                                    <segue destination="mo9-19-gvB" kind="presentation" id="aKK-q2-j2Z"/>
+                                    <segue destination="zjK-4w-zSl" kind="presentation" id="pIn-1T-FcD"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -668,7 +668,7 @@
                                         <state key="normal" title="Help"/>
                                         <connections>
                                             <action selector="helpButton:" destination="IBj-8c-3wa" eventType="touchUpInside" id="Mmz-aA-Txw"/>
-                                            <segue destination="mo9-19-gvB" kind="presentation" id="nVQ-2G-BRS"/>
+                                            <segue destination="zjK-4w-zSl" kind="presentation" id="Bsm-2r-k9Q"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -720,32 +720,46 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Iag-3A-cLW">
-                                <rect key="frame" x="40" y="28" width="240" height="432"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c9l-m2-PRR">
-                                        <rect key="frame" x="155" y="46" width="46" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Close"/>
-                                        <connections>
-                                            <action selector="closeHelpScreen:" destination="zjK-4w-zSl" eventType="touchUpInside" id="VBU-Dx-USh"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Help Screen" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h1l-bD-aQB">
-                                        <rect key="frame" x="45" y="94" width="150" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Help Screen" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h1l-bD-aQB">
+                                        <rect key="frame" x="0.0" y="65" width="320" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e2l-7G-zsC">
+                                        <rect key="frame" x="216" y="23" width="56" height="39"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <state key="normal" title="Close"/>
+                                        <connections>
+                                            <action selector="closeHelpScreen:" destination="zjK-4w-zSl" eventType="touchUpInside" id="Yu4-Kc-ysW"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.5055521046" green="1" blue="0.28899648179999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="p72-9b-P4c"/>
+                    <navigationItem key="navigationItem" id="p72-9b-P4c">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="gBz-gb-fpJ">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="c9l-m2-PRR">
+                                <rect key="frame" x="253" y="4" width="51" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Close"/>
+                                <connections>
+                                    <action selector="closeHelpScreen:" destination="zjK-4w-zSl" eventType="touchUpInside" id="VBU-Dx-USh"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="closeButton" destination="e2l-7G-zsC" id="7sN-Jh-l0J"/>
                         <outlet property="helpScreenText" destination="h1l-bD-aQB" id="hpe-Cp-6hE"/>
                     </connections>
                 </viewController>
@@ -753,26 +767,8 @@
             </objects>
             <point key="canvasLocation" x="3172.5" y="957.5"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="RjX-1j-1Rd">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mo9-19-gvB" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="l53-Ji-nlv">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="zjK-4w-zSl" kind="relationship" relationship="rootViewController" id="Lej-5q-ioN"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KdK-Mb-Psh" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2175" y="957.5"/>
-        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="aKK-q2-j2Z"/>
+        <segue reference="pIn-1T-FcD"/>
     </inferredMetricsTieBreakers>
 </document>
