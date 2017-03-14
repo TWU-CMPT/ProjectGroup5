@@ -89,7 +89,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
                     cameraSession.addOutput(dataOutput)
                 }
                 cameraSession.commitConfiguration()
-                let queue = DispatchQueue(label: "com.invasivecode.videoQueue")
+                let queue = DispatchQueue(label: "forCamera")
                 dataOutput.setSampleBufferDelegate(self, queue: queue)
             }
             catch let error as NSError {
@@ -113,6 +113,9 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
                     let cgImageRef = CGImage.init(jpegDataProviderSource: dataProvider!, decode: nil, shouldInterpolate: true, intent: .defaultIntent)
                     let image = UIImage.init(cgImage: cgImageRef!, scale: 1.0, orientation: .right)
                     // do something with image
+                    self.goalIndex+=1 // Move index
+                    self.goalIndex = self.goalIndex % 3
+                    self.goalDisplay.text = self.goalString[self.goalIndex]
                     UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
                 })
             }
@@ -122,23 +125,5 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
             // Present alert to user.
             present(theAlert, animated: true, completion: nil) //Present alert
         }
-    }
-    
-    func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
-        // Here you collect each frame and process it
-    }
-    
-    func captureOutput(_ captureOutput: AVCaptureOutput!, didDrop sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
-        // Here you can count how many frames are dopped
-    }
-    
-    
-    // imagePickerController: This function is called when the user exits the camera with a succesfully taken photo.
-    // This function is used to do post-camera-operation operations, where we change the goal.
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
-        goalIndex+=1 // Move index
-        goalIndex = goalIndex % 3
-        goalDisplay.text = goalString[goalIndex]
-        self.dismiss(animated: true, completion: nil);
     }
 }
