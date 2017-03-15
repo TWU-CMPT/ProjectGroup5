@@ -19,6 +19,7 @@
 		EB0E51C11E6CB61F00180F9D /* PositiveAffirmationsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0E51C01E6CB61F00180F9D /* PositiveAffirmationsViewControllerTests.swift */; };
 		EB2050611E71FC710015FAB7 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2050601E71FC710015FAB7 /* HelpViewController.swift */; };
 		EB2050631E71FC930015FAB7 /* AnimatedSquareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2050621E71FC930015FAB7 /* AnimatedSquareViewController.swift */; };
+		EB5934A91E789C2000A5EFA0 /* PanicAlertPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5934A81E789C2000A5EFA0 /* PanicAlertPopupViewController.swift */; };
 		EB7359111E665162004A0EB0 /* SquareBreathingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7359101E665162004A0EB0 /* SquareBreathingViewController.swift */; };
 		EB7359131E66520C004A0EB0 /* GroundingExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7359121E66520C004A0EB0 /* GroundingExerciseViewController.swift */; };
 		EB7359151E665240004A0EB0 /* PositiveAffirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7359141E665240004A0EB0 /* PositiveAffirmationViewController.swift */; };
@@ -60,6 +61,7 @@
 		EB0E51C01E6CB61F00180F9D /* PositiveAffirmationsViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PositiveAffirmationsViewControllerTests.swift; sourceTree = "<group>"; };
 		EB2050601E71FC710015FAB7 /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		EB2050621E71FC930015FAB7 /* AnimatedSquareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedSquareViewController.swift; sourceTree = "<group>"; };
+		EB5934A81E789C2000A5EFA0 /* PanicAlertPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanicAlertPopupViewController.swift; sourceTree = "<group>"; };
 		EB7359101E665162004A0EB0 /* SquareBreathingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquareBreathingViewController.swift; sourceTree = "<group>"; };
 		EB7359121E66520C004A0EB0 /* GroundingExerciseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroundingExerciseViewController.swift; sourceTree = "<group>"; };
 		EB7359141E665240004A0EB0 /* PositiveAffirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PositiveAffirmationViewController.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				EB7359121E66520C004A0EB0 /* GroundingExerciseViewController.swift */,
 				EB7359141E665240004A0EB0 /* PositiveAffirmationViewController.swift */,
 				EB999C901E665A93006D41FE /* PanicAlertViewController.swift */,
+				EB5934A81E789C2000A5EFA0 /* PanicAlertPopupViewController.swift */,
 				EB2050601E71FC710015FAB7 /* HelpViewController.swift */,
 				EB2050621E71FC930015FAB7 /* AnimatedSquareViewController.swift */,
 			);
@@ -287,6 +290,7 @@
 				EB7359111E665162004A0EB0 /* SquareBreathingViewController.swift in Sources */,
 				EB7359131E66520C004A0EB0 /* GroundingExerciseViewController.swift in Sources */,
 				EB999C911E665A93006D41FE /* PanicAlertViewController.swift in Sources */,
+				EB5934A91E789C2000A5EFA0 /* PanicAlertPopupViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

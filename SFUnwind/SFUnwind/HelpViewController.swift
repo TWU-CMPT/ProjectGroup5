@@ -32,11 +32,11 @@ class HelpViewController: UIViewController {
         helpScreenText.text = helpString
         helpScreenText.sizeToFit()
         helpScreenText.numberOfLines = 0
-        print("DEBUG: Help screen viewDidLoad called!!!")
+        
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //self.navigationController?.isNavigationBarHidden = true
     }
 
 } // End Help view controller
