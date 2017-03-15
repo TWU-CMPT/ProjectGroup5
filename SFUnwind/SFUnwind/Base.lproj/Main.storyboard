@@ -144,12 +144,25 @@
                                     <segue destination="zjK-4w-zSl" kind="presentation" id="pIn-1T-FcD"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oJJ-9b-b9v">
+                                <rect key="frame" x="103" y="419" width="115" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="24"/>
+                                <state key="normal" title="RESET">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="resetButtonAction:" destination="XSJ-Gk-wV9" eventType="touchUpInside" id="HH3-cO-MHQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.44313725490196076" green="0.74117647058823533" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <outlet property="captureButton" destination="A07-5b-jBc" id="aLZ-Rt-YcV"/>
                         <outlet property="goalDisplay" destination="zdv-hI-0D1" id="3xq-bf-D7e"/>
+                        <outlet property="resetButton" destination="oJJ-9b-b9v" id="c2v-lH-iTZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U3x-La-gcF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -858,6 +871,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="cna-9s-vbo"/>
         <segue reference="hqG-cJ-l0S"/>
-        <segue reference="Bsm-2r-k9Q"/>
+        <segue reference="pIn-1T-FcD"/>
     </inferredMetricsTieBreakers>
 </document>

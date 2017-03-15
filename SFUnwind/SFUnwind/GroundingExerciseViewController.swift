@@ -65,6 +65,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
     // Grounding Exercise Camera Capture Button
     @IBOutlet weak var captureButton: UIButton!
     
+    @IBOutlet weak var resetButton: UIButton!
     // UI Labels:
     //************
     @IBOutlet weak var helpButton: UIButton!
@@ -94,8 +95,20 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        view.layer.insertSublayer(previewLayer, at: 0)
         cameraSession.startRunning()
+        resetButton.isHidden = true
+        resetButton.isEnabled = false
+        captureButton.isHidden = false
+        captureButton.isEnabled = true
+        for tagger in 0...self.totalMax-1 {
+            if let taggedView = self.view.viewWithTag(60+tagger) {
+                taggedView.removeFromSuperview()
+            }
+        }
+        self.goalIndex = 0
+        self.currentTotalIndex = 0
+        self.innerGoalIndex = 0
+        self.maxGoal = 5
     }
     
     var stillImageOutput = AVCaptureStillImageOutput.init()
@@ -105,9 +118,15 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         for _ in 1...self.totalMax {
             self.allViews.append(UIImageView())
         }
+        view.layer.insertSublayer(previewLayer, at: 0)
         captureButton.layer.cornerRadius=20
         captureButton.isExclusiveTouch = true
         captureButton.isMultipleTouchEnabled = true
+        resetButton.layer.cornerRadius=20
+        resetButton.isExclusiveTouch = true
+        resetButton.isMultipleTouchEnabled = true
+        resetButton.isHidden = true
+        resetButton.isEnabled = false
         goalDisplay.text = goalString[goalIndex]
         theAlert.addAction(theOkAction)
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera){
@@ -139,6 +158,22 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let nav = segue.destination as! HelpViewController
         nav.helpString = "OMG\nommmmmmmmmmgmggmgmmgmggmgmmggmgmgmgmgmgmgmgmgmgmmggmgmgmgmgmgmgmgmgmgmgmgmgmgmgmgm\nHello"
+    }
+    
+    @IBAction func resetButtonAction(_ sender: UIButton) {
+        resetButton.isHidden = true
+        resetButton.isEnabled = false
+        captureButton.isHidden = false
+        captureButton.isEnabled = true
+        for tagger in 0...self.totalMax-1 {
+            if let taggedView = self.view.viewWithTag(60+tagger) {
+                taggedView.removeFromSuperview()
+            }
+        }
+        self.goalIndex = 0
+        self.currentTotalIndex = 0
+        self.innerGoalIndex = 0
+        self.maxGoal = 5
     }
     
     // cameraButtonAction: This function is called when the user presses the appropiate button.
