@@ -52,26 +52,29 @@ class PanicAlertPopupViewController: UIViewController, CNContactPickerDelegate, 
     // Check the user has selected a contact name + number and input a message before allowing them to save
     override func shouldPerformSegue(withIdentifier identifier: String?, sender: Any?) -> Bool {
         if let ident = identifier {
+            print(ident)
             if ident == "saveBtnSegue" && (newContactName == "" || newContactNumber == "" || popupTextInput.text == "" ) {
                 return false
             }
         }
+        //dismiss(animated: true, completion: nil)
         return true
     }
     
     // Handle the transition back to the PanicAlertViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Handle transitions:
-        if segue.destination is PanicAlertViewController {
+        if let theDestination = segue.destination as? PanicAlertViewController {
             // Handle save button
             if segue.identifier == "saveBtnSegue" {
-                    setStoredAlert(theName: newContactName, theNumber: newContactNumber, theMessage: popupTextInput.text)
+                    theDestination.setStoredAlert(theName: newContactName, theNumber: newContactNumber, theMessage: popupTextInput.text, recievedAlertIndex: recievedAlertIndex)
             }
             // Handle delete btn
             else if segue.identifier == "deleteBtnSegue" {
-                setStoredAlert(theName: "", theNumber: "", theMessage: "")
+                theDestination.setStoredAlert(theName: "", theNumber: "", theMessage: "", recievedAlertIndex: recievedAlertIndex)
             }
         }
+        dismiss(animated: true, completion: nil)
     }
     
     
@@ -122,55 +125,6 @@ class PanicAlertPopupViewController: UIViewController, CNContactPickerDelegate, 
     }
 
 
-    // Save alert contact text data to a txt file. Called when creating/editing an alert
-    // Argument: contactProperty - A CNContactProperty object, recieved from the CNContactPicker as selected by the user
-    // Note: This function requires UI interaction and must be manually tested on a physical iOS device
-    func setStoredAlert(theName: String, theNumber: String, theMessage: String){
-    
-        // Get the documents directory:
-        if let theDocumentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-        
-            // Select the right filename
-            var filename = String()
-        
-            switch recievedAlertIndex { // Use the recieved tracking variable to select the correct filename
-            case 1:
-                filename = alertFiles[0]
-            case 2:
-                filename = alertFiles[1]
-            case 3:
-                filename = alertFiles[2]
-            case 4:
-                filename = alertFiles[3]
-            case 5:
-                filename = alertFiles[4]
-            default: // We should never reach this point
-                filename = alertFiles[0] // Use the first entry as the default, just in case.
-            }
-        
-            // Append the filename to the documents directory:
-            let thePath = theDocumentsDirectory.appendingPathComponent(filename)
-        
-            // Write to the file
-            do {
-                var fileData: String
-                if theName == "" && theNumber == "" && theMessage == "" {
-                    fileData = ""
-                }
-                else {
-                    fileData = theName + "\n" + theNumber + "\n" + theMessage // Assemble the extracted data for storage
-                }
-            
-                // Update the alert file with the extracted information:
-                try fileData.write(to: thePath, atomically: false, encoding: String.Encoding.utf8)
-            
-            }
-            catch {
-                //currentContact = 0 // Reset the tracker to the default value
-                return
-            }
-        }    
-    } // End file writing
     
     // Handle contact selection:
     public func contactPicker(_ picker: CNContactPickerViewController, didSelect theContactProperty: CNContactProperty){

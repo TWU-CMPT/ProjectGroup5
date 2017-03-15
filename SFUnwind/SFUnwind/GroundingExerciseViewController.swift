@@ -72,7 +72,6 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         view.layer.insertSublayer(previewLayer, at: 0)
-        
         cameraSession.startRunning()
     }
     

@@ -37,7 +37,7 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
         handleCreateSendBtn(contactIndex: 0)                    // Call the generic create/send button handler
     }
     // Contact 1: Edit
-    @IBOutlet weak var contact1EditBtn: UIButton! // Outlet
+    @IBOutlet weak var contact1EditBtn: UIButton! // Outletƒ
     @IBAction func contact1EditBtn(_ sender: Any) { // Action
         currentContact = 1                                      // Update the contact tracking variable
     }
@@ -191,10 +191,61 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
             destinationView.recievedAlertIndex = currentContact// Pass the filename index
             
         }
-        
-
     }
     
+    // Save alert contact text data to a txt file. Called when creating/editing an alert
+    // Argument: contactProperty - A CNContactProperty object, recieved from the CNContactPicker as selected by the user
+    // Note: This function requires UI interaction and must be manually tested on a physical iOS device
+    func setStoredAlert(theName: String, theNumber: String, theMessage: String, recievedAlertIndex: Int){
+        
+        // Get the documents directory:
+        if let theDocumentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            
+            // Select the right filename
+            var filename = String()
+            
+            switch recievedAlertIndex { // Use the recieved tracking variable to select the correct filename
+            case 1:
+                filename = alertFiles[0]
+            case 2:
+                filename = alertFiles[1]
+            case 3:
+                filename = alertFiles[2]
+            case 4:
+                filename = alertFiles[3]
+            case 5:
+                filename = alertFiles[4]
+            default: // We should never reach this point
+                filename = alertFiles[0] // Use the first entry as the default, just in case.
+            }
+            // Append the filename to the documents directory:
+            let thePath = theDocumentsDirectory.appendingPathComponent(filename)
+            
+            // Write to the file
+            do {
+                var fileData: String
+                if theName == "" && theNumber == "" && theMessage == "" {
+                    fileData = ""
+                }
+                else {
+                    fileData = theName + "\n" + theNumber + "\n" + theMessage // Assemble the extracted data for storage
+                }
+                
+                // Update the alert file with the extracted information:
+                try fileData.write(to: thePath, atomically: false, encoding: String.Encoding.utf8)
+                
+            }
+            catch {
+                //currentContact = 0 // Reset the tracker to the default value
+                return
+            }
+        }
+    } // End file writing
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        initializeAlertList()
+    }
     
     // Initialize the alert list. Loads the alert details from file, and sets up the UI to display the correct values
     func initializeAlertList() {
