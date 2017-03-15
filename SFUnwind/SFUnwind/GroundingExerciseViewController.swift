@@ -227,6 +227,9 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
                         if(self.maxGoal==0){
                             self.captureButton.isHidden = true
                             self.captureButton.isEnabled = false
+                            //print(self.helpButton)
+                            self.resetButton.isEnabled = true
+                            self.resetButton.isHidden = false
                             var downHeight = 0.0
                             var rightLength = 0.0
                             let divisor = 6.0
