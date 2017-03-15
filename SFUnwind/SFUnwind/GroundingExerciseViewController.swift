@@ -11,6 +11,29 @@
 import UIKit
 import AVFoundation
 
+extension UIView {
+    func setToX(x:CGFloat){
+        var frame:CGRect = self.frame
+        frame.origin.x = x
+        self.frame = frame
+    }
+    func setToY(y:CGFloat) {
+        var frame:CGRect=self.frame
+        frame.origin.y = y
+        self.frame = frame
+    }
+    func setToW(w:CGFloat){
+        var frame:CGRect = self.frame
+        frame.size.width = w
+        self.frame = frame
+    }
+    func setToH(h:CGFloat){
+        var frame:CGRect = self.frame
+        frame.size.height = h
+        self.frame = frame
+    }
+}
+
 class GroundingFeatureViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, AVCaptureVideoDataOutputSampleBufferDelegate{
     
     // Properties:
@@ -83,6 +106,8 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
             self.allViews.append(UIImageView())
         }
         captureButton.layer.cornerRadius=20
+        captureButton.isExclusiveTouch = true
+        captureButton.isMultipleTouchEnabled = true
         goalDisplay.text = goalString[goalIndex]
         theAlert.addAction(theOkAction)
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera){
@@ -120,8 +145,13 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
     // This function is used to start up the camera, or display an error through an alert message to indicate a camera is not installed.
     @IBAction func cameraButtonAction(_ sender: UIButton) {
         // Test if camera exists
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera){
-            if let videoConnection = stillImageOutput.connection(withMediaType:AVMediaTypeVideo){
+        self.captureButton.isEnabled = false
+        if(self.captureButton.isEnabled == true){
+            print("FAIL1")
+            return
+        }
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+            if let videoConnection = stillImageOutput.connection(withMediaType:AVMediaTypeVideo) {
                 stillImageOutput.captureStillImageAsynchronously(from:videoConnection, completionHandler: {
                     (sampleBuffer, error) in
                     let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer)
@@ -137,8 +167,18 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
                             self.allViews[hider].isHidden = true
                         }
                     }
+                    if(self.captureButton.isEnabled == true){
+                        print("FAIL2")
+                        return
+                    }
                     self.allViews[self.currentTotalIndex].isHidden = false
-                    self.view.addSubview(self.allViews[self.currentTotalIndex])
+                    if self.maxGoal != 0 && self.currentTotalIndex < 45 {
+                        self.view.addSubview(self.allViews[self.currentTotalIndex])
+                    }
+                    else {
+                        print("FAIL3")
+                        return
+                    }
                     self.currentTotalIndex+=1
                     self.innerGoalIndex+=1
                     if(self.innerGoalIndex==self.maxGoal){
@@ -150,16 +190,42 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
                         }
                         self.goalDisplay.text = self.goalString[self.goalIndex]
                         if(self.maxGoal==0){
-                            for remover in 0...self.totalMax-1 {
-                                if let taggedView = self.view.viewWithTag(60+remover) {
-                                    taggedView.removeFromSuperview()
+                            self.captureButton.isHidden = true
+                            self.captureButton.isEnabled = false
+                            var downHeight = 0.0
+                            var rightLength = 0.0
+                            let divisor = 6.0
+                            let topDiv = 7.0
+                            let offset = (UIScreen.main.bounds.width - ((UIScreen.main.bounds.width/CGFloat(divisor))*3))/2
+                            let gridSize = (UIScreen.main.bounds.width/CGFloat(divisor))
+                            for tagger in 0...self.totalMax-1 {
+                                if rightLength == divisor {
+                                    rightLength=0.0
+                                    downHeight+=1
                                 }
+                                //if let taggedView = self.view.viewWithTag(60+tagger) {
+                                //    taggedView.removeFromSuperview()
+                                //}
+                                //print(tagger)
+                                if downHeight == topDiv {
+                                    self.allViews[tagger].frame = CGRect(x: gridSize*CGFloat(rightLength) + offset, y: gridSize*CGFloat(downHeight), width: gridSize, height: gridSize)
+                                }
+                                else{
+                                    self.allViews[tagger].frame = CGRect(x: gridSize*CGFloat(rightLength), y: gridSize*CGFloat(downHeight), width: gridSize, height: gridSize)
+                                }
+                                self.allViews[tagger].isHidden = false
+                                //self.allViews[tagger].center = CGPoint(x: self.sizeOfThumb*CGFloat(rightLength),y: self.sizeOfThumb*CGFloat(downHeight))
+                                //print(self.sizeOfThumb*CGFloat(rightLength))
+                                //print(self.sizeOfThumb*CGFloat(downHeight))
+                                rightLength+=1
+                                //self.view.addSubview(self.allViews[tagger])
                             }
                             self.maxGoal=5
                             self.currentTotalIndex = 0
                         }
                     }
                     //UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+                    self.captureButton.isEnabled = true
                 })
             }
         } else { // You get this if you do not have a camera.
@@ -167,6 +233,8 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
             theAlert.title = "No Camera"
             // Present alert to user.
             present(theAlert, animated: true, completion: nil) //Present alert
+            self.captureButton.isEnabled = true
         }
+        
     }
 }
