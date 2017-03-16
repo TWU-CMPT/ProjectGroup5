@@ -15,7 +15,13 @@ import UIKit
 
 class HelpViewController: UIViewController {
     
-    @IBAction func closeHelpScreen(_ sender: Any) {
+    @IBOutlet weak var helpScreenText: UILabel!
+    
+    var helpString = String()
+    
+    @IBOutlet weak var closeButton: UIButton!
+    
+    @IBAction func closeHelpScreen(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
     
@@ -23,9 +29,14 @@ class HelpViewController: UIViewController {
     // Called once the first time this view is displayed
     override func viewDidLoad() {
         super.viewDidLoad()
+        helpScreenText.text = helpString
+        helpScreenText.sizeToFit()
+        helpScreenText.numberOfLines = 0
         
-        print("DEBUG: Help screen viewDidLoad called!!!")
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
 
 } // End Help view controller

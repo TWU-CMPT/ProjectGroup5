@@ -141,12 +141,33 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W4I-r0-oK5">
+                                <rect key="frame" x="258" y="65" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Help"/>
+                                <connections>
+                                    <segue destination="zjK-4w-zSl" kind="presentation" id="pIn-1T-FcD"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oJJ-9b-b9v">
+                                <rect key="frame" x="103" y="439" width="115" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="24"/>
+                                <state key="normal" title="RESET">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="resetButtonAction:" destination="XSJ-Gk-wV9" eventType="touchUpInside" id="HH3-cO-MHQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.44313725490196076" green="0.74117647058823533" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <outlet property="captureButton" destination="A07-5b-jBc" id="aLZ-Rt-YcV"/>
                         <outlet property="goalDisplay" destination="zdv-hI-0D1" id="3xq-bf-D7e"/>
+                        <outlet property="resetButton" destination="oJJ-9b-b9v" id="c2v-lH-iTZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U3x-La-gcF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -285,6 +306,91 @@
             </objects>
             <point key="canvasLocation" x="1505.625" y="78.75"/>
         </scene>
+        <!--Panic Alert Popup View Controller-->
+        <scene sceneID="JVK-bJ-rUF">
+            <objects>
+                <viewController id="no5-9h-JoG" customClass="PanicAlertPopupViewController" customModule="SFUnwind" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="S3d-8U-p74"/>
+                        <viewControllerLayoutGuide type="bottom" id="MQz-0T-xAk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hXz-Tb-Ea5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lwO-VW-dAM">
+                                <rect key="frame" x="229" y="34" width="63" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="popupCancelBtn:" destination="no5-9h-JoG" eventType="touchUpInside" id="8OJ-sl-HJP"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Edit Panic Alert" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ejb-AM-i0J">
+                                <rect key="frame" x="16" y="72" width="288" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" keyboardDismissMode="interactive" text="Text input" translatesAutoresizingMaskIntoConstraints="NO" id="nLY-ym-oLI">
+                                <rect key="frame" x="16" y="134" width="288" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ohK-IT-Fhq">
+                                <rect key="frame" x="229" y="270" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Save">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="IBj-8c-3wa" kind="presentation" identifier="saveBtnSegue" id="cna-9s-vbo"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfe-8B-Wdi">
+                                <rect key="frame" x="124" y="101" width="180" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Select New Contact">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="popupSelectContactBtn:" destination="no5-9h-JoG" eventType="touchUpInside" id="Cff-wU-Zqr"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0qL-42-7Be">
+                                <rect key="frame" x="16" y="270" width="156" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Delete Alert">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="IBj-8c-3wa" kind="presentation" identifier="deleteBtnSegue" id="ZjI-iC-mtj"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Recipient:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ykn-K0-e3d">
+                                <rect key="frame" x="16" y="105" width="90" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.2480766773223877" green="0.535663902759552" blue="0.76543408632278442" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <connections>
+                        <outlet property="popupSelectContactBtn" destination="nfe-8B-Wdi" id="ZZP-tg-kBl"/>
+                        <outlet property="popupTextInput" destination="nLY-ym-oLI" id="HUi-cK-hEz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U3t-HG-fS9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2214.375" y="-730"/>
+        </scene>
         <!--Panic Alert View Controller-->
         <scene sceneID="hpo-4m-d8g">
             <objects>
@@ -297,41 +403,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AqE-Jv-gpd" userLabel="Body">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AqE-Jv-gpd" userLabel="Background">
                                 <rect key="frame" x="0.0" y="85" width="320" height="395"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0JJ-Uk-DDb" userLabel="Resource Links">
-                                        <rect key="frame" x="0.0" y="260" width="320" height="104"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="smb-RG-R7U" userLabel="WebLink">
-                                                <rect key="frame" x="13" y="37" width="294" height="22"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="49"/>
-                                                <state key="normal" title="Visit the SFU Counselling Service Website">
-                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                            </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Contact SFU Counselling:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="Sfi-nJ-NZM" userLabel="PhoneLabel">
-                                                <rect key="frame" x="13" y="72" width="176" height="20"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="48"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="spatial" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="fill" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oHS-Zj-V02" userLabel="PhoneLink">
-                                                <rect key="frame" x="192" y="72" width="103" height="20"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="48"/>
-                                                <state key="normal" title="(778)-782-4615">
-                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                            </button>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.095493562519550323" green="0.41925257444381714" blue="0.6556018590927124" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </view>
-                                </subviews>
                                 <color key="backgroundColor" red="0.094117647058823528" green="0.41960784313725491" blue="0.65490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bcW-b6-m7u" userLabel="TextElements">
@@ -365,6 +439,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="contact1EditBtn:" destination="IBj-8c-3wa" eventType="touchUpInside" id="Uwi-xX-k2V"/>
+                                                    <segue destination="no5-9h-JoG" kind="presentation" identifier="createEditSegue" id="SrN-Vb-bGB"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" minimumScaleFactor="0.20000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="ZVV-9P-0vW">
@@ -439,6 +514,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="contact2EditBtn:" destination="IBj-8c-3wa" eventType="touchUpInside" id="58Y-nD-XgP"/>
+                                                    <segue destination="no5-9h-JoG" kind="presentation" identifier="createEditSegue" id="bw5-d7-5K7"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" minimumScaleFactor="0.20000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="7J2-tC-HN3">
@@ -483,6 +559,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="contact3EditBtn:" destination="IBj-8c-3wa" eventType="touchUpInside" id="5P3-NE-yPU"/>
+                                                    <segue destination="no5-9h-JoG" kind="presentation" identifier="createEditSegue" id="Z2N-fF-gAd"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" minimumScaleFactor="0.20000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="Mas-nc-fr1">
@@ -523,7 +600,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vqf-Lq-fHx">
-                                                <rect key="frame" x="262" y="0.0" width="52" height="46"/>
+                                                <rect key="frame" x="262" y="-1" width="52" height="47"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                                                 <state key="normal" title="Create">
@@ -534,7 +611,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="97t-C8-93Y">
-                                                <rect key="frame" x="197" y="0.0" width="62" height="46"/>
+                                                <rect key="frame" x="197" y="-1" width="62" height="47"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                                                 <state key="normal" title="Edit">
@@ -542,10 +619,11 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="contact4EditBtn:" destination="IBj-8c-3wa" eventType="touchUpInside" id="ywX-0o-SPb"/>
+                                                    <segue destination="no5-9h-JoG" kind="presentation" identifier="createEditSegue" id="hqG-cJ-l0S"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gSb-7D-Unr">
-                                                <rect key="frame" x="34" y="0.0" width="154" height="53"/>
+                                                <rect key="frame" x="34" y="-1" width="154" height="54"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="...">
@@ -601,6 +679,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="contact5EditBtn:" destination="IBj-8c-3wa" eventType="touchUpInside" id="kd1-H5-x1R"/>
+                                                    <segue destination="no5-9h-JoG" kind="presentation" identifier="createEditSegue" id="62r-yx-Vhg"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" minimumScaleFactor="0.20000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="bsr-Xt-8SB">
@@ -636,6 +715,35 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.2480766773223877" green="0.535663902759552" blue="0.76543408632278442" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0JJ-Uk-DDb" userLabel="Resource Links">
+                                        <rect key="frame" x="0.0" y="304" width="320" height="104"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="smb-RG-R7U" userLabel="WebLink">
+                                                <rect key="frame" x="13" y="3" width="294" height="53"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="49"/>
+                                                <state key="normal" title="Visit the SFU Counselling Service Website">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="weblinkBtn:" destination="IBj-8c-3wa" eventType="touchUpInside" id="LOZ-fX-66U"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="spatial" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="fill" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oHS-Zj-V02" userLabel="PhoneLink">
+                                                <rect key="frame" x="13" y="58" width="294" height="52"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="48"/>
+                                                <state key="normal" title="Phone SFU Counselling: (778)-782-4615">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="phoneLinkBtn:" destination="IBj-8c-3wa" eventType="touchUpInside" id="fiB-4p-gle"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.095493562519550323" green="0.41925257444381714" blue="0.6556018590927124" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </view>
                                 </subviews>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a2J-yF-s6H" userLabel="HeaderBar">
@@ -659,13 +767,14 @@
                                         </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JhE-w6-BMD" userLabel="Help Button">
-                                        <rect key="frame" x="274" y="25" width="46" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JhE-w6-BMD" userLabel="Help Button">
+                                        <rect key="frame" x="227" y="17" width="85" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Help"/>
                                         <connections>
                                             <action selector="helpButton:" destination="IBj-8c-3wa" eventType="touchUpInside" id="Mmz-aA-Txw"/>
-                                            <segue destination="zjK-4w-zSl" kind="presentation" id="nVQ-2G-BRS"/>
+                                            <segue destination="zjK-4w-zSl" kind="presentation" id="Bsm-2r-k9Q"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -675,9 +784,6 @@
                         <color key="backgroundColor" red="0.83921568627450982" green="0.0" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
-                        <outlet property="CounsellingPhoneLabel" destination="Sfi-nJ-NZM" id="kkL-FQ-dGQ"/>
-                        <outlet property="CounsellingPhoneLink" destination="oHS-Zj-V02" id="CII-Hj-Gqo"/>
-                        <outlet property="CounsellingWeblink" destination="smb-RG-R7U" id="vxd-dr-t8W"/>
                         <outlet property="contact1CreateSendBtn" destination="KdU-E2-FW3" id="S8A-yt-rbp"/>
                         <outlet property="contact1EditBtn" destination="HsE-2U-Nwp" id="f1Q-Um-3mT"/>
                         <outlet property="contact1Text" destination="ZVV-9P-0vW" id="XyR-3r-R2p"/>
@@ -693,16 +799,18 @@
                         <outlet property="contact5CreateSendBtn" destination="Ckt-vT-MZ7" id="4uc-Yb-ZXX"/>
                         <outlet property="contact5EditBtn" destination="Yj8-2i-tx9" id="LQu-8m-szj"/>
                         <outlet property="contact5Text" destination="bsr-Xt-8SB" id="rMI-Qw-hks"/>
+                        <outlet property="phoneLinkBtn" destination="oHS-Zj-V02" id="oLV-kI-dKx"/>
                         <outlet property="row1NumericLabel" destination="AEc-9Q-ZMM" id="zUU-Kd-hNk"/>
                         <outlet property="row2NumericLabel" destination="rod-dl-CLQ" id="qgQ-3W-1I2"/>
                         <outlet property="row3NumericLabel" destination="vDi-jD-J9L" id="hUe-Es-dg4"/>
                         <outlet property="row4NumericLabel" destination="HNI-j3-sfR" id="D1u-cs-hqZ"/>
                         <outlet property="row5NumericLabel" destination="T5U-dZ-keT" id="xYI-Iy-kev"/>
+                        <outlet property="weblinkBtn" destination="smb-RG-R7U" id="6cf-Uw-ghA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g0G-pw-N51" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2175" y="73.352855051244504"/>
+            <point key="canvasLocation" x="2175" y="71.25"/>
         </scene>
         <!--Help View Controller-->
         <scene sceneID="e7v-ZR-5j8">
@@ -716,35 +824,53 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Iag-3A-cLW">
-                                <rect key="frame" x="40" y="28" width="240" height="432"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rG6-Sv-3B3">
+                                <rect key="frame" x="17" y="26" width="285" height="428"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c9l-m2-PRR">
-                                        <rect key="frame" x="155" y="46" width="46" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e2l-7G-zsC">
+                                        <rect key="frame" x="221" y="22" width="56" height="39"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <state key="normal" title="Close"/>
                                         <connections>
-                                            <action selector="closeHelpScreen:" destination="zjK-4w-zSl" eventType="touchUpInside" id="VBU-Dx-USh"/>
+                                            <action selector="closeHelpScreen:" destination="zjK-4w-zSl" eventType="touchUpInside" id="Yu4-Kc-ysW"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Help Screen" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h1l-bD-aQB">
-                                        <rect key="frame" x="45" y="94" width="150" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Help Screen" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h1l-bD-aQB">
+                                        <rect key="frame" x="8" y="31" width="157" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="p72-9b-P4c">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="gBz-gb-fpJ">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="c9l-m2-PRR">
+                                <rect key="frame" x="253" y="4" width="51" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Close"/>
+                                <connections>
+                                    <action selector="closeHelpScreen:" destination="zjK-4w-zSl" eventType="touchUpInside" id="VBU-Dx-USh"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="closeButton" destination="e2l-7G-zsC" id="7sN-Jh-l0J"/>
+                        <outlet property="helpScreenText" destination="h1l-bD-aQB" id="hpe-Cp-6hE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SEf-pg-I7J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2175" y="958"/>
+            <point key="canvasLocation" x="1464.375" y="972.5"/>
         </scene>
     </scenes>
     <resources>
