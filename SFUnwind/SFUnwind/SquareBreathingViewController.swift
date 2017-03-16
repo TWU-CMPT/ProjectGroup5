@@ -29,11 +29,21 @@ class SquareBreathingViewController: UIViewController{
     var totalTimerSeconds: Int = 0
     var totalTimerMinute: Int = 0
 
+    var circleOrderTracker: Int = 1
 
     
     // Called once when this object is first instanciated
     override func viewDidLoad() {
         super.viewDidLoad() // Call the super class
+     
+        squareOrderManager(currentCircle: 0).alpha = 0
+
+        squareOrderManager(currentCircle: 1).alpha = 0
+        squareOrderManager(currentCircle: 2).alpha = 0
+        squareOrderManager(currentCircle: 3).alpha = 0
+        
+        
+        
         
         // Load the timer data:
         var _ = loadSecondsTimer()
@@ -144,15 +154,66 @@ class SquareBreathingViewController: UIViewController{
         }
     }
     
-    func animationManager(){
-        UIView.animate(withDuration: 2, delay: 0, options: .curveEaseOut, animations:{
-            self.circleImage.transform = CGAffineTransform(scaleX: 2, y: 2)
-        }, completion:nil)
-        UIView.animate(withDuration: 2, delay: 2.2, options: .curveEaseOut, animations:{
-            self.circleImage.transform = CGAffineTransform(scaleX: 1, y: 1)
+    func scaleAnimationManager(){
+        
+        UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations: {
+            self.squareOrderManager(currentCircle: self.circleOrderTracker).alpha = 1.0
+        }, completion: nil)
+        
+        UIView.animate(withDuration: 2, delay: 1, options: .curveEaseOut, animations:{
+            self.squareOrderManager(currentCircle: self.circleOrderTracker).transform = CGAffineTransform(scaleX: 2, y: 2)
         }, completion:nil)
         
+        
+        UIView.animate(withDuration: 2, delay: 3.2, options: .curveEaseOut, animations:{
+            self.squareOrderManager(currentCircle: self.circleOrderTracker).transform = CGAffineTransform(scaleX: 1, y: 1)
+        }, completion:nil)
+        
+        UIView.animate(withDuration: 1, delay: 5.2, options: .curveLinear, animations: {
+            self.squareOrderManager(currentCircle: self.circleOrderTracker).alpha = 0.0
+        }, completion: nil)
+        
+        circleOrderTracker+=1
     }
+    
+
+ 
+    func squareOrderManager(currentCircle:Int) -> UIImageView{
+        let orderNumber = currentCircle % 4
+
+        switch orderNumber{
+            
+        case 0:
+            return circleTRight
+        case 1:
+            return circleImage
+        case 2:
+            return circleBLeft
+        case 3:
+            return circleBRight
+          
+        default:
+            print("Input variable out of scope")
+            return circleImage
+        }
+        
+
+    }
+/*
+    class func scaleImageToSize(img: UIImage) -> UIImage {
+        
+        var maxSize = CGFloat(max(img.size.height, img.size.width))
+        UIGraphicsBeginImageContext(maxSize)
+
+        img.draw(in: CGRect.init(origin: CGPoint.zero, size: maxSize))
+        
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        
+        
+        UIGraphicsEndImageContext()
+        return scaledImage!
+    }
+*/
     
     // Handle time control. Start/Restart the timer based on user input:
     @IBAction func restartButton(_ sender: Any) {               //Re/Start button
@@ -161,11 +222,15 @@ class SquareBreathingViewController: UIViewController{
         var _ = saveMinutesTimer(totalTimerMinute: totalTimerMinute)
         var _ = saveSecondsTimer(totalTimerSeconds:totalTimerSeconds)
         
+        
+        
         if(sesssionTrackerActive == true){
             timeManager()
             sessionTracker = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(SquareBreathingViewController.timeManager), userInfo: nil, repeats: true)  //Call timeManager() once in every second
-            animationManager()
-           animationTimer = Timer.scheduledTimer(timeInterval: 4.2, target: self, selector: #selector(SquareBreathingViewController.animationManager), userInfo: nil, repeats: true)
+
+            scaleAnimationManager()
+           animationTimer = Timer.scheduledTimer(timeInterval: 6.2, target: self, selector: #selector(SquareBreathingViewController.scaleAnimationManager), userInfo: nil, repeats: true)
+
         }
         else{
             sessionTracker.invalidate()                         //Stops timer
@@ -173,10 +238,14 @@ class SquareBreathingViewController: UIViewController{
             sessionTimeMinute = 4                               //Reset
             sessionTimer.text = "05:00"                         //Print to screen
             animationTimer.invalidate()
+            circleOrderTracker = 1
         }
         
     }
+    @IBOutlet weak var circleBLeft: UIImageView!
     @IBOutlet weak var circleImage: UIImageView!
+    @IBOutlet weak var circleBRight: UIImageView!
+    @IBOutlet weak var circleTRight: UIImageView!
 }
 
 

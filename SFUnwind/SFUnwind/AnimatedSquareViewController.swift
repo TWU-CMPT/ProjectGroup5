@@ -38,7 +38,7 @@ class Draw: UIView {
         circleTopLeft?.saveGState()
         circleTopLeft?.setLineWidth(4.0)//Adjust line width
         circleTopLeft?.setStrokeColor(UIColor.blue.cgColor)//Set color
-        var rectangle = CGRect(x: 10,y: 25,width: 20,height: 60)
+        let rectangle = CGRect(x: 10,y: 25,width: 20,height: 60)
         //circleTopLeft?.strokeEllipse(in: rectangle)
 
         
