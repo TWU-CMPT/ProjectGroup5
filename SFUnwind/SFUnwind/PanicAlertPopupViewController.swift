@@ -10,7 +10,6 @@
 
 import UIKit
 import ContactsUI
-import QuartzCore
 
 
 // Popup class:
@@ -58,7 +57,7 @@ class PanicAlertPopupViewController: UIViewController, CNContactPickerDelegate, 
                 return false
             }
         }
-
+        //dismiss(animated: true, completion: nil)
         return true
     }
     
