@@ -171,9 +171,6 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
         weblinkBtn.titleLabel?.adjustsFontSizeToFitWidth = true
         phoneLinkBtn.titleLabel?.numberOfLines = 1
         phoneLinkBtn.titleLabel?.adjustsFontSizeToFitWidth = true
-        phoneLinkBtn.titleLabel?.numberOfLines = 1
-        phoneLinkBtn.titleLabel?.adjustsFontSizeToFitWidth = true
-        
     }
 
     
@@ -181,7 +178,8 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Handle the help screen:
         if let destinationView = segue.destination as? HelpViewController {
-            destinationView.helpString = "help description text goes here!! and Here. And some here. And a lot more here and here and here and here and here. Also here. Don't forget here. Have we crossed multiple lines yet? Here................. here."
+            destinationView.callingScreen = 3 // Notify the popup who's calling it
+            //destinationView.helpString = "help description text goes here!! and Here. And some here. And a lot more here and here and here and here and here. Also here. Don't forget here. Have we crossed multiple lines yet? Here................. here."
         }
         // Handle the create/edit popup:
         else if let destinationView = segue.destination as? PanicAlertPopupViewController {
