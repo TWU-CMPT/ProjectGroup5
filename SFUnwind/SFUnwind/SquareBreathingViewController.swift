@@ -36,8 +36,8 @@ class SquareBreathingViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad() // Call the super class
      
-        squareOrderManager(currentCircle: 0).alpha = 0
-
+        
+        squareOrderManager(currentCircle: 0).alpha = 0 //Set all images alpha to 0
         squareOrderManager(currentCircle: 1).alpha = 0
         squareOrderManager(currentCircle: 2).alpha = 0
         squareOrderManager(currentCircle: 3).alpha = 0
@@ -64,16 +64,6 @@ class SquareBreathingViewController: UIViewController{
         else if(totalTimerMinute >= 10 && totalTimerSeconds >= 10){
             totalTimer.text = String(totalTimerMinute) + ":" + String(totalTimerSeconds)
         }
-       
-        
-        /*
-        
-        let customAnimation = Draw(frame: CGRect(x: 50, y: 110, width: 1000, height: 1000))   //Initialize a frame
-        customAnimation.draw(CGRect(origin: CGPoint(x: 50, y: 50),size: CGSize(width: 0, height: 0))); //Draw the animation
-        self.view.addSubview(customAnimation)
-*/
-        
-        
         
         
     }
@@ -154,6 +144,7 @@ class SquareBreathingViewController: UIViewController{
         }
     }
     
+    // scaleAnimationManager calls all four steps of animation in order which are fadein, scalex2, scale to original and fade out. SquareOrderManager function is used to track the current image
     func scaleAnimationManager(){
         
         UIView.animate(withDuration: 1, delay: 0, options: .curveEaseIn, animations: {
@@ -175,7 +166,7 @@ class SquareBreathingViewController: UIViewController{
     }
     
 
- 
+    // Tracks the current image with switch statement
     func squareOrderManager(currentCircle:Int) -> UIImageView{
         let orderNumber = currentCircle % 4
 
@@ -197,21 +188,7 @@ class SquareBreathingViewController: UIViewController{
         
 
     }
-/*
-    class func scaleImageToSize(img: UIImage) -> UIImage {
-        
-        var maxSize = CGFloat(max(img.size.height, img.size.width))
-        UIGraphicsBeginImageContext(maxSize)
 
-        img.draw(in: CGRect.init(origin: CGPoint.zero, size: maxSize))
-        
-        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
-        
-        
-        UIGraphicsEndImageContext()
-        return scaledImage!
-    }
-*/
     
     // Handle time control. Start/Restart the timer based on user input:
     @IBAction func restartButton(_ sender: Any) {               //Re/Start button
@@ -235,8 +212,8 @@ class SquareBreathingViewController: UIViewController{
             sessionTimeSeconds = 60                             //Reset
             sessionTimeMinute = 4                               //Reset
             sessionTimer.text = "05:00"                         //Print to screen
-            animationTimer.invalidate()
-            circleOrderTracker = 1
+            animationTimer.invalidate()                         //Stops timer for animation
+            circleOrderTracker = 1                              //Reset image number
         }
         
     }
