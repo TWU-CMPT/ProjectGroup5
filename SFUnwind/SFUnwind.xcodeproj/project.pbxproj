@@ -20,6 +20,7 @@
 		EB0E51C11E6CB61F00180F9D /* PositiveAffirmationsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0E51C01E6CB61F00180F9D /* PositiveAffirmationsViewControllerTests.swift */; };
 		EB2050611E71FC710015FAB7 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2050601E71FC710015FAB7 /* HelpViewController.swift */; };
 		EB5934A91E789C2000A5EFA0 /* PanicAlertPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5934A81E789C2000A5EFA0 /* PanicAlertPopupViewController.swift */; };
+		EB7167471E7B926400828B4C /* helpFiles in Resources */ = {isa = PBXBuildFile; fileRef = EB7167461E7B926400828B4C /* helpFiles */; };
 		EB7359111E665162004A0EB0 /* SquareBreathingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7359101E665162004A0EB0 /* SquareBreathingViewController.swift */; };
 		EB7359131E66520C004A0EB0 /* GroundingExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7359121E66520C004A0EB0 /* GroundingExerciseViewController.swift */; };
 		EB7359151E665240004A0EB0 /* PositiveAffirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7359141E665240004A0EB0 /* PositiveAffirmationViewController.swift */; };
@@ -62,6 +63,7 @@
 		EB0E51C01E6CB61F00180F9D /* PositiveAffirmationsViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PositiveAffirmationsViewControllerTests.swift; sourceTree = "<group>"; };
 		EB2050601E71FC710015FAB7 /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		EB5934A81E789C2000A5EFA0 /* PanicAlertPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanicAlertPopupViewController.swift; sourceTree = "<group>"; };
+		EB7167461E7B926400828B4C /* helpFiles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = helpFiles; sourceTree = "<group>"; };
 		EB7359101E665162004A0EB0 /* SquareBreathingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquareBreathingViewController.swift; sourceTree = "<group>"; };
 		EB7359121E66520C004A0EB0 /* GroundingExerciseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroundingExerciseViewController.swift; sourceTree = "<group>"; };
 		EB7359141E665240004A0EB0 /* PositiveAffirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PositiveAffirmationViewController.swift; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB04A4781E6615F400BD2859 /* LaunchScreen.storyboard in Resources */,
+				EB7167471E7B926400828B4C /* helpFiles in Resources */,
 				EB04A4751E6615F400BD2859 /* Assets.xcassets in Resources */,
 				80F94BC01E76879800F553A2 /* circle-png-25308.png in Resources */,
 				EB04A4731E6615F400BD2859 /* Main.storyboard in Resources */,

@@ -100,12 +100,14 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         resetButton.isEnabled = false
         captureButton.isHidden = false
         captureButton.isEnabled = true
+        previewLayer.isHidden = false
         for tagger in 0...self.totalMax-1 {
             if let taggedView = self.view.viewWithTag(60+tagger) {
                 taggedView.removeFromSuperview()
             }
         }
         self.goalIndex = 0
+        self.goalDisplay.text = self.goalString[self.goalIndex]
         self.currentTotalIndex = 0
         self.innerGoalIndex = 0
         self.maxGoal = 5
@@ -127,6 +129,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         resetButton.isMultipleTouchEnabled = true
         resetButton.isHidden = true
         resetButton.isEnabled = false
+        previewLayer.isHidden = false
         goalDisplay.text = goalString[goalIndex]
         theAlert.addAction(theOkAction)
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera){
@@ -157,7 +160,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
     // Modify help screen
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let nav = segue.destination as! HelpViewController
-        nav.helpString = "OMG\nommmmmmmmmmgmggmgmmgmggmgmmggmgmgmgmgmgmgmgmgmgmmggmgmgmgmgmgmgmgmgmgmgmgmgmgmgmgm\nHello"
+        nav.callingScreen = 1 // Notify the popup who's calling it: 0 = Square Breathing, 1 = Grounding, 2 = Positive Affirmations, 3 = Panic Alerts
     }
     
     @IBAction func resetButtonAction(_ sender: UIButton) {
@@ -165,12 +168,14 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         resetButton.isEnabled = false
         captureButton.isHidden = false
         captureButton.isEnabled = true
+        previewLayer.isHidden = false
         for tagger in 0...self.totalMax-1 {
             if let taggedView = self.view.viewWithTag(60+tagger) {
                 taggedView.removeFromSuperview()
             }
         }
         self.goalIndex = 0
+        self.goalDisplay.text = self.goalString[self.goalIndex]
         self.currentTotalIndex = 0
         self.innerGoalIndex = 0
         self.maxGoal = 5
@@ -230,6 +235,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
                             //print(self.helpButton)
                             self.resetButton.isEnabled = true
                             self.resetButton.isHidden = false
+                            self.previewLayer.isHidden = true
                             var downHeight = 0.0
                             var rightLength = 0.0
                             let divisor = 6.0
