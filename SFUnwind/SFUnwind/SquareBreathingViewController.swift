@@ -156,23 +156,21 @@ class SquareBreathingViewController: UIViewController{
     
     func scaleAnimationManager(){
         
-        UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 1, delay: 0, options: .curveEaseIn, animations: {
             self.squareOrderManager(currentCircle: self.circleOrderTracker).alpha = 1.0
         }, completion: nil)
-        
         UIView.animate(withDuration: 2, delay: 1, options: .curveEaseOut, animations:{
+            print(self.squareOrderManager(currentCircle: self.circleOrderTracker).alpha)
             self.squareOrderManager(currentCircle: self.circleOrderTracker).transform = CGAffineTransform(scaleX: 2, y: 2)
         }, completion:nil)
-        
-        
         UIView.animate(withDuration: 2, delay: 3.2, options: .curveEaseOut, animations:{
+            print(self.squareOrderManager(currentCircle: self.circleOrderTracker).alpha)
             self.squareOrderManager(currentCircle: self.circleOrderTracker).transform = CGAffineTransform(scaleX: 1, y: 1)
-        }, completion:nil)
-        
-        UIView.animate(withDuration: 1, delay: 5.2, options: .curveLinear, animations: {
-            self.squareOrderManager(currentCircle: self.circleOrderTracker).alpha = 0.0
-        }, completion: nil)
-        
+        }, completion: { (finished: Bool) -> Void in
+            UIView.animate(withDuration: 1, delay: 0, options: .curveEaseIn, animations: {
+                self.squareOrderManager(currentCircle: self.circleOrderTracker-1).alpha = 0.0
+            }, completion: nil)
+        })
         circleOrderTracker+=1
     }
     
