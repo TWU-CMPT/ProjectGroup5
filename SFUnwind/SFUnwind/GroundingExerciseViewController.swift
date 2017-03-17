@@ -160,7 +160,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
     // Modify help screen
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let nav = segue.destination as! HelpViewController
-        nav.helpString = "OMG\nommmmmmmmmmgmggmgmmgmggmgmmggmgmgmgmgmgmgmgmgmgmmggmgmgmgmgmgmgmgmgmgmgmgmgmgmgmgm\nHello"
+        nav.callingScreen = 1 // Notify the popup who's calling it: 0 = Square Breathing, 1 = Grounding, 2 = Positive Affirmations, 3 = Panic Alerts
     }
     
     @IBAction func resetButtonAction(_ sender: UIButton) {
