@@ -119,13 +119,23 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     
     @IBOutlet weak var dataDrop: UIPickerView!
     //options of the frequency
-    var data = ["Never", "weekly", "Daily", "hourly"]
+    var data = ["Never", "Weekly", "Daily", "Hourly"]
  //   var picker = UIPickerView()
+    @IBOutlet weak var atLabelText: UILabel!
     
+    @IBOutlet weak var sepLabel: UILabel!
     // Called once when the view loads for the first time
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        weekday.isHidden = true
+        weekday.isEnabled = false
+        hour.isHidden = true
+        hour.isEnabled = false
+        minute.isHidden = true
+        minute.isEnabled = false
+        atLabelText.isHidden = true
+        sepLabel.isHidden = true
         //make the date picker works
 //        picker.delegate = self
 //        picker.dataSource = self
@@ -205,6 +215,47 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         if pickerView == dataDrop{
             self.textTime.text = self.data[row]
             self.dataDrop.isHidden = true
+            if textTime.text == "Weekly" {
+                weekday.isHidden = false
+                weekday.isEnabled = true
+                hour.isHidden = false
+                hour.isEnabled = true
+                minute.isHidden = false
+                minute.isEnabled = true
+                atLabelText.isHidden = false
+                sepLabel.isHidden = false
+                
+            }
+            else if textTime.text == "Daily" {
+                weekday.isHidden = true
+                weekday.isEnabled = false
+                hour.isHidden = false
+                hour.isEnabled = true
+                minute.isHidden = false
+                minute.isEnabled = true
+                atLabelText.isHidden = true
+                sepLabel.isHidden = false
+            }
+            else if textTime.text == "Hourly" {
+                weekday.isHidden = true
+                weekday.isEnabled = false
+                hour.isHidden = true
+                hour.isEnabled = false
+                minute.isHidden = false
+                minute.isEnabled = true
+                atLabelText.isHidden = true
+                sepLabel.isHidden = true
+            }
+            else {
+                weekday.isHidden = true
+                weekday.isEnabled = false
+                hour.isHidden = true
+                hour.isEnabled = false
+                minute.isHidden = true
+                minute.isEnabled = false
+                atLabelText.isHidden = true
+                sepLabel.isHidden = true
+            }
         }
         else if pickerView == weekdayDrop{
             self.weekday.text = self.weekDay[row]
@@ -228,10 +279,11 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
 //    func donePressed(){
 //        self.view.endEditing(true)
 //    }
-//    
-
+//
+    
     
     func textFieldDidBeginEditing(_ textFiled:UITextField){
+        textFiled.isEnabled = false
         if (textFiled == self.textTime){
             self.dataDrop.isHidden = false
         }
@@ -244,41 +296,74 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         else if (textFiled == self.minute){
             self.minuteDrop.isHidden = false
         }
-        
+        textFiled.isEnabled = true
     }
     
-    
-    //Notification button
-    @available(iOS 10.0, *)
+    //DatePicker
     @IBAction func scheduleNotification(_ sender: AnyObject) {
-        let center = UNUserNotificationCenter.current() //set up a current value to a var
-        
-        let content = UNMutableNotificationContent()
-        content.title = "How are you doing today"   //set up a title
-        content.body = "This is just a sample"  //set up a body
-        content.sound = UNNotificationSound.default()   //make the default sound
-        content.categoryIdentifier = "notificationID1"  //ID the above categories
-        
-        //3s testting
-        //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
-        var dateComponnets = DateComponents()
-        dateComponnets.weekday = 0
-        dateComponnets.hour = 0
-        dateComponnets.minute = 0
-        let trigger2 = UNCalendarNotificationTrigger(dateMatching: dateComponnets, repeats: true)
-        
-        let request2 = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger2)
-        center.add(request2)
-        
-        
-//        let triggerTime = Calendar.current.dateComponents([.hour, .minute], from: datePicker.date)  //send notification at a time when the user wants to
-//        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerTime, repeats: true)   //make a trigger
-//        let identifier = "LocalNotificationIdentifier"  //set up a identifier
-//        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger) //test the error case
-        center.add(request2){ (error) in
-            if error != nil {
-                print(error!)
+        var calendar = Calendar.current
+        calendar.locale = Locale(identifier: "en_POSIX_US")
+        let weekDaySymbols = calendar.weekdaySymbols
+        var indexOfDay = weekDaySymbols.index(of: weekday.text!) // INSERT WEEKDAY STRING HERE
+        print(indexOfDay)
+        if indexOfDay == nil {
+            indexOfDay = weekDaySymbols.index(of: "Monday")
+        }
+        let weekDay = indexOfDay! + 1
+        var matchingComponents = DateComponents()
+        var tfreq = ""
+        if textTime.text == "" {
+            tfreq = "Never"
+        }
+        else {
+            tfreq = textTime.text!
+        }
+        if tfreq == "Weekly" {
+            matchingComponents.weekday = weekDay
+        }
+        if tfreq != "Hourly" {
+            if(hour.text != ""){
+                matchingComponents.hour = Int(hour.text!)
             }
+            else {
+                matchingComponents.hour = 0
+            }
+        }
+        else {
+            matchingComponents.hour = calendar.component(.hour, from: Date())
+        }
+        if(minute.text == ""){
+            matchingComponents.minute = 0
+        }
+        else {
+            matchingComponents.minute = Int(minute.text!) // must set, right?
+        }
+        if tfreq == "Hourly" && matchingComponents.minute! <= Calendar.current.component(.minute, from: Date()) {
+            matchingComponents.hour! += 1
+            matchingComponents.hour! = matchingComponents.hour! % 24
+        }
+        let nextDay = calendar.nextDate(after: Date(), matching: matchingComponents, matchingPolicy: .nextTime)
+        UIApplication.shared.cancelAllLocalNotifications()
+        if tfreq != "Never" {
+            print(nextDay?.description)
+            print(calendar.timeZone)
+            let notification = UILocalNotification()
+            let dict:NSDictionary = ["ID":"ID goes here"]
+            notification.userInfo = dict as! [String : String]
+            notification.alertBody = "MESSAGE GOES HERE"
+            notification.alertAction = "Open"
+            notification.fireDate = nextDay
+            if tfreq == "Weekly" {
+                notification.repeatInterval = .weekday
+            }
+            else if tfreq == "Daily" {
+                notification.repeatInterval = .day
+            }
+            else {
+                notification.repeatInterval = .hour // MINIMUM IS MINUTE
+            }
+            notification.soundName = UILocalNotificationDefaultSoundName
+            UIApplication.shared.scheduleLocalNotification(notification)
         }
     }
 }
