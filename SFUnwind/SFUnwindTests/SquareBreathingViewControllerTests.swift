@@ -87,7 +87,6 @@ class SquareBreathingViewControllerTests: XCTestCase {
         XCTAssert(0 == theSquareBreathingViewController?.loadMinutesTimer())
     }
     
-    
     func testSessionSecondsTimeManager(){
         let _ = theSquareBreathingViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
         let previousSessionTimeSeconds = theSquareBreathingViewController?.sessionTimeSeconds

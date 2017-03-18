@@ -10,7 +10,89 @@
 
 import UIKit
 
+// Square Object (Contained by the main Square Breathing screen view controller)
+class Draw: UIView {
+    // Square visual code:
+    //********************
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // Draw the square on screen
+    // Note: This is a visual UI element that must be checked manually
+    override func draw(_ rect: CGRect)
+    {
+        self.backgroundColor = UIColor .clear           //Make backgound
+        //Initialize Lines and Rectangles
+        let lineLeft = UIGraphicsGetCurrentContext()
+        let lineRight = UIGraphicsGetCurrentContext()
+        let lineTop = UIGraphicsGetCurrentContext()
+        let lineBot = UIGraphicsGetCurrentContext()
+        let circleTopLeft = UIGraphicsGetCurrentContext()
+        let circleTopRight = UIGraphicsGetCurrentContext()
+        let circleBotLeft = UIGraphicsGetCurrentContext()
+        let circleBotRight = UIGraphicsGetCurrentContext()
 
+        let colorSpace = CGColorSpaceCreateDeviceRGB()  //Set color
+        let components: [CGFloat] = [0.0, 0.0, 1.0, 1.0]//Set color
+        let color = CGColor(colorSpace: colorSpace, components: components)
+        
+        lineLeft?.setLineWidth(4.0)                     //Adjust line width
+        lineLeft?.setStrokeColor(color!)    //Set color
+        lineLeft?.move(to: CGPoint(x: 40, y: 190))  //Move to coordinates
+        lineLeft?.addLine(to: CGPoint(x: 40, y: 85))//Add line to given coordinates
+        lineLeft?.strokePath()
+
+        lineRight?.setLineWidth(4.0)//Adjust line width
+        lineRight?.setStrokeColor(color!)//Set color
+        lineRight?.move(to: CGPoint(x: 180, y: 190))
+        lineRight?.addLine(to: CGPoint(x: 180, y: 85))  //Move to coordinates
+        lineRight?.strokePath()//Add line to given coordinates
+        
+        lineTop?.setLineWidth(4.0)//Adjust line width
+        lineTop?.setStrokeColor(color!)//Set color
+        lineTop?.move(to: CGPoint(x: 67, y: 65))
+        lineTop?.addLine(to: CGPoint(x: 150, y: 65))  //Move to coordinates
+        lineTop?.strokePath()//Add line to given coordinates
+        
+        lineBot?.setLineWidth(4.0)//Adjust line width
+        lineBot?.setStrokeColor(color!)//Set color
+        lineBot?.move(to: CGPoint(x: 67, y: 205))
+        lineBot?.addLine(to: CGPoint(x: 154, y: 205))  //Move to coordinates
+        lineBot?.strokePath()//Add line to given coordinates
+        
+        circleTopLeft?.saveGState()
+        circleTopLeft?.setLineWidth(4.0)//Adjust line width
+        circleTopLeft?.setStrokeColor(UIColor.blue.cgColor)//Set color
+        let rectangle = CGRect(x: 10,y: 25,width: 60,height: 60)//Set coordinates
+        circleTopLeft?.addEllipse(in: rectangle)
+        circleTopLeft?.strokePath()//Add line to given coordinates
+
+        circleTopRight?.saveGState()
+        circleTopRight?.setLineWidth(4.0)//Adjust line width
+        circleTopRight?.setStrokeColor(UIColor.blue.cgColor)//Set color
+        let rectangle2 = CGRect(x: 150,y: 25,width: 60,height: 60)//Set coordinates
+        circleTopRight?.addEllipse(in: rectangle2)
+        circleTopRight?.strokePath()//Add line to given coordinates
+
+        circleBotLeft?.saveGState()
+        circleBotLeft?.setLineWidth(4.0)//Adjust line width
+        circleBotLeft?.setStrokeColor(UIColor.blue.cgColor)//Set color
+        let rectangle3 = CGRect(x: 10,y: 190,width: 60,height: 60)//Set coordinates
+        circleBotLeft?.addEllipse(in: rectangle3)
+        circleBotLeft?.strokePath()//Add line to given coordinates
+
+        circleBotRight?.saveGState()
+        circleBotRight?.setLineWidth(4.0)//Adjust line width
+        circleBotRight?.setStrokeColor(UIColor.blue.cgColor)//Set color
+        let rectangle4 = CGRect(x: 150,y: 190,width: 60,height: 60)//Set coordinates
+        circleBotRight?.addEllipse(in: rectangle4)
+        circleBotRight?.strokePath()//Add line to given coordinates
+    }
+}
 
 // Main SquareBreathing view controller object
 class SquareBreathingViewController: UIViewController{
@@ -23,27 +105,15 @@ class SquareBreathingViewController: UIViewController{
     var sessionTimeSeconds = 60                         //Set Seconds
     var sessionTimeMinute = 4                           //Set Minute
     var sessionTracker = Timer()
-    var animationTimer = Timer()
     var sesssionTrackerActive: Bool = false             //A boolean statement is used to keep track of the state of RE/START button. sesssionTrackerActive acts like On/Off button
 
     var totalTimerSeconds: Int = 0
     var totalTimerMinute: Int = 0
 
-    var circleOrderTracker: Int = 1
-
     
     // Called once when this object is first instanciated
     override func viewDidLoad() {
         super.viewDidLoad() // Call the super class
-     
-        
-        squareOrderManager(currentCircle: 0).alpha = 0 //Set all images alpha to 0
-        squareOrderManager(currentCircle: 1).alpha = 0
-        squareOrderManager(currentCircle: 2).alpha = 0
-        squareOrderManager(currentCircle: 3).alpha = 0
-        
-        
-        
         
         // Load the timer data:
         var _ = loadSecondsTimer()
@@ -65,6 +135,9 @@ class SquareBreathingViewController: UIViewController{
             totalTimer.text = String(totalTimerMinute) + ":" + String(totalTimerSeconds)
         }
         
+        let customAnimation = Draw(frame: CGRect(x: 50, y: 110, width: 1000, height: 1000))   //Initialize a frame
+        customAnimation.draw(CGRect(origin: CGPoint(x: 50, y: 50),size: CGSize(width: 0, height: 0))); //Draw the animation
+        self.view.addSubview(customAnimation)
         
     }
     
@@ -144,52 +217,6 @@ class SquareBreathingViewController: UIViewController{
         }
     }
     
-    // scaleAnimationManager calls all four steps of animation in order which are fadein, scalex2, scale to original and fade out. SquareOrderManager function is used to track the current image
-    func scaleAnimationManager(){
-        
-        UIView.animate(withDuration: 1, delay: 0, options: .curveEaseIn, animations: {
-            self.squareOrderManager(currentCircle: self.circleOrderTracker).alpha = 1.0
-        }, completion: nil)
-        UIView.animate(withDuration: 2, delay: 1, options: .curveEaseOut, animations:{
-            print(self.squareOrderManager(currentCircle: self.circleOrderTracker).alpha)
-            self.squareOrderManager(currentCircle: self.circleOrderTracker).transform = CGAffineTransform(scaleX: 2, y: 2)
-        }, completion:nil)
-        UIView.animate(withDuration: 2, delay: 3.2, options: .curveEaseOut, animations:{
-            print(self.squareOrderManager(currentCircle: self.circleOrderTracker).alpha)
-            self.squareOrderManager(currentCircle: self.circleOrderTracker).transform = CGAffineTransform(scaleX: 1, y: 1)
-        }, completion: { (finished: Bool) -> Void in
-            UIView.animate(withDuration: 1, delay: 0, options: .curveEaseIn, animations: {
-                self.squareOrderManager(currentCircle: self.circleOrderTracker-1).alpha = 0.0
-            }, completion: nil)
-        })
-        circleOrderTracker+=1
-    }
-    
-
-    // Tracks the current image with switch statement
-    func squareOrderManager(currentCircle:Int) -> UIImageView{
-        let orderNumber = currentCircle % 4
-
-        switch orderNumber{
-            
-        case 0:
-            return circleTRight
-        case 1:
-            return circleImage
-        case 2:
-            return circleBLeft
-        case 3:
-            return circleBRight
-          
-        default:
-            print("Input variable out of scope")
-            return circleImage
-        }
-        
-
-    }
-
-    
     // Handle time control. Start/Restart the timer based on user input:
     @IBAction func restartButton(_ sender: Any) {               //Re/Start button
 
@@ -197,30 +224,18 @@ class SquareBreathingViewController: UIViewController{
         var _ = saveMinutesTimer(totalTimerMinute: totalTimerMinute)
         var _ = saveSecondsTimer(totalTimerSeconds:totalTimerSeconds)
         
-        
-        
         if(sesssionTrackerActive == true){
-            timeManager()
             sessionTracker = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(SquareBreathingViewController.timeManager), userInfo: nil, repeats: true)  //Call timeManager() once in every second
-
-            scaleAnimationManager()
-           animationTimer = Timer.scheduledTimer(timeInterval: 6.2, target: self, selector: #selector(SquareBreathingViewController.scaleAnimationManager), userInfo: nil, repeats: true)
-
+            
         }
         else{
             sessionTracker.invalidate()                         //Stops timer
             sessionTimeSeconds = 60                             //Reset
             sessionTimeMinute = 4                               //Reset
             sessionTimer.text = "05:00"                         //Print to screen
-            animationTimer.invalidate()                         //Stops timer for animation
-            circleOrderTracker = 1                              //Reset image number
         }
-        
+
     }
-    @IBOutlet weak var circleBLeft: UIImageView!
-    @IBOutlet weak var circleImage: UIImageView!
-    @IBOutlet weak var circleBRight: UIImageView!
-    @IBOutlet weak var circleTRight: UIImageView!
 }
 
 
