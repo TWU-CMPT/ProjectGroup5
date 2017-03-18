@@ -92,7 +92,6 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     //Label
     @IBOutlet weak var Label: UILabel!
     
-    
     @IBOutlet weak var textTime: UITextField!
     
     var index = 1   //index of the position of the list
@@ -103,12 +102,21 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     
     var fixed = [" ","1","2","3","4","5","6","7"]
     
+    @IBOutlet weak var weekday: UILabel!
     
-    //DatePicker
-    @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var hour: UILabel!
+    
+    @IBOutlet weak var minute: UILabel!
+    
+    var freq = ""
+    var weekDay = ""
+    var hr = ""
+    var min = ""
+    
     
     //options of the frequency
-    var data = ["Never", "weekly", "Daily", "hourly"]
+    var data = [["Never", "weekly", "Daily", "hourly"],
+                ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23"],["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59"]]
     var picker = UIPickerView()
     
     // Called once when the view loads for the first time
@@ -126,28 +134,58 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         super.didReceiveMemoryWarning()// dispose of any resources that can be recreated.
     }
     
-    //return the components of the UIPickerView, in this case jsut return 1
+    //return the components of data
     public func numberOfComponents(in pickerView: UIPickerView) -> Int{
-        return 1
-    }
-    
-    //make the datePicker of the values in "data"
-    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
         return data.count
     }
     
-    //make the datePicker shows the option which the user selected
+    //make the pickerview count rows in different textFields
+    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
+        return data[component].count
+    }
+    
+    //make the pickerView shows the option which the user selected
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        textTime.text = data[row]
-        self.view.endEditing(false)
+        print(component)
+        print(row)
+        switch (component) {
+        case 0:
+            freq = data[component][row]
+            textTime.text = freq
+            print(freq)
+        case 1:
+            weekDay = data[component][row]
+            weekday.text = weekDay
+            print(weekDay)
+        case 2:
+            hr = data[component][row]
+            hour.text = hr
+            print(hr)
+        case 3:
+            min = data[component][row]
+            minute.text = min
+            print(min)
+        default:
+            break
+        }
+
+        //self.view.endEditing(false)
     }
     
     //return the option which the user selected in string type
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return data[row]
+        return data[component][row]
     }
     
-    //DatePicker
+//    func textFieldDidBeginEditing(_ textFiled:UITextField){
+//        if (textFiled == self.textTime){
+//            self.hour.isHidden = false
+//        }
+//        
+//    }
+    
+    
+    //Notification button
     @available(iOS 10.0, *)
     @IBAction func scheduleNotification(_ sender: AnyObject) {
         let center = UNUserNotificationCenter.current() //set up a current value to a var
@@ -160,12 +198,21 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         
         //3s testting
         //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
+        var dateComponnets = DateComponents()
+        dateComponnets.day = 18
+        dateComponnets.hour = 02
+        dateComponnets.minute = 00
+        let trigger2 = UNCalendarNotificationTrigger(dateMatching: dateComponnets, repeats: true)
         
-        let triggerTime = Calendar.current.dateComponents([.hour, .minute], from: datePicker.date)  //send notification at a time when the user wants to
-        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerTime, repeats: true)   //make a trigger
-        let identifier = "LocalNotificationIdentifier"  //set up a identifier
-        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger) //test the error case
-        center.add(request){ (error) in
+        let request2 = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger2)
+        center.add(request2)
+        
+        
+//        let triggerTime = Calendar.current.dateComponents([.hour, .minute], from: datePicker.date)  //send notification at a time when the user wants to
+//        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerTime, repeats: true)   //make a trigger
+//        let identifier = "LocalNotificationIdentifier"  //set up a identifier
+//        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger) //test the error case
+        center.add(request2){ (error) in
             if error != nil {
                 print(error!)
             }
