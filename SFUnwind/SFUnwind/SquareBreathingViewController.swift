@@ -37,7 +37,7 @@ class SquareBreathingViewController: UIViewController{
         super.viewDidLoad() // Call the super class
      
         
-        squareOrderManager(currentCircle: 0).alpha = 0 //Set all images alpha to 0
+        squareOrderManager(currentCircle: 0).alpha = 0 // Set all images alpha to 0
         squareOrderManager(currentCircle: 1).alpha = 0
         squareOrderManager(currentCircle: 2).alpha = 0
         squareOrderManager(currentCircle: 3).alpha = 0
