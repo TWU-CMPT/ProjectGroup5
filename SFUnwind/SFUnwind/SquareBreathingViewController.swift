@@ -21,7 +21,7 @@ class SquareBreathingViewController: UIViewController{
     
     // UI Timer Parameters
     var sessionTimeSeconds = 60                         //Set Seconds
-    var sessionTimeMinute = 4                           //Set Minute
+    var sessionTimeMinute = 4                           // Set Minute
     var sessionTracker = Timer()
     var animationTimer = Timer()
     var sesssionTrackerActive: Bool = false             //A boolean statement is used to keep track of the state of RE/START button. sesssionTrackerActive acts like On/Off button
