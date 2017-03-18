@@ -144,7 +144,7 @@ class SquareBreathingViewController: UIViewController{
         }
     }
     
-    // scaleAnimationManager calls all four steps of animation in order which are fadein, scalex2, scale to original and fade out. SquareOrderManager function is used to track the current image
+    //scaleAnimationManager calls all four steps of animation in order which are fadein, scalex2, scale to original and fade out. SquareOrderManager function is used to track the current image
     func scaleAnimationManager(){
         UIView.animate(withDuration: 1, delay: 0, options: .curveEaseIn, animations: {
             self.squareOrderManager(currentCircle: self.circleOrderTracker).alpha = 1.0
