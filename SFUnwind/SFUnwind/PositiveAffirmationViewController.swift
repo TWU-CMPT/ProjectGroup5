@@ -102,31 +102,35 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     
     var fixed = [" ","1","2","3","4","5","6","7"]
     
-    @IBOutlet weak var weekday: UILabel!
+    @IBOutlet weak var weekday: UITextField!
+    @IBOutlet weak var weekdayDrop: UIPickerView!
     
-    @IBOutlet weak var hour: UILabel!
+    @IBOutlet weak var hour: UITextField!
+    @IBOutlet weak var hourDrop: UIPickerView!
     
-    @IBOutlet weak var minute: UILabel!
+    @IBOutlet weak var minute: UITextField!
+    @IBOutlet weak var minuteDrop: UIPickerView!
     
     var freq = ""
-    var weekDay = ""
-    var hr = ""
-    var min = ""
+    var weekDay = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    var hr = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23"]
+    var min = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59"]
     
     
+    @IBOutlet weak var dataDrop: UIPickerView!
     //options of the frequency
-    var data = [["Never", "weekly", "Daily", "hourly"],
-                ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23"],["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59"]]
-    var picker = UIPickerView()
+    var data = ["Never", "weekly", "Daily", "hourly"]
+ //   var picker = UIPickerView()
     
     // Called once when the view loads for the first time
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //make the date picker works
-        picker.delegate = self
-        picker.dataSource = self
-        textTime.inputView = picker
-        
+//        picker.delegate = self
+//        picker.dataSource = self
+//        textTime.inputView = picker
+//        
     }
     
     // Check if we've recieved a memory warning.
@@ -136,53 +140,112 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     
     //return the components of data
     public func numberOfComponents(in pickerView: UIPickerView) -> Int{
-        return data.count
+        return 1
     }
     
     //make the pickerview count rows in different textFields
     public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
-        return data[component].count
+        var countrows : Int = data.count
+        if pickerView == weekdayDrop{
+            countrows = self.weekDay.count
+        }
+        else if pickerView == hourDrop{
+            countrows = self.hr.count
+        }
+        else if pickerView == minuteDrop{
+            countrows = self.min.count
+        }
+        return countrows
+    }
+    //return the option which the user selected in string type
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView == dataDrop{
+            let titleRow = data[row]
+            return titleRow
+        }
+        else if pickerView == weekdayDrop{
+            let titleRow = weekDay[row]
+            return titleRow
+        }
+        else if pickerView == hourDrop{
+            let titleRow = hr[row]
+            return titleRow
+        }
+        else if pickerView == minuteDrop{
+            let titleRow = min[row]
+            return titleRow
+        }
+        return ""
     }
     
     //make the pickerView shows the option which the user selected
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print(component)
-        print(row)
-        switch (component) {
-        case 0:
-            freq = data[component][row]
-            textTime.text = freq
-            print(freq)
-        case 1:
-            weekDay = data[component][row]
-            weekday.text = weekDay
-            print(weekDay)
-        case 2:
-            hr = data[component][row]
-            hour.text = hr
-            print(hr)
-        case 3:
-            min = data[component][row]
-            minute.text = min
-            print(min)
-        default:
-            break
-        }
-
-        self.view.endEditing(false)
-    }
-    
-    //return the option which the user selected in string type
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return data[component][row]
-    }
-    
-//    func textFieldDidBeginEditing(_ textFiled:UITextField){
-//        if (textFiled == self.textTime){
-//            self.hour.isHidden = false
+//        print(component)
+//        print(row)
+//        switch (component) {
+//        case 0:
+//            freq = data[component][row]
+//            textTime.text = freq
+//            print(freq)
+//        case 1:
+//            weekDay = data[component][row]
+//            weekday.text = weekDay
+//            print(weekDay)
+//        case 2:
+//            hr = data[component][row]
+//            hour.text = hr
+//            print(hr)
+//        case 3:
+//            min = data[component][row]
+//            minute.text = min
+//            print(min)
+//        default:
+//            break
 //        }
-//        
+        if pickerView == dataDrop{
+            self.textTime.text = self.data[row]
+            self.dataDrop.isHidden = true
+        }
+        else if pickerView == weekdayDrop{
+            self.weekday.text = self.weekDay[row]
+            self.weekdayDrop.isHidden = true
+        }
+        else if pickerView == hourDrop{
+            self.hour.text = self.hr[row]
+            self.hourDrop.isHidden = true
+        }
+        else if pickerView == minuteDrop{
+            self.minute.text = self.min[row]
+            self.minuteDrop.isHidden = true
+        }
+    }
+//        let toolbar = UIToolbar()
+//        toolbar.sizeToFit()
+//        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
+//        toolbar.setItems([doneButton], animated: false)
+//        textTime.inputAccessoryView = toolbar
 //    }
+//    func donePressed(){
+//        self.view.endEditing(true)
+//    }
+//    
+
+    
+    func textFieldDidBeginEditing(_ textFiled:UITextField){
+        if (textFiled == self.textTime){
+            self.dataDrop.isHidden = false
+        }
+        else if (textFiled == self.weekday){
+            self.weekdayDrop.isHidden = false
+        }
+        else if (textFiled == self.hour){
+            self.hourDrop.isHidden = false
+        }
+        else if (textFiled == self.minute){
+            self.minuteDrop.isHidden = false
+        }
+        
+    }
     
     
     //Notification button
@@ -199,9 +262,9 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         //3s testting
         //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
         var dateComponnets = DateComponents()
-        dateComponnets.weekday = Int(data[1][1])
-        dateComponnets.hour = Int(data[2][2])
-        dateComponnets.minute = Int(data[3][3])
+        dateComponnets.weekday = 0
+        dateComponnets.hour = 0
+        dateComponnets.minute = 0
         let trigger2 = UNCalendarNotificationTrigger(dateMatching: dateComponnets, repeats: true)
         
         let request2 = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger2)
