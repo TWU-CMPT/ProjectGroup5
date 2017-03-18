@@ -199,9 +199,9 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         //3s testting
         //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
         var dateComponnets = DateComponents()
-        dateComponnets.day = 18
-        dateComponnets.hour = 02
-        dateComponnets.minute = 00
+        dateComponnets.weekday = Int(data[1][1])
+        dateComponnets.hour = Int(data[2][2])
+        dateComponnets.minute = Int(data[3][3])
         let trigger2 = UNCalendarNotificationTrigger(dateMatching: dateComponnets, repeats: true)
         
         let request2 = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger2)
