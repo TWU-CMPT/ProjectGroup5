@@ -169,7 +169,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             break
         }
 
-        //self.view.endEditing(false)
+        self.view.endEditing(false)
     }
     
     //return the option which the user selected in string type
