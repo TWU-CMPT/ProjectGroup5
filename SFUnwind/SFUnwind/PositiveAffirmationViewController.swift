@@ -111,10 +111,13 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     @IBOutlet weak var minute: UITextField!
     @IBOutlet weak var minuteDrop: UIPickerView!
     
-    var freq = ""
+    var freqIndex = ""
     var weekDay = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    var weekDayIndex = ""
     var hr = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23"]
+    var hrIndex = ""
     var min = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59"]
+    var minIndex = ""
     
     
     @IBOutlet weak var dataDrop: UIPickerView!
@@ -203,18 +206,22 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
 //            break
 //        }
         if pickerView == dataDrop{
+            freqIndex = self.data[row]
             self.textTime.text = self.data[row]
             self.dataDrop.isHidden = true
         }
         else if pickerView == weekdayDrop{
+            weekDayIndex = self.weekDay[row]
             self.weekday.text = self.weekDay[row]
             self.weekdayDrop.isHidden = true
         }
         else if pickerView == hourDrop{
+            hrIndex = self.hr[row]
             self.hour.text = self.hr[row]
             self.hourDrop.isHidden = true
         }
         else if pickerView == minuteDrop{
+            minIndex = self.min[row]
             self.minute.text = self.min[row]
             self.minuteDrop.isHidden = true
         }
