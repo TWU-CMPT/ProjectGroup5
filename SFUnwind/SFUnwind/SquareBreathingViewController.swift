@@ -28,19 +28,19 @@ class SquareBreathingViewController: UIViewController{
 
     var totalTimerSeconds: Int = 0
     var totalTimerMinute: Int = 0
-
     var circleOrderTracker: Int = 1
 
+    
     
     // Called once when this object is first instanciated
     override func viewDidLoad() {
         super.viewDidLoad() // Call the super class
      
         
-        squareOrderManager(currentCircle: 0).alpha = 0 //Set all images alpha to 0
-        squareOrderManager(currentCircle: 1).alpha = 0
-        squareOrderManager(currentCircle: 2).alpha = 0
-        squareOrderManager(currentCircle: 3).alpha = 0
+        squareOrderManager(currentCircle: 0).alpha = 1.0 //Set all images alpha to 0
+        squareOrderManager(currentCircle: 1).alpha = 1.0
+        squareOrderManager(currentCircle: 2).alpha = 1.0
+        squareOrderManager(currentCircle: 3).alpha = 1.0
         
         
         
@@ -65,9 +65,6 @@ class SquareBreathingViewController: UIViewController{
             totalTimer.text = String(totalTimerMinute) + ":" + String(totalTimerSeconds)
         }
         
-        let customAnimation = Draw(frame: CGRect(x: 50, y: 110, width: 1000, height: 1000))   //Initialize a frame
-        customAnimation.draw(CGRect(origin: CGPoint(x: 50, y: 50),size: CGSize(width: 0, height: 0))); //Draw the animation
-        self.view.addSubview(customAnimation)
         
     }
     
@@ -149,7 +146,7 @@ class SquareBreathingViewController: UIViewController{
     
     // scaleAnimationManager calls all four steps of animation in order which are fadein, scalex2, scale to original and fade out. SquareOrderManager function is used to track the current image
     func scaleAnimationManager(){
-        
+        print("Scale Anim entered")
         UIView.animate(withDuration: 1, delay: 0, options: .curveEaseIn, animations: {
             self.squareOrderManager(currentCircle: self.circleOrderTracker).alpha = 1.0
         }, completion: nil)
@@ -176,7 +173,7 @@ class SquareBreathingViewController: UIViewController{
         case 0:
             return circleTRight
         case 1:
-            return circleImage
+            return circleTLeft
         case 2:
             return circleBLeft
         case 3:
@@ -184,12 +181,11 @@ class SquareBreathingViewController: UIViewController{
           
         default:
             print("Input variable out of scope")
-            return circleImage
+            return circleTLeft
         }
         
 
     }
-
     
     // Handle time control. Start/Restart the timer based on user input:
     @IBAction func restartButton(_ sender: Any) {               //Re/Start button
@@ -199,17 +195,27 @@ class SquareBreathingViewController: UIViewController{
         var _ = saveSecondsTimer(totalTimerSeconds:totalTimerSeconds)
         
         if(sesssionTrackerActive == true){
+            timeManager()
             sessionTracker = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(SquareBreathingViewController.timeManager), userInfo: nil, repeats: true)  //Call timeManager() once in every second
             
+            scaleAnimationManager()
+            animationTimer = Timer.scheduledTimer(timeInterval: 6.2, target: self, selector: #selector(SquareBreathingViewController.scaleAnimationManager), userInfo: nil, repeats: true)
+
         }
         else{
             sessionTracker.invalidate()                         //Stops timer
             sessionTimeSeconds = 60                             //Reset
             sessionTimeMinute = 4                               //Reset
             sessionTimer.text = "05:00"                         //Print to screen
+            animationTimer.invalidate()                         //Stops timer for animation
+            circleOrderTracker = 1                              //Reset image number
         }
-
     }
+    
+    @IBOutlet weak var circleBLeft: UIImageView!
+    @IBOutlet weak var circleTRight: UIImageView!
+    @IBOutlet weak var circleTLeft: UIImageView!
+    @IBOutlet weak var circleBRight: UIImageView!
 }
 
 
