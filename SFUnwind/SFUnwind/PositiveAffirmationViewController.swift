@@ -70,6 +70,11 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         
         self.present(alert, animated: true, completion: nil)    //present it
     }
+    @IBOutlet weak var helpButton: UIButton!
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let nav = segue.destination as! HelpViewController
+        nav.callingScreen = 2 // Notify the popup who's calling it: 0 = Square Breathing, 1 = Grounding, 2 = Positive Affirmations, 3 = Panic Alerts
+    }
     
     //Previous button
     @IBAction func Previous(_ sender: AnyObject) {
@@ -400,11 +405,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     }
     
     
-    
-    
-    
-    
-    
+
     
     
 }
