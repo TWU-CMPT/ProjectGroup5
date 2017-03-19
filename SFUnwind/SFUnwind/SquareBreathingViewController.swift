@@ -30,7 +30,22 @@ class SquareBreathingViewController: UIViewController{
     var totalTimerMinute: Int = 0
     var circleOrderTracker: Int = 1
 
+    override func viewDidDisappear(_ animated: Bool) {
+        if(sesssionTrackerActive == true){
+            sesssionTrackerActive = false
+        }
+        sessionTracker.invalidate()                         //Stops timer
+        sessionTimeSeconds = 60                             //Reset
+        sessionTimeMinute = 4                               //Reset
+        sessionTimer.text = "05:00"                         //Print to screen
+        animationTimer.invalidate()                         //Stops timer for animation
+        circleOrderTracker = 1                              //Reset image number
+        reStartButtonText.setTitle("Re/Start", for: .normal)
+    }
     
+    override func viewDidAppear(_ animated: Bool) {
+        sesssionTrackerActive = false
+    }
     
     // Called once when this object is first instanciated
     override func viewDidLoad() {
