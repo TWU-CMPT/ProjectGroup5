@@ -14,7 +14,7 @@ import UserNotifications
 class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
     
     var txtIndex = UITextField()
-    var txt = ""
+    var txt = "rrr"
     //Create button - not on verson 1
     @IBAction func Create(_ sender: AnyObject) {
         //create an alert
@@ -28,6 +28,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         let saveAction = UIAlertAction(title: "Save", style: UIAlertActionStyle.default, handler: { (action:UIAlertAction) -> Void in
             self.txtIndex = (alert.textFields?[0])!   //take the input text
             print(self.txtIndex.text!)    //print
+            self.txt = self.txtIndex.text!
             self.createTxtFile()
             self.Label.text = self.txt //change the label to the next same as the user input
             //self.fixed.append((self.txtIndex.text!))
@@ -383,7 +384,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
 
         if let theDocumentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first{
             
-            let path = theDocumentsDirectory.appendingPathComponent(txtIndex.text!)
+            let path = theDocumentsDirectory.appendingPathComponent("mantras")
             
             //write
             do {
