@@ -14,6 +14,7 @@
 		EB04A4781E6615F400BD2859 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB04A4761E6615F400BD2859 /* LaunchScreen.storyboard */; };
 		EB04A4831E6615F400BD2859 /* SFUnwindTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB04A4821E6615F400BD2859 /* SFUnwindTests.swift */; };
 		EB04A49C1E661A0300BD2859 /* SFUnwindPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB04A49B1E661A0300BD2859 /* SFUnwindPageViewController.swift */; };
+		EB04C6321E7E2AAD005320F4 /* positiveAffirmations in Resources */ = {isa = PBXBuildFile; fileRef = EB04C6311E7E2AAD005320F4 /* positiveAffirmations */; };
 		EB0E51BB1E6CB59000180F9D /* PanicAlertViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0E51BA1E6CB59000180F9D /* PanicAlertViewControllerTests.swift */; };
 		EB0E51BD1E6CB5FB00180F9D /* SquareBreathingViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0E51BC1E6CB5FB00180F9D /* SquareBreathingViewControllerTests.swift */; };
 		EB0E51BF1E6CB60C00180F9D /* GroundingExerciseViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0E51BE1E6CB60C00180F9D /* GroundingExerciseViewControllerTests.swift */; };
@@ -58,6 +59,7 @@
 		EB04A4841E6615F400BD2859 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB04A4891E6615F400BD2859 /* SFUnwindUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SFUnwindUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB04A49B1E661A0300BD2859 /* SFUnwindPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SFUnwindPageViewController.swift; sourceTree = "<group>"; };
+		EB04C6311E7E2AAD005320F4 /* positiveAffirmations */ = {isa = PBXFileReference; lastKnownFileType = folder; path = positiveAffirmations; sourceTree = "<group>"; };
 		EB0E51BA1E6CB59000180F9D /* PanicAlertViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanicAlertViewControllerTests.swift; sourceTree = "<group>"; };
 		EB0E51BC1E6CB5FB00180F9D /* SquareBreathingViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquareBreathingViewControllerTests.swift; sourceTree = "<group>"; };
 		EB0E51BE1E6CB60C00180F9D /* GroundingExerciseViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroundingExerciseViewControllerTests.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 		EB04A46C1E6615F400BD2859 /* SFUnwind */ = {
 			isa = PBXGroup;
 			children = (
+				EB04C6311E7E2AAD005320F4 /* positiveAffirmations */,
 				EB7167461E7B926400828B4C /* helpFiles */,
 				EB04A46D1E6615F400BD2859 /* AppDelegate.swift */,
 				EB04A4711E6615F400BD2859 /* Main.storyboard */,
@@ -263,6 +266,7 @@
 			files = (
 				EB04A4781E6615F400BD2859 /* LaunchScreen.storyboard in Resources */,
 				EB7167471E7B926400828B4C /* helpFiles in Resources */,
+				EB04C6321E7E2AAD005320F4 /* positiveAffirmations in Resources */,
 				EB04A4751E6615F400BD2859 /* Assets.xcassets in Resources */,
 				80635E8C1E7DDB5B000AD79F /* circle-png-25308.png in Resources */,
 				EB04A4731E6615F400BD2859 /* Main.storyboard in Resources */,
