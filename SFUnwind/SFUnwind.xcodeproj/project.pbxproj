@@ -227,7 +227,7 @@
 					};
 					EB04A47D1E6615F400BD2859 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = A6FY2U8DZM;
+						DevelopmentTeam = 44FYG25CBG;
 						ProvisioningStyle = Automatic;
 						TestTargetID = EB04A4691E6615F400BD2859;
 					};
@@ -462,7 +462,7 @@
 				INFOPLIST_FILE = SFUnwind/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = SFUnwindg;
+				PRODUCT_BUNDLE_IDENTIFIER = SFUnwind1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -478,7 +478,7 @@
 				INFOPLIST_FILE = SFUnwind/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = SFUnwindg;
+				PRODUCT_BUNDLE_IDENTIFIER = SFUnwind1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -490,8 +490,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = A6FY2U8DZM;
+				DEVELOPMENT_TEAM = 44FYG25CBG;
 				INFOPLIST_FILE = SFUnwindTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Group5.SFUnwindTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -505,8 +506,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = A6FY2U8DZM;
+				DEVELOPMENT_TEAM = 44FYG25CBG;
 				INFOPLIST_FILE = SFUnwindTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Group5.SFUnwindTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

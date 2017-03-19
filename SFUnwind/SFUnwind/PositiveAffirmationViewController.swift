@@ -13,6 +13,8 @@ import UserNotifications
 
 class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
     
+    var txtIndex = UITextField()
+    var txt = ""
     //Create button - not on verson 1
     @IBAction func Create(_ sender: AnyObject) {
         //create an alert
@@ -24,13 +26,17 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         
         //Save aciton
         let saveAction = UIAlertAction(title: "Save", style: UIAlertActionStyle.default, handler: { (action:UIAlertAction) -> Void in
-            let textField0 = alert.textFields?[0]   //take the input text
-            print(textField0?.text!)    //print
-            self.Label.text = textField0?.text! //change the label to the next same as the user input
-            self.fixed.append((textField0?.text!)!)
+            self.txtIndex = (alert.textFields?[0])!   //take the input text
+            print(self.txtIndex.text!)    //print
+            self.createTxtFile()
+            self.Label.text = self.txt //change the label to the next same as the user input
+            //self.fixed.append((self.txtIndex.text!))
         })
         
         alert.addAction(saveAction) //run the save action
+        
+        
+        
         
         //Cancel action
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil)
@@ -43,7 +49,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     //Delete button - not on verson 1
     @IBAction func DeleteAlert(_ sender: AnyObject) {
         //create an alert
-        let alert = UIAlertController(title: "Are you sure?", message: " ", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "Are you sure?", message: fixed[index], preferredStyle: UIAlertControllerStyle.alert)
         
         //delete aciton
         let deleteAction = UIAlertAction(title: "submit", style: UIAlertActionStyle.default, handler: { (action:UIAlertAction) -> Void in
@@ -366,5 +372,41 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             UIApplication.shared.scheduleLocalNotification(notification)
         }
     }
-}
+    
+    
+    func createTxtFile(){
 
+        if let theDocumentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first{
+            
+            let path = theDocumentsDirectory.appendingPathComponent(txtIndex.text!)
+            
+            //write
+            do {
+                try txt.write(to: path, atomically: true, encoding: String.Encoding.utf8)
+            }
+            catch _ {
+                
+                print("something went wrong")
+            }
+            
+            //read
+            do {
+                txt = try String(contentsOf: path, encoding: String.Encoding.utf8)
+            }
+            catch _ {
+                print("something went wrong2")
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
+    
+    
