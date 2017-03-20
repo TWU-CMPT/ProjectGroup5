@@ -127,6 +127,9 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         resetButton.layer.cornerRadius=20
         resetButton.isExclusiveTouch = true
         resetButton.isMultipleTouchEnabled = true
+        self.goalDisplay.frame = CGRect(x: UIScreen.main.bounds.width*(1/6), y: UIScreen.main.bounds.height * (2.5/10.0), width: UIScreen.main.bounds.width*(2/3), height: UIScreen.main.bounds.width/8)
+        self.captureButton.frame = CGRect(x: UIScreen.main.bounds.width/4, y: UIScreen.main.bounds.height * (4.5/10.0), width: UIScreen.main.bounds.width/2, height: UIScreen.main.bounds.width/10)
+        self.resetButton.frame = CGRect(x: UIScreen.main.bounds.width/4, y: UIScreen.main.bounds.height * (8.0/10.0), width:  UIScreen.main.bounds.width/2, height: UIScreen.main.bounds.width/10)
         resetButton.isHidden = true
         resetButton.isEnabled = false
         previewLayer.isHidden = false

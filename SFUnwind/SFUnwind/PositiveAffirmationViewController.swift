@@ -273,6 +273,46 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
                 print(error.localizedDescription)
             }
         }
+        else {
+            // Attempt to open the file:
+            guard let theFile = Bundle.main.path(forResource: "mantras", ofType: "txt", inDirectory: "positiveAffirmations") else {
+                print("SOMETHING WENT VERY WRONG")
+                return // Return if the file can't be found
+            }
+            
+            do { // Extract the file contents, and return them as a split string array
+                let exportText = try String(contentsOfFile: theFile)
+                //print("Export -- : " + getText)
+                let tempArray = exportText.components(separatedBy: "\n")
+                if(tempArray[0] != ""){
+                    self.arrayOfMantra = exportText.components(separatedBy: "\n")
+                    if self.arrayOfMantra.last == "" {
+                        self.arrayOfMantra.removeLast()
+                    }
+                }
+                var toWrite = String()
+                for stringInArray in self.arrayOfMantra {
+                    if(stringInArray == self.arrayOfMantra.last!){
+                        toWrite += (stringInArray)
+                    }
+                    else {
+                        toWrite += (stringInArray + "\n")
+                    }
+                }
+                try (toWrite).write(toFile: self.pathToAff!, atomically: false, encoding: .utf8)
+                print(self.arrayOfMantra)
+                self.totalMantras = self.arrayOfMantra.count
+                print("0: " + String(self.totalMantras))
+                if(self.totalMantras != 0){
+                    self.Label.text = self.arrayOfMantra[0]
+                }
+
+                
+            } catch let error as NSError { // Handle any exception: Return a nil if we have any issues
+                print("error loading contents of url \(theFile)")
+                print(error.localizedDescription)
+            }
+        }
         alreadyInFile.addAction(theOkAction)
         notInFile.addAction(theOkAction)
         notEntered.addAction(theOkAction)
