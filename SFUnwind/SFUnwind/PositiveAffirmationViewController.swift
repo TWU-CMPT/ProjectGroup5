@@ -4,7 +4,7 @@
 // Project Group 5: SFU CMPT 276
 // Primary programmer: Joseph Zhou
 // Contributing Programmers:
-// Known issues: the datePicker only works on iOS10
+// Known issues: 
 //
 // Note: All files in this project conform to the coding standard included in the SFUnwind HW3 Quality Assurance Documentation
 
@@ -346,28 +346,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     
     //make the pickerView shows the option which the user selected
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        print(component)
-//        print(row)
-//        switch (component) {
-//        case 0:
-//            freq = data[component][row]
-//            textTime.text = freq
-//            print(freq)
-//        case 1:
-//            weekDay = data[component][row]
-//            weekday.text = weekDay
-//            print(weekDay)
-//        case 2:
-//            hr = data[component][row]
-//            hour.text = hr
-//            print(hr)
-//        case 3:
-//            min = data[component][row]
-//            minute.text = min
-//            print(min)
-//        default:
-//            break
-//        }
+
         if pickerView == dataDrop{
             self.textTime.text = self.data[row]
             self.dataDrop.isHidden = true
@@ -426,18 +405,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             self.minuteDrop.isHidden = true
         }
     }
-//        let toolbar = UIToolbar()
-//        toolbar.sizeToFit()
-//        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
-//        toolbar.setItems([doneButton], animated: false)
-//        textTime.inputAccessoryView = toolbar
-//    }
-//    func donePressed(){
-//        self.view.endEditing(true)
-//    }
-//
-    
-    
+
     func textFieldDidBeginEditing(_ textFiled:UITextField){
         textFiled.isEnabled = false
         if (textFiled == self.textTime){
