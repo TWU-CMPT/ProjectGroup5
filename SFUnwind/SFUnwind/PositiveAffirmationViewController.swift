@@ -19,9 +19,12 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     var txt = "rrr"
     var blank = "\n"
     var arrayOfMantra = [String]()
-    let alreadyInFile = UIAlertController(title: "Already in File", message: "This mantra is already entered.", preferredStyle: .alert)
-    let notInFile = UIAlertController(title: "Not in File", message: "Mantra not found.", preferredStyle: .alert)
-    let notEntered = UIAlertController(title: "Not entered", message: "Mantra not entered.", preferredStyle: .alert)
+    let alreadyInFile = UIAlertController(title: "Already in List", message: "This mantra is already entered.", preferredStyle: .alert)
+    let notInFile = UIAlertController(title: "Not in List", message: "Mantra not found.", preferredStyle: .alert)
+    let notEntered = UIAlertController(title: "Mantra Missing", message: "Mantra not entered.", preferredStyle: .alert)
+    let notBoth = UIAlertController(title: "Notifications Cleared/Mantra Missing", message: "All notifications (if any) removed from this application. Please enter mantra.", preferredStyle: .alert)
+    let notExist = UIAlertController(title: "Notifications Cleared", message: "All notifications (if any) removed from this application.", preferredStyle: .alert)
+    let removeNot = UIAlertController(title: "Mantra Not Found", message: "Please enter mantra.", preferredStyle: .alert)
     let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
     //Create button - not on verson 1
     @IBAction func Create(_ sender: AnyObject) {
@@ -277,6 +280,9 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         alreadyInFile.addAction(theOkAction)
         notInFile.addAction(theOkAction)
         notEntered.addAction(theOkAction)
+        notBoth.addAction(theOkAction)
+        notExist.addAction(theOkAction)
+        removeNot.addAction(theOkAction)
         super.viewDidLoad()
         weekday.isHidden = true
         weekday.isEnabled = false
@@ -286,7 +292,6 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         minute.isEnabled = false
         atLabelText.isHidden = true
         sepLabel.isHidden = true
-        dataToWrite = "affirmations.txt"
         //make the date picker works
 //        picker.delegate = self
 //        picker.dataSource = self
@@ -494,14 +499,16 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             matchingComponents.hour! = matchingComponents.hour! % 24
         }
         let nextDay = calendar.nextDate(after: Date(), matching: matchingComponents, matchingPolicy: .nextTime)
-        UIApplication.shared.cancelAllLocalNotifications()
-        if tfreq != "Never" {
+        if(self.Label.text != ""){
+            UIApplication.shared.cancelAllLocalNotifications()
+        }
+        if (tfreq != "Never" && self.Label.text != "") {
             print(nextDay?.description)
             print(calendar.timeZone)
             let notification = UILocalNotification()
             let dict:NSDictionary = ["ID":"ID goes here"]
             notification.userInfo = dict as! [String : String]
-            notification.alertBody = "MESSAGE GOES HERE"
+            notification.alertBody = self.Label.text
             notification.alertAction = "Open"
             notification.fireDate = nextDay
             if tfreq == "Weekly" {
@@ -516,60 +523,19 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             notification.soundName = UILocalNotificationDefaultSoundName
             UIApplication.shared.scheduleLocalNotification(notification)
         }
+        else if (self.Label.text == "" && tfreq == "Never") {
+            // Present alert to user.
+            self.present(self.notBoth, animated: true, completion: nil) //Present alert
+        }
+        else if(self.Label.text == ""){
+            // Present alert to user.
+            self.present(self.removeNot, animated: true, completion: nil) //Present alert
+        }
+        else {
+            // Present alert to user.
+            self.present(self.notExist, animated: true, completion: nil) //Present alert
+        }
     }
-    
-    var dataToWrite = String()
-    
-    func readFile(filename : String) -> [String]?{
-        // Attempt to open the file:
-        if let theDocumentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-            print(filename)
-            let thePath = theDocumentsDirectory.appendingPathComponent(filename) // Append the filename to the path
-            print("WOOPER")
-            print(thePath)
-            // Read from the file:
-            do {
-                let fileContents = try String(contentsOf: thePath, encoding: String.Encoding.utf8)
-                print(fileContents.components(separatedBy: "\n")) // Return the file contents as an array, with each line as an element
-                    //print (fixed[0])
-                //return fixed
-            }
-            catch { // Handle read errors: Return nil
-                print("OH")
-                return nil
-            }
-        }
-        return nil // Return nil: We should only reach this if something went wrong
-//            //read
-//            do {
-//                txt = try String(contentsOf: path, encoding: String.Encoding.utf8)
-//                let content = try String(contentsOfFile: dataToWrite, encoding: String.Encoding.utf8)
-//                let content2 = content.components(separatedBy: "\n")
-//                for i in content2 {
-//                    fixed.append(i)
-//                }
-//            }
-//            catch _ {
-//                print("something went wrong2")
-//            }
-        }
-    
-//    func firstTimeLoad(){
-//        var fileContents = "empty"
-//        if let theDocumentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-//            let thePath = theDocumentsDirectory.appendingPathComponent(dataToWrite)
-//            do {
-//                fileContents = try String(contentsOf: thePath, encoding: String.Encoding.utf8)
-//                if fileContents == " "{
-//                    
-//            }
-//            catch _{
-//                print("error")
-//            }
-//    }
-
-    
-    
 }
     
     
