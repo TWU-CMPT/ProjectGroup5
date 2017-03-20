@@ -14,11 +14,14 @@ import UserNotifications
 class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
     var pathToAff: String? = nil
     var txtIndex = UITextField()
-    var totalMantras: Int = 0;
+    var totalMantras: Int = 0
+    var currentIndex: Int = 0
     var txt = "rrr"
     var blank = "\n"
-    var arrayOfMantra = [""]
+    var arrayOfMantra = [String]()
     let alreadyInFile = UIAlertController(title: "Already in File", message: "This mantra is already entered.", preferredStyle: .alert)
+    let notInFile = UIAlertController(title: "Not in File", message: "Mantra not found.", preferredStyle: .alert)
+    let notEntered = UIAlertController(title: "Not entered", message: "Mantra not entered.", preferredStyle: .alert)
     let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
     //Create button - not on verson 1
     @IBAction func Create(_ sender: AnyObject) {
@@ -36,52 +39,67 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             //print(self.fixed)
             
             // find file
-            
-            let theFileManager = FileManager.default
-            if theFileManager.fileExists(atPath: self.pathToAff!) {
-                print("AVAIL")
-                do {
-                    let exportText = try String(contentsOfFile: self.pathToAff!)
-                    print("Export -- : " + exportText)
-                    self.arrayOfMantra = exportText.components(separatedBy: "\n")
-                    if self.arrayOfMantra.contains(saveText!) {
-                        print("W1")
-                        self.alreadyInFile.title = "Mantra Already Entered"
-                        // Present alert to user.
-                        self.present(self.alreadyInFile, animated: true, completion: nil) //Present alert
-                    }
-                    else {
-                        print("W2")
-                        self.arrayOfMantra.append(saveText!)
-                        if(exportText == ""){
-                            try (saveText!).write(toFile: self.pathToAff!, atomically: false, encoding: .utf8)
+            if(saveText != ""){
+                let theFileManager = FileManager.default
+                if theFileManager.fileExists(atPath: self.pathToAff!) {
+                    print("AVAIL")
+                    do {
+                        let exportText = try String(contentsOfFile: self.pathToAff!)
+                        print("Export -- : " + exportText)
+                        let tempArray = exportText.components(separatedBy: "\n")
+                        if(tempArray[0] != ""){
+                            self.arrayOfMantra = exportText.components(separatedBy: "\n")
+                        }
+                        if self.arrayOfMantra.contains(saveText!) {
+                            print("W1")
+                            self.alreadyInFile.title = "Mantra Already Entered"
+                            // Present alert to user.
+                            self.present(self.alreadyInFile, animated: true, completion: nil) //Present alert
                         }
                         else {
-                            try (exportText + "\n" + saveText!).write(toFile: self.pathToAff!, atomically: false, encoding: .utf8)
+                            print("W2")
+                            print("CH: " + String(describing: self.arrayOfMantra))
+                            self.arrayOfMantra.append(saveText!)
+                            print("CH2: " + String(describing: self.arrayOfMantra))
+                            if(exportText == ""){
+                                try (saveText!).write(toFile: self.pathToAff!, atomically: false, encoding: .utf8)
+                            }
+                            else {
+                                try (exportText + "\n" + saveText!).write(toFile: self.pathToAff!, atomically: false, encoding: .utf8)
+                            }
+                            self.totalMantras+=1
+                            self.currentIndex = self.totalMantras-1
+                            
                         }
-                        
+                    }
+                    catch let error as NSError {
+                        print("error loading contents of url \(self.pathToAff!)")
+                        print(error.localizedDescription)
+                    }
+                    
+                }
+                else {
+                    print("NOT AVAIL")
+                    do {
+                        try (saveText!).write(toFile: self.pathToAff!, atomically: false, encoding: .utf8)
+                        self.totalMantras+=1
+                        self.currentIndex = self.totalMantras
+                        let exportText = try String(contentsOfFile: self.pathToAff!)
+                        self.arrayOfMantra = exportText.components(separatedBy: "\n")
+                    }
+                    catch let error as NSError {
+                        print("error writing to url \(self.pathToAff!)")
+                        print(error.localizedDescription)
                     }
                 }
-                catch let error as NSError {
-                    print("error loading contents of url \(self.pathToAff!)")
-                    print(error.localizedDescription)
-                }
-                
+                self.txt = self.txtIndex.text!
+                self.Label.text = saveText //change the label to the next same as the user input
             }
             else {
-                print("NOT AVAIL")
-                do {
-                    try (saveText!).write(toFile: self.pathToAff!, atomically: false, encoding: .utf8)
-                    let exportText = try String(contentsOfFile: self.pathToAff!)
-                    self.arrayOfMantra = exportText.components(separatedBy: "\n")
-                }
-                catch let error as NSError {
-                    print("error writing to url \(self.pathToAff!)")
-                    print(error.localizedDescription)
-                }
+                self.notEntered.title = "Mantra Not Entered"
+                // Present alert to user.
+                self.present(self.notEntered, animated: true, completion: nil) //Present alert
             }
-            self.txt = self.txtIndex.text!
-            self.Label.text = saveText //change the label to the next same as the user input
         })
         
         alert.addAction(saveAction) //run the save action
@@ -92,80 +110,103 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         alert.addAction(cancelAction)   //run the cancel action
         
         self.present(alert, animated: true, completion: nil)    //present it
+        
     }
     
     //Delete button - not on verson 1
     @IBAction func DeleteAlert(_ sender: AnyObject) {
-        //create an alert
-        //let alert = UIAlertController(title: "Are you sure?", message: fixed[index], preferredStyle: UIAlertControllerStyle.alert)
+        let mantraRemove: String = self.Label.text!
+        let theFileManager = FileManager.default
+        if theFileManager.fileExists(atPath: self.pathToAff!) {
+            print("AVAIL")
+            do {
+                let exportText = try String(contentsOfFile: self.pathToAff!)
+                print("Export -- : " + exportText)
+                self.arrayOfMantra = exportText.components(separatedBy: "\n")
+                if self.arrayOfMantra.contains(mantraRemove) {
+                    print("FOUND")
+                    let theIndex = self.arrayOfMantra.index(of: mantraRemove)
+                    self.arrayOfMantra.remove(at: theIndex!)
+                    var toWrite = String()
+                    for stringInArray in self.arrayOfMantra {
+                        if(stringInArray == self.arrayOfMantra.last!){
+                            toWrite += (stringInArray)
+                        }
+                        else {
+                            toWrite += (stringInArray + "\n")
+                        }
+                    }
+                    if(self.totalMantras > 0){
+                        self.totalMantras-=1
+                        print(self.totalMantras)
+                    }
+                    else {
+                        self.Label.text = ""
+                    }
+                    if (self.currentIndex >= self.totalMantras) {
+                        self.currentIndex = self.totalMantras-1
+                    }
+                    if(self.totalMantras == 0){
+                        self.Label.text = ""
+                    }
+                    else {
+                        self.Label.text = self.arrayOfMantra[self.currentIndex]
+                    }
+                    try (toWrite).write(toFile: self.pathToAff!, atomically: false, encoding: .utf8)
+                }
+                else {
+                    self.alreadyInFile.title = "Mantra Not Found"
+                    // Present alert to user.
+                    self.present(self.notInFile, animated: true, completion: nil) //Present alert
+                    
+                }
+            }
+            catch let error as NSError {
+                print("error loading contents of url \(self.pathToAff!)")
+                print(error.localizedDescription)
+            }
+            
+        }
+        else {
+            print("NOT AVAIL")
+            self.alreadyInFile.title = "Mantra Not Found"
+            // Present alert to user.
+            self.present(self.notInFile, animated: true, completion: nil) //Present alert
+        }
+        print("CH: " + String(describing: self.arrayOfMantra))
+
         
-        //delete aciton
-        //let deleteAction = UIAlertAction(title: "submit", style: UIAlertActionStyle.default, handler: { (action:UIAlertAction) -> Void in
-            //if self.index == self.fixed.count - 1{
-                //self.fixed.remove(at: self.index - 1)
-            //    self.index -= 1
-            //}else if(self.index == 0){
-                //self.fixed.remove(at: self.fixed.count - 1)
-            //}
-        //})
-        
-        //alert.addAction(deleteAction) //run the delete action
-        
-        //Cancel action
-        //let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil)
-        
-        //alert.addAction(cancelAction)   //run the cancel action
-        
-        //self.present(alert, animated: true, completion: nil)    //present it
     }
     @IBOutlet weak var helpButton: UIButton!
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let nav = segue.destination as! HelpViewController
         nav.callingScreen = 2 // Notify the popup who's calling it: 0 = Square Breathing, 1 = Grounding, 2 = Positive Affirmations, 3 = Panic Alerts
     }
-    
-    var ass = " "
     //Previous button
     @IBAction func Previous(_ sender: AnyObject) {
-        if let theDocumentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first{
-            let path = theDocumentsDirectory.appendingPathComponent("mantras2")
-            //read
-            do {
-                txt = try String(contentsOf: path, encoding: String.Encoding.utf8)
-                let reading = txt.components(separatedBy: "\n")
-                if reading[index] == " "{
-                    index = index - 1
-                }
-                self.Label.text = reading[index]
-                index = index - 1
+        if(self.totalMantras > 0){
+            self.currentIndex -= 1
+            if(self.currentIndex < 0){
+                self.currentIndex = self.totalMantras-1
             }
-            catch _ {
-                print("something went wrong2")
-            }
+            //print(String(self.currentIndex) + " " + String(self.totalMantras) + " " + String(self.arrayOfMantra.count))
+            self.Label.text = self.arrayOfMantra[self.currentIndex]
         }
-        
-        print(index)
+        print("KO: " + String(self.totalMantras) + String(self.currentIndex))
+        print("CH: " + String(describing: self.arrayOfMantra))
     }
     
     //Next button
     @IBAction func Next(_ sender: AnyObject) {
-        if let theDocumentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first{
-            let path = theDocumentsDirectory.appendingPathComponent("mantras2")
-            //read
-            do {
-                txt = try String(contentsOf: path, encoding: String.Encoding.utf8)
-                let reading = txt.components(separatedBy: "\n")
-                if reading[index] == " "{
-                    index = index + 1
-                }
-                self.Label.text = reading[index]
-                index = index + 1
+        if(self.totalMantras > 0){
+            self.currentIndex += 1
+            if (self.currentIndex >= self.totalMantras) {
+                self.currentIndex = 0
             }
-            catch _ {
-                print("something went wrong2")
-            }
+            self.Label.text = self.arrayOfMantra[self.currentIndex]
         }
-        print(index)
+        print("KO: " + String(self.totalMantras) + String(self.currentIndex))
+        print("CH: " + String(describing: self.arrayOfMantra))
     }
 
     //Label
@@ -206,11 +247,36 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     // Called once when the view loads for the first time
     
     override func viewDidLoad() {
+        totalMantras = 0
+        currentIndex = 0
         let desiredFile = "affirmations.txt"
         let thePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         let theURL = NSURL(fileURLWithPath: thePath)
         pathToAff = theURL.appendingPathComponent(desiredFile)?.path
+        let theFileManager = FileManager.default
+        if theFileManager.fileExists(atPath: self.pathToAff!){
+            do {
+                let getText = try String(contentsOfFile: self.pathToAff!)
+                //print("Export -- : " + getText)
+                let tempArray = getText.components(separatedBy: "\n")
+                if(tempArray[0] != ""){
+                    self.arrayOfMantra = getText.components(separatedBy: "\n")
+                }
+                print(self.arrayOfMantra)
+                self.totalMantras = self.arrayOfMantra.count
+                print("0: " + String(self.totalMantras))
+                if(self.totalMantras != 0){
+                    self.Label.text = self.arrayOfMantra[0]
+                }
+            }
+            catch {
+                print("error loading contents of url \(self.pathToAff!)")
+                print(error.localizedDescription)
+            }
+        }
         alreadyInFile.addAction(theOkAction)
+        notInFile.addAction(theOkAction)
+        notEntered.addAction(theOkAction)
         super.viewDidLoad()
         weekday.isHidden = true
         weekday.isEnabled = false
