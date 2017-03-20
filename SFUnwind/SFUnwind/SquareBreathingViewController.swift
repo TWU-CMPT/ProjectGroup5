@@ -52,10 +52,10 @@ class SquareBreathingViewController: UIViewController{
         super.viewDidLoad() // Call the super class
      
         
-        squareOrderManager(currentCircle: 0).alpha = 0 // Set all images alpha to 0
-        squareOrderManager(currentCircle: 1).alpha = 0
-        squareOrderManager(currentCircle: 2).alpha = 0
-        squareOrderManager(currentCircle: 3).alpha = 0
+        squareOrderManager(currentCircle: 0).alpha = 100 // Set all images alpha to 100
+        squareOrderManager(currentCircle: 1).alpha = 100
+        squareOrderManager(currentCircle: 2).alpha = 100
+        squareOrderManager(currentCircle: 3).alpha = 100
         
         
         
@@ -161,20 +161,20 @@ class SquareBreathingViewController: UIViewController{
     
     // scaleAnimationManager calls all four steps of animation in order which are fadein, scalex2, scale to original and fade out. SquareOrderManager function is used to track the current image
     func scaleAnimationManager(){
-        UIView.animate(withDuration: 1, delay: 0, options: .curveEaseIn, animations: {
+        /*UIView.animate(withDuration: 1, delay: 0, options: .curveEaseIn, animations: {
             self.squareOrderManager(currentCircle: self.circleOrderTracker).alpha = 1.0
-        }, completion: nil)
-        UIView.animate(withDuration: 2, delay: 1, options: .curveEaseOut, animations:{
+        }, completion: nil)*/
+        UIView.animate(withDuration: 2, delay: 0, options: .curveEaseOut, animations:{
             self.squareOrderManager(currentCircle: self.circleOrderTracker).transform = CGAffineTransform(scaleX: 2, y: 2)
             AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
         }, completion:nil)
-        UIView.animate(withDuration: 2, delay: 3.2, options: .curveEaseOut, animations:{
+        UIView.animate(withDuration: 2, delay: 2.2, options: .curveEaseOut, animations:{
             self.squareOrderManager(currentCircle: self.circleOrderTracker).transform = CGAffineTransform(scaleX: 1, y: 1)
             AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
-        }, completion: { (finished: Bool) -> Void in
-            UIView.animate(withDuration: 1, delay: 0, options: .curveEaseIn, animations: {
+        }, completion: {(finished: Bool) -> Void in
+            /*UIView.animate(withDuration: 1, delay: 0, options: .curveEaseIn, animations: {
                 self.squareOrderManager(currentCircle: self.circleOrderTracker-1).alpha = 0.0
-            }, completion: nil)
+            }, completion: nil)*/
         })
         circleOrderTracker+=1
     }
@@ -215,7 +215,7 @@ class SquareBreathingViewController: UIViewController{
             sessionTracker = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(SquareBreathingViewController.timeManager), userInfo: nil, repeats: true)  //Call timeManager() once in every second
             
             scaleAnimationManager()
-            animationTimer = Timer.scheduledTimer(timeInterval: 6.2, target: self, selector: #selector(SquareBreathingViewController.scaleAnimationManager), userInfo: nil, repeats: true)
+            animationTimer = Timer.scheduledTimer(timeInterval: 4.2, target: self, selector: #selector(SquareBreathingViewController.scaleAnimationManager), userInfo: nil, repeats: true)
             reStartButtonText.setTitle("Stop", for: .normal)
 
         }
