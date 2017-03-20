@@ -222,7 +222,7 @@
 				TargetAttributes = {
 					EB04A4691E6615F400BD2859 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 44FYG25CBG;
+						DevelopmentTeam = A6FY2U8DZM;
 						ProvisioningStyle = Automatic;
 					};
 					EB04A47D1E6615F400BD2859 = {
@@ -458,11 +458,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 44FYG25CBG;
+				DEVELOPMENT_TEAM = A6FY2U8DZM;
 				INFOPLIST_FILE = SFUnwind/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = SFUnwind1;
+				PRODUCT_BUNDLE_IDENTIFIER = SFUnwindg;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -474,11 +474,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 44FYG25CBG;
+				DEVELOPMENT_TEAM = A6FY2U8DZM;
 				INFOPLIST_FILE = SFUnwind/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = SFUnwind1;
+				PRODUCT_BUNDLE_IDENTIFIER = SFUnwindg;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
