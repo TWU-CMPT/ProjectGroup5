@@ -12,10 +12,14 @@ import UIKit
 import UserNotifications
 
 class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
-    
+    var pathToAff: String? = nil
     var txtIndex = UITextField()
+    var totalMantras: Int = 0;
     var txt = "rrr"
     var blank = "\n"
+    var arrayOfMantra = [""]
+    let alreadyInFile = UIAlertController(title: "Already in File", message: "This mantra is already entered.", preferredStyle: .alert)
+    let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
     //Create button - not on verson 1
     @IBAction func Create(_ sender: AnyObject) {
         //create an alert
@@ -27,20 +31,60 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         
         //Save aciton
         let saveAction = UIAlertAction(title: "Save", style: UIAlertActionStyle.default, handler: { (action:UIAlertAction) -> Void in
-            self.txtIndex = (alert.textFields?[0])!   //take the input text
-            print(self.txtIndex.text!)    //print
-            print(self.fixed)
+            let saveText = (alert.textFields?[0])!.text  //take the input text
+            //print("1: " + self.txtIndex.text!)    //print
+            //print(self.fixed)
+            
+            // find file
+            
+            let theFileManager = FileManager.default
+            if theFileManager.fileExists(atPath: self.pathToAff!) {
+                print("AVAIL")
+                do {
+                    let exportText = try String(contentsOfFile: self.pathToAff!)
+                    print("Export -- : " + exportText)
+                    self.arrayOfMantra = exportText.components(separatedBy: "\n")
+                    if self.arrayOfMantra.contains(saveText!) {
+                        print("W1")
+                        self.alreadyInFile.title = "Mantra Already Entered"
+                        // Present alert to user.
+                        self.present(self.alreadyInFile, animated: true, completion: nil) //Present alert
+                    }
+                    else {
+                        print("W2")
+                        self.arrayOfMantra.append(saveText!)
+                        if(exportText == ""){
+                            try (saveText!).write(toFile: self.pathToAff!, atomically: false, encoding: .utf8)
+                        }
+                        else {
+                            try (exportText + "\n" + saveText!).write(toFile: self.pathToAff!, atomically: false, encoding: .utf8)
+                        }
+                        
+                    }
+                }
+                catch let error as NSError {
+                    print("error loading contents of url \(self.pathToAff!)")
+                    print(error.localizedDescription)
+                }
+                
+            }
+            else {
+                print("NOT AVAIL")
+                do {
+                    try (saveText!).write(toFile: self.pathToAff!, atomically: false, encoding: .utf8)
+                    let exportText = try String(contentsOfFile: self.pathToAff!)
+                    self.arrayOfMantra = exportText.components(separatedBy: "\n")
+                }
+                catch let error as NSError {
+                    print("error writing to url \(self.pathToAff!)")
+                    print(error.localizedDescription)
+                }
+            }
             self.txt = self.txtIndex.text!
-            self.createTxtFile()
-            let txt2 = self.readFile(filename : self.dataToWrite)
-            self.Label.text = self.txt //change the label to the next same as the user input
-            //self.fixed.append((self.txtIndex.text!))
+            self.Label.text = saveText //change the label to the next same as the user input
         })
         
         alert.addAction(saveAction) //run the save action
-        
-        
-        
         
         //Cancel action
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil)
@@ -53,26 +97,26 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     //Delete button - not on verson 1
     @IBAction func DeleteAlert(_ sender: AnyObject) {
         //create an alert
-        let alert = UIAlertController(title: "Are you sure?", message: fixed[index], preferredStyle: UIAlertControllerStyle.alert)
+        //let alert = UIAlertController(title: "Are you sure?", message: fixed[index], preferredStyle: UIAlertControllerStyle.alert)
         
         //delete aciton
-        let deleteAction = UIAlertAction(title: "submit", style: UIAlertActionStyle.default, handler: { (action:UIAlertAction) -> Void in
-            if self.index == self.fixed.count - 1{
-                self.fixed.remove(at: self.index - 1)
-                self.index -= 1
-            }else if(self.index == 0){
-                self.fixed.remove(at: self.fixed.count - 1)
-            }
-        })
+        //let deleteAction = UIAlertAction(title: "submit", style: UIAlertActionStyle.default, handler: { (action:UIAlertAction) -> Void in
+            //if self.index == self.fixed.count - 1{
+                //self.fixed.remove(at: self.index - 1)
+            //    self.index -= 1
+            //}else if(self.index == 0){
+                //self.fixed.remove(at: self.fixed.count - 1)
+            //}
+        //})
         
-        alert.addAction(deleteAction) //run the delete action
+        //alert.addAction(deleteAction) //run the delete action
         
         //Cancel action
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil)
+        //let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil)
         
-        alert.addAction(cancelAction)   //run the cancel action
+        //alert.addAction(cancelAction)   //run the cancel action
         
-        self.present(alert, animated: true, completion: nil)    //present it
+        //self.present(alert, animated: true, completion: nil)    //present it
     }
     @IBOutlet weak var helpButton: UIButton!
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -135,7 +179,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     //    var fixed = ["I am awesome!", "I am the architect of my life; I build its foundation and choose its contents.", "Today, I am brimming with energy and overflowing with joy.", "My body is healthy; my mind is brilliant; my soul is tranquil.", "I am superior to negative thoughts and low actions.", "I have been given endless talents which I begin to utilize today.", "I forgive those who have harmed me in my past and peacefully detach from them.", "A river of compassion washes away my anger and replaces it with love.", "I am guided in my every step by Spirit who leads me towards what I must know and do.", "I possess the qualities needed to be extremely successful.", "My ability to conquer  my challenges is limitless; my potential to succeed is infinite."]
     //
     
-    var fixed = [" "]
+    
     
     @IBOutlet weak var weekday: UITextField!
     @IBOutlet weak var weekdayDrop: UIPickerView!
@@ -162,6 +206,11 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     // Called once when the view loads for the first time
     
     override func viewDidLoad() {
+        let desiredFile = "affirmations.txt"
+        let thePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        let theURL = NSURL(fileURLWithPath: thePath)
+        pathToAff = theURL.appendingPathComponent(desiredFile)?.path
+        alreadyInFile.addAction(theOkAction)
         super.viewDidLoad()
         weekday.isHidden = true
         weekday.isEnabled = false
@@ -171,6 +220,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         minute.isEnabled = false
         atLabelText.isHidden = true
         sepLabel.isHidden = true
+        dataToWrite = "affirmations.txt"
         //make the date picker works
 //        picker.delegate = self
 //        picker.dataSource = self
@@ -403,36 +453,23 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     }
     
     var dataToWrite = String()
-    func createTxtFile(){
-        if let theDocumentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first{
-            let path = theDocumentsDirectory.appendingPathComponent("dataToWrite")
-            
-            //write
-            do {
-                try txt.write(to: path, atomically: true, encoding: String.Encoding.utf8)
-                //try blank.write(to: path, atomically: true, encoding: String.Encoding.utf8)
-                
-            }
-            catch _ {
-                
-                print("something went wrong")
-            }
-        }
-    }
     
     func readFile(filename : String) -> [String]?{
         // Attempt to open the file:
         if let theDocumentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            print(filename)
             let thePath = theDocumentsDirectory.appendingPathComponent(filename) // Append the filename to the path
-            
+            print("WOOPER")
+            print(thePath)
             // Read from the file:
             do {
                 let fileContents = try String(contentsOf: thePath, encoding: String.Encoding.utf8)
-                fixed = fileContents.components(separatedBy: "\n") // Return the file contents as an array, with each line as an element
-                    print (fixed)
-                return fixed
+                print(fileContents.components(separatedBy: "\n")) // Return the file contents as an array, with each line as an element
+                    //print (fixed[0])
+                //return fixed
             }
             catch { // Handle read errors: Return nil
+                print("OH")
                 return nil
             }
         }
