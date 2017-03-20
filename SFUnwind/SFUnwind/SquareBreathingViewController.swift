@@ -4,7 +4,7 @@
 // Project Group 5: SFU CMPT 276
 // Primary programmer: Berke Boz
 // Contributing Programmers: Adam Badke
-// Known issues: Timer does not stop when pages are changed, this won't be fixed until animation is implemented
+// Known issues: If re/start button is pressed twice in same seconds, bugs are likely to happen.
 //
 // Note: All files in this project conform to the coding standard included in the SFUnwind HW3 Quality Assurance Documentation
 
@@ -21,7 +21,7 @@ class SquareBreathingViewController: UIViewController{
     
     // UI Timer Parameters
     var sessionTimeSeconds = 60                         //Set Seconds
-    var sessionTimeMinute = 4                           // Set Minute
+    var sessionTimeMinute = 4                           //Set Minute
     var sessionTracker = Timer()
     var animationTimer = Timer()
     var sesssionTrackerActive: Bool = false             //A boolean statement is used to keep track of the state of RE/START button. sesssionTrackerActive acts like On/Off button

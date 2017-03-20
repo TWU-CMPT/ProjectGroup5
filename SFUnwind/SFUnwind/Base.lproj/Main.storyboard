@@ -77,6 +77,14 @@
                                             <action selector="restartButton:" destination="S1c-mL-zIB" eventType="touchUpInside" id="NEJ-G0-WEG"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5xr-Bc-Rma">
+                                        <rect key="frame" x="257" y="63" width="32" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Help"/>
+                                        <connections>
+                                            <segue destination="zjK-4w-zSl" kind="presentation" id="v0c-2v-HoP"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q8K-Td-1hX" userLabel="MidView">
