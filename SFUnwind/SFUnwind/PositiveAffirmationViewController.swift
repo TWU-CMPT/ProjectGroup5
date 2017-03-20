@@ -4,7 +4,7 @@
 // Project Group 5: SFU CMPT 276
 // Primary programmer: Joseph Zhou
 // Contributing Programmers:
-// Known issues: 
+// Known issues:
 //
 // Note: All files in this project conform to the coding standard included in the SFUnwind HW3 Quality Assurance Documentation
 
@@ -177,7 +177,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             self.present(self.notInFile, animated: true, completion: nil) //Present alert
         }
         print("CH: " + String(describing: self.arrayOfMantra))
-
+        
         
     }
     @IBOutlet weak var helpButton: UIButton!
@@ -211,17 +211,13 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         print("KO: " + String(self.totalMantras) + String(self.currentIndex))
         print("CH: " + String(describing: self.arrayOfMantra))
     }
-
+    
     //Label
     @IBOutlet weak var Label: UILabel!
     
     @IBOutlet weak var textTime: UITextField!
     
     var index = 0   //index of the position of the list
-    
-    //fixed 10 postivite affirmations
-    //    var fixed = ["I am awesome!", "I am the architect of my life; I build its foundation and choose its contents.", "Today, I am brimming with energy and overflowing with joy.", "My body is healthy; my mind is brilliant; my soul is tranquil.", "I am superior to negative thoughts and low actions.", "I have been given endless talents which I begin to utilize today.", "I forgive those who have harmed me in my past and peacefully detach from them.", "A river of compassion washes away my anger and replaces it with love.", "I am guided in my every step by Spirit who leads me towards what I must know and do.", "I possess the qualities needed to be extremely successful.", "My ability to conquer  my challenges is limitless; my potential to succeed is infinite."]
-    //
     
     
     
@@ -243,7 +239,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     @IBOutlet weak var dataDrop: UIPickerView!
     //options of the frequency
     var data = ["Never", "Weekly", "Daily", "Hourly"]
- //   var picker = UIPickerView()
+    //   var picker = UIPickerView()
     @IBOutlet weak var atLabelText: UILabel!
     
     @IBOutlet weak var sepLabel: UILabel!
@@ -292,11 +288,6 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         minute.isEnabled = false
         atLabelText.isHidden = true
         sepLabel.isHidden = true
-        //make the date picker works
-//        picker.delegate = self
-//        picker.dataSource = self
-//        textTime.inputView = picker
-//        
     }
     
     // Check if we've recieved a memory warning.
@@ -346,7 +337,6 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     
     //make the pickerView shows the option which the user selected
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-
         if pickerView == dataDrop{
             self.textTime.text = self.data[row]
             self.dataDrop.isHidden = true
@@ -405,7 +395,8 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             self.minuteDrop.isHidden = true
         }
     }
-
+    
+    
     func textFieldDidBeginEditing(_ textFiled:UITextField){
         textFiled.isEnabled = false
         if (textFiled == self.textTime){
@@ -505,5 +496,5 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         }
     }
 }
-    
-    
+
+
