@@ -4,7 +4,7 @@
 // Project Group 5: SFU CMPT 276
 // Primary programmer: Joseph Zhou
 // Contributing Programmers:
-// Known issues: the datePicker only works on iOS10
+// Known issues: 
 //
 // Note: All files in this project conform to the coding standard included in the SFUnwind HW3 Quality Assurance Documentation
 
@@ -287,11 +287,6 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         atLabelText.isHidden = true
         sepLabel.isHidden = true
         dataToWrite = "affirmations.txt"
-        //make the date picker works
-//        picker.delegate = self
-//        picker.dataSource = self
-//        textTime.inputView = picker
-//        
     }
     
     // Check if we've recieved a memory warning.
@@ -341,28 +336,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     
     //make the pickerView shows the option which the user selected
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        print(component)
-//        print(row)
-//        switch (component) {
-//        case 0:
-//            freq = data[component][row]
-//            textTime.text = freq
-//            print(freq)
-//        case 1:
-//            weekDay = data[component][row]
-//            weekday.text = weekDay
-//            print(weekDay)
-//        case 2:
-//            hr = data[component][row]
-//            hour.text = hr
-//            print(hr)
-//        case 3:
-//            min = data[component][row]
-//            minute.text = min
-//            print(min)
-//        default:
-//            break
-//        }
+
         if pickerView == dataDrop{
             self.textTime.text = self.data[row]
             self.dataDrop.isHidden = true
@@ -421,18 +395,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             self.minuteDrop.isHidden = true
         }
     }
-//        let toolbar = UIToolbar()
-//        toolbar.sizeToFit()
-//        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
-//        toolbar.setItems([doneButton], animated: false)
-//        textTime.inputAccessoryView = toolbar
-//    }
-//    func donePressed(){
-//        self.view.endEditing(true)
-//    }
-//
-    
-    
+
     func textFieldDidBeginEditing(_ textFiled:UITextField){
         textFiled.isEnabled = false
         if (textFiled == self.textTime){
@@ -540,35 +503,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             }
         }
         return nil // Return nil: We should only reach this if something went wrong
-//            //read
-//            do {
-//                txt = try String(contentsOf: path, encoding: String.Encoding.utf8)
-//                let content = try String(contentsOfFile: dataToWrite, encoding: String.Encoding.utf8)
-//                let content2 = content.components(separatedBy: "\n")
-//                for i in content2 {
-//                    fixed.append(i)
-//                }
-//            }
-//            catch _ {
-//                print("something went wrong2")
-//            }
-        }
-    
-//    func firstTimeLoad(){
-//        var fileContents = "empty"
-//        if let theDocumentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-//            let thePath = theDocumentsDirectory.appendingPathComponent(dataToWrite)
-//            do {
-//                fileContents = try String(contentsOf: thePath, encoding: String.Encoding.utf8)
-//                if fileContents == " "{
-//                    
-//            }
-//            catch _{
-//                print("error")
-//            }
-//    }
 
-    
     
 }
     
