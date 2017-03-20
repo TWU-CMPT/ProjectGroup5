@@ -504,7 +504,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         }
         return nil // Return nil: We should only reach this if something went wrong
 
-    
+    }
 }
     
     
