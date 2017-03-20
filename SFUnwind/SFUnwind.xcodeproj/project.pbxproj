@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		80635E8C1E7DDB5B000AD79F /* circle-png-25308.png in Resources */ = {isa = PBXBuildFile; fileRef = 80635E8B1E7DDB5B000AD79F /* circle-png-25308.png */; };
+		80E16E151E80524200240952 /* gray_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 80E16E141E80524200240952 /* gray_line.png */; };
 		EB04A46E1E6615F400BD2859 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB04A46D1E6615F400BD2859 /* AppDelegate.swift */; };
 		EB04A4731E6615F400BD2859 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB04A4711E6615F400BD2859 /* Main.storyboard */; };
 		EB04A4751E6615F400BD2859 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB04A4741E6615F400BD2859 /* Assets.xcassets */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		80635E8B1E7DDB5B000AD79F /* circle-png-25308.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle-png-25308.png"; sourceTree = "<group>"; };
+		80E16E141E80524200240952 /* gray_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gray_line.png; sourceTree = "<group>"; };
 		EB04A46A1E6615F400BD2859 /* SFUnwind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SFUnwind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB04A46D1E6615F400BD2859 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB04A4721E6615F400BD2859 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				EB7167461E7B926400828B4C /* helpFiles */,
 				EB04A46D1E6615F400BD2859 /* AppDelegate.swift */,
 				EB04A4711E6615F400BD2859 /* Main.storyboard */,
+				80E16E141E80524200240952 /* gray_line.png */,
 				EB04A4741E6615F400BD2859 /* Assets.xcassets */,
 				EB04A4761E6615F400BD2859 /* LaunchScreen.storyboard */,
 				EB04A4791E6615F400BD2859 /* Info.plist */,
@@ -268,6 +271,7 @@
 				EB7167471E7B926400828B4C /* helpFiles in Resources */,
 				EB04C6321E7E2AAD005320F4 /* positiveAffirmations in Resources */,
 				EB04A4751E6615F400BD2859 /* Assets.xcassets in Resources */,
+				80E16E151E80524200240952 /* gray_line.png in Resources */,
 				80635E8C1E7DDB5B000AD79F /* circle-png-25308.png in Resources */,
 				EB04A4731E6615F400BD2859 /* Main.storyboard in Resources */,
 			);
