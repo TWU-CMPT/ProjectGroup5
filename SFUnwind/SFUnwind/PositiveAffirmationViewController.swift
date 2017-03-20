@@ -15,6 +15,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     
     var txtIndex = UITextField()
     var txt = "rrr"
+    var blank = "\n"
     //Create button - not on verson 1
     @IBAction func Create(_ sender: AnyObject) {
         //create an alert
@@ -28,8 +29,10 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         let saveAction = UIAlertAction(title: "Save", style: UIAlertActionStyle.default, handler: { (action:UIAlertAction) -> Void in
             self.txtIndex = (alert.textFields?[0])!   //take the input text
             print(self.txtIndex.text!)    //print
+            print(self.fixed)
             self.txt = self.txtIndex.text!
             self.createTxtFile()
+            let txt2 = self.readFile(filename : self.dataToWrite)
             self.Label.text = self.txt //change the label to the next same as the user input
             //self.fixed.append((self.txtIndex.text!))
         })
@@ -77,42 +80,62 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         nav.callingScreen = 2 // Notify the popup who's calling it: 0 = Square Breathing, 1 = Grounding, 2 = Positive Affirmations, 3 = Panic Alerts
     }
     
+    var ass = " "
     //Previous button
     @IBAction func Previous(_ sender: AnyObject) {
-        if index > -1 {
-            Label.text = fixed[index]   //change the labe; text to the previous one
-            index = index - 1
+        if let theDocumentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first{
+            let path = theDocumentsDirectory.appendingPathComponent("mantras2")
+            //read
+            do {
+                txt = try String(contentsOf: path, encoding: String.Encoding.utf8)
+                let reading = txt.components(separatedBy: "\n")
+                if reading[index] == " "{
+                    index = index - 1
+                }
+                self.Label.text = reading[index]
+                index = index - 1
+            }
+            catch _ {
+                print("something went wrong2")
+            }
         }
-        if index == -1{
-            index = fixed.count - 1
-        }
+        
         print(index)
     }
     
     //Next button
     @IBAction func Next(_ sender: AnyObject) {
-        if index < fixed.count + 1 {
-            Label.text = fixed[index]   //change the labe; text to the next one
-            index = index + 1
-        }
-        if index == fixed.count{
-            index = 0
+        if let theDocumentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first{
+            let path = theDocumentsDirectory.appendingPathComponent("mantras2")
+            //read
+            do {
+                txt = try String(contentsOf: path, encoding: String.Encoding.utf8)
+                let reading = txt.components(separatedBy: "\n")
+                if reading[index] == " "{
+                    index = index + 1
+                }
+                self.Label.text = reading[index]
+                index = index + 1
+            }
+            catch _ {
+                print("something went wrong2")
+            }
         }
         print(index)
     }
-    
+
     //Label
     @IBOutlet weak var Label: UILabel!
     
     @IBOutlet weak var textTime: UITextField!
     
-    var index = 1   //index of the position of the list
+    var index = 0   //index of the position of the list
     
     //fixed 10 postivite affirmations
     //    var fixed = ["I am awesome!", "I am the architect of my life; I build its foundation and choose its contents.", "Today, I am brimming with energy and overflowing with joy.", "My body is healthy; my mind is brilliant; my soul is tranquil.", "I am superior to negative thoughts and low actions.", "I have been given endless talents which I begin to utilize today.", "I forgive those who have harmed me in my past and peacefully detach from them.", "A river of compassion washes away my anger and replaces it with love.", "I am guided in my every step by Spirit who leads me towards what I must know and do.", "I possess the qualities needed to be extremely successful.", "My ability to conquer  my challenges is limitless; my potential to succeed is infinite."]
     //
     
-    var fixed = [" ","1","2","3","4","5","6","7"]
+    var fixed = [" "]
     
     @IBOutlet weak var weekday: UITextField!
     @IBOutlet weak var weekdayDrop: UIPickerView!
@@ -379,33 +402,68 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         }
     }
     
-    
+    var dataToWrite = String()
     func createTxtFile(){
-
         if let theDocumentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first{
-            
-            let path = theDocumentsDirectory.appendingPathComponent("mantras")
+            let path = theDocumentsDirectory.appendingPathComponent("dataToWrite")
             
             //write
             do {
                 try txt.write(to: path, atomically: true, encoding: String.Encoding.utf8)
+                //try blank.write(to: path, atomically: true, encoding: String.Encoding.utf8)
+                
             }
             catch _ {
                 
                 print("something went wrong")
             }
-            
-            //read
-            do {
-                txt = try String(contentsOf: path, encoding: String.Encoding.utf8)
-            }
-            catch _ {
-                print("something went wrong2")
-            }
         }
     }
     
+    func readFile(filename : String) -> [String]?{
+        // Attempt to open the file:
+        if let theDocumentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let thePath = theDocumentsDirectory.appendingPathComponent(filename) // Append the filename to the path
+            
+            // Read from the file:
+            do {
+                let fileContents = try String(contentsOf: thePath, encoding: String.Encoding.utf8)
+                fixed = fileContents.components(separatedBy: "\n") // Return the file contents as an array, with each line as an element
+                    print (fixed)
+                return fixed
+            }
+            catch { // Handle read errors: Return nil
+                return nil
+            }
+        }
+        return nil // Return nil: We should only reach this if something went wrong
+//            //read
+//            do {
+//                txt = try String(contentsOf: path, encoding: String.Encoding.utf8)
+//                let content = try String(contentsOfFile: dataToWrite, encoding: String.Encoding.utf8)
+//                let content2 = content.components(separatedBy: "\n")
+//                for i in content2 {
+//                    fixed.append(i)
+//                }
+//            }
+//            catch _ {
+//                print("something went wrong2")
+//            }
+        }
     
+//    func firstTimeLoad(){
+//        var fileContents = "empty"
+//        if let theDocumentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+//            let thePath = theDocumentsDirectory.appendingPathComponent(dataToWrite)
+//            do {
+//                fileContents = try String(contentsOf: thePath, encoding: String.Encoding.utf8)
+//                if fileContents == " "{
+//                    
+//            }
+//            catch _{
+//                print("error")
+//            }
+//    }
 
     
     
