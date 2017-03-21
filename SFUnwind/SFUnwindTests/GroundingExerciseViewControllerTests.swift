@@ -72,7 +72,7 @@ class GroundingFeatureViewControllerTests: XCTestCase {
     }
     
     // Test the reset button
-    func testButtonAction(){
+    func testResetButtonAction(){
         // Start the view of the page.
         let _ = theGroundingExerciseViewController?.view
         let testButton = UIButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
