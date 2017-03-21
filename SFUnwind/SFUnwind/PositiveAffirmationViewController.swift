@@ -12,6 +12,8 @@ import UIKit
 import UserNotifications
 
 class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
+    
+    //variable for funcitions
     var pathToAff: String? = nil
     var txtIndex = UITextField()
     var totalMantras: Int = 0
@@ -27,7 +29,8 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     let removeNot = UIAlertController(title: "Mantra Not Found", message: "Please enter mantra.", preferredStyle: .alert)
     let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
     let notiSent = UIAlertController(title: "Mantra Sent", message: "Notification Set", preferredStyle: .alert)
-    //Create button - not on verson 1
+    
+    //Create button
     @IBAction func Create(_ sender: AnyObject) {
         //create an alert
         let alert = UIAlertController(title: "Enter Mantra", message: "Write down the mantra you like", preferredStyle: UIAlertControllerStyle.alert)
@@ -39,35 +42,36 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         //Save aciton
         let saveAction = UIAlertAction(title: "Save", style: UIAlertActionStyle.default, handler: { (action:UIAlertAction) -> Void in
             let saveText = (alert.textFields?[0])!.text  //take the input text
-            //print("1: " + self.txtIndex.text!)    //print
-            //print(self.fixed)
             
             // find file
             if(saveText != ""){
                 let theFileManager = FileManager.default
+                
+                //read file
                 if theFileManager.fileExists(atPath: self.pathToAff!) {
-                    print("AVAIL")
                     do {
                         let exportText = try String(contentsOfFile: self.pathToAff!)
-                        print("Export -- : " + exportText)
                         let tempArray = exportText.components(separatedBy: "\n")
+                        
+                        //read from test, load as array
                         if(tempArray[0] != ""){
                             self.arrayOfMantra = exportText.components(separatedBy: "\n")
                         }
                         if self.arrayOfMantra.contains(saveText!) {
-                            print("W1")
                             self.alreadyInFile.title = "Mantra Already Entered"
+                            
                             // Present alert to user.
                             self.present(self.alreadyInFile, animated: true, completion: nil) //Present alert
                         }
                         else {
-                            print("W2")
-                            print("CH: " + String(describing: self.arrayOfMantra))
+                            
+                            //add the input text to array
                             self.arrayOfMantra.append(saveText!)
-                            print("CH2: " + String(describing: self.arrayOfMantra))
                             if(exportText == ""){
                                 try (saveText!).write(toFile: self.pathToAff!, atomically: false, encoding: .utf8)
                             }
+                                
+                            //write to file
                             else {
                                 try (exportText + "\n" + saveText!).write(toFile: self.pathToAff!, atomically: false, encoding: .utf8)
                             }
@@ -83,8 +87,8 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
                     
                 }
                 else {
-                    print("NOT AVAIL")
                     do {
+                        //write to file
                         try (saveText!).write(toFile: self.pathToAff!, atomically: false, encoding: .utf8)
                         self.totalMantras+=1
                         self.currentIndex = self.totalMantras
@@ -101,7 +105,6 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             }
             else {
                 self.notEntered.title = "Mantra Not Entered"
-                // Present alert to user.
                 self.present(self.notEntered, animated: true, completion: nil) //Present alert
             }
         })
@@ -117,20 +120,19 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         
     }
     
-    //Delete button - not on verson 1
+    //Delete button
     @IBAction func DeleteAlert(_ sender: AnyObject) {
         let mantraRemove: String = self.Label.text!
         let theFileManager = FileManager.default
+        
+        //read file
         if theFileManager.fileExists(atPath: self.pathToAff!) {
-            print("AVAIL")
             do {
                 let exportText = try String(contentsOfFile: self.pathToAff!)
-                print("Export -- : " + exportText)
                 self.arrayOfMantra = exportText.components(separatedBy: "\n")
                 if self.arrayOfMantra.contains(mantraRemove) {
-                    print("FOUND")
                     let theIndex = self.arrayOfMantra.index(of: mantraRemove)
-                    self.arrayOfMantra.remove(at: theIndex!)
+                    self.arrayOfMantra.remove(at: theIndex!) //remove mantra from array
                     var toWrite = String()
                     for stringInArray in self.arrayOfMantra {
                         if(stringInArray == self.arrayOfMantra.last!){
@@ -142,7 +144,6 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
                     }
                     if(self.totalMantras > 0){
                         self.totalMantras-=1
-                        print(self.totalMantras)
                     }
                     else {
                         self.Label.text = ""
@@ -154,12 +155,13 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
                         self.Label.text = ""
                     }
                     else {
-                        self.Label.text = self.arrayOfMantra[self.currentIndex]
+                        self.Label.text = self.arrayOfMantra[self.currentIndex] // change the label text as in array
                     }
                     try (toWrite).write(toFile: self.pathToAff!, atomically: false, encoding: .utf8)
                 }
                 else {
                     self.alreadyInFile.title = "Mantra Not Found"
+                    
                     // Present alert to user.
                     self.present(self.notInFile, animated: true, completion: nil) //Present alert
                     
@@ -172,12 +174,9 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             
         }
         else {
-            print("NOT AVAIL")
             self.alreadyInFile.title = "Mantra Not Found"
-            // Present alert to user.
             self.present(self.notInFile, animated: true, completion: nil) //Present alert
         }
-        print("CH: " + String(describing: self.arrayOfMantra))
         
         
     }
@@ -186,6 +185,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         let nav = segue.destination as! HelpViewController
         nav.callingScreen = 2 // Notify the popup who's calling it: 0 = Square Breathing, 1 = Grounding, 2 = Positive Affirmations, 3 = Panic Alerts
     }
+    
     //Previous button
     @IBAction func Previous(_ sender: AnyObject) {
         if(self.totalMantras > 0){
@@ -193,11 +193,8 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             if(self.currentIndex < 0){
                 self.currentIndex = self.totalMantras-1
             }
-            //print(String(self.currentIndex) + " " + String(self.totalMantras) + " " + String(self.arrayOfMantra.count))
-            self.Label.text = self.arrayOfMantra[self.currentIndex]
+            self.Label.text = self.arrayOfMantra[self.currentIndex] //change label text to the previous one
         }
-        print("KO: " + String(self.totalMantras) + String(self.currentIndex))
-        print("CH: " + String(describing: self.arrayOfMantra))
     }
     
     //Next button
@@ -207,48 +204,37 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             if (self.currentIndex >= self.totalMantras) {
                 self.currentIndex = 0
             }
-            self.Label.text = self.arrayOfMantra[self.currentIndex]
+            self.Label.text = self.arrayOfMantra[self.currentIndex] //change label text to the next one
         }
-        print("KO: " + String(self.totalMantras) + String(self.currentIndex))
-        print("CH: " + String(describing: self.arrayOfMantra))
     }
     
-    //Label
+    //Label, textFiled, viewpicker, button
     @IBOutlet weak var Label: UILabel!
-    
     @IBOutlet weak var textTime: UITextField!
-    
-    var index = 0   //index of the position of the list
-    
-    
-    
     @IBOutlet weak var weekday: UITextField!
     @IBOutlet weak var weekdayDrop: UIPickerView!
-    
     @IBOutlet weak var hour: UITextField!
     @IBOutlet weak var hourDrop: UIPickerView!
-    
     @IBOutlet weak var minute: UITextField!
     @IBOutlet weak var minuteDrop: UIPickerView!
-    
-    var freq = ""
+    @IBOutlet weak var dataDrop: UIPickerView!
+    @IBOutlet weak var atLabelText: UILabel!
+    @IBOutlet weak var sepLabel: UILabel!
+    @IBOutlet weak var notificationButton: UIButton!
+    //options of the frequency
+    var data = ["Never", "Weekly", "Daily", "Hourly"]
+    //options of weekdays
     var weekDay = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    //options of hours
     var hr = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23"]
+    //options of minutes
     var min = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59"]
     
     
-    @IBOutlet weak var dataDrop: UIPickerView!
-    //options of the frequency
-    var data = ["Never", "Weekly", "Daily", "Hourly"]
-    //   var picker = UIPickerView()
-    @IBOutlet weak var atLabelText: UILabel!
-    
-    @IBOutlet weak var sepLabel: UILabel!
-    // Called once when the view loads for the first time
-    
-    @IBOutlet weak var notificationButton: UIButton!
+
     
     override func viewDidLoad() {
+        //initialize the index for mantras.count
         totalMantras = 0
         currentIndex = 0
         self.notificationButton.layer.cornerRadius = 20
@@ -256,20 +242,19 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         let thePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         let theURL = NSURL(fileURLWithPath: thePath)
         pathToAff = theURL.appendingPathComponent(desiredFile)?.path
+        
+        //read file
         let theFileManager = FileManager.default
         if theFileManager.fileExists(atPath: self.pathToAff!){
             do {
                 let getText = try String(contentsOfFile: self.pathToAff!)
-                //print("Export -- : " + getText)
                 let tempArray = getText.components(separatedBy: "\n")
                 if(tempArray[0] != ""){
                     self.arrayOfMantra = getText.components(separatedBy: "\n")
                 }
-                print(self.arrayOfMantra)
                 self.totalMantras = self.arrayOfMantra.count
-                print("0: " + String(self.totalMantras))
                 if(self.totalMantras != 0){
-                    self.Label.text = self.arrayOfMantra[0]
+                    self.Label.text = self.arrayOfMantra[0] //change label text as in array
                 }
             }
             catch {
@@ -278,15 +263,15 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             }
         }
         else {
+            
             // Attempt to open the file:
             guard let theFile = Bundle.main.path(forResource: "mantras", ofType: "txt", inDirectory: "positiveAffirmations") else {
-                print("SOMETHING WENT VERY WRONG")
                 return // Return if the file can't be found
             }
             
-            do { // Extract the file contents, and return them as a split string array
+            do {
+                // Extract the file contents, and return them as a split string array
                 let exportText = try String(contentsOfFile: theFile)
-                //print("Export -- : " + getText)
                 let tempArray = exportText.components(separatedBy: "\n")
                 if(tempArray[0] != ""){
                     self.arrayOfMantra = exportText.components(separatedBy: "\n")
@@ -294,6 +279,8 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
                         self.arrayOfMantra.removeLast()
                     }
                 }
+                
+                //write to file
                 var toWrite = String()
                 for stringInArray in self.arrayOfMantra {
                     if(stringInArray == self.arrayOfMantra.last!){
@@ -304,11 +291,9 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
                     }
                 }
                 try (toWrite).write(toFile: self.pathToAff!, atomically: false, encoding: .utf8)
-                print(self.arrayOfMantra)
                 self.totalMantras = self.arrayOfMantra.count
-                print("0: " + String(self.totalMantras))
                 if(self.totalMantras != 0){
-                    self.Label.text = self.arrayOfMantra[0]
+                    self.Label.text = self.arrayOfMantra[0] //present the first mantra in the array
                 }
 
                 
@@ -317,6 +302,8 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
                 print(error.localizedDescription)
             }
         }
+        
+        //set up actions and properties
         alreadyInFile.addAction(theOkAction)
         notInFile.addAction(theOkAction)
         notEntered.addAction(theOkAction)
@@ -359,6 +346,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         }
         return countrows
     }
+    
     //return the option which the user selected in string type
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerView == dataDrop{
@@ -383,6 +371,8 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     //make the pickerView shows the option which the user selected
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == dataDrop{
+            
+            //hide certain picker views for different cases
             self.textTime.text = self.data[row]
             self.dataDrop.isHidden = true
             if textTime.text == "Weekly" {
@@ -394,7 +384,6 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
                 minute.isEnabled = true
                 atLabelText.isHidden = false
                 sepLabel.isHidden = false
-                
             }
             else if textTime.text == "Daily" {
                 weekday.isHidden = true
@@ -441,7 +430,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         }
     }
     
-    
+    //hide the view picker when the textFiled end editing
     func textFieldDidBeginEditing(_ textFiled:UITextField){
         textFiled.isEnabled = false
         if (textFiled == self.textTime){
@@ -459,19 +448,20 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         textFiled.isEnabled = true
     }
     
-    //DatePicker
+    //Schedule Notification
     @IBAction func scheduleNotification(_ sender: AnyObject) {
         var calendar = Calendar.current
         calendar.locale = Locale(identifier: "en_POSIX_US")
         let weekDaySymbols = calendar.weekdaySymbols
         var indexOfDay = weekDaySymbols.index(of: weekday.text!) // INSERT WEEKDAY STRING HERE
-        print(indexOfDay as Any)
         if indexOfDay == nil {
             indexOfDay = weekDaySymbols.index(of: "Monday")
         }
         let weekDay = indexOfDay! + 1
         var matchingComponents = DateComponents()
         var tfreq = ""
+        
+        //default as Never
         if textTime.text == "" {
             tfreq = "Never"
         }
@@ -481,6 +471,8 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         if tfreq == "Weekly" {
             matchingComponents.weekday = weekDay
         }
+        
+        //show hours and minutes only
         if tfreq != "Hourly" {
             if(hour.text != ""){
                 matchingComponents.hour = Int(hour.text!)
@@ -498,6 +490,8 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         else {
             matchingComponents.minute = Int(minute.text!) // must set, right?
         }
+        
+        //hide and present certain view picker for different cases
         if tfreq == "Hourly" && matchingComponents.minute! <= Calendar.current.component(.minute, from: Date()) {
             matchingComponents.hour! += 1
             matchingComponents.hour! = matchingComponents.hour! % 24
@@ -507,8 +501,6 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             UIApplication.shared.cancelAllLocalNotifications()
         }
         if (tfreq != "Never" && self.Label.text != "") {
-            print(nextDay?.description as Any)
-            print(calendar.timeZone)
             let notification = UILocalNotification()
             let dict:NSDictionary = ["ID":"ID goes here"]
             notification.userInfo = dict as! [String : String]
