@@ -31,17 +31,27 @@ class PositiveAffirmationViewControllerTests: XCTestCase {
     
     var thePositiveAffirmationVIdeController: PositiveAffirmationViewController?    // Add an instance of the positive affirmation view controller object to this test class
     
-    //test
     //test the viewDidLoad function
     func testViewDidLoad(){
+        let _ = thePositiveAffirmationVIdeController?.view
         // We can tell that our viewDidLoad function has been called as our buttons are no longer nil:
         var result = (thePositiveAffirmationVIdeController?.data != nil)
         XCTAssert(result)
         
-        result = (thePositiveAffirmationVIdeController?.index != nil)
-        XCTAssert(result)
+        // Test initiale of variables
+        //---
+        XCTAssert(thePositiveAffirmationVIdeController?.currentIndex == 0)
+        XCTAssert(thePositiveAffirmationVIdeController?.notificationButton.layer.cornerRadius == 20)
+        XCTAssert(thePositiveAffirmationVIdeController?.createMantraButton.layer.cornerRadius == 20)
+        XCTAssert(thePositiveAffirmationVIdeController?.deleteMantraButton.layer.cornerRadius == 20)
+        XCTAssert(thePositiveAffirmationVIdeController?.previousButton.layer.cornerRadius == 20)
+        XCTAssert(thePositiveAffirmationVIdeController?.nextButton.layer.cornerRadius == 20)
+        //---
         
-        result = (thePositiveAffirmationVIdeController?.Label == nil)
+        //Test if file exists
+        XCTAssert(FileManager.default.fileExists(atPath: (thePositiveAffirmationVIdeController?.pathToAff)!))
+        
+        result = (thePositiveAffirmationVIdeController?.index != nil)
         XCTAssert(result)
     }
     
@@ -85,6 +95,7 @@ class PositiveAffirmationViewControllerTests: XCTestCase {
         XCTAssert(((thePositiveAffirmationVIdeController?.DeleteAlert(testButton)) != nil))  //test the button works or not
     }
     
+    // Tests the pickerViewTitle()
     func testPickerViewTitle(){
         let pickerview = UIPickerView()
         let titleForRow = 0
@@ -93,7 +104,7 @@ class PositiveAffirmationViewControllerTests: XCTestCase {
         let textTime = thePositiveAffirmationVIdeController?.pickerView(pickerview, titleForRow: titleForRow, forComponent: forComponent)// Call the initializer function
         XCTAssert(textTime == "")
     }
-    
+    // Tests the pickerViewDidSelect()
     func testPickerViewDidSelect(){
         var didSelectRow = 1
         var inComponent = 0
@@ -124,7 +135,7 @@ class PositiveAffirmationViewControllerTests: XCTestCase {
         XCTAssert(thePositiveAffirmationVIdeController?.minute.isHidden == false)
         XCTAssert(thePositiveAffirmationVIdeController?.atLabelText.isHidden == true)
         XCTAssert(thePositiveAffirmationVIdeController?.sepLabel.isHidden == true)
-        }
+    }
 
 
 }
