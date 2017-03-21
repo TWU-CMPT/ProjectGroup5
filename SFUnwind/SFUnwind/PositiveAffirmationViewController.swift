@@ -21,22 +21,22 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     var txt = "rrr"
     var blank = "\n"
     var arrayOfMantra = [String]()
-    let alreadyInFile = UIAlertController(title: "Already in List", message: "This mantra is already entered.", preferredStyle: .alert)
+    let alreadyInFile = UIAlertController(title: "Mantra already exists!", message: "This positive affirmation has already been entered.", preferredStyle: .alert)
     let notInFile = UIAlertController(title: "Not in List", message: "Mantra not found.", preferredStyle: .alert)
-    let notEntered = UIAlertController(title: "Mantra Missing", message: "Mantra not entered.", preferredStyle: .alert)
+    let notEntered = UIAlertController(title: "Mantra Missing", message: "You must enter a positive affirmation.", preferredStyle: .alert)
     let notBoth = UIAlertController(title: "Notifications Cleared/Mantra Missing", message: "All notifications (if any) removed from this application. Please enter mantra.", preferredStyle: .alert)
     let notExist = UIAlertController(title: "Notifications Cleared", message: "All notifications (if any) removed from this application.", preferredStyle: .alert)
     let removeNot = UIAlertController(title: "Mantra Not Found", message: "Please enter mantra.", preferredStyle: .alert)
     let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-    let notiSent = UIAlertController(title: "Mantra Sent", message: "Notification Set", preferredStyle: .alert)
+    let notiSent = UIAlertController(title: "Positive Affirmation Confirmed", message: "Your mantra notification preferences have been saved.", preferredStyle: .alert)
     
     //Create button
     @IBAction func Create(_ sender: AnyObject) {
         //create an alert
-        let alert = UIAlertController(title: "Enter Mantra", message: "Write down the mantra you like", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "Enter a custom affirmation", message: "Please entery your personal mantra", preferredStyle: UIAlertControllerStyle.alert)
         
         //add textField
-        alert.addTextField { (textField) in textField.placeholder = "Enter here"
+        alert.addTextField { (textField) in textField.placeholder = "Insert Mantra..."
         }
         
         //Save aciton

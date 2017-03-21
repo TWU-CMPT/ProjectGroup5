@@ -43,7 +43,7 @@ class SquareBreathingViewController: UIViewController{
         sessionTimer.text = "05:00"                         //Print to screen
         animationTimer.invalidate()                         //Stops timer for animation
         circleOrderTracker = 1                              //Reset image number
-        reStartButtonText.setTitle("Re/Start", for: .normal)
+        reStartButtonText.setTitle("Start", for: .normal)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -225,7 +225,7 @@ class SquareBreathingViewController: UIViewController{
             sessionTimer.text = "05:00"                         //Print to screen
             animationTimer.invalidate()                         //Stops timer for animation
             circleOrderTracker = 1                              //Reset image number
-            reStartButtonText.setTitle("Re/Start", for: .normal)//Set Reset button text
+            reStartButtonText.setTitle("Start", for: .normal)//Set Reset button text
         }
         self.reStartButtonText.isEnabled = true
     }
