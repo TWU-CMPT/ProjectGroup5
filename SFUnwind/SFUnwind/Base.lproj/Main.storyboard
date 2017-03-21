@@ -197,6 +197,7 @@
                     <connections>
                         <outlet property="captureButton" destination="A07-5b-jBc" id="aLZ-Rt-YcV"/>
                         <outlet property="goalDisplay" destination="zdv-hI-0D1" id="3xq-bf-D7e"/>
+                        <outlet property="helpButton" destination="W4I-r0-oK5" id="kHp-78-QNB"/>
                         <outlet property="resetButton" destination="oJJ-9b-b9v" id="c2v-lH-iTZ"/>
                     </connections>
                 </viewController>

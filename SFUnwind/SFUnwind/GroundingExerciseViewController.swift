@@ -98,6 +98,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         cameraSession.startRunning()
         resetButton.isHidden = true
         resetButton.isEnabled = false
+        goalDisplay.isHidden = false
         captureButton.isHidden = false
         captureButton.isEnabled = true
         previewLayer.isHidden = false
@@ -172,6 +173,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
     @IBAction func resetButtonAction(_ sender: UIButton) {
         resetButton.isHidden = true
         resetButton.isEnabled = false
+        goalDisplay.isHidden = false
         captureButton.isHidden = false
         captureButton.isEnabled = true
         previewLayer.isHidden = false
@@ -227,6 +229,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
                     }
                     self.currentTotalIndex+=1
                     self.innerGoalIndex+=1
+                    self.helpButton.superview?.bringSubview(toFront: self.helpButton)
                     if(self.innerGoalIndex==self.maxGoal){
                         self.innerGoalIndex=0
                         self.goalIndex+=1 // Move index
@@ -238,6 +241,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
                         if(self.maxGoal==0){
                             self.captureButton.isHidden = true
                             self.captureButton.isEnabled = false
+                            self.goalDisplay.isHidden = true
                             //print(self.helpButton)
                             self.resetButton.isEnabled = true
                             self.resetButton.isHidden = false
@@ -270,8 +274,13 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
                                 rightLength+=1
                                 //self.view.addSubview(self.allViews[tagger])
                             }
+                            self.resetButton.superview?.bringSubview(toFront: self.resetButton)
+                            self.captureButton.superview?.bringSubview(toFront: self.captureButton)
+                            self.goalDisplay.superview?.bringSubview(toFront: self.goalDisplay)
+                            self.helpButton.superview?.bringSubview(toFront: self.helpButton)
                             self.maxGoal=5
                             self.currentTotalIndex = 0
+                            return
                         }
                     }
                     //UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
