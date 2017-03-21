@@ -121,12 +121,49 @@ class SquareBreathingViewControllerTests: XCTestCase {
         
         XCTAssertEqual(expectedSessionTimeMinutes, resultedSessionTimeMinutes)
         
+    }
+    
+    //Tests if after page is swiped does code in SquareBreathingViewController run
+    //Also checks if timer stops
+    func testViewDidDisappear(){
+        let _ = theSquareBreathingViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
+        theSquareBreathingViewController?.sesssionTrackerActive = true
+        theSquareBreathingViewController?.viewDidDisappear(true)
+        XCTAssertFalse((theSquareBreathingViewController?.sesssionTrackerActive)!)
         
+        let previousSessionTimeSeconds = theSquareBreathingViewController?.sessionTimeSeconds
+        theSquareBreathingViewController?.timeManager()
+        XCTAssertNotEqual(previousSessionTimeSeconds, theSquareBreathingViewController?.sessionTimeSeconds)
+        
+    }
+    //Tests if squareOrderManager() returns desired UIImageView
+    //Also tests if switch functions correctly
+    func testSquareOrderManager(){
+        let _ = theSquareBreathingViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
+        var orderNumber = 0
+        XCTAssertEqual(theSquareBreathingViewController?.circleTRight, theSquareBreathingViewController?.squareOrderManager(currentCircle: orderNumber))
+        orderNumber += 1
+        XCTAssertEqual(theSquareBreathingViewController?.circleTLeft, theSquareBreathingViewController?.squareOrderManager(currentCircle: orderNumber))
+        orderNumber += 1
+        XCTAssertEqual(theSquareBreathingViewController?.circleBLeft, theSquareBreathingViewController?.squareOrderManager(currentCircle: orderNumber))
+        orderNumber += 1
+        XCTAssertEqual(theSquareBreathingViewController?.circleBRight, theSquareBreathingViewController?.squareOrderManager(currentCircle: orderNumber))
+        orderNumber += 1
+        XCTAssertEqual(theSquareBreathingViewController?.circleTRight, theSquareBreathingViewController?.squareOrderManager(currentCircle: orderNumber))
+    }
+    
+    //Tests button functionality when view appears
+    func testViewDidAppear(){
+        let _ = theSquareBreathingViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
+        theSquareBreathingViewController?.sesssionTrackerActive = true
+        theSquareBreathingViewController?.viewDidAppear(true)
+        XCTAssertFalse((theSquareBreathingViewController?.sesssionTrackerActive)!)
         
     }
     
+    //Test if start button is initialized
     func testReStartButtonInitialized(){
-    
+        let _ = theSquareBreathingViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
         XCTAssertNotNil(theSquareBreathingViewController?.restartButton(sender: AnyClass.self))
     }
     
