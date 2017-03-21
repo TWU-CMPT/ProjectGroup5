@@ -144,7 +144,7 @@ class PanicAlertViewControllerTests: XCTestCase {
     
     // Test the contact picker's cancel delegate function
     func testContactPickerDidCancel(){
-        let fakeCntrl = CNContactPickerViewController()
+        _ = CNContactPickerViewController()
         //thePanicAlertViewController?.contactPickerDidCancel(fakeCntrl)
         XCTAssert(thePanicAlertViewController?.currentContact == 0)
     }
