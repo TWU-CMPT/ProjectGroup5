@@ -366,7 +366,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
                                     // Apply offset, and move picture to right spot
                                     self.allViews[tagger].frame = CGRect(x: gridSize*CGFloat(rightLength) + offset, y: gridSize*CGFloat(downHeight), width: gridSize, height: gridSize)
                                 }
-                                // Else, do it regularly
+                                    // Else, do it regularly
                                 else{
                                     // Move picture to right spot
                                     self.allViews[tagger].frame = CGRect(x: gridSize*CGFloat(rightLength), y: gridSize*CGFloat(downHeight), width: gridSize, height: gridSize)
