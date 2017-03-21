@@ -19,7 +19,7 @@ class SquareBreathingViewController: UIViewController{
     @IBOutlet weak var totalTimer: UILabel!
     @IBOutlet weak var sessionTimer: UILabel!
     
-    var isAnimating = false
+
     
     // UI Timer Parameters
     var sessionTimeSeconds = 60                         //Set Seconds
@@ -31,7 +31,8 @@ class SquareBreathingViewController: UIViewController{
     var totalTimerSeconds: Int = 0
     var totalTimerMinute: Int = 0
     var circleOrderTracker: Int = 1
-
+    var isAnimating = false
+    
     override func viewDidDisappear(_ animated: Bool) {
         if(sesssionTrackerActive == true){
             sesssionTrackerActive = false
@@ -158,16 +159,19 @@ class SquareBreathingViewController: UIViewController{
     func scaleAnimationManager(){
         UIView.animate(withDuration: 2, delay: 0, options: .curveEaseOut, animations:{
             self.isAnimating = true
-            self.squareOrderManager(currentCircle: self.circleOrderTracker).transform = CGAffineTransform(scaleX: 2, y: 2)
-            AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+            self.squareOrderManager(currentCircle: self.circleOrderTracker).transform = CGAffineTransform(scaleX: 2, y: 2) //Sets the selected image's scale to 2 in 2 seconds
+
+        }, completion:nil)
+        
+        UIView.animate(withDuration: 0.2, delay: 2, options: .curveEaseOut, animations:{
+        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate)) //Vibrates the phone
         }, completion:nil)
         UIView.animate(withDuration: 2, delay: 2.2, options: .curveEaseOut, animations:{
-            self.squareOrderManager(currentCircle: self.circleOrderTracker).transform = CGAffineTransform(scaleX: 1, y: 1)
-            AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+            self.squareOrderManager(currentCircle: self.circleOrderTracker).transform = CGAffineTransform(scaleX: 1, y: 1) //Rescales the image over time
         }, completion: {(finished: Bool) -> Void in
             self.isAnimating=false
         })
-        circleOrderTracker+=1
+        circleOrderTracker+=1 //Rotates between images
     }
     
 
@@ -221,7 +225,7 @@ class SquareBreathingViewController: UIViewController{
             sessionTimer.text = "05:00"                         //Print to screen
             animationTimer.invalidate()                         //Stops timer for animation
             circleOrderTracker = 1                              //Reset image number
-            reStartButtonText.setTitle("Re/Start", for: .normal)
+            reStartButtonText.setTitle("Re/Start", for: .normal)//Set Reset button text
         }
         self.reStartButtonText.isEnabled = true
     }
