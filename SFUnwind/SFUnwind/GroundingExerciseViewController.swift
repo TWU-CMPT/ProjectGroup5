@@ -6,7 +6,7 @@
 // Contributing Programmers:
 // Known issues:
 //
-// Note: All files in this project conform to the coding standard included in the SFUnwind HW3 Quality Assurance Documentation
+// Note: All files in this project conform to the coding standard included in the SFUnwind HW4 Quality Assurance Documentation
 
 import UIKit
 import AVFoundation

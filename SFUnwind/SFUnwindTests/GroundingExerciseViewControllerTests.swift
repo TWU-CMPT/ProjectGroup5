@@ -45,27 +45,49 @@ class GroundingFeatureViewControllerTests: XCTestCase {
         XCTAssert(theGroundingExerciseViewController?.goalDisplay.text == theGroundingExerciseViewController?.goalString[(theGroundingExerciseViewController?.goalIndex)!])
         // Check if corner radius is correct
         XCTAssert(theGroundingExerciseViewController?.captureButton.layer.cornerRadius == 20)
+        // Check if buttons are correctly hidden and disabled after viewDidLoad
+        XCTAssert(theGroundingExerciseViewController?.captureButton.isHidden == false)
+        XCTAssert(theGroundingExerciseViewController?.captureButton.isEnabled == true)
+        XCTAssert(theGroundingExerciseViewController?.resetButton.isHidden == true)
+        XCTAssert(theGroundingExerciseViewController?.resetButton.isEnabled == false)
+        XCTAssert(theGroundingExerciseViewController?.goalDisplay.isHidden == false)
+        XCTAssert(theGroundingExerciseViewController?.helpButton.isHidden == false)
+        XCTAssert(theGroundingExerciseViewController?.helpButton.isEnabled == true)
     }
-    // Test the imagePickerController view
-    func testImagePickerController(){
+    
+    // Test the viewDidAppear function
+    func testViewDidAppear(){
         // Start the view of the page.
         let _ = theGroundingExerciseViewController?.view
-        // Take measure of the current goal index
-        let testCheckCount = theGroundingExerciseViewController?.goalIndex
-        // Create a test picture
-        let examplePic = UIImage(named: "ImageExample")
-        // Create a test anyObject dictionary
-        let dictionary = [NSObject: AnyObject]()
-        // create test imagePicker
-        let imagePicker = UIImagePickerController()
-        // Call function
-        theGroundingExerciseViewController?.imagePickerController(imagePicker, didFinishPickingImage: examplePic, editingInfo : dictionary)
-        // WARNING: It is called by the camera, and never runs by direct call. Except here. We are testing if the camera success results in change in strings. Camera always puts in valid data through argument.
-        // Test if goal index was incremented
-        XCTAssert(testCheckCount! == (theGroundingExerciseViewController?.goalIndex)! - 1)
-        // Test if goal string is correct as well
-        XCTAssert((theGroundingExerciseViewController?.goalDisplay.text)! == theGroundingExerciseViewController?.goalString[testCheckCount!+1])
+        // Trigger the viewDidAppear()
+        let _ = theGroundingExerciseViewController?.view
+        // Check if buttons are correctly hidden and disabled viewDidAppear.
+        XCTAssert(theGroundingExerciseViewController?.captureButton.isHidden == false)
+        XCTAssert(theGroundingExerciseViewController?.captureButton.isEnabled == true)
+        XCTAssert(theGroundingExerciseViewController?.resetButton.isHidden == true)
+        XCTAssert(theGroundingExerciseViewController?.resetButton.isEnabled == false)
+        XCTAssert(theGroundingExerciseViewController?.goalDisplay.isHidden == false)
+        XCTAssert(theGroundingExerciseViewController?.helpButton.isHidden == false)
+        XCTAssert(theGroundingExerciseViewController?.helpButton.isEnabled == true)
     }
+    
+    // Test the reset button
+    func testButtonAction(){
+        // Start the view of the page.
+        let _ = theGroundingExerciseViewController?.view
+        let testButton = UIButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        // Press button
+         theGroundingExerciseViewController?.resetButtonAction(testButton)
+        // Check if buttons are correctly hidden and disabled after reset.
+        XCTAssert(theGroundingExerciseViewController?.captureButton.isHidden == false)
+        XCTAssert(theGroundingExerciseViewController?.captureButton.isEnabled == true)
+        XCTAssert(theGroundingExerciseViewController?.resetButton.isHidden == true)
+        XCTAssert(theGroundingExerciseViewController?.resetButton.isEnabled == false)
+        XCTAssert(theGroundingExerciseViewController?.goalDisplay.isHidden == false)
+        XCTAssert(theGroundingExerciseViewController?.helpButton.isHidden == false)
+        XCTAssert(theGroundingExerciseViewController?.helpButton.isEnabled == true)
+    }
+    
     // Test the imagePickerController view
     func testCameraButtonAction(){
         // Start the view of the page.
