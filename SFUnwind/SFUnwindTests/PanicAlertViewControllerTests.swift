@@ -93,20 +93,20 @@ class PanicAlertViewControllerTests: XCTestCase {
         let alert01Result = thePanicAlertViewController?.getStoredAlerts(filename: "alert01")
         
         // Assert that the return value is what we expected:
-        XCTAssert(alert01Result == nil || (alert01Result?.count)! >= 3) // Either there is no file and nil is returned, or, we get an array of strings of 3 or more elements
+        XCTAssert(alert01Result == nil || alert01Result?[0] == "" || (alert01Result?.count)! >= 3) // Either there is no file and nil is returned, or, we get an array of strings of 3 or more elements
         
         // Repeat the test for the remaining 4 alerts:
         let alert02Result = thePanicAlertViewController?.getStoredAlerts(filename: "alert02")
-        XCTAssert(alert02Result == nil || (alert02Result?.count)! >= 3) // Either there is no file and nil is returned, or, we get an array of strings of 3 or more elements
+        XCTAssert(alert02Result == nil || alert02Result?[0] == "" || (alert02Result?.count)! >= 3) // Either there is no file and nil is returned, or, we get an array of strings of 3 or more elements
         
         let alert03Result = thePanicAlertViewController?.getStoredAlerts(filename: "alert03")
-        XCTAssert(alert03Result == nil || (alert03Result?.count)! >= 3) // Either there is no file and nil is returned, or, we get an array of strings of 3 or more elements
+        XCTAssert(alert03Result == nil || alert03Result?[0] == "" || (alert03Result?.count)! >= 3) // Either there is no file and nil is returned, or, we get an array of strings of 3 or more elements
         
         let alert04Result = thePanicAlertViewController?.getStoredAlerts(filename: "alert04")
-        XCTAssert(alert04Result == nil || (alert04Result?.count)! >= 3) // Either there is no file and nil is returned, or, we get an array of strings of 3 or more elements
+        XCTAssert(alert04Result == nil || alert04Result?[0] == "" || (alert04Result?.count)! >= 3) // Either there is no file and nil is returned, or, we get an array of strings of 3 or more elements
         
         let alert05Result = thePanicAlertViewController?.getStoredAlerts(filename: "alert05")
-        XCTAssert(alert05Result == nil || (alert05Result?.count)! >= 3) // Either there is no file and nil is returned, or, we get an array of strings of 3 or more elements
+        XCTAssert(alert05Result == nil || alert05Result?[0] == "" || (alert05Result?.count)! >= 3) // Either there is no file and nil is returned, or, we get an array of strings of 3 or more elements
 
         // Test invalid input
         let invalidAlert = thePanicAlertViewController?.getStoredAlerts(filename: "alert0")
