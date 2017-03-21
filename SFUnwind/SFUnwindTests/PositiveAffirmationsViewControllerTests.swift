@@ -38,12 +38,6 @@ class PositiveAffirmationViewControllerTests: XCTestCase {
         var result = (thePositiveAffirmationVIdeController?.data != nil)
         XCTAssert(result)
         
-        result = (thePositiveAffirmationVIdeController?.datePicker == nil)
-        XCTAssert(result)
-        
-        result = (thePositiveAffirmationVIdeController?.fixed != nil)
-        XCTAssert(result)
-        
         result = (thePositiveAffirmationVIdeController?.index != nil)
         XCTAssert(result)
         
@@ -82,5 +76,56 @@ class PositiveAffirmationViewControllerTests: XCTestCase {
         let testButton = UIButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         XCTAssert(((thePositiveAffirmationVIdeController?.Create(testButton)) != nil))  //test the button works or not
     }
+    
+    // Test the delete mantra feature
+    func testDeleteMantra(){
+        // Start the view of the page.
+        let _ = thePositiveAffirmationVIdeController?.view
+        let testButton = UIButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        XCTAssert(((thePositiveAffirmationVIdeController?.DeleteAlert(testButton)) != nil))  //test the button works or not
+    }
+    
+    func testPickerViewTitle(){
+        let pickerview = UIPickerView()
+        let titleForRow = 0
+        let forComponent = 0
+        _ = thePositiveAffirmationVIdeController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
+        let textTime = thePositiveAffirmationVIdeController?.pickerView(pickerview, titleForRow: titleForRow, forComponent: forComponent)// Call the initializer function
+        XCTAssert(textTime == "")
+    }
+    
+    func testPickerViewDidSelect(){
+        var didSelectRow = 1
+        var inComponent = 0
+        _ = thePositiveAffirmationVIdeController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
+        thePositiveAffirmationVIdeController?.pickerView((thePositiveAffirmationVIdeController?.dataDrop)!, didSelectRow: didSelectRow, inComponent: inComponent)// Call the initializer function
+        thePositiveAffirmationVIdeController?.textTime.text = "Weekly"
+        thePositiveAffirmationVIdeController?.pickerView((thePositiveAffirmationVIdeController?.dataDrop)!, didSelectRow: didSelectRow, inComponent: inComponent)
+        XCTAssert(thePositiveAffirmationVIdeController?.weekday.isHidden == false)
+        XCTAssert(thePositiveAffirmationVIdeController?.hour.isHidden == false)
+        XCTAssert(thePositiveAffirmationVIdeController?.minute.isHidden == false)
+        XCTAssert(thePositiveAffirmationVIdeController?.atLabelText.isHidden == false)
+        XCTAssert(thePositiveAffirmationVIdeController?.sepLabel.isHidden == false)
+        didSelectRow = 2
+        inComponent = 0
+        thePositiveAffirmationVIdeController?.textTime.text = "Daily"
+        thePositiveAffirmationVIdeController?.pickerView((thePositiveAffirmationVIdeController?.dataDrop)!, didSelectRow: didSelectRow, inComponent: inComponent)// Call the initializer function
+        XCTAssert(thePositiveAffirmationVIdeController?.weekday.isHidden == true)
+        XCTAssert(thePositiveAffirmationVIdeController?.hour.isHidden == false)
+        XCTAssert(thePositiveAffirmationVIdeController?.minute.isHidden == false)
+        XCTAssert(thePositiveAffirmationVIdeController?.atLabelText.isHidden == true)
+        XCTAssert(thePositiveAffirmationVIdeController?.sepLabel.isHidden == false)
+        thePositiveAffirmationVIdeController?.textTime.text = "Hourly"
+        didSelectRow = 3
+        inComponent = 0
+        thePositiveAffirmationVIdeController?.pickerView((thePositiveAffirmationVIdeController?.dataDrop)!, didSelectRow: didSelectRow, inComponent: inComponent)// Call the initializer function
+        XCTAssert(thePositiveAffirmationVIdeController?.weekday.isHidden == true)
+        XCTAssert(thePositiveAffirmationVIdeController?.hour.isHidden == true)
+        XCTAssert(thePositiveAffirmationVIdeController?.minute.isHidden == false)
+        XCTAssert(thePositiveAffirmationVIdeController?.atLabelText.isHidden == true)
+        XCTAssert(thePositiveAffirmationVIdeController?.sepLabel.isHidden == true)
+        }
+
+
 }
 
