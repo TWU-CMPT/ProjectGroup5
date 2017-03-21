@@ -19,6 +19,8 @@ class SquareBreathingViewController: UIViewController{
     @IBOutlet weak var totalTimer: UILabel!
     @IBOutlet weak var sessionTimer: UILabel!
     
+    var isAnimating = false
+    
     // UI Timer Parameters
     var sessionTimeSeconds = 60                         //Set Seconds
     var sessionTimeMinute = 4                           //Set Minute
@@ -165,6 +167,7 @@ class SquareBreathingViewController: UIViewController{
             self.squareOrderManager(currentCircle: self.circleOrderTracker).alpha = 1.0
         }, completion: nil)*/
         UIView.animate(withDuration: 2, delay: 0, options: .curveEaseOut, animations:{
+            self.isAnimating = true
             self.squareOrderManager(currentCircle: self.circleOrderTracker).transform = CGAffineTransform(scaleX: 2, y: 2)
             AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
         }, completion:nil)
@@ -172,6 +175,7 @@ class SquareBreathingViewController: UIViewController{
             self.squareOrderManager(currentCircle: self.circleOrderTracker).transform = CGAffineTransform(scaleX: 1, y: 1)
             AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
         }, completion: {(finished: Bool) -> Void in
+            self.isAnimating=false
             /*UIView.animate(withDuration: 1, delay: 0, options: .curveEaseIn, animations: {
                 self.squareOrderManager(currentCircle: self.circleOrderTracker-1).alpha = 0.0
             }, completion: nil)*/
@@ -206,11 +210,16 @@ class SquareBreathingViewController: UIViewController{
     // Handle time control. Start/Restart the timer based on user input:
     @IBAction func restartButton(_ sender: Any) {               //Re/Start button
 
+        self.reStartButtonText.isEnabled = false
+        if(self.reStartButtonText.isEnabled == true){
+            print("FAIL1")
+            return
+        }
     sesssionTrackerActive = !(sesssionTrackerActive)            //Boolean statement acts like on/off button with reset functionality
         var _ = saveMinutesTimer(totalTimerMinute: totalTimerMinute)
         var _ = saveSecondsTimer(totalTimerSeconds:totalTimerSeconds)
         
-        if(sesssionTrackerActive == true){
+        if(sesssionTrackerActive == true && self.isAnimating == false){
             timeManager()
             sessionTracker = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(SquareBreathingViewController.timeManager), userInfo: nil, repeats: true)  //Call timeManager() once in every second
             
@@ -228,6 +237,7 @@ class SquareBreathingViewController: UIViewController{
             circleOrderTracker = 1                              //Reset image number
             reStartButtonText.setTitle("Re/Start", for: .normal)
         }
+        self.reStartButtonText.isEnabled = true
     }
     
     @IBOutlet weak var reStartButtonText: UIButton!
