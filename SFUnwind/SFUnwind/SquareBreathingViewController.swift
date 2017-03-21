@@ -54,13 +54,6 @@ class SquareBreathingViewController: UIViewController{
         super.viewDidLoad() // Call the super class
      
         
-        squareOrderManager(currentCircle: 0).alpha = 100 // Set all images alpha to 100
-        squareOrderManager(currentCircle: 1).alpha = 100
-        squareOrderManager(currentCircle: 2).alpha = 100
-        squareOrderManager(currentCircle: 3).alpha = 100
-        
-        
-        
         
         // Load the timer data:
         var _ = loadSecondsTimer()
@@ -163,9 +156,6 @@ class SquareBreathingViewController: UIViewController{
     
     // scaleAnimationManager calls all four steps of animation in order which are fadein, scalex2, scale to original and fade out. SquareOrderManager function is used to track the current image
     func scaleAnimationManager(){
-        /*UIView.animate(withDuration: 1, delay: 0, options: .curveEaseIn, animations: {
-            self.squareOrderManager(currentCircle: self.circleOrderTracker).alpha = 1.0
-        }, completion: nil)*/
         UIView.animate(withDuration: 2, delay: 0, options: .curveEaseOut, animations:{
             self.isAnimating = true
             self.squareOrderManager(currentCircle: self.circleOrderTracker).transform = CGAffineTransform(scaleX: 2, y: 2)
@@ -176,15 +166,12 @@ class SquareBreathingViewController: UIViewController{
             AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
         }, completion: {(finished: Bool) -> Void in
             self.isAnimating=false
-            /*UIView.animate(withDuration: 1, delay: 0, options: .curveEaseIn, animations: {
-                self.squareOrderManager(currentCircle: self.circleOrderTracker-1).alpha = 0.0
-            }, completion: nil)*/
         })
         circleOrderTracker+=1
     }
     
 
-    // Tracks the current image with switch statement
+    // Tracks the current image with switch statement and returns it
     func squareOrderManager(currentCircle:Int) -> UIImageView{
         let orderNumber = currentCircle % 4
 
@@ -210,9 +197,8 @@ class SquareBreathingViewController: UIViewController{
     // Handle time control. Start/Restart the timer based on user input:
     @IBAction func restartButton(_ sender: Any) {               //Re/Start button
 
-        self.reStartButtonText.isEnabled = false
+        self.reStartButtonText.isEnabled = false                //BUG FIX // Case to disable Re/Start Button bashing
         if(self.reStartButtonText.isEnabled == true){
-            print("FAIL1")
             return
         }
     sesssionTrackerActive = !(sesssionTrackerActive)            //Boolean statement acts like on/off button with reset functionality
@@ -220,10 +206,10 @@ class SquareBreathingViewController: UIViewController{
         var _ = saveSecondsTimer(totalTimerSeconds:totalTimerSeconds)
         
         if(sesssionTrackerActive == true && self.isAnimating == false){
-            timeManager()
+            timeManager()                                       //Call timeManager()
             sessionTracker = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(SquareBreathingViewController.timeManager), userInfo: nil, repeats: true)  //Call timeManager() once in every second
             
-            scaleAnimationManager()
+            scaleAnimationManager()                             //Call animation handler
             animationTimer = Timer.scheduledTimer(timeInterval: 4.2, target: self, selector: #selector(SquareBreathingViewController.scaleAnimationManager), userInfo: nil, repeats: true)
             reStartButtonText.setTitle("Stop", for: .normal)
 
@@ -240,6 +226,7 @@ class SquareBreathingViewController: UIViewController{
         self.reStartButtonText.isEnabled = true
     }
     
+    //Circles and Images
     @IBOutlet weak var reStartButtonText: UIButton!
     @IBOutlet weak var circleBLeft: UIImageView!
     @IBOutlet weak var circleTRight: UIImageView!
