@@ -1,1 +1,1 @@
-Grounding help text goes here. This text has been loaded from the ./helpFiles directory
+Placeholder Grounding Exercise screen help text. This text has been loaded from the ./helpFiles directory. This text will be updated in Version 3 of SFUnwind.

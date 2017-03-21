@@ -1,1 +1,1 @@
-Positive affirmation help text goes here. This text has been loaded from the ./helpFiles directory
+Placeholder Positive Affirmations screen help text. This text has been loaded from the ./helpFiles directory. This text will be updated in Version 3 of SFUnwind.
