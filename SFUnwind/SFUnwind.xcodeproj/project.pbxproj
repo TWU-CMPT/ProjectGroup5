@@ -7,10 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		80635E8C1E7DDB5B000AD79F /* circle-png-25308.png in Resources */ = {isa = PBXBuildFile; fileRef = 80635E8B1E7DDB5B000AD79F /* circle-png-25308.png */; };
-		80AE4ED31E80E6AB0050098C /* inC.png in Resources */ = {isa = PBXBuildFile; fileRef = 80AE4ED11E80E6AB0050098C /* inC.png */; };
-		80AE4ED41E80E6AB0050098C /* outC.png in Resources */ = {isa = PBXBuildFile; fileRef = 80AE4ED21E80E6AB0050098C /* outC.png */; };
-		80E16E151E80524200240952 /* gray_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 80E16E141E80524200240952 /* gray_line.png */; };
+		800067811E81B77A00F9AA50 /* inC.png in Resources */ = {isa = PBXBuildFile; fileRef = 800067801E81B77A00F9AA50 /* inC.png */; };
+		800067831E81B7C600F9AA50 /* outC.png in Resources */ = {isa = PBXBuildFile; fileRef = 800067821E81B7C600F9AA50 /* outC.png */; };
+		800067851E81B7FD00F9AA50 /* gray_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 800067841E81B7FD00F9AA50 /* gray_line.png */; };
 		EB04A46E1E6615F400BD2859 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB04A46D1E6615F400BD2859 /* AppDelegate.swift */; };
 		EB04A4731E6615F400BD2859 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB04A4711E6615F400BD2859 /* Main.storyboard */; };
 		EB04A4751E6615F400BD2859 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB04A4741E6615F400BD2859 /* Assets.xcassets */; };
@@ -50,10 +49,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		80635E8B1E7DDB5B000AD79F /* circle-png-25308.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle-png-25308.png"; sourceTree = "<group>"; };
-		80AE4ED11E80E6AB0050098C /* inC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inC.png; sourceTree = "<group>"; };
-		80AE4ED21E80E6AB0050098C /* outC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = outC.png; sourceTree = "<group>"; };
-		80E16E141E80524200240952 /* gray_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gray_line.png; sourceTree = "<group>"; };
+		800067801E81B77A00F9AA50 /* inC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inC.png; sourceTree = "<group>"; };
+		800067821E81B7C600F9AA50 /* outC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = outC.png; sourceTree = "<group>"; };
+		800067841E81B7FD00F9AA50 /* gray_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gray_line.png; sourceTree = "<group>"; };
 		EB04A46A1E6615F400BD2859 /* SFUnwind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SFUnwind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB04A46D1E6615F400BD2859 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB04A4721E6615F400BD2859 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -131,15 +129,14 @@
 				EB7167461E7B926400828B4C /* helpFiles */,
 				EB04A46D1E6615F400BD2859 /* AppDelegate.swift */,
 				EB04A4711E6615F400BD2859 /* Main.storyboard */,
-				80E16E141E80524200240952 /* gray_line.png */,
 				EB04A4741E6615F400BD2859 /* Assets.xcassets */,
 				EB04A4761E6615F400BD2859 /* LaunchScreen.storyboard */,
 				EB04A4791E6615F400BD2859 /* Info.plist */,
 				EB04A49B1E661A0300BD2859 /* SFUnwindPageViewController.swift */,
-				80635E8B1E7DDB5B000AD79F /* circle-png-25308.png */,
 				EB7359101E665162004A0EB0 /* SquareBreathingViewController.swift */,
-				80AE4ED11E80E6AB0050098C /* inC.png */,
-				80AE4ED21E80E6AB0050098C /* outC.png */,
+				800067821E81B7C600F9AA50 /* outC.png */,
+				800067841E81B7FD00F9AA50 /* gray_line.png */,
+				800067801E81B77A00F9AA50 /* inC.png */,
 				EB7359121E66520C004A0EB0 /* GroundingExerciseViewController.swift */,
 				EB7359141E665240004A0EB0 /* PositiveAffirmationViewController.swift */,
 				EB999C901E665A93006D41FE /* PanicAlertViewController.swift */,
@@ -275,12 +272,11 @@
 			files = (
 				EB04A4781E6615F400BD2859 /* LaunchScreen.storyboard in Resources */,
 				EB7167471E7B926400828B4C /* helpFiles in Resources */,
-				80AE4ED41E80E6AB0050098C /* outC.png in Resources */,
+				800067851E81B7FD00F9AA50 /* gray_line.png in Resources */,
 				EB04C6321E7E2AAD005320F4 /* positiveAffirmations in Resources */,
+				800067811E81B77A00F9AA50 /* inC.png in Resources */,
 				EB04A4751E6615F400BD2859 /* Assets.xcassets in Resources */,
-				80AE4ED31E80E6AB0050098C /* inC.png in Resources */,
-				80E16E151E80524200240952 /* gray_line.png in Resources */,
-				80635E8C1E7DDB5B000AD79F /* circle-png-25308.png in Resources */,
+				800067831E81B7C600F9AA50 /* outC.png in Resources */,
 				EB04A4731E6615F400BD2859 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
