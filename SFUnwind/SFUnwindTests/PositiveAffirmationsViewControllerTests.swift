@@ -126,6 +126,12 @@ class PositiveAffirmationViewControllerTests: XCTestCase {
         XCTAssert(thePositiveAffirmationVIdeController?.sepLabel.isHidden == true)
         }
 
+    func testTextFieldDidBeginEditing(){
+        let txtField = UITextField()
+        _ = thePositiveAffirmationVIdeController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
+        thePositiveAffirmationVIdeController?.textFieldDidBeginEditing(txtField)
+        XCTAssert(txtField.isEnabled == true)
+        
+    }
 
 }
-
