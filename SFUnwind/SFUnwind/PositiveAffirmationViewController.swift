@@ -26,6 +26,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     let notExist = UIAlertController(title: "Notifications Cleared", message: "All notifications (if any) removed from this application.", preferredStyle: .alert)
     let removeNot = UIAlertController(title: "Mantra Not Found", message: "Please enter mantra.", preferredStyle: .alert)
     let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+    let notiSent = UIAlertController(title: "Mantra Sent", message: "Notification Set", preferredStyle: .alert)
     //Create button - not on verson 1
     @IBAction func Create(_ sender: AnyObject) {
         //create an alert
@@ -245,9 +246,12 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     @IBOutlet weak var sepLabel: UILabel!
     // Called once when the view loads for the first time
     
+    @IBOutlet weak var notificationButton: UIButton!
+    
     override func viewDidLoad() {
         totalMantras = 0
         currentIndex = 0
+        self.notificationButton.layer.cornerRadius = 20
         let desiredFile = "affirmations.txt"
         let thePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         let theURL = NSURL(fileURLWithPath: thePath)
@@ -319,6 +323,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         notBoth.addAction(theOkAction)
         notExist.addAction(theOkAction)
         removeNot.addAction(theOkAction)
+        notiSent.addAction(theOkAction)
         super.viewDidLoad()
         weekday.isHidden = true
         weekday.isEnabled = false
@@ -460,7 +465,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         calendar.locale = Locale(identifier: "en_POSIX_US")
         let weekDaySymbols = calendar.weekdaySymbols
         var indexOfDay = weekDaySymbols.index(of: weekday.text!) // INSERT WEEKDAY STRING HERE
-        print(indexOfDay)
+        print(indexOfDay as Any)
         if indexOfDay == nil {
             indexOfDay = weekDaySymbols.index(of: "Monday")
         }
@@ -502,7 +507,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             UIApplication.shared.cancelAllLocalNotifications()
         }
         if (tfreq != "Never" && self.Label.text != "") {
-            print(nextDay?.description)
+            print(nextDay?.description as Any)
             print(calendar.timeZone)
             let notification = UILocalNotification()
             let dict:NSDictionary = ["ID":"ID goes here"]
@@ -521,6 +526,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             }
             notification.soundName = UILocalNotificationDefaultSoundName
             UIApplication.shared.scheduleLocalNotification(notification)
+            self.present(self.notiSent, animated: true, completion: nil) // Presnt alert
         }
         else if (self.Label.text == "" && tfreq == "Never") {
             // Present alert to user.
