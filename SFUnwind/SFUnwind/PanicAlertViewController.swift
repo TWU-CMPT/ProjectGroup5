@@ -5,7 +5,6 @@
 // Primary programmer: Adam Badke #301310785
 // Contributing Programmers:
 // Known issues: 
-// - The iPhone simulator does not load the messaging app when sending an alert message. However, this feature DOES work on a physical device.
 //
 // Note: All files in this project conform to the coding standard included in the SFUnwind HW3 Quality Assurance Documentation
 
@@ -356,78 +355,6 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
         return nil // Return nil: We should only reach this if something went wrong
     }
     
-//    
-//    // Save alert contact text data to a txt file. Called when creating/editing an alert
-//    // Argument: contactProperty - A CNContactProperty object, recieved from the CNContactPicker as selected by the user
-//    // Note: This function requires UI interaction and must be manually tested on a physical iOS device
-//    func setStoredAlert(contactProperty: CNContactProperty){
-//        
-//        // Get the documents directory:
-//        if let theDocumentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-//            
-//            // Select the right filename
-//            var filename = String()
-//            switch currentContact { // Use the currentContact tracking variable to select the correct filename
-//            case 1:
-//                filename = alertFiles[0]
-//            case 2:
-//                filename = alertFiles[1]
-//            case 3:
-//                filename = alertFiles[2]
-//            case 4:
-//                filename = alertFiles[3]
-//            case 5:
-//                filename = alertFiles[4]
-//            default: // We should never reach this point
-//                filename = alertFiles[0] // Use the first entry as the default, just in case.
-//            }
-//            
-//            // Append the filename to the documents directory:
-//            let thePath = theDocumentsDirectory.appendingPathComponent(filename)
-//            
-//            // Write to the file
-//            do {
-//                
-//                // Extract the information from the recieved contact:
-//                let nameData = contactProperty.contact.givenName + " " + contactProperty.contact.familyName
-//                
-//                // Hard coded alert message: This will be replaced in future versions of the app
-//                let alertMessage = "I'm having a panic attack. Are you able to call or meet with me?"
-//
-//                // Get the phone number
-//                let numberData = (contactProperty.value as! CNPhoneNumber).stringValue
-//                
-//                let fileData = nameData + "\n" + numberData + "\n" + alertMessage // Assemble the extracted data for storage
-//                
-//                // Update the alert file with the extracted information:
-//                try fileData.write(to: thePath, atomically: false, encoding: String.Encoding.utf8)
-//
-//            }
-//            catch {
-//                currentContact = 0 // Reset the tracker to the default value
-//                return
-//            }
-//        }
-//        
-//        currentContact = 0      // Reset the tracker to the default value
-//        initializeAlertList()   // Update the view by re-initializing it
-//        
-//    } // End file writing
-    
-    
-//    // Display the contact select screen
-//    // Note: This function requires UI interaction and must be manually tested on a physical iOS device
-//    func displayContactSelector(){
-//        
-//        let theContactView = CNContactPickerViewController()    // Create a CNContactPickerViewController object
-//        theContactView.delegate = self                          // Set the current class, which inherits from the CNContactPickerDelegate class, as the view's delegate
-//
-//        // Restrict the information visible in the contact picker to names and mobile phone numbers
-//        theContactView.displayedPropertyKeys = [CNContactPhoneNumbersKey]
-//        
-//        present(theContactView, animated:true, completion: nil) // Display the contact picker view within the current view, to allow the user to select a contact. Triggers the CNContactPickerDelegate protocol functions (below)
-//    }
-    
     
     // Handle the create/send button functionality
     // Argument: contactIndex - The array index of the relevant alert file to use [0, 5]
@@ -461,27 +388,7 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
             present(txtMsgView, animated: true, completion: nil)
         }
     }
-
-    
-//    // CNContactPickerDelegate protocol functions:
-//    //********************************************
-//    // Handle cancel button
-//    public func contactPickerDidCancel(_ picker: CNContactPickerViewController){
-//        currentContact = 0      // Update our contact tracking variable. 0 = default
-//    }
-//    // Handle contact selection:
-//    public func contactPicker(_ picker: CNContactPickerViewController, didSelect theContactProperty: CNContactProperty){
-//        
-//        // Ensure the user has selected a phone number:
-//        if theContactProperty.key == CNContactPhoneNumbersKey {
-//            // Pass the contact for processing and storing:
-//            setStoredAlert(contactProperty: theContactProperty)
-//        }
-//        else { // Otherwise, reset the current contact tracker and do nothing
-//            currentContact = 0
-//        }
-//    }
-    
+   
     
     // MFMessageComposeViewControllerDelegate protocol functions:
     //***********************************************************
