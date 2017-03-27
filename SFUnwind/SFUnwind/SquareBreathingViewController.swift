@@ -4,7 +4,7 @@
 // Project Group 5: SFU CMPT 276
 // Primary programmer: Berke Boz
 // Contributing Programmers: Adam Badke
-// Known issues: If re/start button is pressed twice in same seconds, bugs are likely to happen.
+// Known issues: -
 //
 // Note: All files in this project conform to the coding standard included in the SFUnwind HW3 Quality Assurance Documentation
 
@@ -33,6 +33,10 @@ class SquareBreathingViewController: UIViewController{
     var circleOrderTracker: Int = 1
     var isAnimating = false
     
+    var totalNumberOfSessions = 0
+    var sessionStatistics: String = ""
+    var sessionSecs = 0
+    
     override func viewDidDisappear(_ animated: Bool) {
         if(sesssionTrackerActive == true){
             sesssionTrackerActive = false
@@ -44,6 +48,8 @@ class SquareBreathingViewController: UIViewController{
         animationTimer.invalidate()                         //Stops timer for animation
         circleOrderTracker = 1                              //Reset image number
         reStartButtonText.setTitle("Start", for: .normal)
+        setTotalStatistics(previousSesssion: loadTotalStatistics())
+        sessionSecs = 0
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -54,7 +60,13 @@ class SquareBreathingViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad() // Call the super class
      
+
+        //Path location is               /Library/Developer/CoreSimulator/Devices/B4F5BD79-F9B7-4AE8-91D1-E6DB8AA75CE7/data/Containers/Data/Application/68D1C1AE-7A3F-479D-BBB3-7493A421E8B7/Documents/timeStatistics..txt
         
+        
+        
+
+
         
         // Load the timer data:
         var _ = loadSecondsTimer()
@@ -78,6 +90,50 @@ class SquareBreathingViewController: UIViewController{
         
         
     }
+    
+    func loadTotalStatistics() -> String{
+        let fileName = "timeStatistics"
+        let DocumentDirURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        let fileURL = DocumentDirURL.appendingPathComponent(fileName).appendingPathExtension(".txt")
+        
+        
+        var readString = "" // Used to store the file contents
+        do {
+            // Read the file contents
+            readString = try String(contentsOf: fileURL)
+        } catch let error as NSError {
+            print("Failed reading from URL: \(fileURL), Error: " + error.localizedDescription)
+        }
+        return readString
+    
+    }
+    
+
+    
+    func setTotalStatistics(previousSesssion: String){
+        
+        let writeString:String
+        
+        if(previousSesssion == ""){
+            writeString = String(sessionSecs)
+        }
+        else{
+            writeString = previousSesssion + "\n" + String(sessionSecs)
+        }
+
+        let fileName = "timeStatistics"
+        let DocumentDirURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        let fileURL = DocumentDirURL.appendingPathComponent(fileName).appendingPathExtension(".txt")
+        
+        do {
+            // Write to the file
+            try writeString.write(to: fileURL, atomically: true, encoding: String.Encoding.utf8)
+        } catch let error as NSError {
+            print("Failed writing to URL: \(fileURL), Error: " + error.localizedDescription)
+        }
+    
+    }
+
     
     // Save the seconds value of the timer to the device
     func saveSecondsTimer(totalTimerSeconds: Int) -> Int{
@@ -112,7 +168,7 @@ class SquareBreathingViewController: UIViewController{
     
     // Handle the timer as it is being displayed on the screen:
     func timeManager(){
-        
+        sessionSecs+=1
         sessionTimeSeconds-=1                                                  //Decrement Seconds
         totalTimerSeconds+=1                                                   //Increment Seconds
 
@@ -226,8 +282,12 @@ class SquareBreathingViewController: UIViewController{
             animationTimer.invalidate()                         //Stops timer for animation
             circleOrderTracker = 1                              //Reset image number
             reStartButtonText.setTitle("Start", for: .normal)//Set Reset button text
+            setTotalStatistics(previousSesssion: loadTotalStatistics())
+            sessionSecs = 0
+        
         }
         self.reStartButtonText.isEnabled = true
+        
     }
     
     //Circles and Images
