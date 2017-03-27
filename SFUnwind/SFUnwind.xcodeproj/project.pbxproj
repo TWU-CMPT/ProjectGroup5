@@ -30,6 +30,7 @@
 		EB7359131E66520C004A0EB0 /* GroundingExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7359121E66520C004A0EB0 /* GroundingExerciseViewController.swift */; };
 		EB7359151E665240004A0EB0 /* PositiveAffirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7359141E665240004A0EB0 /* PositiveAffirmationViewController.swift */; };
 		EB999C911E665A93006D41FE /* PanicAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB999C901E665A93006D41FE /* PanicAlertViewController.swift */; };
+		EBBB25471E8981F5004D63B1 /* graphics in Resources */ = {isa = PBXBuildFile; fileRef = EBBB25461E8981F5004D63B1 /* graphics */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,7 @@
 		EB7359121E66520C004A0EB0 /* GroundingExerciseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroundingExerciseViewController.swift; sourceTree = "<group>"; };
 		EB7359141E665240004A0EB0 /* PositiveAffirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PositiveAffirmationViewController.swift; sourceTree = "<group>"; };
 		EB999C901E665A93006D41FE /* PanicAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanicAlertViewController.swift; sourceTree = "<group>"; };
+		EBBB25461E8981F5004D63B1 /* graphics */ = {isa = PBXFileReference; lastKnownFileType = folder; path = graphics; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 		EB04A46C1E6615F400BD2859 /* SFUnwind */ = {
 			isa = PBXGroup;
 			children = (
+				EBBB25461E8981F5004D63B1 /* graphics */,
 				EB04C6311E7E2AAD005320F4 /* positiveAffirmations */,
 				EB7167461E7B926400828B4C /* helpFiles */,
 				EB04A46D1E6615F400BD2859 /* AppDelegate.swift */,
@@ -281,6 +284,7 @@
 				EB04A4751E6615F400BD2859 /* Assets.xcassets in Resources */,
 				800067831E81B7C600F9AA50 /* outC.png in Resources */,
 				EB04A4731E6615F400BD2859 /* Main.storyboard in Resources */,
+				EBBB25471E8981F5004D63B1 /* graphics in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
