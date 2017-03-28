@@ -1,1 +1,3 @@
-Placeholder Square Breathing screen help text. This text has been loaded from the ./helpFiles directory. This text will be updated in Version 3 of SFUnwind.
+Disrupt a panic attack, refocus your attention & regain control of your breathing with the Square Breathing meditation exercise.
+
+Tap the "Start" button to begin the exercise. Follow the square with your eyes, time your breath with the vibrations & expansion & contraction of the circles. View your progress by tapping the "Statistics" button.

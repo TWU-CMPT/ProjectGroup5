@@ -1,1 +1,3 @@
-Placeholder Panic Alerts screen help text. This text has been loaded from the ./helpFiles directory. This text will be updated in Version 3 of SFUnwind.
+Panic Alerts are pre-written text messages that can be sent instantly with the press of a button, connecting you family or friends without the stress of composing a message under duress.
+
+Tap the "Create" button to create a new alert: Select a recipient, enter your message & tap save. Send an alert text message by tapping the "Send" button. Edit or delete an alert by tapping "Edit".
