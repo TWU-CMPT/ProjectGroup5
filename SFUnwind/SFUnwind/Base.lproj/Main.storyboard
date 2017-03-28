@@ -80,10 +80,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="SquareBreathing.png" translatesAutoresizingMaskIntoConstraints="NO" id="mbb-CW-IPh" userLabel="BackgroundImage">
-                                <rect key="frame" x="0.0" y="87" width="320" height="393"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P67-tL-bRd" userLabel="BotView">
                                 <rect key="frame" x="0.0" y="352" width="320" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
@@ -1128,7 +1124,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="SquareBreathing.png" width="2048" height="2732"/>
         <image name="gray_line.png" width="1904" height="115"/>
         <image name="inC.png" width="1100" height="1100"/>
         <image name="outC.png" width="1100" height="1100"/>
