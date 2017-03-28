@@ -219,7 +219,7 @@ class SquareBreathingViewController: UIViewController{
 
         }, completion:nil)
         
-        UIView.animate(withDuration: 0.2, delay: 2, options: .curveEaseOut, animations:{
+        UIView.animate(withDuration: 0.2, delay: 2.8, options: .curveEaseOut, animations:{
         AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate)) //Vibrates the phone
         }, completion:nil)
         UIView.animate(withDuration: 2, delay: 2.2, options: .curveEaseOut, animations:{

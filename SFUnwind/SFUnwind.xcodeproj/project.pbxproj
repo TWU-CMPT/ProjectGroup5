@@ -10,6 +10,8 @@
 		800067811E81B77A00F9AA50 /* inC.png in Resources */ = {isa = PBXBuildFile; fileRef = 800067801E81B77A00F9AA50 /* inC.png */; };
 		800067831E81B7C600F9AA50 /* outC.png in Resources */ = {isa = PBXBuildFile; fileRef = 800067821E81B7C600F9AA50 /* outC.png */; };
 		800067851E81B7FD00F9AA50 /* gray_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 800067841E81B7FD00F9AA50 /* gray_line.png */; };
+		80087C431E8A2D9900F6988C /* SquareBreathing.png in Resources */ = {isa = PBXBuildFile; fileRef = 80087C421E8A2D9900F6988C /* SquareBreathing.png */; };
+		80B7704F1E8A367600B327EC /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B7704E1E8A367600B327EC /* StatisticsViewController.swift */; };
 		EB04A46E1E6615F400BD2859 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB04A46D1E6615F400BD2859 /* AppDelegate.swift */; };
 		EB04A4731E6615F400BD2859 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB04A4711E6615F400BD2859 /* Main.storyboard */; };
 		EB04A4751E6615F400BD2859 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB04A4741E6615F400BD2859 /* Assets.xcassets */; };
@@ -54,6 +56,8 @@
 		800067801E81B77A00F9AA50 /* inC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inC.png; sourceTree = "<group>"; };
 		800067821E81B7C600F9AA50 /* outC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = outC.png; sourceTree = "<group>"; };
 		800067841E81B7FD00F9AA50 /* gray_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gray_line.png; sourceTree = "<group>"; };
+		80087C421E8A2D9900F6988C /* SquareBreathing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SquareBreathing.png; path = graphics/SquareBreathing.png; sourceTree = "<group>"; };
+		80B7704E1E8A367600B327EC /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		EB04A46A1E6615F400BD2859 /* SFUnwind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SFUnwind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB04A46D1E6615F400BD2859 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB04A4721E6615F400BD2859 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -139,6 +143,7 @@
 				EB04A4791E6615F400BD2859 /* Info.plist */,
 				EB04A49B1E661A0300BD2859 /* SFUnwindPageViewController.swift */,
 				EB7359101E665162004A0EB0 /* SquareBreathingViewController.swift */,
+				80087C421E8A2D9900F6988C /* SquareBreathing.png */,
 				800067821E81B7C600F9AA50 /* outC.png */,
 				800067841E81B7FD00F9AA50 /* gray_line.png */,
 				800067801E81B77A00F9AA50 /* inC.png */,
@@ -146,6 +151,7 @@
 				EB7359141E665240004A0EB0 /* PositiveAffirmationViewController.swift */,
 				EB999C901E665A93006D41FE /* PanicAlertViewController.swift */,
 				EB5934A81E789C2000A5EFA0 /* PanicAlertPopupViewController.swift */,
+				80B7704E1E8A367600B327EC /* StatisticsViewController.swift */,
 				EB2050601E71FC710015FAB7 /* HelpViewController.swift */,
 				EB2050621E71FC930015FAB7 /* AnimatedSquareViewController.swift */,
 			);
@@ -285,6 +291,7 @@
 				800067831E81B7C600F9AA50 /* outC.png in Resources */,
 				EB04A4731E6615F400BD2859 /* Main.storyboard in Resources */,
 				EBBB25471E8981F5004D63B1 /* graphics in Resources */,
+				80087C431E8A2D9900F6988C /* SquareBreathing.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +317,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB2050631E71FC930015FAB7 /* AnimatedSquareViewController.swift in Sources */,
+				80B7704F1E8A367600B327EC /* StatisticsViewController.swift in Sources */,
 				EB2050611E71FC710015FAB7 /* HelpViewController.swift in Sources */,
 				EB7359151E665240004A0EB0 /* PositiveAffirmationViewController.swift in Sources */,
 				EB04A49C1E661A0300BD2859 /* SFUnwindPageViewController.swift in Sources */,
