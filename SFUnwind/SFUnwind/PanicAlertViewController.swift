@@ -151,7 +151,6 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
         
         // Call the alert list initialization function, which updates the UI elements with the correct, loaded text:
         initializeAlertList()
-        
 
         // Handle formatting of numeric row labels
         row1NumericLabel.numberOfLines = 0

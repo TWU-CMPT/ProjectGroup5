@@ -37,7 +37,16 @@ class SquareBreathingViewController: UIViewController{
     var sessionStatistics: String = ""
     var sessionSecs = 0
     
+    @IBOutlet weak var topTitle: UILabel!
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        view.sendSubview(toBack: bgMantra)
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
+        bgMantra.isHidden = true
+        view.sendSubview(toBack: bgMantra)
         if(sesssionTrackerActive == true){
             sesssionTrackerActive = false
         }
@@ -53,14 +62,32 @@ class SquareBreathingViewController: UIViewController{
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        bgMantra.isHidden = false
+        view.sendSubview(toBack: bgMantra)
         sesssionTrackerActive = false
     }
+    @IBOutlet weak var statisticsButton: UIButton!
     
+    func rotateBG(targetView: UIView, duration: Double = 1.0){
+        UIView.animate(withDuration: duration, delay: 0.0, options: .curveLinear, animations: { targetView.transform = targetView.transform.rotated(by: CGFloat(M_PI))}) { finished in self.rotateBG(targetView: targetView, duration: duration) }
+    }
+    
+    
+    @IBOutlet weak var bgMantra: UIImageView!
     // Called once when this object is first instanciated
     override func viewDidLoad() {
         super.viewDidLoad() // Call the super class
-     
-
+        self.reStartButtonText.layer.cornerRadius = 10
+        self.statisticsButton.layer.cornerRadius = 10
+        //let offsetImage = topTitle.frame.height
+        //let center = sessionTimer.frame.origin.y + (sessionTimer.frame.height/2)
+        //let trueOffset = (center - offsetImage)*2
+        //let background = UIImageView(frame: CGRect(x: 0, y: offsetImage, width: UIScreen.main.bounds.width, height: trueOffset))
+        bgMantra.image = UIImage(named: "mantraFinal2.png")
+        view.sendSubview(toBack: bgMantra)
+        self.rotateBG(targetView: bgMantra, duration: 60)
+        //self.view.backgroundColor = UIColor(patternImage: UIImage(named: "SquareBreathing.png")!)
         //Path location is               /Library/Developer/CoreSimulator/Devices/B4F5BD79-F9B7-4AE8-91D1-E6DB8AA75CE7/data/Containers/Data/Application/68D1C1AE-7A3F-479D-BBB3-7493A421E8B7/Documents/timeStatistics..txt
         
         

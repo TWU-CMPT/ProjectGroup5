@@ -144,12 +144,14 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         view.layer.insertSublayer(previewLayer, at: 0)
         // Sets the smooth corners of the capture button
         captureButton.layer.cornerRadius=20
+        captureButton.isOpaque = false
         // Activates exclusive touch of capture button
         captureButton.isExclusiveTouch = true
         // Activates multi touch of capture botton
         captureButton.isMultipleTouchEnabled = true
         // Sets the smooth corners of the reset button
         resetButton.layer.cornerRadius=20
+        captureButton.alpha = 0.9
         // Activates exclusive touch of reset button
         resetButton.isExclusiveTouch = true
         //Activates multi touch of reset button
@@ -198,6 +200,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
                 cameraSession.commitConfiguration()
                 // Set the delegate sample to self
                 dOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "forCamera"))
+                
             }
             catch _ as NSError {
                 //Print error
@@ -216,6 +219,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
             nav.callingScreen = 1 // Notify the popup who's calling it: 0 = Square Breathing, 1 = Grounding, 2 = Positive Affirmations, 3 = Panic Alerts
         }
     }
+    @IBOutlet weak var countdown: UILabel!
     
     // resetButtonAction: This function resets the controller to the initial state
     @IBAction func resetButtonAction(_ sender: UIButton) {
