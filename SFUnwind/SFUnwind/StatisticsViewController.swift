@@ -15,12 +15,13 @@ class StatisticsViewController: UIViewController {
     var averageTime: Double = 0
     var longestSession: Double = 0
     var totalNumber = 0
-    
+
     @IBOutlet weak var backButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Sets corner radius of back button
         self.backButton.layer.cornerRadius = 10
         
         if let avg:Double = UserDefaults.standard.value(forKey: "averageSession") as! Double?{
@@ -78,7 +79,6 @@ class StatisticsViewController: UIViewController {
     @IBAction func closeScreen(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-
 
 
     @IBOutlet weak var totalNumberOfSessionsLabel: UILabel!
