@@ -41,12 +41,9 @@ class SquareBreathingViewController: UIViewController{
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        view.sendSubview(toBack: bgMantra)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        bgMantra.isHidden = true
-        view.sendSubview(toBack: bgMantra)
         if(sesssionTrackerActive == true){
             sesssionTrackerActive = false
         }
@@ -54,6 +51,7 @@ class SquareBreathingViewController: UIViewController{
         sessionTimeSeconds = 60                             //Reset
         sessionTimeMinute = 4                               //Reset
         sessionTimer.text = "05:00"                         //Print to screen
+        self.resetTimerColor()                              //Reset timer color
         animationTimer.invalidate()                         //Stops timer for animation
         circleOrderTracker = 1                              //Reset image number
         reStartButtonText.setTitle("Start", for: .normal)
@@ -63,23 +61,32 @@ class SquareBreathingViewController: UIViewController{
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        bgMantra.isHidden = false
-        view.sendSubview(toBack: bgMantra)
         sesssionTrackerActive = false
     }
     @IBOutlet weak var statisticsButton: UIButton!
     
+    // Rotated the background image
     func rotateBG(targetView: UIView, duration: Double = 1.0){
         UIView.animate(withDuration: duration, delay: 0.0, options: .curveLinear, animations: { targetView.transform = targetView.transform.rotated(by: CGFloat(M_PI))}) { finished in self.rotateBG(targetView: targetView, duration: duration) }
     }
+    // Resets timer colir
+    func resetTimerColor(){
+        let attAdd = NSMutableAttributedString.init(attributedString: self.sessionTimer.attributedText!)
+        let range = ((self.sessionTimer.text as NSString?)!).range(of: self.sessionTimer.text!)
+        attAdd.addAttribute(NSStrokeColorAttributeName, value: UIColor.white, range: range)
+        attAdd.addAttribute(NSForegroundColorAttributeName, value: UIColor.black, range: range)
+        attAdd.addAttribute(NSStrokeWidthAttributeName, value: 2.5, range: range)
+        self.sessionTimer.attributedText = NSAttributedString(attributedString: attAdd)
+    }
     
-    
+
     @IBOutlet weak var bgMantra: UIImageView!
     // Called once when this object is first instanciated
     override func viewDidLoad() {
         super.viewDidLoad() // Call the super class
         self.reStartButtonText.layer.cornerRadius = 10
         self.statisticsButton.layer.cornerRadius = 10
+        self.resetTimerColor() // Reset timer color
         //let offsetImage = topTitle.frame.height
         //let center = sessionTimer.frame.origin.y + (sessionTimer.frame.height/2)
         //let trueOffset = (center - offsetImage)*2
@@ -236,6 +243,7 @@ class SquareBreathingViewController: UIViewController{
             totalTimer.text = String(totalTimerMinute) + ":" + String(totalTimerSeconds)
 
         }
+        self.resetTimerColor() // Resets the color of timer
     }
     
     // scaleAnimationManager calls all four steps of animation in order which are fadein, scalex2, scale to original and fade out. SquareOrderManager function is used to track the current image
@@ -306,6 +314,7 @@ class SquareBreathingViewController: UIViewController{
             sessionTimeSeconds = 60                             //Reset
             sessionTimeMinute = 4                               //Reset
             sessionTimer.text = "05:00"                         //Print to screen
+            self.resetTimerColor()                              //Reset Timer Color
             animationTimer.invalidate()                         //Stops timer for animation
             circleOrderTracker = 1                              //Reset image number
             reStartButtonText.setTitle("Start", for: .normal)//Set Reset button text
