@@ -33,9 +33,14 @@ class SquareBreathingViewController: UIViewController{
     var circleOrderTracker: Int = 1
     var isAnimating = false
     
-    var totalNumberOfSessions = 0
+    var totalSessions:Int = 0
+    var minSession: Double = 0
+    var averageSession: Double = 1
+    var maxSession: Double = 0
+    
+    
     var sessionStatistics: String = ""
-    var sessionSecs = 0
+    var sessionSecs:Double = 0
     
     @IBOutlet weak var topTitle: UILabel!
     
@@ -56,12 +61,20 @@ class SquareBreathingViewController: UIViewController{
         circleOrderTracker = 1                              //Reset image number
         reStartButtonText.setTitle("Start", for: .normal)
         setTotalStatistics(previousSesssion: loadTotalStatistics())
+        
+        syncStatistics()
+        saveStatistics()
         sessionSecs = 0
+
+        
+
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         sesssionTrackerActive = false
+        loadStatistics()
     }
     @IBOutlet weak var statisticsButton: UIButton!
     
@@ -124,7 +137,7 @@ class SquareBreathingViewController: UIViewController{
         
         
     }
-    
+    //DO NOT DELETE UNLESS BERKE IS REALLY REALLY SURE
     func loadTotalStatistics() -> String{
         let fileName = "timeStatistics"
         let DocumentDirURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
@@ -143,7 +156,7 @@ class SquareBreathingViewController: UIViewController{
     }
     
 
-    
+    //DO NOT DELETE UNLESS BERKE IS REALLY REALLY SURE
     func setTotalStatistics(previousSesssion: String){
         
         let writeString:String
@@ -168,6 +181,53 @@ class SquareBreathingViewController: UIViewController{
     
     }
 
+    
+    func saveStatistics(){
+        UserDefaults.standard.set(averageSession, forKey: "averageSession")
+        UserDefaults.standard.set(minSession, forKey: "minSession")
+        UserDefaults.standard.set(maxSession, forKey: "maxSession")
+        UserDefaults.standard.set(totalSessions, forKey: "totalSessions")
+        UserDefaults.standard.synchronize()
+    }
+    
+    func loadStatistics(){
+        if let avg:Double = UserDefaults.standard.value(forKey: "averageSession") as! Double?{
+            averageSession = avg
+        }
+        if let minS:Double = UserDefaults.standard.value(forKey: "minSession") as! Double? {
+            minSession = minS
+        }
+        if let maxS:Double = UserDefaults.standard.value(forKey: "maxSession") as! Double?{
+            maxSession = maxS
+        }
+        if let totalS = UserDefaults.standard.value(forKey: "totalSessions") as! Int?{
+            totalSessions = totalS
+        }
+        UserDefaults.standard.synchronize()
+    }
+    
+    func syncStatistics(){
+        if let numberOfSessions = UserDefaults.standard.value(forKey:  "totalSessions") as? Int{
+         totalSessions = numberOfSessions
+        }
+        if(totalSessions == 0){                                 //Do not load
+            averageSession = Double(sessionSecs)
+            minSession = Double(sessionSecs)
+            maxSession = Double(sessionSecs)
+        }
+        else{                                                   //Normal Calculations with load
+            averageSession = (((averageSession*Double(totalSessions))+Double(sessionSecs))/Double((totalSessions+1)))
+        }
+        
+        if(Double(sessionSecs) > maxSession){
+            maxSession = Double(sessionSecs)
+        }
+        if(Double(sessionSecs) < minSession){
+            minSession = Double(sessionSecs)
+        }
+
+
+    }
     
     // Save the seconds value of the timer to the device
     func saveSecondsTimer(totalTimerSeconds: Int) -> Int{
@@ -319,10 +379,18 @@ class SquareBreathingViewController: UIViewController{
             circleOrderTracker = 1                              //Reset image number
             reStartButtonText.setTitle("Start", for: .normal)//Set Reset button text
             setTotalStatistics(previousSesssion: loadTotalStatistics())
+            
+            syncStatistics()
+            totalSessions+=1
+            saveStatistics()
             sessionSecs = 0
+
+            
+            
         
         }
         self.reStartButtonText.isEnabled = true
+        
         
     }
     
