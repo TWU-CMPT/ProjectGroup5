@@ -228,7 +228,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     //options of hours
     var hr = ["12","1","2","3","4","5","6","7","8","9","10","11"]
     //options of minutes
-    var min = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59"]
+    var min = ["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59"]
     //options of am or pm
     var mornAfter = ["AM","PM"]
     // UI Selectable Buttons
@@ -239,22 +239,72 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     @IBOutlet weak var nextButton: UIButton!
     //--
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.notificationSet.sizeToFit()
+        self.notificationSet.textAlignment = NSTextAlignment.center
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.detectTap()
         //initialize the index for mantras.count
         totalMantras = 0
         currentIndex = 0
-        self.notificationButton.layer.cornerRadius = 20
-        self.createMantraButton.layer.cornerRadius = 20
-        self.deleteMantraButton.layer.cornerRadius = 20
-        self.previousButton.layer.cornerRadius = 20
-        self.nextButton.layer.cornerRadius = 20
+        self.notificationButton.layer.cornerRadius = 13
+        self.createMantraButton.layer.cornerRadius = 13
+        self.deleteMantraButton.layer.cornerRadius = 13
+        self.previousButton.layer.cornerRadius = 13
+        self.nextButton.layer.cornerRadius = 13
         let desiredFile = "affirmations.txt"
         let thePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         let theURL = NSURL(fileURLWithPath: thePath)
         pathToAff = theURL.appendingPathComponent(desiredFile)?.path
-        
+        print(UIApplication.shared.scheduledLocalNotifications)
+        sleep(1)
+        // Set notification settings properly.
+        if (UIApplication.shared.scheduledLocalNotifications?.count)! > 0 {
+            let setNot = UIApplication.shared.scheduledLocalNotifications![0]
+            let notDate = setNot.fireDate
+            let minute = NSCalendar.current.component(.minute, from: notDate!)
+            var AMPM = "A.M."
+            var minuteString: String
+            var hourString: String
+            if(minute<=9){
+                minuteString = "0" + String(minute)
+            }
+            else {
+                minuteString = String(minute)
+            }
+            var hour = NSCalendar.current.component(.hour, from: notDate!)
+            if(hour>=12){
+                hour = hour - 12
+                AMPM = "P.M."
+            }
+            if(hour==0){
+                hour=12
+            }
+            if(hour<=9){
+                hourString = "0" + String(hour)
+            }
+            else {
+                hourString = String(hour)
+            }
+            let weekday = NSCalendar.current.component(.weekday, from: notDate!)
+            if(setNot.repeatInterval == NSCalendar.Unit.hour){
+                self.notificationSet.text = "Current Notification Set: Every hour at ##:" + minuteString
+            }
+            else if(setNot.repeatInterval == NSCalendar.Unit.day){
+                self.notificationSet.text = "Current Notification Set: Every Day at " + hourString + ":" + minuteString + " " + AMPM
+            }
+            else {
+                self.notificationSet.text = "Current Notification Set: Every " + self.weekDay[weekday-1] + " at " + hourString + ":" + minuteString + " " + AMPM
+            }
+            self.notificationSet.sizeToFit()
+            self.notificationSet.textAlignment = NSTextAlignment.center
+        }
+        self.notificationSet.sizeToFit()
+        self.notificationSet.textAlignment = NSTextAlignment.center
         //read file
         let theFileManager = FileManager.default
         if theFileManager.fileExists(atPath: self.pathToAff!){
@@ -421,6 +471,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     @IBOutlet weak var hourTitle: UILabel!
     
     @IBOutlet weak var minuteTitle: UILabel!
+    @IBOutlet weak var notificationSet: UILabel!
     
     //make the pickerView shows the option which the user selected
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -589,9 +640,10 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             matchingComponents.hour! = matchingComponents.hour! % 24
         }
         let nextDay = calendar.nextDate(after: Date(), matching: matchingComponents, matchingPolicy: .nextTime)
-        print(nextDay?.description)
+        //print(nextDay?.description)
         if(self.Label.text != ""){
             UIApplication.shared.cancelAllLocalNotifications()
+            self.notificationSet.text = "No Notification Set"
         }
         if (tfreq != "Never" && self.Label.text != "") {
             let notification = UILocalNotification()
@@ -611,6 +663,49 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             }
             notification.soundName = UILocalNotificationDefaultSoundName
             UIApplication.shared.scheduleLocalNotification(notification)
+            if (UIApplication.shared.scheduledLocalNotifications?.count)! > 0 {
+                let setNot = UIApplication.shared.scheduledLocalNotifications![0]
+                let notDate = setNot.fireDate
+                let minute = NSCalendar.current.component(.minute, from: notDate!)
+                var AMPM = "A.M."
+                var minuteString: String
+                var hourString: String
+                if(minute<=9){
+                    minuteString = "0" + String(minute)
+                }
+                else {
+                    minuteString = String(minute)
+                }
+                var hour = NSCalendar.current.component(.hour, from: notDate!)
+                if(hour>=12){
+                    hour = hour - 12
+                    AMPM = "P.M."
+                }
+                if(hour==0){
+                    hour=12
+                }
+                if(hour<=9){
+                    hourString = "0" + String(hour)
+                }
+                else {
+                    hourString = String(hour)
+                }
+                let weekday = NSCalendar.current.component(.weekday, from: notDate!)
+                if(setNot.repeatInterval == NSCalendar.Unit.hour){
+                    self.notificationSet.text = "Current Notification Set: Every hour at ##:" + minuteString
+                }
+                else if(setNot.repeatInterval == NSCalendar.Unit.day){
+                    self.notificationSet.text = "Current Notification Set: Every Day at " + hourString + ":" + minuteString + " " + AMPM
+                }
+                else {
+                    self.notificationSet.text = "Current Notification Set: Every " + self.weekDay[weekday-1] + " at " + hourString + ":" + minuteString + " " + AMPM
+                }
+                self.notificationSet.sizeToFit()
+                self.notificationSet.textAlignment = NSTextAlignment.center
+            }
+            else {
+                self.notificationSet.text = "ERROR!"
+            }
             self.present(self.notiSent, animated: true, completion: nil) // Presnt alert
         }
         else if (self.Label.text == "" && tfreq == "Never") {
