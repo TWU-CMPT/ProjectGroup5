@@ -79,12 +79,19 @@ class PanicAlertPopupViewController: UIViewController, CNContactPickerDelegate, 
         }
         dismiss(animated: true, completion: nil)
     }
-    
+    // Cancel Button
+    @IBOutlet weak var cancelButton: UIButton!
+    // Delete Button
+    @IBOutlet weak var deleteButton: UIButton!
+    // Save Button
+    @IBOutlet weak var saveButton: UIButton!
     
     // Called once when the view is loaded
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.cancelButton.layer.cornerRadius = 15
+        self.deleteButton.layer.cornerRadius = 15
+        self.saveButton.layer.cornerRadius = 15
         popupTextInput.delegate = self
         
         // Insert the recieved alert into the UI:

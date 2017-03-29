@@ -16,8 +16,12 @@ class StatisticsViewController: UIViewController {
     var longestSession: Double = 0
     var totalNumber = 0
     
+    @IBOutlet weak var backButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.backButton.layer.cornerRadius = 10
         
         if let avg:Double = UserDefaults.standard.value(forKey: "averageSession") as! Double?{
             averageTime = avg

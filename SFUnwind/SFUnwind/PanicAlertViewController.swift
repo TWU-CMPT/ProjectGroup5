@@ -164,6 +164,18 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
         row5NumericLabel.numberOfLines = 0
         row5NumericLabel.adjustsFontSizeToFitWidth = true
         
+        // Round corners of buttons
+        self.contact1EditBtn.layer.cornerRadius = 10
+        self.contact2EditBtn.layer.cornerRadius = 10
+        self.contact3EditBtn.layer.cornerRadius = 10
+        self.contact4EditBtn.layer.cornerRadius = 10
+        self.contact5EditBtn.layer.cornerRadius = 10
+        self.contact1CreateSendBtn.layer.cornerRadius = 10
+        self.contact2CreateSendBtn.layer.cornerRadius = 10
+        self.contact3CreateSendBtn.layer.cornerRadius = 10
+        self.contact4CreateSendBtn.layer.cornerRadius = 10
+        self.contact5CreateSendBtn.layer.cornerRadius = 10
+        
         // Handle formatting of the SFU Counselling contact information:
         weblinkBtn.titleLabel?.numberOfLines = 1
         weblinkBtn.titleLabel?.adjustsFontSizeToFitWidth = true
