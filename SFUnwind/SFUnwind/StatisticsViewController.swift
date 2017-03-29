@@ -27,14 +27,7 @@ class StatisticsViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func getShortest(stats: String) -> Int{
-        if(stats == ""){
-            return 0
-        }
-        return 3
-            
-    }
+
     
 
     
