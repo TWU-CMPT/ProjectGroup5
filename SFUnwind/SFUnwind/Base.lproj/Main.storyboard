@@ -120,14 +120,14 @@
                                         <rect key="frame" x="218" y="79" width="105" height="35"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="23"/>
-                                        <color key="textColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="0.61051332439999995" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.16821005940437317" green="0.56650102138519287" blue="0.87149226665496826" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Total:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qkt-Yv-vQI">
                                         <rect key="frame" x="155" y="65" width="81" height="64"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="23"/>
-                                        <color key="textColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="0.61051332439999995" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.17192402482032776" green="0.57402229309082031" blue="0.87541252374649048" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="highlightedColor" red="1" green="0.97042926640000005" blue="0.99997150879999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </label>
                                 </subviews>
@@ -195,7 +195,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="inC.png" translatesAutoresizingMaskIntoConstraints="NO" id="HoL-bH-n0a" userLabel="topRightInner.png">
-                                        <rect key="frame" x="208" y="-4" width="58" height="58"/>
+                                        <rect key="frame" x="208" y="-3" width="58" height="58"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="inC.png" translatesAutoresizingMaskIntoConstraints="NO" id="KSV-pK-O0y" userLabel="botRightInner.png">
@@ -207,12 +207,12 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qdM-su-kh1">
-                                        <rect key="frame" x="95" y="104" width="107" height="39"/>
+                                        <rect key="frame" x="80" y="102" width="128" height="39"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <attributedString key="attributedText">
                                             <fragment content="05:00">
                                                 <attributes>
-                                                    <color key="NSColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="0.61051332438650308" colorSpace="calibratedRGB"/>
+                                                    <color key="NSColor" red="0.17192402482032776" green="0.57402229309082031" blue="0.87541252374649048" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <font key="NSFont" size="39" name="AppleSDGothicNeo-UltraLight"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
