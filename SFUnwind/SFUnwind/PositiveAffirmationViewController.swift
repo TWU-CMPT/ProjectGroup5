@@ -21,17 +21,17 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     var txt = "rrr"
     var blank = "\n"
     var arrayOfMantra = [String]()
-    let alreadyInFile = UIAlertController(title: "Mantra already exists!", message: "This positive affirmation has already been entered.", preferredStyle: .alert)
-    let notInFile = UIAlertController(title: "Not in List", message: "Mantra not found.", preferredStyle: .alert)
-    let notEntered = UIAlertController(title: "Mantra Missing", message: "You must enter a positive affirmation.", preferredStyle: .alert)
-    let notBoth = UIAlertController(title: "Notifications Cleared/Mantra Missing", message: "All notifications (if any) removed from this application. Please enter mantra.", preferredStyle: .alert)
-    let notExist = UIAlertController(title: "Notifications Cleared", message: "All notifications (if any) removed from this application.", preferredStyle: .alert)
-    let removeNot = UIAlertController(title: "Mantra Not Found", message: "Please enter mantra.", preferredStyle: .alert)
-    let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-    let notiSent = UIAlertController(title: "Positive Affirmation Confirmed", message: "Your mantra notification preferences have been saved.", preferredStyle: .alert)
+   
     
     //Create button
     @IBAction func Create(_ sender: AnyObject) {
+        let alreadyInFile = UIAlertController(title: "Mantra already exists!", message: "This positive affirmation has already been entered.", preferredStyle: .alert)
+        let notInFile = UIAlertController(title: "Not in List", message: "Mantra not found.", preferredStyle: .alert)
+        let notEntered = UIAlertController(title: "Mantra Missing", message: "You must enter a positive affirmation.", preferredStyle: .alert)
+        let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        notEntered.addAction(theOkAction)
+        notInFile.addAction(theOkAction)
+        alreadyInFile.addAction(theOkAction)
         //create an alert
         let alert = UIAlertController(title: "Enter a Custom Affirmation", message: "Please enter a new mantra", preferredStyle: UIAlertControllerStyle.alert)
         
@@ -58,10 +58,10 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
                             self.arrayOfMantra = exportText.components(separatedBy: "\n")
                         }
                         if self.arrayOfMantra.contains(saveText!) {
-                            self.alreadyInFile.title = "Mantra Already Entered"
+                            alreadyInFile.title = "Mantra Already Entered"
                             
                             // Present alert to user.
-                            self.present(self.alreadyInFile, animated: true, completion: nil) //Present alert
+                            self.present(alreadyInFile, animated: true, completion: nil) //Present alert
                         }
                         else {
                             
@@ -104,8 +104,8 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
                 self.Label.text = saveText //change the label to the next same as the user input
             }
             else {
-                self.notEntered.title = "Mantra Not Entered"
-                self.present(self.notEntered, animated: true, completion: nil) //Present alert
+                notEntered.title = "Mantra Not Entered"
+                self.present(notEntered, animated: true, completion: nil) //Present alert
             }
         })
         
@@ -122,6 +122,12 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     
     //Delete button
     @IBAction func DeleteAlert(_ sender: AnyObject) {
+         let alreadyInFile = UIAlertController(title: "Mantra already exists!", message: "This positive affirmation has already been entered.", preferredStyle: .alert)
+        let notInFile = UIAlertController(title: "Not in List", message: "Mantra not found.", preferredStyle: .alert)
+        let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        notInFile.addAction(theOkAction)
+        alreadyInFile.addAction(theOkAction)
+        
         let mantraRemove: String = self.Label.text!
         let theFileManager = FileManager.default
         
@@ -160,10 +166,9 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
                     try (toWrite).write(toFile: self.pathToAff!, atomically: false, encoding: .utf8)
                 }
                 else {
-                    self.alreadyInFile.title = "Mantra Not Found"
-                    
+                    alreadyInFile.title = "Mantra Not Found"
                     // Present alert to user.
-                    self.present(self.notInFile, animated: true, completion: nil) //Present alert
+                    present(notInFile, animated: true, completion: nil) //Present alert
                     
                 }
             }
@@ -174,8 +179,8 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             
         }
         else {
-            self.alreadyInFile.title = "Mantra Not Found"
-            self.present(self.notInFile, animated: true, completion: nil) //Present alert
+            alreadyInFile.title = "Mantra Not Found"
+            self.present(notInFile, animated: true, completion: nil) //Present alert
         }
         
         
@@ -241,7 +246,6 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.notificationSet.sizeToFit()
         self.notificationSet.textAlignment = NSTextAlignment.center
     }
     
@@ -261,7 +265,6 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         let thePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         let theURL = NSURL(fileURLWithPath: thePath)
         pathToAff = theURL.appendingPathComponent(desiredFile)?.path
-        print(UIApplication.shared.scheduledLocalNotifications)
         sleep(1)
         // Set notification settings properly.
         if (UIApplication.shared.scheduledLocalNotifications?.count)! > 0 {
@@ -301,10 +304,8 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             else {
                 self.notificationSet.text = "Active Notification: Each " + self.weekDay[weekday-1] + " at " + hourString + ":" + minuteString + " " + AMPM
             }
-            self.notificationSet.sizeToFit()
             self.notificationSet.textAlignment = NSTextAlignment.center
         }
-        self.notificationSet.sizeToFit()
         self.notificationSet.textAlignment = NSTextAlignment.center
         //read file
         let theFileManager = FileManager.default
@@ -367,13 +368,6 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         }
         
         //set up actions and properties
-        alreadyInFile.addAction(theOkAction)
-        notInFile.addAction(theOkAction)
-        notEntered.addAction(theOkAction)
-        notBoth.addAction(theOkAction)
-        notExist.addAction(theOkAction)
-        removeNot.addAction(theOkAction)
-        notiSent.addAction(theOkAction)
         weekday.isHidden = true
         weekday.isEnabled = false
         hour.isHidden = true
@@ -590,6 +584,19 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     
     //Schedule Notification
     @IBAction func scheduleNotification(_ sender: AnyObject) {
+        
+        let notBoth = UIAlertController(title: "Notifications Cleared/Mantra Missing", message: "All notifications (if any) removed from this application. Please enter mantra.", preferredStyle: .alert)
+        let notExist = UIAlertController(title: "Notifications Cleared", message: "All notifications (if any) removed from this application.", preferredStyle: .alert)
+        let removeNot = UIAlertController(title: "Mantra Not Found", message: "Please enter mantra.", preferredStyle: .alert)
+        let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let notiSent = UIAlertController(title: "Positive Affirmation Confirmed", message: "Your mantra notification preferences have been saved.", preferredStyle: .alert)
+        
+        
+        
+        notBoth.addAction(theOkAction)
+        notExist.addAction(theOkAction)
+        removeNot.addAction(theOkAction)
+        notiSent.addAction(theOkAction)
         self.hideSelection()
         var calendar = Calendar.current
         calendar.locale = Locale(identifier: "en_POSIX_US")
@@ -701,25 +708,27 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
                 else {
                     self.notificationSet.text = "Active Notification: Each " + self.weekDay[weekday-1] + " at " + hourString + ":" + minuteString + " " + AMPM
                 }
-                self.notificationSet.sizeToFit()
                 self.notificationSet.textAlignment = NSTextAlignment.center
             }
             else {
                 self.notificationSet.text = "ERROR!"
             }
-            self.present(self.notiSent, animated: true, completion: nil) // Presnt alert
+            self.present(notiSent, animated: true, completion: nil) // Presnt alert
         }
         else if (self.Label.text == "" && tfreq == "Never") {
+            print("A1")
             // Present alert to user.
-            self.present(self.notBoth, animated: true, completion: nil) //Present alert
+            self.present(notBoth, animated: true, completion: nil) //Present alert
         }
         else if(self.Label.text == ""){
+            print("A2")
             // Present alert to user.
-            self.present(self.removeNot, animated: true, completion: nil) //Present alert
+            self.present(removeNot, animated: true, completion: nil) //Present alert
         }
         else {
+            print("A3")
             // Present alert to user.
-            self.present(self.notExist, animated: true, completion: nil) //Present alert
+            self.present(notExist, animated: true, completion: nil) //Present alert
         }
     }
 }
