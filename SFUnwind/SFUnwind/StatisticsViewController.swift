@@ -18,15 +18,30 @@ class StatisticsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        averageTime = UserDefaults.standard.value(forKey: "averageSession" ) as! Double
-        shortestSession = UserDefaults.standard.value(forKey: "minSession") as! Double
-        longestSession = UserDefaults.standard.value(forKey: "maxSession") as! Double
-        totalNumber = UserDefaults.standard.value(forKey: "totalSessions") as! Int
+        
+        if let avg:Double = UserDefaults.standard.value(forKey: "averageSession") as! Double?{
+            averageTime = avg
+        }
+        if let minS:Double = UserDefaults.standard.value(forKey: "minSession") as! Double? {
+            shortestSession = minS
+        }
+        if let maxS:Double = UserDefaults.standard.value(forKey: "maxSession") as! Double?{
+            longestSession = maxS
+        }
+        if let totalS = UserDefaults.standard.value(forKey: "totalSessions") as! Int?{
+            totalNumber = totalS
+        }
+        UserDefaults.standard.synchronize()
+        
+        
         averageTime = (round(100*averageTime)/100)
         averageTimeLabel.text = String(averageTime) + " Seconds"
         shortestSessionLabel.text = String(shortestSession) + " Seconds"
         longestSessionLabel.text = String(longestSession) + " Seconds"
         totalNumberOfSessionsLabel.text = String(totalNumber)
+        
+        
+        
         
         // Do any additional setup after loading the view.
     }
