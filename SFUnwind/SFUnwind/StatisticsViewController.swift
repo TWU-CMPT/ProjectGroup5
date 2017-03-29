@@ -22,9 +22,10 @@ class StatisticsViewController: UIViewController {
         shortestSession = UserDefaults.standard.value(forKey: "minSession") as! Double
         longestSession = UserDefaults.standard.value(forKey: "maxSession") as! Double
         totalNumber = UserDefaults.standard.value(forKey: "totalSessions") as! Int
-        averageTimeLabel.text = String(averageTime)
-        shortestSessionLabel.text = String(shortestSession)
-        longestSessionLabel.text = String(longestSession)
+        averageTime = (round(100*averageTime)/100)
+        averageTimeLabel.text = String(averageTime) + " Seconds"
+        shortestSessionLabel.text = String(shortestSession) + " Seconds"
+        longestSessionLabel.text = String(longestSession) + " Seconds"
         totalNumberOfSessionsLabel.text = String(totalNumber)
         
         // Do any additional setup after loading the view.
