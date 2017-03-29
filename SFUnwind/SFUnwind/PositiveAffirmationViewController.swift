@@ -33,7 +33,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     //Create button
     @IBAction func Create(_ sender: AnyObject) {
         //create an alert
-        let alert = UIAlertController(title: "Enter a custom affirmation", message: "Please entery your personal mantra", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "Enter a Custom Affirmation", message: "Please enter a new mantra", preferredStyle: UIAlertControllerStyle.alert)
         
         //add textField
         alert.addTextField { (textField) in textField.placeholder = "Insert Mantra..."
@@ -226,11 +226,11 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     //options of weekdays
     var weekDay = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     //options of hours
-    var hr = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23"]
+    var hr = ["12","1","2","3","4","5","6","7","8","9","10","11"]
     //options of minutes
     var min = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59"]
-    
-    
+    //options of am or pm
+    var mornAfter = ["AM","PM"]
     // UI Selectable Buttons
     //--
     @IBOutlet weak var createMantraButton: UIButton!
@@ -240,6 +240,8 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     //--
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        self.detectTap()
         //initialize the index for mantras.count
         totalMantras = 0
         currentIndex = 0
@@ -321,7 +323,6 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         notExist.addAction(theOkAction)
         removeNot.addAction(theOkAction)
         notiSent.addAction(theOkAction)
-        super.viewDidLoad()
         weekday.isHidden = true
         weekday.isEnabled = false
         hour.isHidden = true
@@ -330,6 +331,10 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         minute.isEnabled = false
         atLabelText.isHidden = true
         sepLabel.isHidden = true
+        AMPMSel.isHidden = true
+        weekdayTitle.isHidden = true
+        hourTitle.isHidden = true
+        minuteTitle.isHidden = true
     }
     
     // Check if we've recieved a memory warning.
@@ -340,6 +345,30 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     //return the components of data
     public func numberOfComponents(in pickerView: UIPickerView) -> Int{
         return 1
+    }
+    
+    func detectTap(){
+        let theTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.hideSelection))
+        theTap.cancelsTouchesInView = false
+        view.addGestureRecognizer(theTap)
+    }
+    
+    func hideSelection(){
+        if(dataDrop.isHidden == false){
+            self.pickerView(dataDrop, didSelectRow: self.dataDrop.selectedRow(inComponent: 0), inComponent: 0)
+        }
+        if(hourDrop.isHidden == false){
+            self.pickerView(hourDrop, didSelectRow: self.hourDrop.selectedRow(inComponent: 0), inComponent: 0)
+        }
+        if(minuteDrop.isHidden == false){
+            self.pickerView(minuteDrop, didSelectRow: self.minuteDrop.selectedRow(inComponent: 0), inComponent: 0)
+        }
+        if(weekdayDrop.isHidden == false){
+            self.pickerView(weekdayDrop, didSelectRow: self.weekdayDrop.selectedRow(inComponent: 0), inComponent: 0)
+        }
+        if(AMPMSelPick.isHidden == false){
+            self.pickerView(AMPMSelPick, didSelectRow: self.AMPMSelPick.selectedRow(inComponent: 0), inComponent: 0)
+        }
     }
     
     //make the pickerview count rows in different textFields
@@ -354,8 +383,13 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         else if pickerView == minuteDrop{
             countrows = self.min.count
         }
+        else if pickerView == AMPMSelPick{
+            countrows = self.mornAfter.count
+        }
         return countrows
     }
+    @IBOutlet weak var AMPMSel: UITextField!
+    @IBOutlet weak var AMPMSelPick: UIPickerView!
     
     //return the option which the user selected in string type
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
@@ -375,8 +409,18 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             let titleRow = min[row]
             return titleRow
         }
+        else if pickerView == AMPMSelPick{
+            let titleRow = mornAfter[row]
+            return titleRow
+        }
         return ""
     }
+    
+    @IBOutlet weak var weekdayTitle: UILabel!
+    
+    @IBOutlet weak var hourTitle: UILabel!
+    
+    @IBOutlet weak var minuteTitle: UILabel!
     
     //make the pickerView shows the option which the user selected
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -394,6 +438,11 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
                 minute.isEnabled = true
                 atLabelText.isHidden = false
                 sepLabel.isHidden = false
+                AMPMSel.isHidden = false
+                AMPMSel.isEnabled = true
+                weekdayTitle.isHidden = false
+                hourTitle.isHidden = false
+                minuteTitle.isHidden = false
             }
             else if textTime.text == "Daily" {
                 weekday.isHidden = true
@@ -404,6 +453,11 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
                 minute.isEnabled = true
                 atLabelText.isHidden = true
                 sepLabel.isHidden = false
+                AMPMSel.isHidden = false
+                AMPMSel.isEnabled = true
+                weekdayTitle.isHidden = true
+                hourTitle.isHidden = false
+                minuteTitle.isHidden = false
             }
             else if textTime.text == "Hourly" {
                 weekday.isHidden = true
@@ -414,6 +468,11 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
                 minute.isEnabled = true
                 atLabelText.isHidden = true
                 sepLabel.isHidden = true
+                AMPMSel.isHidden = true
+                AMPMSel.isEnabled = false
+                weekdayTitle.isHidden = true
+                hourTitle.isHidden = true
+                minuteTitle.isHidden = false
             }
             else {
                 weekday.isHidden = true
@@ -424,6 +483,11 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
                 minute.isEnabled = false
                 atLabelText.isHidden = true
                 sepLabel.isHidden = true
+                AMPMSel.isHidden = true
+                AMPMSel.isEnabled = false
+                weekdayTitle.isHidden = true
+                hourTitle.isHidden = true
+                minuteTitle.isHidden = true
             }
         }
         else if pickerView == weekdayDrop{
@@ -438,34 +502,49 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             self.minute.text = self.min[row]
             self.minuteDrop.isHidden = true
         }
+        else if pickerView == AMPMSelPick{
+            self.AMPMSel.text = self.mornAfter[row]
+            self.AMPMSelPick.isHidden = true
+        }
     }
     
     //hide the view picker when the textFiled end editing
     func textFieldDidBeginEditing(_ textFiled:UITextField){
         textFiled.isEnabled = false
+        self.hideSelection()
         if (textFiled == self.textTime){
+            textFiled.text = ""
             self.dataDrop.isHidden = false
         }
         else if (textFiled == self.weekday){
+            textFiled.text = ""
             self.weekdayDrop.isHidden = false
         }
         else if (textFiled == self.hour){
+            textFiled.text = ""
             self.hourDrop.isHidden = false
         }
         else if (textFiled == self.minute){
+            textFiled.text = ""
             self.minuteDrop.isHidden = false
         }
+        else if (textFiled == self.AMPMSel){
+            textFiled.text = ""
+            self.AMPMSelPick.isHidden = false
+        }
+        
         textFiled.isEnabled = true
     }
     
     //Schedule Notification
     @IBAction func scheduleNotification(_ sender: AnyObject) {
+        self.hideSelection()
         var calendar = Calendar.current
         calendar.locale = Locale(identifier: "en_POSIX_US")
         let weekDaySymbols = calendar.weekdaySymbols
         var indexOfDay = weekDaySymbols.index(of: weekday.text!) // INSERT WEEKDAY STRING HERE
         if indexOfDay == nil {
-            indexOfDay = weekDaySymbols.index(of: "Monday")
+            indexOfDay = weekDaySymbols.index(of: "Sunday")
         }
         let weekDay = indexOfDay! + 1
         var matchingComponents = DateComponents()
@@ -485,10 +564,13 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         //show hours and minutes only
         if tfreq != "Hourly" {
             if(hour.text != ""){
-                matchingComponents.hour = Int(hour.text!)
+                matchingComponents.hour = Int(hour.text!)!%12
             }
             else {
                 matchingComponents.hour = 0
+            }
+            if(AMPMSel.text == "PM"){
+                matchingComponents.hour! += 12
             }
         }
         else {
@@ -507,6 +589,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             matchingComponents.hour! = matchingComponents.hour! % 24
         }
         let nextDay = calendar.nextDate(after: Date(), matching: matchingComponents, matchingPolicy: .nextTime)
+        print(nextDay?.description)
         if(self.Label.text != ""){
             UIApplication.shared.cancelAllLocalNotifications()
         }
