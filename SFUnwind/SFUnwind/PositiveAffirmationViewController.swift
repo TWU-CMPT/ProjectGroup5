@@ -2,8 +2,8 @@
 // PositiveAffirmationViewController.swift - View Controller for the Positive Affirmation feature screen
 // SFUnwind
 // Project Group 5: SFU CMPT 276
-// Primary programmer: Joseph Zhou
-// Contributing Programmers:
+// Primary programmer: David Magaril
+// Contributing Programmers: Joseph Zhou, Adam Badke
 // Known issues:
 //
 // Note: All files in this project conform to the coding standard included in the SFUnwind HW3 Quality Assurance Documentation
@@ -13,7 +13,7 @@ import UserNotifications
 
 class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
     
-    //variable for funcitions
+    //variable for functions
     var pathToAff: String? = nil
     var txtIndex = UITextField()
     var totalMantras: Int = 0
@@ -245,6 +245,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         self.notificationSet.textAlignment = NSTextAlignment.center
     }
     
+    // Called once when this view is loaded:
     override func viewDidLoad() {
         super.viewDidLoad()
         self.detectTap()
@@ -267,7 +268,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             let setNot = UIApplication.shared.scheduledLocalNotifications![0]
             let notDate = setNot.fireDate
             let minute = NSCalendar.current.component(.minute, from: notDate!)
-            var AMPM = "A.M."
+            var AMPM = "A.M"
             var minuteString: String
             var hourString: String
             if(minute<=9){
@@ -279,7 +280,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             var hour = NSCalendar.current.component(.hour, from: notDate!)
             if(hour>=12){
                 hour = hour - 12
-                AMPM = "P.M."
+                AMPM = "P.M"
             }
             if(hour==0){
                 hour=12
@@ -292,13 +293,13 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             }
             let weekday = NSCalendar.current.component(.weekday, from: notDate!)
             if(setNot.repeatInterval == NSCalendar.Unit.hour){
-                self.notificationSet.text = "Current Notification Set: Every hour at ##:" + minuteString
+                self.notificationSet.text = "Active Notification: Each hour at ##:" + minuteString
             }
             else if(setNot.repeatInterval == NSCalendar.Unit.day){
-                self.notificationSet.text = "Current Notification Set: Every Day at " + hourString + ":" + minuteString + " " + AMPM
+                self.notificationSet.text = "Active Notification: Each Day at " + hourString + ":" + minuteString + " " + AMPM
             }
             else {
-                self.notificationSet.text = "Current Notification Set: Every " + self.weekDay[weekday-1] + " at " + hourString + ":" + minuteString + " " + AMPM
+                self.notificationSet.text = "Active Notification: Each " + self.weekDay[weekday-1] + " at " + hourString + ":" + minuteString + " " + AMPM
             }
             self.notificationSet.sizeToFit()
             self.notificationSet.textAlignment = NSTextAlignment.center
@@ -643,7 +644,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         //print(nextDay?.description)
         if(self.Label.text != ""){
             UIApplication.shared.cancelAllLocalNotifications()
-            self.notificationSet.text = "No Notification Set"
+            self.notificationSet.text = "No Active Notification"
         }
         if (tfreq != "Never" && self.Label.text != "") {
             let notification = UILocalNotification()
@@ -667,7 +668,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
                 let setNot = UIApplication.shared.scheduledLocalNotifications![0]
                 let notDate = setNot.fireDate
                 let minute = NSCalendar.current.component(.minute, from: notDate!)
-                var AMPM = "A.M."
+                var AMPM = "A.M"
                 var minuteString: String
                 var hourString: String
                 if(minute<=9){
@@ -679,7 +680,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
                 var hour = NSCalendar.current.component(.hour, from: notDate!)
                 if(hour>=12){
                     hour = hour - 12
-                    AMPM = "P.M."
+                    AMPM = "P.M"
                 }
                 if(hour==0){
                     hour=12
@@ -692,13 +693,13 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
                 }
                 let weekday = NSCalendar.current.component(.weekday, from: notDate!)
                 if(setNot.repeatInterval == NSCalendar.Unit.hour){
-                    self.notificationSet.text = "Current Notification Set: Every hour at ##:" + minuteString
+                    self.notificationSet.text = "Active Notification: Each hour at ##:" + minuteString
                 }
                 else if(setNot.repeatInterval == NSCalendar.Unit.day){
-                    self.notificationSet.text = "Current Notification Set: Every Day at " + hourString + ":" + minuteString + " " + AMPM
+                    self.notificationSet.text = "Active Notification: Each Day at " + hourString + ":" + minuteString + " " + AMPM
                 }
                 else {
-                    self.notificationSet.text = "Current Notification Set: Every " + self.weekDay[weekday-1] + " at " + hourString + ":" + minuteString + " " + AMPM
+                    self.notificationSet.text = "Active Notification: Each " + self.weekDay[weekday-1] + " at " + hourString + ":" + minuteString + " " + AMPM
                 }
                 self.notificationSet.sizeToFit()
                 self.notificationSet.textAlignment = NSTextAlignment.center
