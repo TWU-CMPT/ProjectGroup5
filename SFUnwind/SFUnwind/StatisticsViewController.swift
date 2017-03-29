@@ -11,14 +11,21 @@ import UIKit
 class StatisticsViewController: UIViewController {
 
     
-    var shortestSession:Int = 0
-    var averageTime:Int = 0
-    var longestSession:Int = 0
-    var totalNumber:Int = 0
+    var shortestSession: Double = 999
+    var averageTime: Double = 0
+    var longestSession: Double = 0
+    var totalNumber = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        averageTime = UserDefaults.standard.value(forKey: "averageSession" ) as! Double
+        shortestSession = UserDefaults.standard.value(forKey: "minSession") as! Double
+        longestSession = UserDefaults.standard.value(forKey: "maxSession") as! Double
+        totalNumber = UserDefaults.standard.value(forKey: "totalSessions") as! Int
+        averageTimeLabel.text = String(averageTime)
+        shortestSessionLabel.text = String(shortestSession)
+        longestSessionLabel.text = String(longestSession)
+        totalNumberOfSessionsLabel.text = String(totalNumber)
         
         // Do any additional setup after loading the view.
     }
@@ -29,7 +36,7 @@ class StatisticsViewController: UIViewController {
     }
 
     
-
+    
     
     
     func loadTotalStatistics() -> String{
@@ -54,4 +61,8 @@ class StatisticsViewController: UIViewController {
 
 
 
+    @IBOutlet weak var totalNumberOfSessionsLabel: UILabel!
+    @IBOutlet weak var longestSessionLabel: UILabel!
+    @IBOutlet weak var shortestSessionLabel: UILabel!
+    @IBOutlet weak var averageTimeLabel: UILabel!
 }
