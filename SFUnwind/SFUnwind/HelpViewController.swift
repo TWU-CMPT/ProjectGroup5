@@ -25,6 +25,8 @@ class HelpViewController: UIViewController {
     //**************
     @IBOutlet weak var helpScreenText: UILabel!
     
+    @IBOutlet weak var UIScrollView: UIScrollView!
+    
     @IBOutlet weak var closeButton: UIButton!
     
     @IBAction func closeHelpScreen(_ sender: UIButton) {
@@ -38,18 +40,25 @@ class HelpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         populateHelpText(screenNumber: callingScreen)
         
         // Set teh help screen text, and format it:
         helpScreenText.text = helpString
         helpScreenText.sizeToFit()
-        helpScreenText.numberOfLines = 0
-        helpScreenText.adjustsFontSizeToFitWidth = true
+        //helpScreenText.numberOfLines = 0
+        //helpScreenText.adjustsFontSizeToFitWidth = true
         
         // Format the close button:
-        closeButton.sizeToFit()
-        closeButton.titleLabel?.numberOfLines = 0
-        closeButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        //closeButton.sizeToFit()
+        //closeButton.titleLabel?.numberOfLines = 0
+        //closeButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
+        var theContent = CGRect.zero
+        for theView in self.UIScrollView.subviews {
+            theContent = theContent.union(theView.frame)
+        }
+        self.UIScrollView.contentSize = theContent.size
         
     }
     
