@@ -45,7 +45,13 @@ class StatisticsViewController: UIViewController {
         longestSessionLabel.text = String(longestSession) + " Seconds"
         totalNumberOfSessionsLabel.text = String(totalNumber)
         
+        if(shortestSession == 999){
+        shortestSessionLabel.text = "N/A"
+        }
         
+        if(longestSession > 300){
+        longestSessionLabel.text = "300 Seconds"
+        }
         
         
         // Do any additional setup after loading the view.

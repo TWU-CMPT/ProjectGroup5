@@ -38,6 +38,7 @@ class SquareBreathingViewController: UIViewController{
     var averageSession: Double = 1
     var maxSession: Double = 0
     
+    var statsPageOpen: Bool = false
     
     var sessionStatistics: String = ""
     var sessionSecs:Double = 0
@@ -50,6 +51,7 @@ class SquareBreathingViewController: UIViewController{
     
     override func viewDidDisappear(_ animated: Bool) {
         if(sesssionTrackerActive == true){
+            syncStatistics()
             sesssionTrackerActive = false
         }
         sessionTracker.invalidate()                         //Stops timer
@@ -61,8 +63,6 @@ class SquareBreathingViewController: UIViewController{
         circleOrderTracker = 1                              //Reset image number
         reStartButtonText.setTitle("Start", for: .normal)
         setTotalStatistics(previousSesssion: loadTotalStatistics())
-        
-        syncStatistics()
         saveStatistics()
         sessionSecs = 0
 
@@ -80,7 +80,8 @@ class SquareBreathingViewController: UIViewController{
     
     // Rotated the background image
     func rotateBG(targetView: UIView, duration: Double = 1.0){
-        UIView.animate(withDuration: duration, delay: 0.0, options: .curveLinear, animations: { targetView.transform = targetView.transform.rotated(by: CGFloat(M_PI))}) { finished in self.rotateBG(targetView: targetView, duration: duration) }
+        UIView.animate(withDuration: duration, delay: 0.0, options: .curveLinear, animations: { targetView.transform = targetView.transform.rotated(by: CGFloat(M_PI))}) { finished in self.rotateBG(targetView: targetView, duration: duration)
+        }
     }
     // Resets timer colir
     func resetTimerColor(){
@@ -206,6 +207,8 @@ class SquareBreathingViewController: UIViewController{
         UserDefaults.standard.synchronize()
     }
     
+    
+    
     func syncStatistics(){
         if let numberOfSessions = UserDefaults.standard.value(forKey:  "totalSessions") as? Int{
          totalSessions = numberOfSessions
@@ -215,8 +218,10 @@ class SquareBreathingViewController: UIViewController{
             minSession = Double(sessionSecs)
             maxSession = Double(sessionSecs)
         }
-        else{                                                   //Normal Calculations with load
+        else{
+            print(averageSession, totalSessions, sessionSecs)
             averageSession = (((averageSession*Double(totalSessions))+Double(sessionSecs))/Double((totalSessions+1)))
+            print(averageSession, totalSessions, sessionSecs)
         }
         
         if(Double(sessionSecs) > maxSession){
