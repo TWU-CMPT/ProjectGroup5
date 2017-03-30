@@ -55,7 +55,7 @@ class Draw: UIView {
             set1?.setStrokeColor(UIColor.blue.cgColor)
             let rectangle = CGRect(x: offset,y: 285,width: 15,height: -heightValue) //was  (x: offset,y: 235,width: 15,height: -heightValue)
             set1?.addRect(rectangle)
-            UIColor(red: 0, green: 0, blue: 100, alpha: 50).setFill()
+            UIColor.blue.setFill()
             UIRectFill(rectangle)
             set1?.strokePath()
             set1?.restoreGState()
@@ -64,12 +64,12 @@ class Draw: UIView {
         let arrayLenght = getArrayLength()
         let sessionArray = getSessionArray()
         var defaultOffset = 10
-        
-        for i in 0...arrayLenght-1{
-            defaultOffset+=20
-            drawRectangle(offset: CGFloat(defaultOffset), heightValue: CGFloat(sessionArray[i]))
+        if(arrayLenght != 0){
+            for i in 0...arrayLenght-1{
+                defaultOffset+=20
+                drawRectangle(offset: CGFloat(defaultOffset), heightValue: CGFloat(sessionArray[i]+1))
+            }
         }
-        
 
     }
     
