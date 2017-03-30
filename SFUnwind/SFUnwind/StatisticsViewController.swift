@@ -8,6 +8,75 @@
 
 import UIKit
 
+class Draw: UIView {
+    
+    
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+
+    
+    func getArrayLength() -> Int{
+
+        var latestSessions = [Double]()
+        if let previousSessions = UserDefaults.standard.value(forKey: "previousSessions"){
+            latestSessions = previousSessions as! [Double]
+            return latestSessions.count
+        }
+    return 0
+    }
+    
+    func getSessionArray() -> [Double]{
+        var latestSessions = [Double]()
+        if let previousSessions = UserDefaults.standard.value(forKey: "previousSessions"){
+            latestSessions = previousSessions as! [Double]
+        }
+        return latestSessions
+    }
+
+    
+    
+    override func draw(_ rect: CGRect)
+    {
+        
+        self.backgroundColor = UIColor.clear
+        
+        func drawRectangle(offset:CGFloat, heightValue: CGFloat){
+            
+            let set1 = UIGraphicsGetCurrentContext()
+            set1?.saveGState()
+            set1?.setLineWidth(0)
+            set1?.setStrokeColor(UIColor.blue.cgColor)
+            let rectangle = CGRect(x: offset,y: 285,width: 15,height: -heightValue) //was  (x: offset,y: 235,width: 15,height: -heightValue)
+            set1?.addRect(rectangle)
+            UIColor.blue.setFill()
+            UIRectFill(rectangle)
+            set1?.strokePath()
+            set1?.restoreGState()
+        }
+
+        let arrayLenght = getArrayLength()
+        let sessionArray = getSessionArray()
+        var defaultOffset = 10
+        if(arrayLenght != 0){
+            for i in 0...arrayLenght-1{
+                defaultOffset+=20
+                drawRectangle(offset: CGFloat(defaultOffset), heightValue: CGFloat(sessionArray[i]+1))
+            }
+        }
+
+    }
+    
+    
+}
+
+
 class StatisticsViewController: UIViewController {
 
     
@@ -53,6 +122,13 @@ class StatisticsViewController: UIViewController {
         longestSessionLabel.text = "300 Seconds"
         }
         
+        let board = Draw(frame: CGRect(x: 25, y: 240, width: 250, height: 300))
+        
+        board.draw(CGRect(
+            origin: CGPoint(x: 50, y: 50),
+            size: CGSize(width: 100, height: 100)));
+        self.view.addSubview(board)
+        
         
         // Do any additional setup after loading the view.
     }
@@ -92,3 +168,8 @@ class StatisticsViewController: UIViewController {
     @IBOutlet weak var shortestSessionLabel: UILabel!
     @IBOutlet weak var averageTimeLabel: UILabel!
 }
+
+
+
+
+

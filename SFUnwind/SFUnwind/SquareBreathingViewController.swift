@@ -209,6 +209,7 @@ class SquareBreathingViewController: UIViewController{
             UserDefaults.standard.set(minSession, forKey: "minSession")
             UserDefaults.standard.set(maxSession, forKey: "maxSession")
             UserDefaults.standard.set(totalSessions, forKey: "totalSessions")
+            UserDefaults.standard.set(sessionSecs, forKey: "lastSession")
             UserDefaults.standard.synchronize()
         }
     }
