@@ -64,7 +64,8 @@ class SquareBreathingViewController: UIViewController{
         reStartButtonText.setTitle("Start", for: .normal)
         setTotalStatistics(previousSesssion: loadTotalStatistics())
         saveStatistics()
-        sessionSecs = 0
+        saveRecentSesionTracker()
+        sessionSecs = 0                                     //Must be last line no matter what
 
         
 
