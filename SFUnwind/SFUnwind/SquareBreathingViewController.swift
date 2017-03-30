@@ -156,6 +156,24 @@ class SquareBreathingViewController: UIViewController{
     
     }
     
+    func saveRecentSesionTracker(){
+        loadStatistics()
+        var latestSessions = [Double]()
+        if let previousSessions = UserDefaults.standard.value(forKey: "previousSessions"){
+            latestSessions = previousSessions as! [Double]
+        }
+        if(sessionSecs != 0.0){
+        latestSessions.append(sessionSecs)
+        }
+        if(latestSessions.count >= 11){
+            latestSessions.remove(at: 0)
+        }
+        
+        UserDefaults.standard.set(latestSessions, forKey: "previousSessions")
+        print(latestSessions)
+    }
+    
+
 
     //DO NOT DELETE UNLESS BERKE IS REALLY REALLY SURE
     func setTotalStatistics(previousSesssion: String){
@@ -166,9 +184,10 @@ class SquareBreathingViewController: UIViewController{
             writeString = String(sessionSecs)
         }
         else{
-            writeString = previousSesssion + "\n" + String(sessionSecs)
+            writeString = previousSesssion + " " + String(sessionSecs)
         }
 
+        
         let fileName = "timeStatistics"
         let DocumentDirURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
         let fileURL = DocumentDirURL.appendingPathComponent(fileName).appendingPathExtension(".txt")
@@ -184,11 +203,13 @@ class SquareBreathingViewController: UIViewController{
 
     
     func saveStatistics(){
-        UserDefaults.standard.set(averageSession, forKey: "averageSession")
-        UserDefaults.standard.set(minSession, forKey: "minSession")
-        UserDefaults.standard.set(maxSession, forKey: "maxSession")
-        UserDefaults.standard.set(totalSessions, forKey: "totalSessions")
-        UserDefaults.standard.synchronize()
+        if(sessionSecs != 0.0){                                 // Session secs being equal to 0.00 causes bugs, best solution is to totally ignore the person who achieves to press Re/Start button twice in literally 0 seconds 0 miliseconds
+            UserDefaults.standard.set(averageSession, forKey: "averageSession")
+            UserDefaults.standard.set(minSession, forKey: "minSession")
+            UserDefaults.standard.set(maxSession, forKey: "maxSession")
+            UserDefaults.standard.set(totalSessions, forKey: "totalSessions")
+            UserDefaults.standard.synchronize()
+        }
     }
     
     func loadStatistics(){
@@ -219,9 +240,9 @@ class SquareBreathingViewController: UIViewController{
             maxSession = Double(sessionSecs)
         }
         else{
-            print(averageSession, totalSessions, sessionSecs)
+
             averageSession = (((averageSession*Double(totalSessions))+Double(sessionSecs))/Double((totalSessions+1)))
-            print(averageSession, totalSessions, sessionSecs)
+
         }
         
         if(Double(sessionSecs) > maxSession){
@@ -388,6 +409,7 @@ class SquareBreathingViewController: UIViewController{
             syncStatistics()
             totalSessions+=1
             saveStatistics()
+            saveRecentSesionTracker()
             sessionSecs = 0
 
             
