@@ -61,7 +61,7 @@
 		80087C421E8A2D9900F6988C /* SquareBreathing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SquareBreathing.png; path = graphics/SquareBreathing.png; sourceTree = "<group>"; };
 		80B7704E1E8A367600B327EC /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		823202141E8A98D30098964A /* mantraFinal2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mantraFinal2.png; path = graphics/mantraFinal2.png; sourceTree = "<group>"; };
-		828AB80F1E8D2A0900F6170C /* infoi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = infoi.png; path = SFUnwind/infoi.png; sourceTree = "<group>"; };
+		828AB80F1E8D2A0900F6170C /* infoi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = infoi.png; sourceTree = "<group>"; };
 		EB04A46A1E6615F400BD2859 /* SFUnwind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SFUnwind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB04A46D1E6615F400BD2859 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB04A4721E6615F400BD2859 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -118,7 +118,6 @@
 		EB04A4611E6615F400BD2859 = {
 			isa = PBXGroup;
 			children = (
-				828AB80F1E8D2A0900F6170C /* infoi.png */,
 				EB04A46C1E6615F400BD2859 /* SFUnwind */,
 				EB04A4811E6615F400BD2859 /* SFUnwindTests */,
 				EB04A46B1E6615F400BD2859 /* Products */,
@@ -153,6 +152,7 @@
 				800067821E81B7C600F9AA50 /* outC.png */,
 				800067841E81B7FD00F9AA50 /* gray_line.png */,
 				800067801E81B77A00F9AA50 /* inC.png */,
+				828AB80F1E8D2A0900F6170C /* infoi.png */,
 				EB7359121E66520C004A0EB0 /* GroundingExerciseViewController.swift */,
 				EB7359141E665240004A0EB0 /* PositiveAffirmationViewController.swift */,
 				EB999C901E665A93006D41FE /* PanicAlertViewController.swift */,
@@ -246,7 +246,7 @@
 				TargetAttributes = {
 					EB04A4691E6615F400BD2859 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = A6FY2U8DZM;
+						DevelopmentTeam = V9FZNT8NLF;
 						ProvisioningStyle = Automatic;
 					};
 					EB04A47D1E6615F400BD2859 = {
@@ -490,11 +490,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = A6FY2U8DZM;
+				DEVELOPMENT_TEAM = V9FZNT8NLF;
 				INFOPLIST_FILE = SFUnwind/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = SFUnwindg;
+				PRODUCT_BUNDLE_IDENTIFIER = SFUnwind;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -506,11 +506,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = A6FY2U8DZM;
+				DEVELOPMENT_TEAM = V9FZNT8NLF;
 				INFOPLIST_FILE = SFUnwind/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = SFUnwindg;
+				PRODUCT_BUNDLE_IDENTIFIER = SFUnwind;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

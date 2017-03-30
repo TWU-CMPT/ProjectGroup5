@@ -178,8 +178,8 @@
                                         <color key="textColor" red="0.17192402482032776" green="0.57402229309082031" blue="0.87541252374649048" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="highlightedColor" red="1" green="0.97042926640000005" blue="0.99997150879999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5xr-Bc-Rma">
-                                        <rect key="frame" x="43" y="65" width="41" height="40"/>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5xr-Bc-Rma">
+                                        <rect key="frame" x="43" y="65" width="40" height="40"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                                         <inset key="titleEdgeInsets" minX="0.0" minY="5" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" image="infoi.png"/>
@@ -640,7 +640,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LBM-B7-UgO">
                                 <rect key="frame" x="142" y="250" width="36" height="36"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" image="infoi.png"/>
                                 <connections>
@@ -1311,6 +1311,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="cna-9s-vbo"/>
         <segue reference="SrN-Vb-bGB"/>
-        <segue reference="Bsm-2r-k9Q"/>
+        <segue reference="v0c-2v-HoP"/>
     </inferredMetricsTieBreakers>
 </document>
