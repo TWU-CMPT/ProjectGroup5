@@ -83,6 +83,26 @@ class SquareBreathingViewController: UIViewController{
         self.sessionTimer.attributedText = NSAttributedString(attributedString: attAdd)
     }
     
+    @IBOutlet weak var restartButton: UIButton!
+    
+    @IBAction func restartAllButton(_ sender: UIButton){
+        self.totalTimerSeconds = 0
+        self.totalTimerMinute = 0
+        self.averageSession = 0
+        self.minSession = 999
+        self.maxSession = 0
+        self.totalSessions = 0
+        self.sessionSecs = 0
+        UserDefaults.standard.set(averageSession, forKey: "averageSession")
+        UserDefaults.standard.set(minSession, forKey: "minSession")
+        UserDefaults.standard.set(maxSession, forKey: "maxSession")
+        UserDefaults.standard.set(totalSessions, forKey: "totalSessions")
+        UserDefaults.standard.set(sessionSecs, forKey: "lastSession")
+        UserDefaults.standard.set(totalTimerSeconds, forKey: "totalSecs") //Set Seconds
+        UserDefaults.standard.set(totalTimerMinute, forKey: "totalMins")
+        UserDefaults.standard.set([Double](), forKey: "previousSessions")
+        UserDefaults.standard.synchronize()
+    }
 
     @IBOutlet weak var bgMantra: UIImageView!
     // Called once when this object is first instanciated
@@ -90,6 +110,7 @@ class SquareBreathingViewController: UIViewController{
         super.viewDidLoad() // Call the super class
         self.reStartButtonText.layer.cornerRadius = 10
         self.statisticsButton.layer.cornerRadius = 10
+        self.restartButton.layer.cornerRadius = 10
         self.resetTimerColor() // Reset timer color
         self.topTitle.adjustsFontSizeToFitWidth = true
         //let offsetImage = topTitle.frame.height
@@ -163,6 +184,8 @@ class SquareBreathingViewController: UIViewController{
         UserDefaults.standard.set(latestSessions, forKey: "previousSessions")
         print(latestSessions)
     }
+    
+    
     
 
 
@@ -386,7 +409,8 @@ class SquareBreathingViewController: UIViewController{
         var _ = saveSecondsTimer(totalTimerSeconds:totalTimerSeconds)
         
         if(sesssionTrackerActive == true && self.isAnimating == false){
-            print("NO3")
+            self.restartButton.isHidden = true
+            self.restartButton.isEnabled = false
             timeManager()                                       //Call timeManager()
             sessionTracker = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(SquareBreathingViewController.timeManager), userInfo: nil, repeats: true)  //Call timeManager() once in every second
             
@@ -396,7 +420,8 @@ class SquareBreathingViewController: UIViewController{
 
         }
         else{
-            print("YES4")
+            self.restartButton.isHidden = false
+            self.restartButton.isEnabled = true
             sessionTracker.invalidate()                         //Stops timer
             sessionTimeSeconds = 60                             //Reset
             sessionTimeMinute = 4                               //Reset

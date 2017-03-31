@@ -149,6 +149,19 @@
                                         <color key="textColor" red="0.17192402482032776" green="0.57402229309082031" blue="0.87541252374649048" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="highlightedColor" red="1" green="0.97042926640000005" blue="0.99997150879999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="SkA-kM-YOo">
+                                        <rect key="frame" x="8" y="79" width="97" height="26"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.095493562520000005" green="0.41925257440000002" blue="0.65560185910000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="Zapfino" family="Zapfino" pointSize="16"/>
+                                        <inset key="contentEdgeInsets" minX="0.0" minY="8" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="Restart">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="restartAllButton:" destination="S1c-mL-zIB" eventType="touchUpInside" id="9vR-j7-Oxc"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </view>
                             <view contentMode="scaleToFill" id="i2t-se-HII" userLabel="TopView">
@@ -278,6 +291,7 @@
                         <outlet property="circleTLeft" destination="6Sh-YO-Ieg" id="lSF-mj-1pp"/>
                         <outlet property="circleTRight" destination="dOo-0Z-XRe" id="AP8-nu-5xh"/>
                         <outlet property="reStartButtonText" destination="yMl-L3-fQu" id="DE1-eG-OXD"/>
+                        <outlet property="restartButton" destination="SkA-kM-YOo" id="IZz-9D-5Lg"/>
                         <outlet property="sessionTimer" destination="qdM-su-kh1" id="Q9f-jN-Fnf"/>
                         <outlet property="statisticsButton" destination="NK4-Dk-nxk" id="1zz-5G-8ap"/>
                         <outlet property="topTitle" destination="5rG-rX-037" id="OkQ-bP-Agw"/>
