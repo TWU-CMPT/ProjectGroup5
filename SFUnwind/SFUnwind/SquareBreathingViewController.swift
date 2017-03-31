@@ -284,7 +284,11 @@ class SquareBreathingViewController: UIViewController{
         sessionTimeSeconds-=1                                                  //Decrement Seconds
         totalTimerSeconds+=1                                                   //Increment Seconds
 
-
+        if(sessionTimeSeconds == 0 && sessionTimeMinute == 0){
+            restartButton(UIButton())
+            sessionTimer.text = "05:00"
+        }
+        
         if(sessionTimeSeconds == 0 && sessionTimeMinute != 0){                 //If Remaining mins != 0
             sessionTimer.text = "0" + String(sessionTimeMinute)+":00"
             sessionTimeMinute-=1                                               //Decrement Minutes
