@@ -113,13 +113,16 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         // Reset Button
         resetButton.isHidden = true
         resetButton.isEnabled = false
+        self.resetButton.alpha = 1
         // Goal Display
         goalDisplay.isHidden = false
         // Capture Button
         captureButton.isHidden = false
         captureButton.isEnabled = true
         // Preview Layer
+        self.previewLayer.removeAllAnimations()
         previewLayer.isHidden = false
+        previewLayer.opacity = 1
         // Removes all picture from screen
         for tagger in 0...self.totalMax-1 {
             // Check for each with tag
@@ -178,6 +181,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         // Disables the reset button for grid view
         resetButton.isEnabled = false
         // Reveals the preview layer to user
+        self.previewLayer.removeAllAnimations()
         previewLayer.isHidden = false
         // Resets the goal display
         goalDisplay.text = goalString[goalIndex]
@@ -244,7 +248,9 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         captureButton.isHidden = false
         captureButton.isEnabled = true
         // Preview Layer
+        self.previewLayer.removeAllAnimations()
         previewLayer.isHidden = false
+        previewLayer.opacity = 1
         // Removes all picture from screen
         for tagger in 0...self.totalMax-1 {
             // Check for each with tag
@@ -311,6 +317,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
                     }
                     // Sets current picture to visible
                     self.allViews[self.currentTotalIndex].isHidden = false
+                    self.allViews[self.currentTotalIndex].alpha = 1
                     // Checks if still valid
                     if self.maxGoal != 0 && self.currentTotalIndex < 45 {
                         // Adds the picture view to controller view
@@ -349,12 +356,19 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
                             self.captureButton.isEnabled = false
                             // Hide goal display
                             self.goalDisplay.isHidden = true
-                            // Enable reset button
-                            self.resetButton.isEnabled = true
+                            // Disable reset button
+                            self.resetButton.isEnabled = false
                             // Reveal reset button
                             self.resetButton.isHidden = false
                             // Hide the camera preview
-                            self.previewLayer.isHidden = true
+                            let previewAnimation = CABasicAnimation(keyPath: "opacity")
+                            previewAnimation.fromValue = 1
+                            previewAnimation.toValue = 0
+                            previewAnimation.duration = 4
+                            previewAnimation.autoreverses = false
+                            previewAnimation.fillMode = kCAFillModeForwards
+                            previewAnimation.isRemovedOnCompletion = false
+                            self.previewLayer.add(previewAnimation, forKey: "opacity")
                             // Find y for each picture
                             var downHeight = 0.0
                             // Find x for each picture
@@ -368,6 +382,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
                             // Obtain the size of each grid
                             let gridSize = (UIScreen.main.bounds.width/CGFloat(divisor))
                             // Obtain each picture, display in grid
+                            self.resetButton.alpha = 0
                             for tagger in 0...self.totalMax-1 {
                                 // Check if program reached divisor
                                 if rightLength == divisor {
@@ -376,18 +391,38 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
                                     // Increment going down
                                     downHeight+=1
                                 }
-                                // Check if we reach for center
+                                var xVal = gridSize*CGFloat(rightLength)
                                 if downHeight == topDiv {
-                                    // Apply offset, and move picture to right spot
-                                    self.allViews[tagger].frame = CGRect(x: gridSize*CGFloat(rightLength) + offset, y: gridSize*CGFloat(downHeight), width: gridSize, height: gridSize)
+                                    xVal += offset
                                 }
-                                    // Else, do it regularly
-                                else{
-                                    // Move picture to right spot
-                                    self.allViews[tagger].frame = CGRect(x: gridSize*CGFloat(rightLength), y: gridSize*CGFloat(downHeight), width: gridSize, height: gridSize)
-                                }
+                                // Apply offset, and move picture to right spot
+                                self.allViews[tagger].frame = CGRect(x: xVal, y: UIScreen.main.bounds.height, width: gridSize, height: gridSize)
+                                UIView.animate(withDuration: 2, delay: Double(tagger)*0.1, options: .curveEaseOut, animations: {
+                                    self.allViews[tagger].frame = CGRect(x: xVal, y: gridSize*CGFloat(downHeight), width: gridSize, height: gridSize)
+                                    
+                                }, completion: nil)
                                 // Reveal picture to user
+                                self.allViews[tagger].alpha = 0
                                 self.allViews[tagger].isHidden = false
+                                if(tagger != self.totalMax-1){
+                                    UIView.animate(withDuration: 1, delay: Double(tagger)*0.1, options: .curveEaseOut, animations: {
+                                        self.allViews[tagger].alpha = 1
+                                    }, completion: nil)
+                                }
+                                else {
+                                    UIView.animate(withDuration: 1, delay: Double(tagger)*0.1, options: .curveEaseOut, animations: {
+                                        self.allViews[tagger].alpha = 1
+                                    }, completion: { (finished: Bool) -> Void in
+                                        UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations: {
+                                            self.resetButton.alpha = 1
+                                        }, completion: {
+                                            (finished: Bool) -> Void in
+                                            if(self.resetButton.isHidden == false){
+                                                self.resetButton.isEnabled = true
+                                            }
+                                        })
+                                    })
+                                }
                                 // Pushes future pictures to the right
                                 rightLength+=1
                             }
