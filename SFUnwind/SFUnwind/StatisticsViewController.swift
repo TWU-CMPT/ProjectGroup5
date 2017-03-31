@@ -79,11 +79,11 @@ class Draw: UIView {
         set3?.strokePath()
         set3?.restoreGState()
 
-        let arrayLenght = getArrayLength()
+        let arrayLength = getArrayLength()
         let sessionArray = getSessionArray()
         var defaultOffset = 10
-        if(arrayLenght != 0){
-            for i in 0...arrayLenght-1{
+        if(arrayLength != 0){
+            for i in 0...arrayLength-1{
                 defaultOffset+=20
                 drawRectangle(offset: CGFloat(defaultOffset), heightValue: CGFloat(sessionArray[i]+1))
             }
@@ -102,6 +102,8 @@ class StatisticsViewController: UIViewController {
     var averageTime: Double = 0
     var longestSession: Double = 0
     var totalNumber = 0
+    
+    var allViews = [UIView]()
 
     @IBOutlet weak var backButton: UIButton!
     
@@ -125,12 +127,20 @@ class StatisticsViewController: UIViewController {
         }
         UserDefaults.standard.synchronize()
         
+        if(shortestSession != 999){
+            averageTime = (round(100*averageTime)/100)
+            averageTimeLabel.text = String(averageTime) + " Seconds"
+            shortestSessionLabel.text = String(shortestSession) + " Seconds"
+            longestSessionLabel.text = String(longestSession) + " Seconds"
+            totalNumberOfSessionsLabel.text = String(totalNumber)
+        }
+        else {
+            averageTimeLabel.text = "N/A"
+            shortestSessionLabel.text = "N/A"
+            longestSessionLabel.text = "N/A"
+            totalNumberOfSessionsLabel.text = "0"
+        }
         
-        averageTime = (round(100*averageTime)/100)
-        averageTimeLabel.text = String(averageTime) + " Seconds"
-        shortestSessionLabel.text = String(shortestSession) + " Seconds"
-        longestSessionLabel.text = String(longestSession) + " Seconds"
-        totalNumberOfSessionsLabel.text = String(totalNumber)
         
         if(shortestSession == 999){
         shortestSessionLabel.text = "N/A"
@@ -140,12 +150,32 @@ class StatisticsViewController: UIViewController {
         longestSessionLabel.text = "300 Seconds"
         }
         
-        let board = Draw(frame: CGRect(x: 25, y: 240, width: 250, height: 300))
+        //let board = Draw(frame: CGRect(x: 25, y: 240, width: 250, height: 300))
         
-        board.draw(CGRect(
-            origin: CGPoint(x: 50, y: 50),
-            size: CGSize(width: 100, height: 100)));
-        self.view.addSubview(board)
+        //board.draw(CGRect(
+            //origin: CGPoint(x: 50, y: 50),
+            //size: CGSize(width: 100, height: 100)));
+        //self.view.addSubview(board)
+        
+        let bottomG = UIScreen.main.bounds.height * (9/10)
+        let heightMax = UIScreen.main.bounds.height * (4/10)
+        let leftG = UIScreen.main.bounds.width * (1/10)
+        let spacer = UIScreen.main.bounds.width * (8/100)
+        var offset = 0
+        if let previousSessions = UserDefaults.standard.value(forKey: "previousSessions") as? [Double] {
+            for bar in previousSessions {
+                self.allViews.append(UIView())
+                self.allViews[offset].backgroundColor = UIColor.cyan
+                self.allViews[offset].frame = CGRect(x: (leftG + (spacer*CGFloat(offset))), y: bottomG, width: spacer-5, height: -((CGFloat(bar/300.0)*heightMax)))
+                self.view.addSubview(self.allViews[offset])
+                self.view.bringSubview(toFront: self.allViews[offset])
+                print(offset)
+                print(self.allViews[offset])
+                offset = offset + 1
+            }
+        }
+        
+        
         
         
         // Do any additional setup after loading the view.
