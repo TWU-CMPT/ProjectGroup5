@@ -165,12 +165,16 @@ class StatisticsViewController: UIViewController {
         if let previousSessions = UserDefaults.standard.value(forKey: "previousSessions") as? [Double] {
             for bar in previousSessions {
                 self.allViews.append(UIView())
-                self.allViews[offset].backgroundColor = UIColor.cyan
-                self.allViews[offset].frame = CGRect(x: (leftG + (spacer*CGFloat(offset))), y: bottomG, width: spacer-5, height: -((CGFloat(bar/300.0)*heightMax)))
-                self.view.addSubview(self.allViews[offset])
-                self.view.bringSubview(toFront: self.allViews[offset])
-                print(offset)
-                print(self.allViews[offset])
+                self.allViews.append(UIView())
+                self.allViews[offset*2].backgroundColor = UIColor.cyan
+                self.allViews[(offset*2) + 1].backgroundColor = UIColor.cyan
+                self.allViews[offset*2].frame = CGRect(x: (leftG + (spacer*CGFloat(offset))), y: bottomG, width: spacer-5, height: -((CGFloat(bar/300.0)*heightMax)))
+                self.allViews[(offset*2) + 1].frame = CGRect(x: (leftG + (spacer*CGFloat(offset))), y: bottomG, width: spacer-5, height: -(heightMax))
+                self.allViews[(offset*2) + 1].alpha = 0.3
+                self.view.addSubview(self.allViews[(offset*2) + 1])
+                self.view.addSubview(self.allViews[offset*2])
+                self.view.bringSubview(toFront: self.allViews[(offset*2) + 1])
+                self.view.bringSubview(toFront: self.allViews[offset*2])
                 offset = offset + 1
             }
         }
