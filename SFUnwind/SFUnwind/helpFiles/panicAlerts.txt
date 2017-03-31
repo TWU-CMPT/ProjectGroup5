@@ -1,3 +1,7 @@
-Panic Alerts are pre-written text messages that can be sent instantly with the press of a button, connecting you family or friends without the stress of composing a message under duress.
+Panic Alerts are pre-written text messages that can be sent instantly with the press of a button to immediately alert and connect you with family or friends when you need support, without the stress of composing a message under duress.
 
-Tap the "Create" button to create a new alert: Select a recipient, enter your message & tap save. Send an alert text message by tapping the "Send" button. Edit or delete an alert by tapping "Edit".
+Tap the "Create" button to create a new panic alert. Select a recipient, enter your message & tap save.
+
+Send your configured alert text message by tapping the "Send" button.
+
+Edit or delete an alert by tapping the "Edit" button next to an existing panic alert.
