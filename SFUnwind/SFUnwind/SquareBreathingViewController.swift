@@ -102,6 +102,7 @@ class SquareBreathingViewController: UIViewController{
         self.reStartButtonText.layer.cornerRadius = 10
         self.statisticsButton.layer.cornerRadius = 10
         self.resetTimerColor() // Reset timer color
+        self.topTitle.adjustsFontSizeToFitWidth = true
         //let offsetImage = topTitle.frame.height
         //let center = sessionTimer.frame.origin.y + (sessionTimer.frame.height/2)
         //let trueOffset = (center - offsetImage)*2
