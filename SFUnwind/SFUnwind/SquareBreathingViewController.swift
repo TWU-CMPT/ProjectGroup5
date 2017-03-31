@@ -331,14 +331,17 @@ class SquareBreathingViewController: UIViewController{
     // scaleAnimationManager calls all four steps of animation in order which are fadein, scalex2, scale to original and fade out. SquareOrderManager function is used to track the current image
     func scaleAnimationManager(){
         UIView.animate(withDuration: 2, delay: 0, options: .curveEaseOut, animations:{
+            AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
             self.isAnimating = true
             self.squareOrderManager(currentCircle: self.circleOrderTracker).transform = CGAffineTransform(scaleX: 2, y: 2) //Sets the selected image's scale to 2 in 2 seconds
 
-        }, completion:nil)
+        }, completion: { (finished: Bool) -> Void in
+            AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+        })
         
-        UIView.animate(withDuration: 0.2, delay: 3.6, options: .curveEaseOut, animations:{
-        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate)) //Vibrates the phone
-        }, completion:nil)
+        //UIView.animate(withDuration: 0.2, delay: 3.6, options: .curveEaseOut, animations:{
+        // //Vibrates the phone
+        //}, completion:nil)
         UIView.animate(withDuration: 2, delay: 2.2, options: .curveEaseOut, animations:{
             self.squareOrderManager(currentCircle: self.circleOrderTracker).transform = CGAffineTransform(scaleX: 1, y: 1) //Rescales the image over time
         }, completion: {(finished: Bool) -> Void in
