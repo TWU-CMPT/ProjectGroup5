@@ -296,13 +296,13 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             }
             let weekday = NSCalendar.current.component(.weekday, from: notDate!)
             if(setNot.repeatInterval == NSCalendar.Unit.hour){
-                self.notificationSet.text = "Active Notification: Each hour at ##:" + minuteString
+                self.notificationSet.text = "Active Reminder: Each hour at ##:" + minuteString
             }
             else if(setNot.repeatInterval == NSCalendar.Unit.day){
-                self.notificationSet.text = "Active Notification: Each Day at " + hourString + ":" + minuteString + " " + AMPM
+                self.notificationSet.text = "Active Reminder: Each Day at " + hourString + ":" + minuteString + " " + AMPM
             }
             else {
-                self.notificationSet.text = "Active Notification: Each " + self.weekDay[weekday-1] + " at " + hourString + ":" + minuteString + " " + AMPM
+                self.notificationSet.text = "Active Reminder: Each " + self.weekDay[weekday-1] + " at " + hourString + ":" + minuteString + " " + AMPM
             }
             self.notificationSet.textAlignment = NSTextAlignment.center
         }
@@ -585,11 +585,11 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     //Schedule Notification
     @IBAction func scheduleNotification(_ sender: AnyObject) {
         
-        let notBoth = UIAlertController(title: "Notifications Cleared/Mantra Missing", message: "All notifications (if any) removed from this application. Please enter mantra.", preferredStyle: .alert)
-        let notExist = UIAlertController(title: "Notifications Cleared", message: "All notifications (if any) removed from this application.", preferredStyle: .alert)
-        let removeNot = UIAlertController(title: "Mantra Not Found", message: "Please enter mantra.", preferredStyle: .alert)
+        let notBoth = UIAlertController(title: "Reminders Cleared/Mantra Missing", message: "All notifications have been cleared. Please enter a mantra.", preferredStyle: .alert)
+        let notExist = UIAlertController(title: "Reminders Cleared", message: "Notifications have been cleared.", preferredStyle: .alert)
+        let removeNot = UIAlertController(title: "Mantra Not Found", message: "Please enter a mantra.", preferredStyle: .alert)
         let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        let notiSent = UIAlertController(title: "Positive Affirmation Confirmed", message: "Your mantra notification preferences have been saved.", preferredStyle: .alert)
+        let notiSent = UIAlertController(title: "Positive Affirmation Confirmed", message: "Your mantra reminder preferences have been saved.", preferredStyle: .alert)
         
         
         
@@ -651,7 +651,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         //print(nextDay?.description)
         if(self.Label.text != ""){
             UIApplication.shared.cancelAllLocalNotifications()
-            self.notificationSet.text = "No Active Notification"
+            self.notificationSet.text = "No Active Reminder"
         }
         if (tfreq != "Never" && self.Label.text != "") {
             let notification = UILocalNotification()
@@ -700,13 +700,13 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
                 }
                 let weekday = NSCalendar.current.component(.weekday, from: notDate!)
                 if(setNot.repeatInterval == NSCalendar.Unit.hour){
-                    self.notificationSet.text = "Active Notification: Each hour at ##:" + minuteString
+                    self.notificationSet.text = "Active Reminder: Each hour at ##:" + minuteString
                 }
                 else if(setNot.repeatInterval == NSCalendar.Unit.day){
-                    self.notificationSet.text = "Active Notification: Each Day at " + hourString + ":" + minuteString + " " + AMPM
+                    self.notificationSet.text = "Active Reminder: Each Day at " + hourString + ":" + minuteString + " " + AMPM
                 }
                 else {
-                    self.notificationSet.text = "Active Notification: Each " + self.weekDay[weekday-1] + " at " + hourString + ":" + minuteString + " " + AMPM
+                    self.notificationSet.text = "Active Reminder: Each " + self.weekDay[weekday-1] + " at " + hourString + ":" + minuteString + " " + AMPM
                 }
                 self.notificationSet.textAlignment = NSTextAlignment.center
             }
