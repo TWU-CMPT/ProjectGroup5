@@ -19,6 +19,11 @@ class StatisticsViewController: UIViewController {
     var totalNumber = 0
     
     var allViews = [UIView]()
+    
+    @IBOutlet weak var totalNumberOfSessionsLabel: UILabel!
+    @IBOutlet weak var longestSessionLabel: UILabel!
+    @IBOutlet weak var shortestSessionLabel: UILabel!
+    @IBOutlet weak var averageTimeLabel: UILabel!
 
     @IBOutlet weak var backButton: UIButton!
     
@@ -44,25 +49,16 @@ class StatisticsViewController: UIViewController {
         
         if(shortestSession != 999){
             averageTime = (round(100*averageTime)/100)
-            averageTimeLabel.text = String(averageTime) + " Seconds"
-            shortestSessionLabel.text = String(shortestSession) + " Seconds"
-            longestSessionLabel.text = String(longestSession) + " Seconds"
-            totalNumberOfSessionsLabel.text = String(totalNumber)
+            averageTimeLabel.text = "Average: " + String(averageTime) + " Seconds"
+            shortestSessionLabel.text = "Shortest: " + String(shortestSession) + " Seconds"
+            longestSessionLabel.text = "Longest: " + String(longestSession) + " Seconds"
+            totalNumberOfSessionsLabel.text = "Total Sessions: " + String(totalNumber)
         }
         else {
-            averageTimeLabel.text = "N/A"
-            shortestSessionLabel.text = "N/A"
-            longestSessionLabel.text = "N/A"
-            totalNumberOfSessionsLabel.text = "0"
-        }
-        
-        
-        if(shortestSession == 999){
-        shortestSessionLabel.text = "N/A"
-        }
-        
-        if(longestSession > 300){
-        longestSessionLabel.text = "300 Seconds"
+            averageTimeLabel.text = "Average: N/A"
+            shortestSessionLabel.text = "Shortest: N/A"
+            longestSessionLabel.text = "Longest: N/A"
+            totalNumberOfSessionsLabel.text =  "Total Sessions: 0"
         }
         
         //let board = Draw(frame: CGRect(x: 25, y: 240, width: 250, height: 300))
@@ -105,35 +101,11 @@ class StatisticsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    
-    
-    
-    
-    func loadTotalStatistics() -> String{
-        let fileName = "timeStatistics"
-        let DocumentDirURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-        let fileURL = DocumentDirURL.appendingPathComponent(fileName).appendingPathExtension(".txt")
-        
-        
-        var readString = "" // Used to store the file contents
-        do {
-            // Read the file contents
-            readString = try String(contentsOf: fileURL)
-        } catch let error as NSError {
-            print("Failed reading from URL: \(fileURL), Error: " + error.localizedDescription)
-        }
-        return readString
-        
-    }
     @IBAction func closeScreen(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
 
 
-    @IBOutlet weak var totalNumberOfSessionsLabel: UILabel!
-    @IBOutlet weak var longestSessionLabel: UILabel!
-    @IBOutlet weak var shortestSessionLabel: UILabel!
-    @IBOutlet weak var averageTimeLabel: UILabel!
 }
 
 
