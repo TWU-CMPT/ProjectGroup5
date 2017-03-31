@@ -50,26 +50,15 @@ class SquareBreathingViewController: UIViewController{
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        if(sesssionTrackerActive == true){
-            syncStatistics()
-            sesssionTrackerActive = false
+        super.viewDidDisappear(animated)
+        if(sesssionTrackerActive == false){
+            print("NO1")
+            // oh hey nothing
         }
-        sessionTracker.invalidate()                         //Stops timer
-        sessionTimeSeconds = 60                             //Reset
-        sessionTimeMinute = 4                               //Reset
-        sessionTimer.text = "05:00"                         //Print to screen
-        self.resetTimerColor()                              //Reset timer color
-        animationTimer.invalidate()                         //Stops timer for animation
-        circleOrderTracker = 1                              //Reset image number
-        reStartButtonText.setTitle("Start", for: .normal)
-        setTotalStatistics(previousSesssion: loadTotalStatistics())
-        saveStatistics()
-        saveRecentSesionTracker()
-        sessionSecs = 0                                     //Must be last line no matter what
-
-        
-
-        
+        else {
+            print("YES2")
+            restartButton(UIButton())
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -343,7 +332,7 @@ class SquareBreathingViewController: UIViewController{
 
         }, completion:nil)
         
-        UIView.animate(withDuration: 0.2, delay: 2.8, options: .curveEaseOut, animations:{
+        UIView.animate(withDuration: 0.2, delay: 3.6, options: .curveEaseOut, animations:{
         AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate)) //Vibrates the phone
         }, completion:nil)
         UIView.animate(withDuration: 2, delay: 2.2, options: .curveEaseOut, animations:{
@@ -390,6 +379,7 @@ class SquareBreathingViewController: UIViewController{
         var _ = saveSecondsTimer(totalTimerSeconds:totalTimerSeconds)
         
         if(sesssionTrackerActive == true && self.isAnimating == false){
+            print("NO3")
             timeManager()                                       //Call timeManager()
             sessionTracker = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(SquareBreathingViewController.timeManager), userInfo: nil, repeats: true)  //Call timeManager() once in every second
             
@@ -399,6 +389,7 @@ class SquareBreathingViewController: UIViewController{
 
         }
         else{
+            print("YES4")
             sessionTracker.invalidate()                         //Stops timer
             sessionTimeSeconds = 60                             //Reset
             sessionTimeMinute = 4                               //Reset
@@ -411,6 +402,7 @@ class SquareBreathingViewController: UIViewController{
             
             syncStatistics()
             totalSessions+=1
+            print("NOW " + String(totalSessions))
             saveStatistics()
             saveRecentSesionTracker()
             sessionSecs = 0
