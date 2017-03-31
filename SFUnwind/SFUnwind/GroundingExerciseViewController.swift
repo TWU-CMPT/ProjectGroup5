@@ -49,14 +49,21 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
     // Grounding Exercise Camera Preview Layer
     lazy var previewLayer: AVCaptureVideoPreviewLayer = {
         // Create preview layer
-        let preview =  AVCaptureVideoPreviewLayer(session: self.cameraSession)
-        // Set the bounds of the preview layer
-        preview?.bounds = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
-        // Set the position of the preview layer
-        preview?.position = CGPoint(x: self.view.bounds.midX, y: self.view.bounds.midY)
-        // Set the aspect ratio of the preview layer
-        preview?.videoGravity = AVLayerVideoGravityResizeAspect
-        return preview!
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera){
+            let preview =  AVCaptureVideoPreviewLayer(session: self.cameraSession)
+            // Set the bounds of the preview layer
+            preview?.bounds = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
+            // Set the position of the preview layer
+            preview?.position = CGPoint(x: self.view.bounds.midX, y: self.view.bounds.midY)
+            // Set the aspect ratio of the preview layer
+            preview?.videoGravity = AVLayerVideoGravityResizeAspect
+            return preview!
+        }
+        else {
+            let preview = AVCaptureVideoPreviewLayer()
+            return preview
+        }
+        
     }()
     
     // Grounding Exercise Camera Session
@@ -64,7 +71,9 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         // Create capture session
         let s = AVCaptureSession()
         // Sets quality of capture session
-        s.sessionPreset = AVCaptureSessionPresetLow
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera){
+            s.sessionPreset = AVCaptureSessionPresetLow
+        }
         return s
     }()
     
@@ -97,7 +106,9 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // Starts the camera session
-        cameraSession.startRunning()
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera){
+            cameraSession.startRunning()
+        }
         // Alters the UI elements appropiately
         // Reset Button
         resetButton.isHidden = true
