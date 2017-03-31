@@ -60,6 +60,24 @@ class Draw: UIView {
             set1?.strokePath()
             set1?.restoreGState()
         }
+        //For Y Value
+        let set2 = UIGraphicsGetCurrentContext()
+        set2?.saveGState()
+        set2?.setLineWidth(4)
+        set2?.setStrokeColor(UIColor.black.cgColor)
+        let rectangle = CGRect(x: 16,y: 285,width: 4,height: -280) //was  (x: offset,y: 235,width: 15,height: -heightValue)
+        set2?.addRect(rectangle)
+        set2?.strokePath()
+        set2?.restoreGState()
+        //For X Value
+        let set3 = UIGraphicsGetCurrentContext()
+        set3?.saveGState()
+        set3?.setLineWidth(4)
+        set3?.setStrokeColor(UIColor.black.cgColor)
+        let rectangle2 = CGRect(x: 16,y: 289,width: 250,height: 4) //was  (x: offset,y: 235,width: 15,height: -heightValue)
+        set3?.addRect(rectangle2)
+        set3?.strokePath()
+        set3?.restoreGState()
 
         let arrayLenght = getArrayLength()
         let sessionArray = getSessionArray()
