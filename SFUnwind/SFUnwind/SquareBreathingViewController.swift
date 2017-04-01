@@ -405,7 +405,7 @@ class SquareBreathingViewController: UIViewController{
         if(sessionTimeSeconds == 0 && sessionTimeMinute == 0){
             restartButton(UIButton())
             if(self.mantraAvailable == true){
-                let dMantra = UIAlertController(title: "", message: self.arrayOfMantra[Int(arc4random_uniform(UInt32(self.arrayOfMantra.count)))], preferredStyle: .alert)
+                let dMantra = UIAlertController(title: "A Positive Affirmation:", message: self.arrayOfMantra[Int(arc4random_uniform(UInt32(self.arrayOfMantra.count)))], preferredStyle: .alert)
                 let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                 dMantra.addAction(theOkAction)
                 present(dMantra, animated: true, completion: nil)

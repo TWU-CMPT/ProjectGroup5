@@ -584,11 +584,11 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     //Schedule Notification
     @IBAction func scheduleNotification(_ sender: AnyObject) {
         
-        let notBoth = UIAlertController(title: "Reminders Cleared/Mantra Missing", message: "All notifications have been cleared. Please enter a mantra.", preferredStyle: .alert)
-        let notExist = UIAlertController(title: "Reminders Cleared", message: "Notifications have been cleared.", preferredStyle: .alert)
+        let notBoth = UIAlertController(title: "Reminders cleared/Mantra missing", message: "All notifications have been cleared. Please enter a mantra.", preferredStyle: .alert)
+        let notExist = UIAlertController(title: "Reminders cleared", message: "Notifications have been cleared.", preferredStyle: .alert)
         let removeNot = UIAlertController(title: "Mantra Not Found", message: "Please enter a mantra.", preferredStyle: .alert)
         let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        let notiSent = UIAlertController(title: "Positive Affirmation Confirmed", message: "Your mantra reminder preferences have been saved.", preferredStyle: .alert)
+        let notiSent = UIAlertController(title: "Positive affirmation confirmed", message: "Your mantra reminder preferences have been saved.", preferredStyle: .alert)
         
         
         

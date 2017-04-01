@@ -38,7 +38,7 @@ class StatisticsViewController: UIViewController {
         UserDefaults.standard.set(0, forKey: "totalMins")
         UserDefaults.standard.set([Double](), forKey: "previousSessions")
         //self.totalTimer.text = "00:00"
-        let allReset = UIAlertController(title: "Statitics Deleted", message: "All Statistics have been reset to default.", preferredStyle: .alert)
+        let allReset = UIAlertController(title: "Statistics Rest", message: "Your usage stats have been reset to default.", preferredStyle: .alert)
         let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         allReset.addAction(theOkAction)
         UserDefaults.standard.synchronize()
