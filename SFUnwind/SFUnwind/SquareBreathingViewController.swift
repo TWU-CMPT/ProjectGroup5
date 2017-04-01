@@ -552,7 +552,7 @@ class SquareBreathingViewController: UIViewController{
         self.statisticsButton.isHidden = false
         self.statisticsButton.isEnabled = true
         if(self.hasVisited == false){
-            let firstUse = UIAlertController(title: "Welcome to SFUnwind", message: "Tap the info button to the top right of any screen for help.", preferredStyle: .alert)
+            let firstUse = UIAlertController(title: "Welcome to SFUnwind", message: "Tap the info button to the top right of any screen for help", preferredStyle: .alert)
             let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             firstUse.addAction(theOkAction)
             self.present(firstUse, animated: true, completion: nil)
