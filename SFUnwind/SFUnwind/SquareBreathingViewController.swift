@@ -24,8 +24,8 @@ class SquareBreathingViewController: UIViewController{
     // UI Timer Parameters
     var sessionTimeSeconds = 60                         //Set Seconds
     var sessionTimeMinute = 4                           //Set Minute
-    var sessionTracker = Timer()
-    var animationTimer = Timer()
+    var sessionTracker : Timer?
+    var animationTimer : Timer?
     var sesssionTrackerActive: Bool = false             //A boolean statement is used to keep track of the state of RE/START button. sesssionTrackerActive acts like On/Off button
 
     var totalTimerSeconds: Int = 0
@@ -51,13 +51,12 @@ class SquareBreathingViewController: UIViewController{
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        if(sesssionTrackerActive == false){
-            print("NO1")
-            // oh hey nothing
+        if(sesssionTrackerActive == true || reStartButtonText.currentTitle == "Stop"){
+            print("OH1")
+            restartButton(UIButton())
         }
         else {
-            print("YES2")
-            restartButton(UIButton())
+            print("OH2")
         }
     }
     
@@ -308,10 +307,17 @@ class SquareBreathingViewController: UIViewController{
     
     // Handle the timer as it is being displayed on the screen:
     func timeManager(){
+        if self.reStartButtonText.currentTitle != "Stop" {
+            animationTimer!.invalidate()
+            sessionTracker!.invalidate()
+            animationTimer = nil
+            sessionTracker = nil
+            return
+        }
         sessionSecs+=1
         sessionTimeSeconds-=1                                                  //Decrement Seconds
         totalTimerSeconds+=1                                                   //Increment Seconds
-
+        
         if(sessionTimeSeconds == 0 && sessionTimeMinute == 0){
             restartButton(UIButton())
             sessionTimer.text = "05:00"
@@ -322,18 +328,18 @@ class SquareBreathingViewController: UIViewController{
             sessionTimeMinute-=1                                               //Decrement Minutes
             sessionTimeSeconds = 60                                            //Decrement Seconds
         }
-        
+            
         else if(sessionTimeSeconds < 10 && sessionTimeMinute == 0){             //If no mins left
             sessionTimer.text = "0" + String(sessionTimeMinute) + ":0" + String(sessionTimeSeconds)
-
+            
             if(sessionTimeSeconds <= -1){                                       //Detects if timer is finished
-                sessionTracker.invalidate()                                     //Stops the timer
+                sessionTracker?.invalidate()                                     //Stops the timer
                 sessionTimer.text = "FINISHED"
-
+                
             }
         }
         else if(sessionTimeSeconds < 10 && sessionTimeMinute != 0 ){            //If Session Seconds is a one digit number
-                sessionTimer.text = "0" + String(sessionTimeMinute) + ":0" + String(sessionTimeSeconds)
+            sessionTimer.text = "0" + String(sessionTimeMinute) + ":0" + String(sessionTimeSeconds)
         }
         else{                                                                   //Casually prints time
             sessionTimer.text = "0" + String(sessionTimeMinute) + ":" + String(sessionTimeSeconds)
@@ -343,38 +349,49 @@ class SquareBreathingViewController: UIViewController{
             totalTimerSeconds = 0
             totalTimerMinute += 1
         }
-        if(totalTimerMinute < 10 && totalTimerSeconds < 10){                    //If both Min&&Sec are one digit
-            totalTimer.text = "0" + String(totalTimerMinute) + ":0" + String(totalTimerSeconds)     //Keeps XX:XX format
+        var totalSecString = String(totalTimerSeconds)
+        if(totalTimerSeconds < 10){
+            totalSecString = "0" + totalSecString
         }
-        else if(totalTimerMinute < 10 && totalTimerSeconds >= 10){              //If min is one digit number
-            totalTimer.text = "0" + String(totalTimerMinute) + ":" + String(totalTimerSeconds)      //Keeps XX:XX format
+        var totalMinString = String(totalTimerMinute)
+        if(totalTimerMinute < 10){
+            totalMinString = "0" + totalMinString
         }
-        else{                                                                   //If both Min&&Sec aren't one digit
-            totalTimer.text = String(totalTimerMinute) + ":" + String(totalTimerSeconds)
-
-        }
+        totalTimer.text = totalMinString + ":" + totalSecString    //Keeps XX:XX format
         self.resetTimerColor() // Resets the color of timer
     }
+
+    
     
     // scaleAnimationManager calls all four steps of animation in order which are fadein, scalex2, scale to original and fade out. SquareOrderManager function is used to track the current image
     func scaleAnimationManager(){
+        if self.reStartButtonText.currentTitle != "Stop" {
+            if(animationTimer != nil){
+                animationTimer!.invalidate()
+                animationTimer = nil
+            }
+            if(sessionTracker != nil){
+                sessionTracker!.invalidate()
+                sessionTracker = nil
+            }
+            return
+        }
         UIView.animate(withDuration: 2, delay: 0, options: .curveEaseOut, animations:{
             AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
             self.isAnimating = true
             self.squareOrderManager(currentCircle: self.circleOrderTracker).transform = CGAffineTransform(scaleX: 2, y: 2) //Sets the selected image's scale to 2 in 2 seconds
 
         }, completion: { (finished: Bool) -> Void in
-            AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+            if(self.sessionTracker != nil){
+                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+            }
         })
-        
-        //UIView.animate(withDuration: 0.2, delay: 3.6, options: .curveEaseOut, animations:{
-        // //Vibrates the phone
-        //}, completion:nil)
         UIView.animate(withDuration: 2, delay: 2.2, options: .curveEaseOut, animations:{
             self.squareOrderManager(currentCircle: self.circleOrderTracker).transform = CGAffineTransform(scaleX: 1, y: 1) //Rescales the image over time
         }, completion: {(finished: Bool) -> Void in
             self.isAnimating=false
         })
+
         circleOrderTracker+=1 //Rotates between images
     }
     
@@ -413,33 +430,38 @@ class SquareBreathingViewController: UIViewController{
         var _ = saveMinutesTimer(totalTimerMinute: totalTimerMinute)
         var _ = saveSecondsTimer(totalTimerSeconds:totalTimerSeconds)
         
-        if(sesssionTrackerActive == true && self.isAnimating == false){
+        if(sesssionTrackerActive == true && self.isAnimating == false && sessionTracker == nil && animationTimer == nil){
             self.restartButton.isHidden = true
             self.restartButton.isEnabled = false
+            while(reStartButtonText.currentTitle != "Stop"){
+                reStartButtonText.setTitle("Stop", for: .normal)
+            }
+            sessionTracker = Timer()
+            animationTimer = Timer()
             timeManager()                                       //Call timeManager()
             sessionTracker = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(SquareBreathingViewController.timeManager), userInfo: nil, repeats: true)  //Call timeManager() once in every second
-            
             scaleAnimationManager()                             //Call animation handler
             animationTimer = Timer.scheduledTimer(timeInterval: 4.2, target: self, selector: #selector(SquareBreathingViewController.scaleAnimationManager), userInfo: nil, repeats: true)
-            reStartButtonText.setTitle("Stop", for: .normal)
+            
 
         }
-        else{
+        else if (sessionTracker != nil && animationTimer != nil){
             self.restartButton.isHidden = false
             self.restartButton.isEnabled = true
-            sessionTracker.invalidate()                         //Stops timer
+            sessionTracker!.invalidate()                         //Stops timer
             sessionTimeSeconds = 60                             //Reset
             sessionTimeMinute = 4                               //Reset
             sessionTimer.text = "05:00"                         //Print to screen
             self.resetTimerColor()                              //Reset Timer Color
-            animationTimer.invalidate()                         //Stops timer for animation
+            animationTimer!.invalidate()                         //Stops timer for animation
             circleOrderTracker = 1                              //Reset image number
             reStartButtonText.setTitle("Start", for: .normal)//Set Reset button text
+            sessionTracker = nil
+            animationTimer = nil
             setTotalStatistics(previousSesssion: loadTotalStatistics())
             
             syncStatistics()
             totalSessions+=1
-            print("NOW " + String(totalSessions))
             saveStatistics()
             saveRecentSesionTracker()
             sessionSecs = 0
