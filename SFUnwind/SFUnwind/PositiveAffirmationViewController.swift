@@ -295,7 +295,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             }
             let weekday = NSCalendar.current.component(.weekday, from: notDate!)
             if(setNot.repeatInterval == NSCalendar.Unit.hour){
-                self.notificationSet.text = "Active Reminder: Each hour at ##:" + minuteString
+                self.notificationSet.text = "Active Reminder: Each hour at --:" + minuteString
             }
             else if(setNot.repeatInterval == NSCalendar.Unit.day){
                 self.notificationSet.text = "Active Reminder: Each Day at " + hourString + ":" + minuteString + " " + AMPM
