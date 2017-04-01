@@ -265,7 +265,6 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         let thePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         let theURL = NSURL(fileURLWithPath: thePath)
         pathToAff = theURL.appendingPathComponent(desiredFile)?.path
-        sleep(1)
         // Set notification settings properly.
         if (UIApplication.shared.scheduledLocalNotifications?.count)! > 0 {
             let setNot = UIApplication.shared.scheduledLocalNotifications![0]
@@ -648,7 +647,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             matchingComponents.hour! = matchingComponents.hour! % 24
         }
         let nextDay = calendar.nextDate(after: Date(), matching: matchingComponents, matchingPolicy: .nextTime)
-        //print(nextDay?.description)
+        print(nextDay?.description)
         if(self.Label.text != ""){
             UIApplication.shared.cancelAllLocalNotifications()
             self.notificationSet.text = "No Active Reminder"

@@ -37,6 +37,11 @@ class SquareBreathingViewController: UIViewController{
     var minSession: Double = 0
     var averageSession: Double = 1
     var maxSession: Double = 0
+    var pathToAff: String? = nil
+    var arrayOfMantra = [String]()
+    var totalMantras: Int = 0
+    var mantraAvailable = false
+    var hasVisited = false
     
     var statsPageOpen: Bool = false
     
@@ -47,6 +52,7 @@ class SquareBreathingViewController: UIViewController{
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        // Present for first
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -54,13 +60,21 @@ class SquareBreathingViewController: UIViewController{
         if(sesssionTrackerActive == true || reStartButtonText.currentTitle == "Stop"){
             restartButton(UIButton())
         }
-        else {
-            print("OH2")
+        if(self.hasVisited == false){
+            print("VISITED")
+            let firstUse = UIAlertController(title: "Hello New User", message: "Click on the help button on the top right on any feature to obtain info.", preferredStyle: .alert)
+            let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            firstUse.addAction(theOkAction)
+            self.present(firstUse, animated: true, completion: nil)
+            UserDefaults.standard.set(true, forKey: "firstTime")
+            self.hasVisited = true
         }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        // Present First Use
+        print("WP " + String(self.hasVisited))
         sesssionTrackerActive = false
         loadStatistics()
         let totalSec = loadSecondsTimer()
@@ -74,12 +88,95 @@ class SquareBreathingViewController: UIViewController{
             totalMinString = "0" + totalMinString
         }
         totalTimer.text = totalMinString + ":" + totalSecString    //Keeps XX:XX format
+        // Set affirmation appropiately
+        let desiredFile = "affirmations.txt"
+        let thePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        let theURL = NSURL(fileURLWithPath: thePath)
+        pathToAff = theURL.appendingPathComponent(desiredFile)?.path
+        
+        let theFileManager = FileManager.default
+        if theFileManager.fileExists(atPath: self.pathToAff!){
+            
+            do {
+                let getText = try String(contentsOfFile: self.pathToAff!)
+                let tempArray = getText.components(separatedBy: "\n")
+                if(tempArray[0] != ""){
+                    self.arrayOfMantra = getText.components(separatedBy: "\n")
+                }
+                self.totalMantras = self.arrayOfMantra.count
+                if(self.totalMantras != 0){
+                    self.mantraAvailable = true
+                }
+            }
+            catch {
+                print("error loading contents of url \(self.pathToAff!)")
+                print(error.localizedDescription)
+            }
+        }
+        else {
+            //UserDefaults.standard.set(false, forKey: "firstTime")
+            //self.hasVisited = false
+            // Attempt to open the file:
+            guard let theFile = Bundle.main.path(forResource: "mantras", ofType: "txt", inDirectory: "positiveAffirmations") else {
+                return // Return if the file can't be found
+            }
+            
+            do {
+                // Extract the file contents, and return them as a split string array
+                let exportText = try String(contentsOfFile: theFile)
+                let tempArray = exportText.components(separatedBy: "\n")
+                if(tempArray[0] != ""){
+                    self.arrayOfMantra = exportText.components(separatedBy: "\n")
+                    if self.arrayOfMantra.last == "" {
+                        self.arrayOfMantra.removeLast()
+                    }
+                }
+                
+                //write to file
+                var toWrite = String()
+                for stringInArray in self.arrayOfMantra {
+                    if(stringInArray == self.arrayOfMantra.last!){
+                        toWrite += (stringInArray)
+                    }
+                    else {
+                        toWrite += (stringInArray + "\n")
+                    }
+                }
+                try (toWrite).write(toFile: self.pathToAff!, atomically: false, encoding: .utf8)
+                self.totalMantras = self.arrayOfMantra.count
+                if(self.totalMantras != 0){
+                    self.mantraAvailable = true
+                }
+                
+                
+            } catch let error as NSError { // Handle any exception: Return a nil if we have any issues
+                print("error loading contents of url \(theFile)")
+                print(error.localizedDescription)
+            }
+        }
+        if let checker: Bool = UserDefaults.standard.value(forKey: "firstTime") as? Bool {
+            self.hasVisited = checker
+        }
+        else {
+            UserDefaults.standard.set(false, forKey: "firstTime")
+            self.hasVisited = false
+        }
+        if(self.hasVisited == false){
+            self.statisticsButton.isHidden = true
+            self.statisticsButton.isEnabled = false
+        }
+        else{
+            self.statisticsButton.isHidden = false
+            self.statisticsButton.isEnabled = true
+        }
+
 
     }
     @IBOutlet weak var statisticsButton: UIButton!
     
     // Rotated the background image
     func rotateBG(targetView: UIView, duration: Double = 1.0){
+        // Present for first
         UIView.animate(withDuration: duration, delay: 0.0, options: .curveLinear, animations: { targetView.transform = targetView.transform.rotated(by: CGFloat(M_PI))}) { finished in self.rotateBG(targetView: targetView, duration: duration)
         }
     }
@@ -102,7 +199,7 @@ class SquareBreathingViewController: UIViewController{
         super.viewDidLoad() // Call the super class
         self.reStartButtonText.layer.cornerRadius = 10
         self.statisticsButton.layer.cornerRadius = 10
-        
+        self.statisticsButton.isHidden = false
         self.resetTimerColor() // Reset timer color
         self.topTitle.adjustsFontSizeToFitWidth = true
         //let offsetImage = topTitle.frame.height
@@ -305,13 +402,18 @@ class SquareBreathingViewController: UIViewController{
         sessionSecs+=1
         sessionTimeSeconds-=1                                                  //Decrement Seconds
         totalTimerSeconds+=1                                                   //Increment Seconds
-        
         if(sessionTimeSeconds == 0 && sessionTimeMinute == 0){
             restartButton(UIButton())
+            if(self.mantraAvailable == true){
+                let dMantra = UIAlertController(title: "", message: self.arrayOfMantra[Int(arc4random_uniform(UInt32(self.arrayOfMantra.count)))], preferredStyle: .alert)
+                let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                dMantra.addAction(theOkAction)
+                present(dMantra, animated: true, completion: nil)
+            }
             sessionTimer.text = "05:00"
         }
         
-        if(sessionTimeSeconds == 0 && sessionTimeMinute != 0){                 //If Remaining mins != 0
+        else if(sessionTimeSeconds == 0 && sessionTimeMinute != 0){                 //If Remaining mins != 0
             sessionTimer.text = "0" + String(sessionTimeMinute)+":00"
             sessionTimeMinute-=1                                               //Decrement Minutes
             sessionTimeSeconds = 60                                            //Decrement Seconds
@@ -322,7 +424,7 @@ class SquareBreathingViewController: UIViewController{
             
             if(sessionTimeSeconds <= -1){                                       //Detects if timer is finished
                 sessionTracker?.invalidate()                                     //Stops the timer
-                sessionTimer.text = "FINISHED"
+                sessionTimer.text = "05:00"
                 
             }
         }
@@ -409,7 +511,19 @@ class SquareBreathingViewController: UIViewController{
     
     // Handle time control. Start/Restart the timer based on user input:
     @IBAction func restartButton(_ sender: Any) {               //Re/Start button
-
+        // Present for first
+        print(self.hasVisited)
+        self.statisticsButton.isHidden = false
+        self.statisticsButton.isEnabled = true
+        if(self.hasVisited == false){
+            let firstUse = UIAlertController(title: "Hello New User", message: "Click on the help button on the top right on any feature to obtain info.", preferredStyle: .alert)
+            let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            firstUse.addAction(theOkAction)
+            self.present(firstUse, animated: true, completion: nil)
+            UserDefaults.standard.set(true, forKey: "firstTime")
+            self.hasVisited = true
+            return
+        }
         self.reStartButtonText.isEnabled = false                //BUG FIX // Case to disable Re/Start Button bashing
         if(self.reStartButtonText.isEnabled == true){
             return
@@ -419,6 +533,8 @@ class SquareBreathingViewController: UIViewController{
         var _ = saveSecondsTimer(totalTimerSeconds:totalTimerSeconds)
         
         if(sesssionTrackerActive == true && self.isAnimating == false && sessionTracker == nil && animationTimer == nil){
+            sessionTimeSeconds = 60                             //Reset
+            sessionTimeMinute = 4
             while(reStartButtonText.currentTitle != "Stop"){
                 reStartButtonText.setTitle("Stop", for: .normal)
             }
@@ -433,8 +549,8 @@ class SquareBreathingViewController: UIViewController{
         }
         else if (sessionTracker != nil && animationTimer != nil){
             sessionTracker!.invalidate()                         //Stops timer
-            sessionTimeSeconds = 60                             //Reset
-            sessionTimeMinute = 4                               //Reset
+            sessionTimeSeconds = 0                             //Reset
+            sessionTimeMinute = 5                               //Reset
             sessionTimer.text = "05:00"                         //Print to screen
             self.resetTimerColor()                              //Reset Timer Color
             animationTimer!.invalidate()                         //Stops timer for animation

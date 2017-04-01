@@ -40,6 +40,18 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
     // Grounding Exercise Blank Views
     var blankViews = [UIView]()
     
+    // Grounding Exercise Path to Affirmations
+    var pathToAff: String? = nil
+    
+    // Grounding Exercise Array of Mantras
+    var arrayOfMantra = [String]()
+    
+    // Grounding Exercise Total Amount of Mantras
+    var totalMantras: Int = 0
+    
+    // Grounding Exercise Mantra Indicator
+    var mantraAvailable = false
+    
     // Grounding Exercise Camera Failure Alert.
     let theAlert = UIAlertController(title: "For Testing", message: "Sorry, this device has no camera", preferredStyle: .alert)
     
@@ -168,6 +180,70 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         attAdd.addAttribute(NSForegroundColorAttributeName, value: UIColor.black, range: range)
         attAdd.addAttribute(NSStrokeWidthAttributeName, value: -2.5, range: range)
         self.countdown.attributedText = NSAttributedString(attributedString: attAdd)
+        // Set affirmation appropiately
+        let desiredFile = "affirmations.txt"
+        let thePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        let theURL = NSURL(fileURLWithPath: thePath)
+        pathToAff = theURL.appendingPathComponent(desiredFile)?.path
+        let theFileManager = FileManager.default
+        if theFileManager.fileExists(atPath: self.pathToAff!){
+            do {
+                let getText = try String(contentsOfFile: self.pathToAff!)
+                let tempArray = getText.components(separatedBy: "\n")
+                if(tempArray[0] != ""){
+                    self.arrayOfMantra = getText.components(separatedBy: "\n")
+                }
+                self.totalMantras = self.arrayOfMantra.count
+                if(self.totalMantras != 0){
+                    self.mantraAvailable = true
+                }
+            }
+            catch {
+                print("error loading contents of url \(self.pathToAff!)")
+                print(error.localizedDescription)
+            }
+        }
+        else {
+            
+            // Attempt to open the file:
+            guard let theFile = Bundle.main.path(forResource: "mantras", ofType: "txt", inDirectory: "positiveAffirmations") else {
+                return // Return if the file can't be found
+            }
+            
+            do {
+                // Extract the file contents, and return them as a split string array
+                let exportText = try String(contentsOfFile: theFile)
+                let tempArray = exportText.components(separatedBy: "\n")
+                if(tempArray[0] != ""){
+                    self.arrayOfMantra = exportText.components(separatedBy: "\n")
+                    if self.arrayOfMantra.last == "" {
+                        self.arrayOfMantra.removeLast()
+                    }
+                }
+                
+                //write to file
+                var toWrite = String()
+                for stringInArray in self.arrayOfMantra {
+                    if(stringInArray == self.arrayOfMantra.last!){
+                        toWrite += (stringInArray)
+                    }
+                    else {
+                        toWrite += (stringInArray + "\n")
+                    }
+                }
+                try (toWrite).write(toFile: self.pathToAff!, atomically: false, encoding: .utf8)
+                self.totalMantras = self.arrayOfMantra.count
+                if(self.totalMantras != 0){
+                    self.mantraAvailable = true
+                }
+                
+                
+            } catch let error as NSError { // Handle any exception: Return a nil if we have any issues
+                print("error loading contents of url \(theFile)")
+                print(error.localizedDescription)
+            }
+        }
+
     }
     
     
@@ -526,6 +602,11 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
                                             (finished: Bool) -> Void in
                                             if(self.resetButton.isHidden == false){
                                                 self.resetButton.isEnabled = true
+                                                if(self.mantraAvailable == true){
+                                                    let dMantra = UIAlertController(title: "", message: self.arrayOfMantra[Int(arc4random_uniform(UInt32(self.arrayOfMantra.count)))], preferredStyle: .alert)
+                                                    let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                                                    dMantra.addAction(theOkAction)
+                                                    self.present(dMantra, animated: true, completion: nil)                                           }
                                             }
                                         })
                                     })
