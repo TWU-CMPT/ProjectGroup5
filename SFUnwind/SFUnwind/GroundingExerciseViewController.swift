@@ -298,7 +298,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         // Apply correctly
         for blank in 0...4 {
             let spacing: CGFloat = 2.0
-            let down: CGFloat = 10.0
+            let down: CGFloat = 20.0
             // outer
             self.blankViews.append(UIView())
             self.blankViews[blank*2].frame = CGRect(x: self.sizeOfThumb*CGFloat(blank), y: down+0.0, width: self.sizeOfThumb, height: self.sizeOfThumb)
@@ -494,7 +494,8 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
                         // Adds the picture view to controller view
                         self.view.addSubview(self.allViews[self.currentTotalIndex])
                         UIView.animate(withDuration: 1, animations: {
-                            self.allViews[self.currentTotalIndex].frame = CGRect(x: self.sizeOfThumb*CGFloat(self.innerGoalIndex), y: 10.0+0.0, width: self.sizeOfThumb, height: self.sizeOfThumb)
+                            // Set the image animation correctly
+                            self.allViews[self.currentTotalIndex].frame = CGRect(x: self.sizeOfThumb*CGFloat(self.innerGoalIndex), y: 20.0+0.0, width: self.sizeOfThumb, height: self.sizeOfThumb)
                         })
                     }
                     else {
