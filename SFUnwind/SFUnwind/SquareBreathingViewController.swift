@@ -62,7 +62,7 @@ class SquareBreathingViewController: UIViewController{
         }
         if(self.hasVisited == false){
             print("VISITED")
-            let firstUse = UIAlertController(title: "Hello New User", message: "Click on the help button on the top right on any feature to obtain info.", preferredStyle: .alert)
+            let firstUse = UIAlertController(title: "Welcome to SFUnwind", message: "Click on the help button on the top right on any feature to obtain info.", preferredStyle: .alert)
             let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             firstUse.addAction(theOkAction)
             self.present(firstUse, animated: true, completion: nil)
@@ -516,7 +516,7 @@ class SquareBreathingViewController: UIViewController{
         self.statisticsButton.isHidden = false
         self.statisticsButton.isEnabled = true
         if(self.hasVisited == false){
-            let firstUse = UIAlertController(title: "Hello New User", message: "Click on the help button on the top right on any feature to obtain info.", preferredStyle: .alert)
+            let firstUse = UIAlertController(title: "Welcome to SFUnwind", message: "Click on the help button on the top right on any feature to obtain info.", preferredStyle: .alert)
             let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             firstUse.addAction(theOkAction)
             self.present(firstUse, animated: true, completion: nil)

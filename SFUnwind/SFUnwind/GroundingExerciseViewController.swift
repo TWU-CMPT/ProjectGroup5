@@ -302,7 +302,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
             // inner
             self.blankViews.append(UIView())
             self.blankViews[(blank*2) + 1].frame = CGRect(x: (self.sizeOfThumb*CGFloat(blank)) + spacing, y: spacing, width: self.sizeOfThumb-(spacing*2), height: self.sizeOfThumb-(spacing*2))
-            self.blankViews[(blank*2) + 1].backgroundColor = UIColor.brown
+            self.blankViews[(blank*2) + 1].backgroundColor = UIColor.lightGray
             self.view.addSubview(self.blankViews[(blank*2) + 1])
         }
         // Bring info button to front
@@ -603,7 +603,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
                                             if(self.resetButton.isHidden == false){
                                                 self.resetButton.isEnabled = true
                                                 if(self.mantraAvailable == true){
-                                                    let dMantra = UIAlertController(title: "", message: self.arrayOfMantra[Int(arc4random_uniform(UInt32(self.arrayOfMantra.count)))], preferredStyle: .alert)
+                                                    let dMantra = UIAlertController(title: "A Positive Affirmation:", message: self.arrayOfMantra[Int(arc4random_uniform(UInt32(self.arrayOfMantra.count)))], preferredStyle: .alert)
                                                     let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                                                     dMantra.addAction(theOkAction)
                                                     self.present(dMantra, animated: true, completion: nil)                                           }
