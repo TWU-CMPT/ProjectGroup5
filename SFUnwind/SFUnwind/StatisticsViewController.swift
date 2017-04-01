@@ -25,13 +25,41 @@ class StatisticsViewController: UIViewController {
     @IBOutlet weak var shortestSessionLabel: UILabel!
     @IBOutlet weak var averageTimeLabel: UILabel!
 
+    @IBOutlet weak var restartButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
+    
+    @IBAction func restartAllButton(_ sender: UIButton){
+        UserDefaults.standard.set(0, forKey: "averageSession")
+        UserDefaults.standard.set(999, forKey: "minSession")
+        UserDefaults.standard.set(0, forKey: "maxSession")
+        UserDefaults.standard.set(0, forKey: "totalSessions")
+        UserDefaults.standard.set(0, forKey: "lastSession")
+        UserDefaults.standard.set(0, forKey: "totalSecs") //Set Seconds
+        UserDefaults.standard.set(0, forKey: "totalMins")
+        UserDefaults.standard.set([Double](), forKey: "previousSessions")
+        //self.totalTimer.text = "00:00"
+        let allReset = UIAlertController(title: "Statitics Deleted", message: "All Statistics have been reset to default.", preferredStyle: .alert)
+        let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        allReset.addAction(theOkAction)
+        UserDefaults.standard.synchronize()
+        for theView in self.allViews {
+            theView.removeFromSuperview()
+        }
+        self.allViews = [UIView]()
+        self.averageTimeLabel.text = "Average: N/A"
+        self.shortestSessionLabel.text = "Shortest: N/A"
+        self.longestSessionLabel.text = "Longest: N/A"
+        self.totalNumberOfSessionsLabel.text =  "Total Sessions: 0"
+        self.present(allReset, animated: true, completion: nil) //Present alert
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Sets corner radius of back button
         self.backButton.layer.cornerRadius = 10
+        self.restartButton.layer.cornerRadius = 10
         
         if let avg:Double = UserDefaults.standard.value(forKey: "averageSession") as! Double?{
             averageTime = avg
