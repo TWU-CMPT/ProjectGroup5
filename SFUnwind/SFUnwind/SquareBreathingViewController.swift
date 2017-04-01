@@ -435,7 +435,7 @@ class SquareBreathingViewController: UIViewController{
             sessionTimer.text = "0" + String(sessionTimeMinute) + ":" + String(sessionTimeSeconds)
         }
         
-        if(totalTimerSeconds == 60){                                            //Set 60 secs to 0 secs and increment min
+        if(totalTimerSeconds >= 60){                                            //Set 60 secs to 0 secs and increment min
             totalTimerSeconds = 0
             totalTimerMinute += 1
         }
