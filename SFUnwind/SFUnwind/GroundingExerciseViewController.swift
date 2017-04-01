@@ -17,7 +17,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
     //******************
     
     // Grounding Exercise Goal Names (constants).
-    let goalString = ["[SEE]", "[TOUCH]", "[HEAR]"]
+    let goalString = ["[ see ]", "[ touch ]", "[ hear ]"]
     
     // Grounding Exercise Goal Current Index
     var goalIndex = 0
