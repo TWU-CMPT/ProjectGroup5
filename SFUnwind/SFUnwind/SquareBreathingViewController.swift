@@ -476,16 +476,52 @@ class SquareBreathingViewController: UIViewController{
                 AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
             }
         })
+        
+        UIView.animate(withDuration: 1.3, delay: 0.7, options: .curveEaseOut, animations:{
+        self.innerOrderManager(currentCircle: self.circleOrderTracker).transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+            
+        }, completion: nil)
+        
+        
+        
         UIView.animate(withDuration: 2, delay: 2.2, options: .curveEaseOut, animations:{
             self.squareOrderManager(currentCircle: self.circleOrderTracker).transform = CGAffineTransform(scaleX: 1, y: 1) //Rescales the image over time
         }, completion: {(finished: Bool) -> Void in
             self.isAnimating=false
         })
 
+        UIView.animate(withDuration: 1.3, delay: 2.69, options: .curveEaseOut, animations:{
+            self.innerOrderManager(currentCircle: self.circleOrderTracker).transform = CGAffineTransform(scaleX: 1, y: 1)
+            
+        }, completion: nil)
+        
+        
         circleOrderTracker+=1 //Rotates between images
     }
     
 
+    func innerOrderManager(currentCircle:Int) -> UIImageView{
+        let orderNumber = currentCircle % 4
+        
+        switch orderNumber{
+            
+        case 0:
+            return topRInner
+        case 1:
+            return topLInner
+        case 2:
+            return botLInner
+        case 3:
+            return botRInner
+            
+        default:
+            print("Input variable out of scope")
+            return topRInner
+        }
+        
+        
+    }
+    
     // Tracks the current image with switch statement and returns it
     func squareOrderManager(currentCircle:Int) -> UIImageView{
         let orderNumber = currentCircle % 4
@@ -576,6 +612,10 @@ class SquareBreathingViewController: UIViewController{
     }
     
     //Circles and Images
+    @IBOutlet weak var botLInner: UIImageView!
+    @IBOutlet weak var botRInner: UIImageView!
+    @IBOutlet weak var topRInner: UIImageView!
+    @IBOutlet weak var topLInner: UIImageView!
     @IBOutlet weak var reStartButtonText: UIButton!
     @IBOutlet weak var circleBLeft: UIImageView!
     @IBOutlet weak var circleTRight: UIImageView!
