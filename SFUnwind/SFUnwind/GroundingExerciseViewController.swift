@@ -174,12 +174,16 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         // Max Goal Reset
         self.maxGoal = 5
         // Reset countdown
+        // Sets up the countdown
+        self.countdown.text = "1/5"
+        // Reset countdown
         attAdd = NSMutableAttributedString.init(attributedString: self.countdown.attributedText!)
         range = ((self.countdown.text as NSString?)!).range(of: self.countdown.text!)
         attAdd.addAttribute(NSStrokeColorAttributeName, value: UIColor.white, range: range)
         attAdd.addAttribute(NSForegroundColorAttributeName, value: UIColor.black, range: range)
         attAdd.addAttribute(NSStrokeWidthAttributeName, value: -2.5, range: range)
         self.countdown.attributedText = NSAttributedString(attributedString: attAdd)
+
         // Set affirmation appropiately
         let desiredFile = "affirmations.txt"
         let thePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
@@ -274,7 +278,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         resetButton.isMultipleTouchEnabled = true
         // Scales the buttons and goal displays
         //---
-        self.goalDisplay.frame = CGRect(x: UIScreen.main.bounds.width*(1/6), y: UIScreen.main.bounds.height * (2.5/10.0), width: UIScreen.main.bounds.width*(2/3), height: UIScreen.main.bounds.width/8)
+        self.goalDisplay.frame = CGRect(x: UIScreen.main.bounds.width*(1/6), y: UIScreen.main.bounds.height * (14.0/30.0), width: UIScreen.main.bounds.width*(2/3), height: UIScreen.main.bounds.width/8)
         self.captureButton.frame = CGRect(x: UIScreen.main.bounds.width/4, y: UIScreen.main.bounds.height * (6.5/10.0), width: UIScreen.main.bounds.width/2, height: UIScreen.main.bounds.width/10)
         self.resetButton.frame = CGRect(x: UIScreen.main.bounds.width/4, y: UIScreen.main.bounds.height * (8.0/10.0), width:  UIScreen.main.bounds.width/2, height: UIScreen.main.bounds.width/10)
         self.countdown.frame = CGRect(x: UIScreen.main.bounds.width*(1/6), y: UIScreen.main.bounds.height * (7.75/10.0), width: UIScreen.main.bounds.width*(2/3), height: UIScreen.main.bounds.width/8)
@@ -294,14 +298,15 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         // Apply correctly
         for blank in 0...4 {
             let spacing: CGFloat = 2.0
+            let down: CGFloat = 10.0
             // outer
             self.blankViews.append(UIView())
-            self.blankViews[blank*2].frame = CGRect(x: self.sizeOfThumb*CGFloat(blank), y: 0.0, width: self.sizeOfThumb, height: self.sizeOfThumb)
+            self.blankViews[blank*2].frame = CGRect(x: self.sizeOfThumb*CGFloat(blank), y: down+0.0, width: self.sizeOfThumb, height: self.sizeOfThumb)
             self.blankViews[blank*2].backgroundColor = UIColor.white
             self.view.addSubview(self.blankViews[blank*2])
             // inner
             self.blankViews.append(UIView())
-            self.blankViews[(blank*2) + 1].frame = CGRect(x: (self.sizeOfThumb*CGFloat(blank)) + spacing, y: spacing, width: self.sizeOfThumb-(spacing*2), height: self.sizeOfThumb-(spacing*2))
+            self.blankViews[(blank*2) + 1].frame = CGRect(x: (self.sizeOfThumb*CGFloat(blank)) + spacing, y: down+spacing, width: self.sizeOfThumb-(spacing*2), height: self.sizeOfThumb-(spacing*2))
             self.blankViews[(blank*2) + 1].backgroundColor = UIColor.lightGray
             self.view.addSubview(self.blankViews[(blank*2) + 1])
         }
@@ -318,7 +323,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         // Allows the user to press Ok for alert
         theAlert.addAction(theOkAction)
         // Sets up the countdown
-        self.countdown.text = "5/5"
+        self.countdown.text = "1/5"
         // Reset countdown
         attAdd = NSMutableAttributedString.init(attributedString: self.countdown.attributedText!)
         range = ((self.countdown.text as NSString?)!).range(of: self.countdown.text!)
@@ -423,7 +428,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         // Max Goal Reset
         self.maxGoal = 5
         // Reset countdown
-        self.countdown.text = String(self.innerGoalIndex) + "/" + String(self.maxGoal)
+        self.countdown.text = String(self.innerGoalIndex+1) + "/" + String(self.maxGoal)
         attAdd = NSMutableAttributedString.init(attributedString: self.countdown.attributedText!)
         range = ((self.countdown.text as NSString?)!).range(of: self.countdown.text!)
         attAdd.addAttribute(NSStrokeColorAttributeName, value: UIColor.white, range: range)
@@ -489,7 +494,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
                         // Adds the picture view to controller view
                         self.view.addSubview(self.allViews[self.currentTotalIndex])
                         UIView.animate(withDuration: 1, animations: {
-                            self.allViews[self.currentTotalIndex].frame = CGRect(x: self.sizeOfThumb*CGFloat(self.innerGoalIndex), y: 0.0, width: self.sizeOfThumb, height: self.sizeOfThumb)
+                            self.allViews[self.currentTotalIndex].frame = CGRect(x: self.sizeOfThumb*CGFloat(self.innerGoalIndex), y: 10.0+0.0, width: self.sizeOfThumb, height: self.sizeOfThumb)
                         })
                     }
                     else {
@@ -630,7 +635,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
                         }
                     }
                     // Reset countdown
-                    self.countdown.text = String(self.innerGoalIndex) + "/" + String(self.maxGoal)
+                    self.countdown.text = String(self.innerGoalIndex+1) + "/" + String(self.maxGoal)
                     let attAdd = NSMutableAttributedString.init(attributedString: self.countdown.attributedText!)
                     let range = ((self.countdown.text as NSString?)!).range(of: self.countdown.text!)
                     attAdd.addAttribute(NSStrokeColorAttributeName, value: UIColor.white, range: range)
