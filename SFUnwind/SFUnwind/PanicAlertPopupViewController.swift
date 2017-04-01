@@ -92,6 +92,7 @@ class PanicAlertPopupViewController: UIViewController, CNContactPickerDelegate, 
         self.cancelButton.layer.cornerRadius = 15
         self.deleteButton.layer.cornerRadius = 15
         self.saveButton.layer.cornerRadius = 15
+        self.popupSelectContactBtn.layer.cornerRadius = 15
         popupTextInput.delegate = self
         
         // Insert the recieved alert into the UI:
