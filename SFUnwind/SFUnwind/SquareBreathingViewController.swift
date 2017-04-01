@@ -62,7 +62,7 @@ class SquareBreathingViewController: UIViewController{
         }
         if(self.hasVisited == false){
             print("VISITED")
-            let firstUse = UIAlertController(title: "Welcome to SFUnwind", message: "Click on the help button on the top right on any feature to obtain info.", preferredStyle: .alert)
+            let firstUse = UIAlertController(title: "Welcome to SFUnwind", message: "Tap the info button to the top right of any screen for help", preferredStyle: .alert)
             let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             firstUse.addAction(theOkAction)
             self.present(firstUse, animated: true, completion: nil)
