@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES" initialViewController="vSk-QB-SEX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES" initialViewController="vSk-QB-SEX">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -295,6 +295,8 @@
                         <color key="backgroundColor" red="0.1998479962348938" green="0.69690680503845215" blue="0.98134762048721313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
+                        <outlet property="BotLInner" destination="KWo-kG-Tr7" id="U5g-0d-sgQ"/>
+                        <outlet property="BotRInner" destination="KSV-pK-O0y" id="PuY-b1-W2k"/>
                         <outlet property="bgMantra" destination="TgL-aT-kmX" id="MOF-Hv-arT"/>
                         <outlet property="circleBLeft" destination="dHC-Im-eD2" id="L1M-vr-Lev"/>
                         <outlet property="circleBRight" destination="Kvg-Mw-712" id="Q6o-HZ-nWQ"/>
@@ -303,6 +305,8 @@
                         <outlet property="reStartButtonText" destination="yMl-L3-fQu" id="DE1-eG-OXD"/>
                         <outlet property="sessionTimer" destination="qdM-su-kh1" id="Q9f-jN-Fnf"/>
                         <outlet property="statisticsButton" destination="NK4-Dk-nxk" id="1zz-5G-8ap"/>
+                        <outlet property="topLInner" destination="K2o-5r-9J4" id="JN1-aC-Qr3"/>
+                        <outlet property="topRInner" destination="HoL-bH-n0a" id="ETl-Ba-gHj"/>
                         <outlet property="topTitle" destination="5rG-rX-037" id="OkQ-bP-Agw"/>
                         <outlet property="totalTimer" destination="VpD-SW-FJN" id="xCp-MY-df5"/>
                     </connections>
@@ -1311,8 +1315,8 @@
         <simulatedScreenMetrics key="destination" type="retina5_5.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Whi-nE-pgM"/>
-        <segue reference="cna-9s-vbo"/>
         <segue reference="hqG-cJ-l0S"/>
+        <segue reference="cna-9s-vbo"/>
+        <segue reference="v0c-2v-HoP"/>
     </inferredMetricsTieBreakers>
 </document>
