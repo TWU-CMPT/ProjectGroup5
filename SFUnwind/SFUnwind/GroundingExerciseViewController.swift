@@ -175,7 +175,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         self.maxGoal = 5
         // Reset countdown
         // Sets up the countdown
-        self.countdown.text = "1/5"
+        self.countdown.text = "0/5"
         // Reset countdown
         attAdd = NSMutableAttributedString.init(attributedString: self.countdown.attributedText!)
         range = ((self.countdown.text as NSString?)!).range(of: self.countdown.text!)
@@ -323,7 +323,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         // Allows the user to press Ok for alert
         theAlert.addAction(theOkAction)
         // Sets up the countdown
-        self.countdown.text = "1/5"
+        self.countdown.text = "0/5"
         // Reset countdown
         attAdd = NSMutableAttributedString.init(attributedString: self.countdown.attributedText!)
         range = ((self.countdown.text as NSString?)!).range(of: self.countdown.text!)
@@ -427,14 +427,16 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         self.innerGoalIndex = 0
         // Max Goal Reset
         self.maxGoal = 5
+        // Sets up the countdown
+        self.countdown.text = "0/5"
         // Reset countdown
-        self.countdown.text = String(self.innerGoalIndex+1) + "/" + String(self.maxGoal)
         attAdd = NSMutableAttributedString.init(attributedString: self.countdown.attributedText!)
         range = ((self.countdown.text as NSString?)!).range(of: self.countdown.text!)
         attAdd.addAttribute(NSStrokeColorAttributeName, value: UIColor.white, range: range)
         attAdd.addAttribute(NSForegroundColorAttributeName, value: UIColor.black, range: range)
         attAdd.addAttribute(NSStrokeWidthAttributeName, value: -2.5, range: range)
         self.countdown.attributedText = NSAttributedString(attributedString: attAdd)
+        // Sets up camera
     }
     
     // cameraButtonAction: This function is called when the user presses the capture button.
@@ -636,7 +638,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
                         }
                     }
                     // Reset countdown
-                    self.countdown.text = String(self.innerGoalIndex+1) + "/" + String(self.maxGoal)
+                    self.countdown.text = String(self.innerGoalIndex) + "/" + String(self.maxGoal)
                     let attAdd = NSMutableAttributedString.init(attributedString: self.countdown.attributedText!)
                     let range = ((self.countdown.text as NSString?)!).range(of: self.countdown.text!)
                     attAdd.addAttribute(NSStrokeColorAttributeName, value: UIColor.white, range: range)
