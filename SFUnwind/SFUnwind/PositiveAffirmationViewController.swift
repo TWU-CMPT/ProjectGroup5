@@ -647,7 +647,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             matchingComponents.hour! = matchingComponents.hour! % 24
         }
         let nextDay = calendar.nextDate(after: Date(), matching: matchingComponents, matchingPolicy: .nextTime)
-        print(nextDay?.description)
+        //print(nextDay?.description)
         if(self.Label.text != ""){
             UIApplication.shared.cancelAllLocalNotifications()
             self.notificationSet.text = "No Active Reminder"

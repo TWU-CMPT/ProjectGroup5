@@ -33,9 +33,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             //let categoryOne = UNNotificationCategory(identifier: "notificationID1", actions: [actionOne], intentIdentifiers: [], options: [])
             //center.setNotificationCategories([categoryOne])
         }
+        else {
+            let notificationTypes: UIUserNotificationType = [UIUserNotificationType.alert, UIUserNotificationType.badge, UIUserNotificationType.sound]
+            let pushNotificationSetting = UIUserNotificationSettings(types: notificationTypes, categories: nil)
+            application.registerUserNotificationSettings(pushNotificationSetting)
+            application.registerForRemoteNotifications()
+        }
         return true
     }
     
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data){
+        print("DEVICE TOKEN = \(deviceToken)")
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error){
+        print(error)
+    }
+    
+    private func application(application: UIApplication, didRecieveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        print(userInfo)
+        
+    }
     
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
