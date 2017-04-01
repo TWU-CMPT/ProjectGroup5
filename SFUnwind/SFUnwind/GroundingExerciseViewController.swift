@@ -37,6 +37,9 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
     // Grounding Exercise Array of Pictures
     var allViews = [UIImageView]()
     
+    // Grounding Exercise Blank Views
+    var blankViews = [UIView]()
+    
     // Grounding Exercise Camera Failure Alert.
     let theAlert = UIAlertController(title: "For Testing", message: "Sorry, this device has no camera", preferredStyle: .alert)
     
@@ -44,7 +47,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
     let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
     
     // Grounding Exercise Calculation of Size of Thumbail
-    let sizeOfThumb = (UIScreen.main.bounds.width/5.0)
+    let sizeOfThumb = min(UIScreen.main.bounds.height/8.0,UIScreen.main.bounds.width/5.0)
     
     // Grounding Exercise Camera Preview Layer
     lazy var previewLayer: AVCaptureVideoPreviewLayer = {
@@ -98,6 +101,9 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
     // Grounding Exercise Current Goal Display
     @IBOutlet weak var goalDisplay: UILabel!
     
+    // Grounding Exercise Countdown
+    @IBOutlet weak var countdown: UILabel!
+    
     // GroundingFeatureViewController Class methods/functions:
     //**************************************************
     
@@ -123,6 +129,13 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         self.previewLayer.removeAllAnimations()
         previewLayer.isHidden = false
         previewLayer.opacity = 1
+        // Put in blank screens
+        for blank in 0...4 {
+            self.blankViews[blank*2].isHidden = false
+            self.blankViews[(blank*2)+1].isHidden = false
+            self.blankViews[blank*2].alpha = 1
+            self.blankViews[(blank*2)+1].alpha = 1
+        }
         // Removes all picture from screen
         for tagger in 0...self.totalMax-1 {
             // Check for each with tag
@@ -136,12 +149,25 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         self.goalIndex = 0
         // Goal Display Reset
         self.goalDisplay.text = self.goalString[self.goalIndex]
+        var attAdd = NSMutableAttributedString.init(attributedString: self.goalDisplay.attributedText!)
+        var range = ((self.goalDisplay.text as NSString?)!).range(of: self.goalDisplay.text!)
+        attAdd.addAttribute(NSStrokeColorAttributeName, value: UIColor.white, range: range)
+        attAdd.addAttribute(NSForegroundColorAttributeName, value: UIColor.black, range: range)
+        attAdd.addAttribute(NSStrokeWidthAttributeName, value: -2.5, range: range)
+        self.goalDisplay.attributedText = NSAttributedString(attributedString: attAdd)
         // Current Total Index Reset
         self.currentTotalIndex = 0
         // Inner Gaol Index Reset
         self.innerGoalIndex = 0
         // Max Goal Reset
         self.maxGoal = 5
+        // Reset countdown
+        attAdd = NSMutableAttributedString.init(attributedString: self.countdown.attributedText!)
+        range = ((self.countdown.text as NSString?)!).range(of: self.countdown.text!)
+        attAdd.addAttribute(NSStrokeColorAttributeName, value: UIColor.white, range: range)
+        attAdd.addAttribute(NSForegroundColorAttributeName, value: UIColor.black, range: range)
+        attAdd.addAttribute(NSStrokeWidthAttributeName, value: -2.5, range: range)
+        self.countdown.attributedText = NSAttributedString(attributedString: attAdd)
     }
     
     
@@ -170,11 +196,12 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         resetButton.isExclusiveTouch = true
         //Activates multi touch of reset button
         resetButton.isMultipleTouchEnabled = true
-        // Scales the buttons and goal display
+        // Scales the buttons and goal displays
         //---
         self.goalDisplay.frame = CGRect(x: UIScreen.main.bounds.width*(1/6), y: UIScreen.main.bounds.height * (2.5/10.0), width: UIScreen.main.bounds.width*(2/3), height: UIScreen.main.bounds.width/8)
-        self.captureButton.frame = CGRect(x: UIScreen.main.bounds.width/4, y: UIScreen.main.bounds.height * (4.5/10.0), width: UIScreen.main.bounds.width/2, height: UIScreen.main.bounds.width/10)
+        self.captureButton.frame = CGRect(x: UIScreen.main.bounds.width/4, y: UIScreen.main.bounds.height * (6.5/10.0), width: UIScreen.main.bounds.width/2, height: UIScreen.main.bounds.width/10)
         self.resetButton.frame = CGRect(x: UIScreen.main.bounds.width/4, y: UIScreen.main.bounds.height * (8.0/10.0), width:  UIScreen.main.bounds.width/2, height: UIScreen.main.bounds.width/10)
+        self.countdown.frame = CGRect(x: UIScreen.main.bounds.width*(1/6), y: UIScreen.main.bounds.height * (7.75/10.0), width: UIScreen.main.bounds.width*(2/3), height: UIScreen.main.bounds.width/8)
         //---
         // Hides the reset button for grid view
         resetButton.isHidden = true
@@ -183,10 +210,47 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         // Reveals the preview layer to user
         self.previewLayer.removeAllAnimations()
         previewLayer.isHidden = false
+        // Adds white screens
+        for blankView in self.blankViews {
+            blankView.removeFromSuperview()
+        }
+        self.blankViews = [UIView]()
+        // Apply correctly
+        for blank in 0...4 {
+            let spacing: CGFloat = 2.0
+            // outer
+            self.blankViews.append(UIView())
+            self.blankViews[blank*2].frame = CGRect(x: self.sizeOfThumb*CGFloat(blank), y: 0.0, width: self.sizeOfThumb, height: self.sizeOfThumb)
+            self.blankViews[blank*2].backgroundColor = UIColor.white
+            self.view.addSubview(self.blankViews[blank*2])
+            // inner
+            self.blankViews.append(UIView())
+            self.blankViews[(blank*2) + 1].frame = CGRect(x: (self.sizeOfThumb*CGFloat(blank)) + spacing, y: spacing, width: self.sizeOfThumb-(spacing*2), height: self.sizeOfThumb-(spacing*2))
+            self.blankViews[(blank*2) + 1].backgroundColor = UIColor.brown
+            self.view.addSubview(self.blankViews[(blank*2) + 1])
+        }
+        // Bring info button to front
+        self.helpButton.superview?.bringSubview(toFront: self.helpButton)
         // Resets the goal display
         goalDisplay.text = goalString[goalIndex]
+        var attAdd = NSMutableAttributedString.init(attributedString: self.goalDisplay.attributedText!)
+        var range = ((self.goalDisplay.text as NSString?)!).range(of: self.goalDisplay.text!)
+        attAdd.addAttribute(NSStrokeColorAttributeName, value: UIColor.white, range: range)
+        attAdd.addAttribute(NSForegroundColorAttributeName, value: UIColor.black, range: range)
+        attAdd.addAttribute(NSStrokeWidthAttributeName, value: -2.5, range: range)
+        self.goalDisplay.attributedText = NSAttributedString(attributedString: attAdd)
         // Allows the user to press Ok for alert
         theAlert.addAction(theOkAction)
+        // Sets up the countdown
+        self.countdown.text = "5/5"
+        // Reset countdown
+        attAdd = NSMutableAttributedString.init(attributedString: self.countdown.attributedText!)
+        range = ((self.countdown.text as NSString?)!).range(of: self.countdown.text!)
+        attAdd.addAttribute(NSStrokeColorAttributeName, value: UIColor.white, range: range)
+        attAdd.addAttribute(NSForegroundColorAttributeName, value: UIColor.black, range: range)
+        attAdd.addAttribute(NSStrokeWidthAttributeName, value: -2.5, range: range)
+        self.countdown.attributedText = NSAttributedString(attributedString: attAdd)
+        // Sets up camera
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera){
             // Obtain the capture device available
             let theCaptureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo) as AVCaptureDevice
@@ -234,7 +298,6 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
             nav.callingScreen = 1 // Notify the popup who's calling it: 0 = Square Breathing, 1 = Grounding, 2 = Positive Affirmations, 3 = Panic Alerts
         }
     }
-    @IBOutlet weak var countdown: UILabel!
     
     // resetButtonAction: This function resets the controller to the initial state
     @IBAction func resetButtonAction(_ sender: UIButton) {
@@ -251,6 +314,13 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         self.previewLayer.removeAllAnimations()
         previewLayer.isHidden = false
         previewLayer.opacity = 1
+        // Put in blank screens
+        for blank in 0...4 {
+            self.blankViews[blank*2].isHidden = false
+            self.blankViews[(blank*2)+1].isHidden = false
+            self.blankViews[blank*2].alpha = 1
+            self.blankViews[(blank*2)+1].alpha = 1
+        }
         // Removes all picture from screen
         for tagger in 0...self.totalMax-1 {
             // Check for each with tag
@@ -264,12 +334,26 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         self.goalIndex = 0
         // Goal Display Reset
         self.goalDisplay.text = self.goalString[self.goalIndex]
+        var attAdd = NSMutableAttributedString.init(attributedString: self.goalDisplay.attributedText!)
+        var range = ((self.goalDisplay.text as NSString?)!).range(of: self.goalDisplay.text!)
+        attAdd.addAttribute(NSStrokeColorAttributeName, value: UIColor.white, range: range)
+        attAdd.addAttribute(NSForegroundColorAttributeName, value: UIColor.black, range: range)
+        attAdd.addAttribute(NSStrokeWidthAttributeName, value: -2.5, range: range)
+        self.goalDisplay.attributedText = NSAttributedString(attributedString: attAdd)
         // Current Total Index Reset
         self.currentTotalIndex = 0
         // Inner Gaol Index Reset
         self.innerGoalIndex = 0
         // Max Goal Reset
         self.maxGoal = 5
+        // Reset countdown
+        self.countdown.text = String(self.innerGoalIndex) + "/" + String(self.maxGoal)
+        attAdd = NSMutableAttributedString.init(attributedString: self.countdown.attributedText!)
+        range = ((self.countdown.text as NSString?)!).range(of: self.countdown.text!)
+        attAdd.addAttribute(NSStrokeColorAttributeName, value: UIColor.white, range: range)
+        attAdd.addAttribute(NSForegroundColorAttributeName, value: UIColor.black, range: range)
+        attAdd.addAttribute(NSStrokeWidthAttributeName, value: -2.5, range: range)
+        self.countdown.attributedText = NSAttributedString(attributedString: attAdd)
     }
     
     // cameraButtonAction: This function is called when the user presses the capture button.
@@ -300,7 +384,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
                     // Put image into array
                     self.allViews[self.currentTotalIndex] = UIImageView(image: image)
                     // Move and scale the image to appropiate place
-                    self.allViews[self.currentTotalIndex].frame = CGRect(x: self.sizeOfThumb*CGFloat(self.innerGoalIndex), y: 0.0, width: self.sizeOfThumb, height: self.sizeOfThumb)
+                    self.allViews[self.currentTotalIndex].frame = CGRect(x: self.sizeOfThumb*CGFloat(self.innerGoalIndex), y: -self.sizeOfThumb, width: self.sizeOfThumb, height: self.sizeOfThumb)
                     // Set the tag for overlay on picture
                     self.allViews[self.currentTotalIndex].tag = 60 + self.currentTotalIndex
                     // Hide all previous pictures when goal is changed
@@ -320,8 +404,17 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
                     self.allViews[self.currentTotalIndex].alpha = 1
                     // Checks if still valid
                     if self.maxGoal != 0 && self.currentTotalIndex < 45 {
+                        let previewAnimation = CABasicAnimation(keyPath: "opacity")
+                        previewAnimation.fromValue = 0.5
+                        previewAnimation.toValue = 1
+                        previewAnimation.duration = 0.3
+                        previewAnimation.autoreverses = false
+                        self.previewLayer.add(previewAnimation, forKey: "opacity")
                         // Adds the picture view to controller view
                         self.view.addSubview(self.allViews[self.currentTotalIndex])
+                        UIView.animate(withDuration: 1, animations: {
+                            self.allViews[self.currentTotalIndex].frame = CGRect(x: self.sizeOfThumb*CGFloat(self.innerGoalIndex), y: 0.0, width: self.sizeOfThumb, height: self.sizeOfThumb)
+                        })
                     }
                     else {
                         // Return if invalid
@@ -341,6 +434,11 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
                         self.goalIndex+=1
                         // If we went through entire goal array
                         if(self.goalIndex == 3){
+                            // Remove blank screen
+                            UIView.animate(withDuration: 2, animations: {
+                                self.blankViews[((self.maxGoal-1)*2)].alpha = 0
+                                self.blankViews[((self.maxGoal-1)*2+1)].alpha = 0
+                            })
                             // Decrement the max goal for 1 less picture per round
                             self.maxGoal-=1
                             // Reset goal index
@@ -348,8 +446,16 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
                         }
                         // Set current goal to correct index
                         self.goalDisplay.text = self.goalString[self.goalIndex]
+                        let attAdd = NSMutableAttributedString.init(attributedString: self.goalDisplay.attributedText!)
+                        let range = ((self.goalDisplay.text as NSString?)!).range(of: self.goalDisplay.text!)
+                        attAdd.addAttribute(NSStrokeColorAttributeName, value: UIColor.white, range: range)
+                        attAdd.addAttribute(NSForegroundColorAttributeName, value: UIColor.black, range: range)
+                        attAdd.addAttribute(NSStrokeWidthAttributeName, value: -2.5, range: range)
+                        self.goalDisplay.attributedText = NSAttributedString(attributedString: attAdd)
                         // Check if grid is now needed to be display
                         if(self.maxGoal==0){
+                            // Hide countdown
+                            self.countdown.text = ""
                             // Hide capture button
                             self.captureButton.isHidden = true
                             // Disable capture button
@@ -361,6 +467,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
                             // Reveal reset button
                             self.resetButton.isHidden = false
                             // Hide the camera preview
+                            self.previewLayer.removeAllAnimations()
                             let previewAnimation = CABasicAnimation(keyPath: "opacity")
                             previewAnimation.fromValue = 1
                             previewAnimation.toValue = 0
@@ -441,6 +548,15 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
                             return
                         }
                     }
+                    // Reset countdown
+                    self.countdown.text = String(self.innerGoalIndex) + "/" + String(self.maxGoal)
+                    let attAdd = NSMutableAttributedString.init(attributedString: self.countdown.attributedText!)
+                    let range = ((self.countdown.text as NSString?)!).range(of: self.countdown.text!)
+                    attAdd.addAttribute(NSStrokeColorAttributeName, value: UIColor.white, range: range)
+                    attAdd.addAttribute(NSForegroundColorAttributeName, value: UIColor.black, range: range)
+                    attAdd.addAttribute(NSStrokeWidthAttributeName, value: -2.5, range: range)
+                    self.countdown.attributedText = NSAttributedString(attributedString: attAdd)
+                    // Re-enable capture button
                     self.captureButton.isEnabled = true
                 })
             }

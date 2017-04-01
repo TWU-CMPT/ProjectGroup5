@@ -52,7 +52,6 @@ class SquareBreathingViewController: UIViewController{
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         if(sesssionTrackerActive == true || reStartButtonText.currentTitle == "Stop"){
-            print("OH1")
             restartButton(UIButton())
         }
         else {
@@ -84,7 +83,7 @@ class SquareBreathingViewController: UIViewController{
         UIView.animate(withDuration: duration, delay: 0.0, options: .curveLinear, animations: { targetView.transform = targetView.transform.rotated(by: CGFloat(M_PI))}) { finished in self.rotateBG(targetView: targetView, duration: duration)
         }
     }
-    // Resets timer colir
+    // Resets timer color
     func resetTimerColor(){
         let attAdd = NSMutableAttributedString.init(attributedString: self.sessionTimer.attributedText!)
         let range = ((self.sessionTimer.text as NSString?)!).range(of: self.sessionTimer.text!)
