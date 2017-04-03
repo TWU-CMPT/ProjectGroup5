@@ -1,10 +1,12 @@
 //
-//  StatisticsViewController.swift
-//  SFUnwind
+// StatisticsViewController.swift - View Controller for the "Statistics feature screen
+// SFUnwind
+// Project Group 5: SFU CMPT 276
+// Primary programmer: David Magaril
+// Contributing Programmers: Berke Boz
+// Known issues: -
 //
-//  Created by berke on 2017-03-27.
-//  Copyright © 2017 CMPT 276 - Group 5. All rights reserved.
-//
+// Note: All files in this project conform to the coding standard included in the SFUnwind HW3 Quality Assurance Documentation
 
 import UIKit
 

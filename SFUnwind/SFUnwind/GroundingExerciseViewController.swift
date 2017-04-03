@@ -128,16 +128,16 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
             cameraSession.startRunning()
         }
         // Alters the UI elements appropiately
-        // Reset Button
+        // Reset Button --
         resetButton.isHidden = true
         resetButton.isEnabled = false
         self.resetButton.alpha = 1
-        // Goal Display
+        // Goal Display --
         goalDisplay.isHidden = false
         // Capture Button
         captureButton.isHidden = false
         captureButton.isEnabled = true
-        // Preview Layer
+        // Preview Layer -- Remove all animation as well
         self.previewLayer.removeAllAnimations()
         previewLayer.isHidden = false
         previewLayer.opacity = 1
@@ -160,13 +160,16 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         // Goat Index Reset
         self.goalIndex = 0
         // Goal Display Reset
+        // ---
         self.goalDisplay.text = self.goalString[self.goalIndex]
+        // SET TO WHITE
         var attAdd = NSMutableAttributedString.init(attributedString: self.goalDisplay.attributedText!)
         var range = ((self.goalDisplay.text as NSString?)!).range(of: self.goalDisplay.text!)
         attAdd.addAttribute(NSStrokeColorAttributeName, value: UIColor.white, range: range)
         attAdd.addAttribute(NSForegroundColorAttributeName, value: UIColor.black, range: range)
         attAdd.addAttribute(NSStrokeWidthAttributeName, value: -2.5, range: range)
         self.goalDisplay.attributedText = NSAttributedString(attributedString: attAdd)
+        // ---
         // Current Total Index Reset
         self.currentTotalIndex = 0
         // Inner Gaol Index Reset
@@ -177,36 +180,49 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         // Sets up the countdown
         self.countdown.text = "0/5"
         // Reset countdown
+        // SET TO WHITE
+        //--
         attAdd = NSMutableAttributedString.init(attributedString: self.countdown.attributedText!)
         range = ((self.countdown.text as NSString?)!).range(of: self.countdown.text!)
         attAdd.addAttribute(NSStrokeColorAttributeName, value: UIColor.white, range: range)
         attAdd.addAttribute(NSForegroundColorAttributeName, value: UIColor.black, range: range)
         attAdd.addAttribute(NSStrokeWidthAttributeName, value: -2.5, range: range)
         self.countdown.attributedText = NSAttributedString(attributedString: attAdd)
-
+        //--
         // Set affirmation appropiately
         let desiredFile = "affirmations.txt"
+        // Get path
         let thePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        // Get url
         let theURL = NSURL(fileURLWithPath: thePath)
+        // Set pathToAff appropiately
         pathToAff = theURL.appendingPathComponent(desiredFile)?.path
         let theFileManager = FileManager.default
+        // Checks if affirmations exist
         if theFileManager.fileExists(atPath: self.pathToAff!){
             do {
+                // Get file content
                 let getText = try String(contentsOfFile: self.pathToAff!)
+                // Seperate content
                 let tempArray = getText.components(separatedBy: "\n")
+                // Check if empty
                 if(tempArray[0] != ""){
                     self.arrayOfMantra = getText.components(separatedBy: "\n")
                 }
+                // Get the count of mantras
                 self.totalMantras = self.arrayOfMantra.count
+                // Check if there's any
                 if(self.totalMantras != 0){
                     self.mantraAvailable = true
                 }
             }
+                //Catch error
             catch {
                 print("error loading contents of url \(self.pathToAff!)")
                 print(error.localizedDescription)
             }
         }
+            // First time running or mantra file deleted
         else {
             
             // Attempt to open the file:
@@ -217,9 +233,13 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
             do {
                 // Extract the file contents, and return them as a split string array
                 let exportText = try String(contentsOfFile: theFile)
+                // Seperate contents
                 let tempArray = exportText.components(separatedBy: "\n")
+                // Check if empty
                 if(tempArray[0] != ""){
+                    // Put contents in
                     self.arrayOfMantra = exportText.components(separatedBy: "\n")
+                    // Check if last is "", remove if so
                     if self.arrayOfMantra.last == "" {
                         self.arrayOfMantra.removeLast()
                     }
@@ -227,21 +247,27 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
                 
                 //write to file
                 var toWrite = String()
+                // Put each string into array
                 for stringInArray in self.arrayOfMantra {
+                    // Check if last to make sure there isn't "\n" at end
                     if(stringInArray == self.arrayOfMantra.last!){
                         toWrite += (stringInArray)
                     }
+                        // Write normally
                     else {
                         toWrite += (stringInArray + "\n")
                     }
                 }
+                // Write to new file
                 try (toWrite).write(toFile: self.pathToAff!, atomically: false, encoding: .utf8)
+                // Get mantra count
                 self.totalMantras = self.arrayOfMantra.count
+                // Check if mantra available
                 if(self.totalMantras != 0){
                     self.mantraAvailable = true
                 }
                 
-                
+                // catch errors
             } catch let error as NSError { // Handle any exception: Return a nil if we have any issues
                 print("error loading contents of url \(theFile)")
                 print(error.localizedDescription)
@@ -297,23 +323,31 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         self.blankViews = [UIView]()
         // Apply correctly
         for blank in 0...4 {
+            // Get spacing!
             let spacing: CGFloat = 2.0
             let down: CGFloat = 20.0
-            // outer
+            // Outer square!
             self.blankViews.append(UIView())
+            // Set frame
             self.blankViews[blank*2].frame = CGRect(x: self.sizeOfThumb*CGFloat(blank), y: down+0.0, width: self.sizeOfThumb, height: self.sizeOfThumb)
+            // Set color
             self.blankViews[blank*2].backgroundColor = UIColor.white
+            // Add view
             self.view.addSubview(self.blankViews[blank*2])
-            // inner
+            // Inner square!
             self.blankViews.append(UIView())
+            // Set frame
             self.blankViews[(blank*2) + 1].frame = CGRect(x: (self.sizeOfThumb*CGFloat(blank)) + spacing, y: down+spacing, width: self.sizeOfThumb-(spacing*2), height: self.sizeOfThumb-(spacing*2))
+            // Set color
             self.blankViews[(blank*2) + 1].backgroundColor = UIColor.lightGray
+            // Add view
             self.view.addSubview(self.blankViews[(blank*2) + 1])
         }
         // Bring info button to front
         self.helpButton.superview?.bringSubview(toFront: self.helpButton)
         // Resets the goal display
         goalDisplay.text = goalString[goalIndex]
+        // Set text to white!
         var attAdd = NSMutableAttributedString.init(attributedString: self.goalDisplay.attributedText!)
         var range = ((self.goalDisplay.text as NSString?)!).range(of: self.goalDisplay.text!)
         attAdd.addAttribute(NSStrokeColorAttributeName, value: UIColor.white, range: range)
@@ -325,6 +359,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         // Sets up the countdown
         self.countdown.text = "0/5"
         // Reset countdown
+        // Set text to white
         attAdd = NSMutableAttributedString.init(attributedString: self.countdown.attributedText!)
         range = ((self.countdown.text as NSString?)!).range(of: self.countdown.text!)
         attAdd.addAttribute(NSStrokeColorAttributeName, value: UIColor.white, range: range)
@@ -391,7 +426,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         // Capture Button
         captureButton.isHidden = false
         captureButton.isEnabled = true
-        // Preview Layer
+        // Preview Layer and remove animations
         self.previewLayer.removeAllAnimations()
         previewLayer.isHidden = false
         previewLayer.opacity = 1
@@ -415,6 +450,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         self.goalIndex = 0
         // Goal Display Reset
         self.goalDisplay.text = self.goalString[self.goalIndex]
+        // Set to white
         var attAdd = NSMutableAttributedString.init(attributedString: self.goalDisplay.attributedText!)
         var range = ((self.goalDisplay.text as NSString?)!).range(of: self.goalDisplay.text!)
         attAdd.addAttribute(NSStrokeColorAttributeName, value: UIColor.white, range: range)
@@ -430,6 +466,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
         // Sets up the countdown
         self.countdown.text = "0/5"
         // Reset countdown
+        // Set to white
         attAdd = NSMutableAttributedString.init(attributedString: self.countdown.attributedText!)
         range = ((self.countdown.text as NSString?)!).range(of: self.countdown.text!)
         attAdd.addAttribute(NSStrokeColorAttributeName, value: UIColor.white, range: range)
@@ -487,14 +524,18 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
                     self.allViews[self.currentTotalIndex].alpha = 1
                     // Checks if still valid
                     if self.maxGoal != 0 && self.currentTotalIndex < 45 {
+                        // Create CALayer animation
                         let previewAnimation = CABasicAnimation(keyPath: "opacity")
+                        // From and to
                         previewAnimation.fromValue = 0.5
                         previewAnimation.toValue = 1
+                        // Duration is short
                         previewAnimation.duration = 0.3
                         previewAnimation.autoreverses = false
                         self.previewLayer.add(previewAnimation, forKey: "opacity")
                         // Adds the picture view to controller view
                         self.view.addSubview(self.allViews[self.currentTotalIndex])
+                        // Animate new photo to place
                         UIView.animate(withDuration: 1, animations: {
                             // Set the image animation correctly
                             self.allViews[self.currentTotalIndex].frame = CGRect(x: self.sizeOfThumb*CGFloat(self.innerGoalIndex), y: 20.0+0.0, width: self.sizeOfThumb, height: self.sizeOfThumb)
@@ -529,6 +570,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
                             self.goalIndex = 0
                         }
                         // Set current goal to correct index
+                        // Set goal appropiately white
                         self.goalDisplay.text = self.goalString[self.goalIndex]
                         let attAdd = NSMutableAttributedString.init(attributedString: self.goalDisplay.attributedText!)
                         let range = ((self.goalDisplay.text as NSString?)!).range(of: self.goalDisplay.text!)
@@ -551,6 +593,8 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
                             // Reveal reset button
                             self.resetButton.isHidden = false
                             // Hide the camera preview
+                            // Create CALayer animation
+                            // Remove all first
                             self.previewLayer.removeAllAnimations()
                             let previewAnimation = CABasicAnimation(keyPath: "opacity")
                             previewAnimation.fromValue = 1
@@ -595,25 +639,33 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
                                 // Reveal picture to user
                                 self.allViews[tagger].alpha = 0
                                 self.allViews[tagger].isHidden = false
+                                // Reveal to user in animation
                                 if(tagger != self.totalMax-1){
                                     UIView.animate(withDuration: 1, delay: Double(tagger)*0.1, options: .curveEaseOut, animations: {
                                         self.allViews[tagger].alpha = 1
                                     }, completion: nil)
                                 }
                                 else {
+                                    // Create animation to move to grid display
                                     UIView.animate(withDuration: 1, delay: Double(tagger)*0.1, options: .curveEaseOut, animations: {
                                         self.allViews[tagger].alpha = 1
                                     }, completion: { (finished: Bool) -> Void in
+                                        // Create animation to reveal to user
                                         UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations: {
                                             self.resetButton.alpha = 1
                                         }, completion: {
                                             (finished: Bool) -> Void in
+                                            // Set reset button
                                             if(self.resetButton.isHidden == false){
                                                 self.resetButton.isEnabled = true
+                                                // Display mantra to user
                                                 if(self.mantraAvailable == true){
+                                                    // Get mantra settings
                                                     let dMantra = UIAlertController(title: "A Positive Affirmation:", message: self.arrayOfMantra[Int(arc4random_uniform(UInt32(self.arrayOfMantra.count)))], preferredStyle: .alert)
+                                                    // Get user reply
                                                     let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                                                     dMantra.addAction(theOkAction)
+                                                    // Present as alert to user
                                                     self.present(dMantra, animated: true, completion: nil)                                           }
                                             }
                                         })
@@ -639,6 +691,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
                     }
                     // Reset countdown
                     self.countdown.text = String(self.innerGoalIndex) + "/" + String(self.maxGoal)
+                    // Set text to white!
                     let attAdd = NSMutableAttributedString.init(attributedString: self.countdown.attributedText!)
                     let range = ((self.countdown.text as NSString?)!).range(of: self.countdown.text!)
                     attAdd.addAttribute(NSStrokeColorAttributeName, value: UIColor.white, range: range)
