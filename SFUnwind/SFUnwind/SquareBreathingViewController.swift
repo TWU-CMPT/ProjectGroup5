@@ -47,6 +47,8 @@ class SquareBreathingViewController: UIViewController{
     var sessionStatistics: String = ""                  //Initialize session statistics string
     var sessionSecs:Double = 0                          //Set session seconds tracker as double
     
+    var latestSessions = [Double]()
+    
     @IBOutlet weak var topTitle: UILabel!
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -237,7 +239,7 @@ class SquareBreathingViewController: UIViewController{
     //Saves recent 10 sessions to UserStandards, to be used in Statistics View Controller
     func saveRecentSesionTracker(){
         loadStatistics()                                                                            //Sync previous data
-        var latestSessions = [Double]()
+        
         if let previousSessions = UserDefaults.standard.value(forKey: "previousSessions"){
             latestSessions = previousSessions as! [Double]
         }

@@ -31,7 +31,7 @@ class StatisticsViewController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     
     
-    @IBAction func restartAllButton(_ sender: UIButton){
+    @IBAction func restartAllButton(_ sender: Any){
         
         UserDefaults.standard.set(0, forKey: "averageSession")                  //Reset everything that is tracked
         UserDefaults.standard.set(999, forKey: "minSession")
