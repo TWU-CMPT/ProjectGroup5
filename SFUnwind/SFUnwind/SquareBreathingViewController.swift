@@ -33,20 +33,19 @@ class SquareBreathingViewController: UIViewController{
     var circleOrderTracker: Int = 1
     var isAnimating = false                             //A boolean statement to state if animation is active
     
-    var totalSessions:Int = 0
-    var minSession: Double = 0
-    var averageSession: Double = 1
-    var maxSession: Double = 0
-    var pathToAff: String? = nil
-    var arrayOfMantra = [String]()
-    var totalMantras: Int = 0
-    var mantraAvailable = false
-    var hasVisited = false
+    var totalSessions:Int = 0                           //Set total sessions counter
+    var minSession: Double = 0                          //Set min session
+    var averageSession: Double = 1                      //Set average session
+    var maxSession: Double = 0                          //Set max session
+    var pathToAff: String? = nil                        //Set string to find file path
+    var arrayOfMantra = [String]()                      //Set mantra array
+    var totalMantras: Int = 0                           //Set total number of mantras
+    var mantraAvailable = false                         //Boolean statement to track availability of mantra
+    var hasVisited = false                              //For first time usage detection
     
-    var statsPageOpen: Bool = false
-    
-    var sessionStatistics: String = ""
-    var sessionSecs:Double = 0
+    var statsPageOpen: Bool = false                     //Checks if stats page is open
+    var sessionStatistics: String = ""                  //Initialize session statistics string
+    var sessionSecs:Double = 0                          //Set session seconds tracker as double
     
     @IBOutlet weak var topTitle: UILabel!
     
@@ -74,7 +73,7 @@ class SquareBreathingViewController: UIViewController{
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // Present First Use
-        print("WP " + String(self.hasVisited))
+        
         sesssionTrackerActive = false
         loadStatistics()                                                //Sync statistics
         let totalSec = loadSecondsTimer()                               //Load seconds passed
@@ -315,21 +314,21 @@ class SquareBreathingViewController: UIViewController{
     
     // Save the seconds value of the timer to the device
     func saveSecondsTimer(totalTimerSeconds: Int) -> Int{
-        UserDefaults.standard.set(totalTimerSeconds, forKey: "totalSecs") //Set Seconds
+        UserDefaults.standard.set(totalTimerSeconds, forKey: "totalSecs")                   //Set Seconds
         UserDefaults.standard.synchronize()
         return totalTimerSeconds
     }
     
     // Save the minutes value of the timer to the device
     func saveMinutesTimer(totalTimerMinute: Int) -> Int{
-        UserDefaults.standard.set(totalTimerMinute, forKey: "totalMins")    //Set Minutes
+        UserDefaults.standard.set(totalTimerMinute, forKey: "totalMins")                    //Set Minutes
         UserDefaults.standard.synchronize()
         return totalTimerMinute
     }
     
     // Load the seconds data from the device
     func loadSecondsTimer() -> Int{
-        if let loadedSecs = UserDefaults.standard.value(forKey: "totalSecs") as? Int{    //Load seconds
+        if let loadedSecs = UserDefaults.standard.value(forKey: "totalSecs") as? Int{       //Load seconds
             totalTimerSeconds = loadedSecs
         }
         return totalTimerSeconds
@@ -337,7 +336,7 @@ class SquareBreathingViewController: UIViewController{
     
     // Load the minutes data from the device
     func loadMinutesTimer() -> Int{
-        if let loadedMins = UserDefaults.standard.value(forKey:  "totalMins") as? Int{    //Load minutes
+        if let loadedMins = UserDefaults.standard.value(forKey:  "totalMins") as? Int{      //Load minutes
             totalTimerMinute = loadedMins
             
         }
@@ -367,7 +366,7 @@ class SquareBreathingViewController: UIViewController{
             sessionTimer.text = "05:00"
         }
         
-        else if(sessionTimeSeconds == 0 && sessionTimeMinute != 0){                 //If Remaining mins != 0
+        else if(sessionTimeSeconds == 0 && sessionTimeMinute != 0){            //If Remaining mins != 0
             sessionTimer.text = "0" + String(sessionTimeMinute)+":00"
             sessionTimeMinute-=1                                               //Decrement Minutes
             sessionTimeSeconds = 60                                            //Decrement Seconds
@@ -377,7 +376,7 @@ class SquareBreathingViewController: UIViewController{
             sessionTimer.text = "0" + String(sessionTimeMinute) + ":0" + String(sessionTimeSeconds)
             
             if(sessionTimeSeconds <= -1){                                       //Detects if timer is finished
-                sessionTracker?.invalidate()                                     //Stops the timer
+                sessionTracker?.invalidate()                                    //Stops the timer
                 sessionTimer.text = "05:00"
                 
             }
@@ -401,8 +400,8 @@ class SquareBreathingViewController: UIViewController{
         if(totalTimerMinute < 10){
             totalMinString = "0" + totalMinString
         }
-        totalTimer.text = totalMinString + ":" + totalSecString    //Keeps XX:XX format
-        self.resetTimerColor() // Resets the color of timer
+        totalTimer.text = totalMinString + ":" + totalSecString                 //Keeps XX:XX format
+        self.resetTimerColor()                                                  // Resets the color of timer
     }
 
     
@@ -502,7 +501,7 @@ class SquareBreathingViewController: UIViewController{
     // Handle time control. Start/Restart the timer based on user input:
     @IBAction func restartButton(_ sender: Any) {               //Re/Start button
         // Present for first
-        print(self.hasVisited)
+
         self.statisticsButton.isHidden = false                  //Show hidden statistics button
         self.statisticsButton.isEnabled = true                  //Enable statistics button
         if(self.hasVisited == false){
