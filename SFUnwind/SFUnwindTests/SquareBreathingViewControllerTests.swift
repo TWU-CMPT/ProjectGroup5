@@ -200,8 +200,34 @@ class SquareBreathingViewControllerTests: XCTestCase {
         XCTAssert(latestSessions.count >= 10)
 
     }
+    //Tests if average functionality works
+    func testSyncStatistics(){
+        let _ = theSquareBreathingViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
+        // Here we test valid and invalid data for this function.
+        theSquareBreathingViewController?.reStartButtonText.setTitle("Stop", for: .normal)
     
-    
+        let numberOfSessions = 5
+        let average = 5
+        UserDefaults.standard.set(numberOfSessions, forKey: "totalSessions")
+        UserDefaults.standard.set(average, forKey: "averageSession")
+        theSquareBreathingViewController?.sessionSecs = 35.0
+        theSquareBreathingViewController?.loadStatistics()
+        theSquareBreathingViewController?.syncStatistics()
+        theSquareBreathingViewController?.saveStatistics()
+        let newAverage = UserDefaults.standard.value(forKey: "averageSession") as! Double?
+        XCTAssert(newAverage == 10.0)
+        
+        let oldMax = theSquareBreathingViewController?.maxSession
+        theSquareBreathingViewController?.sessionSecs = oldMax!+1
+        theSquareBreathingViewController?.syncStatistics()
+        XCTAssert(oldMax != theSquareBreathingViewController?.maxSession)
+        
+        let oldMin = theSquareBreathingViewController?.minSession
+        theSquareBreathingViewController?.sessionSecs = oldMin!-1
+        theSquareBreathingViewController?.syncStatistics()
+        XCTAssert(oldMax != theSquareBreathingViewController?.maxSession)
+        
+    }
     
     
     //Test if start button is initialized

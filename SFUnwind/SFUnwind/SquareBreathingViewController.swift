@@ -315,13 +315,18 @@ class SquareBreathingViewController: UIViewController{
     }
     
     // Save the seconds value of the timer to the device
+    //Input: passed seconds
+    //Output: passed seconds (Output added to this function in order to make debugging more practical)
     func saveSecondsTimer(totalTimerSeconds: Int) -> Int{
         UserDefaults.standard.set(totalTimerSeconds, forKey: "totalSecs")                   //Set Seconds
         UserDefaults.standard.synchronize()
         return totalTimerSeconds
     }
     
+    
     // Save the minutes value of the timer to the device
+    //Input: passed minutes
+    //Output: passed minutes (Output added to this function in order to make debugging more practical)
     func saveMinutesTimer(totalTimerMinute: Int) -> Int{
         UserDefaults.standard.set(totalTimerMinute, forKey: "totalMins")                    //Set Minutes
         UserDefaults.standard.synchronize()
@@ -329,6 +334,7 @@ class SquareBreathingViewController: UIViewController{
     }
     
     // Load the seconds data from the device
+    //Output: Seconds passed as an Integer
     func loadSecondsTimer() -> Int{
         if let loadedSecs = UserDefaults.standard.value(forKey: "totalSecs") as? Int{       //Load seconds
             totalTimerSeconds = loadedSecs
@@ -337,6 +343,7 @@ class SquareBreathingViewController: UIViewController{
     }
     
     // Load the minutes data from the device
+    //Output: Minutes passed as an Integer
     func loadMinutesTimer() -> Int{
         if let loadedMins = UserDefaults.standard.value(forKey:  "totalMins") as? Int{      //Load minutes
             totalTimerMinute = loadedMins
@@ -455,6 +462,8 @@ class SquareBreathingViewController: UIViewController{
     }
     
     // Tracks the current inner circle image with switch statement and returns it
+    //Input: circle order number as an Integer
+    //Output: Corresponding UI Image View
     func innerOrderManager(currentCircle:Int) -> UIImageView{
         let orderNumber = currentCircle % 4
         
@@ -478,6 +487,8 @@ class SquareBreathingViewController: UIViewController{
     }
     
     // Tracks the current outer circle image with switch statement and returns it
+    //Input: circle order number as an Integer
+    //Output: Corresponding UI Image View
     func squareOrderManager(currentCircle:Int) -> UIImageView{
         let orderNumber = currentCircle % 4
 

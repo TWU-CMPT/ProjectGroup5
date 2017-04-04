@@ -2,8 +2,8 @@
 // StatisticsViewController.swift - View Controller for the "Statistics feature screen
 // SFUnwind
 // Project Group 5: SFU CMPT 276
-// Primary programmer: David Magaril
-// Contributing Programmers: Berke Boz
+// Primary programmers: David Magaril, Berke Boz
+// Contributing Programmers:
 // Known issues: -
 //
 // Note: All files in this project conform to the coding standard included in the SFUnwind HW3 Quality Assurance Documentation
@@ -110,8 +110,8 @@ class StatisticsViewController: UIViewController {
                 self.allViews[offset*2].frame = CGRect(x: (leftG + (spacer*CGFloat(offset))), y: bottomG, width: spacer-5, height: -((CGFloat(bar/300.0)*heightMax)))   //Initialize the frame
                 self.allViews[(offset*2) + 1].frame = CGRect(x: (leftG + (spacer*CGFloat(offset))), y: bottomG, width: spacer-5, height: -(heightMax))                  //Draw the image
                 self.allViews[(offset*2) + 1].alpha = 0.3                                                                                                               //Change alpha to %30
-                self.view.addSubview(self.allViews[(offset*2) + 1])
-                self.view.addSubview(self.allViews[offset*2])
+                self.view.addSubview(self.allViews[(offset*2) + 1])     //Set background
+                self.view.addSubview(self.allViews[offset*2])           //Set background
                 self.view.bringSubview(toFront: self.allViews[(offset*2) + 1])
                 self.view.bringSubview(toFront: self.allViews[offset*2])
                 offset = offset + 1
