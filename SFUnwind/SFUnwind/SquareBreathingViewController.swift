@@ -24,14 +24,14 @@ class SquareBreathingViewController: UIViewController{
     // UI Timer Parameters
     var sessionTimeSeconds = 60                         //Set Seconds
     var sessionTimeMinute = 4                           //Set Minute
-    var sessionTracker : Timer?
-    var animationTimer : Timer?
+    var sessionTracker : Timer?                         //Install Timer
+    var animationTimer : Timer?                         //Install Timer
     var sesssionTrackerActive: Bool = false             //A boolean statement is used to keep track of the state of RE/START button. sesssionTrackerActive acts like On/Off button
 
-    var totalTimerSeconds: Int = 0
+    var totalTimerSeconds: Int = 0                      //Set timer seconds to 0
     var totalTimerMinute: Int = 0
     var circleOrderTracker: Int = 1
-    var isAnimating = false
+    var isAnimating = false                             //A boolean statement to state if animation is active
     
     var totalSessions:Int = 0
     var minSession: Double = 0
@@ -60,13 +60,13 @@ class SquareBreathingViewController: UIViewController{
         if(sesssionTrackerActive == true || reStartButtonText.currentTitle == "Stop"){
             restartButton(UIButton())
         }
-        if(self.hasVisited == false){
-            print("VISITED")
+        if(self.hasVisited == false){                                   //Set first time usage alert
+            
             let firstUse = UIAlertController(title: "Welcome to SFUnwind", message: "Tap the info button to the top right of any screen for help", preferredStyle: .alert)
             let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            firstUse.addAction(theOkAction)
+            firstUse.addAction(theOkAction)                             //Present the alert
             self.present(firstUse, animated: true, completion: nil)
-            UserDefaults.standard.set(true, forKey: "firstTime")
+            UserDefaults.standard.set(true, forKey: "firstTime")        //Set firstTime boolean to opposite so next time app opens, we dont get first time user alert
             self.hasVisited = true
         }
     }
@@ -76,25 +76,25 @@ class SquareBreathingViewController: UIViewController{
         // Present First Use
         print("WP " + String(self.hasVisited))
         sesssionTrackerActive = false
-        loadStatistics()
-        let totalSec = loadSecondsTimer()
-        let totalMin = loadMinutesTimer()
-        var totalSecString = String(totalSec)
+        loadStatistics()                                                //Sync statistics
+        let totalSec = loadSecondsTimer()                               //Load seconds passed
+        let totalMin = loadMinutesTimer()                               //Load minutes passed
+        var totalSecString = String(totalSec)                           //Declare total seconds passed as string
         if(totalSec < 10){
-            totalSecString = "0" + totalSecString
+            totalSecString = "0" + totalSecString                       //Keeps XX:XX format
         }
         var totalMinString = String(totalMin)
         if(totalMin < 10){
-            totalMinString = "0" + totalMinString
+            totalMinString = "0" + totalMinString                       //Keeps XX:XX format
         }
-        totalTimer.text = totalMinString + ":" + totalSecString    //Keeps XX:XX format
+        totalTimer.text = totalMinString + ":" + totalSecString         //Keeps XX:XX format
         // Set affirmation appropiately
-        let desiredFile = "affirmations.txt"
+        let desiredFile = "affirmations.txt"                            //For the mantra's file directory
         let thePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         let theURL = NSURL(fileURLWithPath: thePath)
         pathToAff = theURL.appendingPathComponent(desiredFile)?.path
         
-        let theFileManager = FileManager.default
+        let theFileManager = FileManager.default                        //Gets mantra
         if theFileManager.fileExists(atPath: self.pathToAff!){
             
             do {
@@ -114,9 +114,7 @@ class SquareBreathingViewController: UIViewController{
             }
         }
         else {
-            //UserDefaults.standard.set(false, forKey: "firstTime")
-            //self.hasVisited = false
-            // Attempt to open the file:
+            
             guard let theFile = Bundle.main.path(forResource: "mantras", ofType: "txt", inDirectory: "positiveAffirmations") else {
                 return // Return if the file can't be found
             }
@@ -154,11 +152,11 @@ class SquareBreathingViewController: UIViewController{
                 print(error.localizedDescription)
             }
         }
-        if let checker: Bool = UserDefaults.standard.value(forKey: "firstTime") as? Bool {
+        if let checker: Bool = UserDefaults.standard.value(forKey: "firstTime") as? Bool {          //Check if first time
             self.hasVisited = checker
         }
         else {
-            UserDefaults.standard.set(false, forKey: "firstTime")
+            UserDefaults.standard.set(false, forKey: "firstTime")                                   //Set false for first time usage
             self.hasVisited = false
         }
         if(self.hasVisited == false){
@@ -166,7 +164,7 @@ class SquareBreathingViewController: UIViewController{
             self.statisticsButton.isEnabled = false
         }
         else{
-            self.statisticsButton.isHidden = false
+            self.statisticsButton.isHidden = false                                                  //Enable statistics button
             self.statisticsButton.isEnabled = true
         }
 
@@ -175,13 +173,13 @@ class SquareBreathingViewController: UIViewController{
     @IBOutlet weak var statisticsButton: UIButton!
     
     // Rotated the background image
-    func rotateBG(targetView: UIView, duration: Double = 1.0){
+    func rotateBG(targetView: UIView, duration: Double = 1.0){                                      //Rotate background image
         // Present for first
-        UIView.animate(withDuration: duration, delay: 0.0, options: .curveLinear, animations: { targetView.transform = targetView.transform.rotated(by: CGFloat(M_PI))}) { finished in self.rotateBG(targetView: targetView, duration: duration)
+        UIView.animate(withDuration: duration, delay: 0.0, options: .curveLinear, animations: { targetView.transform = targetView.transform.rotated(by: CGFloat(M_PI))}) { finished in self.rotateBG(targetView: targetView, duration: duration)                                    //Animate the rotation
         }
     }
     // Resets timer color
-    func resetTimerColor(){
+    func resetTimerColor(){                                                                         //Reset the color
         let attAdd = NSMutableAttributedString.init(attributedString: self.sessionTimer.attributedText!)
         let range = ((self.sessionTimer.text as NSString?)!).range(of: self.sessionTimer.text!)
         attAdd.addAttribute(NSStrokeColorAttributeName, value: UIColor.white, range: range)
@@ -202,10 +200,7 @@ class SquareBreathingViewController: UIViewController{
         self.statisticsButton.isHidden = false
         self.resetTimerColor() // Reset timer color
         self.topTitle.adjustsFontSizeToFitWidth = true
-        //let offsetImage = topTitle.frame.height
-        //let center = sessionTimer.frame.origin.y + (sessionTimer.frame.height/2)
-        //let trueOffset = (center - offsetImage)*2
-        //let background = UIImageView(frame: CGRect(x: 0, y: offsetImage, width: UIScreen.main.bounds.width, height: trueOffset))
+
         bgMantra.image = UIImage(named: "mantraFinal2.png")
         view.sendSubview(toBack: bgMantra)
         self.rotateBG(targetView: bgMantra, duration: 60)
@@ -239,101 +234,60 @@ class SquareBreathingViewController: UIViewController{
         
         
     }
-    //DO NOT DELETE UNLESS BERKE IS REALLY REALLY SURE
-    func loadTotalStatistics() -> String{
-        let fileName = "timeStatistics"
-        let DocumentDirURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-        let fileURL = DocumentDirURL.appendingPathComponent(fileName).appendingPathExtension(".txt")
-        
-        
-        var readString = "" // Used to store the file contents
-        do {
-            // Read the file contents
-            readString = try String(contentsOf: fileURL)
-        } catch let error as NSError {
-            print("Failed reading from URL: \(fileURL), Error: " + error.localizedDescription)
-        }
-        return readString
-    
-    }
-    
+
+    //Saves recent 10 sessions to UserStandards, to be used in Statistics View Controller
     func saveRecentSesionTracker(){
-        loadStatistics()
+        loadStatistics()                                                                            //Sync previous data
         var latestSessions = [Double]()
         if let previousSessions = UserDefaults.standard.value(forKey: "previousSessions"){
             latestSessions = previousSessions as! [Double]
         }
         if(sessionSecs != 0.0){
-        latestSessions.append(sessionSecs)
+        latestSessions.append(sessionSecs)                                                          //We dont want user to press re/start button twice under 0.0 secs
         }
-        if(latestSessions.count >= 11){
-            latestSessions.remove(at: 0)
+        if(latestSessions.count >= 11){                                                             //Set to recent 10 sessions for stats page
+            latestSessions.remove(at: 0)                                                            //Remove oldest session
         }
         
-        UserDefaults.standard.set(latestSessions, forKey: "previousSessions")
-        print(latestSessions)
+        UserDefaults.standard.set(latestSessions, forKey: "previousSessions")                       //Save changes
     }
     
     
     
 
 
-    //DO NOT DELETE UNLESS BERKE IS REALLY REALLY SURE
-    func setTotalStatistics(previousSesssion: String){
-        
-        let writeString:String
-        
-        if(previousSesssion == ""){
-            writeString = String(sessionSecs)
-        }
-        else{
-            writeString = previousSesssion + " " + String(sessionSecs)
-        }
 
-        
-        let fileName = "timeStatistics"
-        let DocumentDirURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-        let fileURL = DocumentDirURL.appendingPathComponent(fileName).appendingPathExtension(".txt")
-        
-        do {
-            // Write to the file
-            try writeString.write(to: fileURL, atomically: true, encoding: String.Encoding.utf8)
-        } catch let error as NSError {
-            print("Failed writing to URL: \(fileURL), Error: " + error.localizedDescription)
-        }
-    
-    }
-
-    
+    //This function saves the values that we want to keep track of.
+    //Values are used in StatisticsViewControllerPage
     func saveStatistics(){
-        if(sessionSecs != 0.0){                                 // Session secs being equal to 0.00 causes bugs, best solution is to totally ignore the person who achieves to press Re/Start button twice in literally 0 seconds 0 miliseconds
-            UserDefaults.standard.set(averageSession, forKey: "averageSession")
+        if(sessionSecs != 0.0){                                                                     // Session secs being equal to 0.00 causes bugs, best solution is to totally ignore the person who achieves to press Re/Start button twice in literally 0 seconds 0 miliseconds
+            UserDefaults.standard.set(averageSession, forKey: "averageSession")                     //Save seconds to userStandards for use in Statistics Page
             UserDefaults.standard.set(minSession, forKey: "minSession")
             UserDefaults.standard.set(maxSession, forKey: "maxSession")
             UserDefaults.standard.set(totalSessions, forKey: "totalSessions")
             UserDefaults.standard.set(sessionSecs, forKey: "lastSession")
-            UserDefaults.standard.synchronize()
+            UserDefaults.standard.synchronize()                                                     //Syncronize
         }
     }
-    
+    //This function loads/sync's session data
     func loadStatistics(){
-        if let avg:Double = UserDefaults.standard.value(forKey: "averageSession") as! Double?{
+        if let avg:Double = UserDefaults.standard.value(forKey: "averageSession") as! Double?{      //Load average session
             averageSession = avg
         }
-        if let minS:Double = UserDefaults.standard.value(forKey: "minSession") as! Double? {
+        if let minS:Double = UserDefaults.standard.value(forKey: "minSession") as! Double? {        //Load min session
             minSession = minS
         }
-        if let maxS:Double = UserDefaults.standard.value(forKey: "maxSession") as! Double?{
+        if let maxS:Double = UserDefaults.standard.value(forKey: "maxSession") as! Double?{         //Load max session
             maxSession = maxS
         }
-        if let totalS = UserDefaults.standard.value(forKey: "totalSessions") as! Int?{
+        if let totalS = UserDefaults.standard.value(forKey: "totalSessions") as! Int?{              //Load total number of sessions
             totalSessions = totalS
         }
         UserDefaults.standard.synchronize()
     }
     
     
-    
+    //This function does necessary computation to sync average sessions and updates maxSession, minSession
     func syncStatistics(){
         if let numberOfSessions = UserDefaults.standard.value(forKey:  "totalSessions") as? Int{
          totalSessions = numberOfSessions
@@ -345,14 +299,14 @@ class SquareBreathingViewController: UIViewController{
         }
         else{
 
-            averageSession = (((averageSession*Double(totalSessions))+Double(sessionSecs))/Double((totalSessions+1)))
+            averageSession = (((averageSession*Double(totalSessions))+Double(sessionSecs))/Double((totalSessions+1)))       //Calculates average session
 
         }
         
-        if(Double(sessionSecs) > maxSession){
+        if(Double(sessionSecs) > maxSession){                                                           //Update new max session if current session value is bigger
             maxSession = Double(sessionSecs)
         }
-        if(Double(sessionSecs) < minSession){
+        if(Double(sessionSecs) < minSession){                                                           //Update new min session if current session value is lower
             minSession = Double(sessionSecs)
         }
 
@@ -393,15 +347,15 @@ class SquareBreathingViewController: UIViewController{
     // Handle the timer as it is being displayed on the screen:
     func timeManager(){
         if self.reStartButtonText.currentTitle != "Stop" {
-            animationTimer!.invalidate()
-            sessionTracker!.invalidate()
-            animationTimer = nil
-            sessionTracker = nil
+            animationTimer!.invalidate()                                                    //Stop timer for animation
+            sessionTracker!.invalidate()                                                    //Stop timer for session tracker
+            animationTimer = nil                                                            //Remove timers for evading possible bugs
+            sessionTracker = nil                                                            //Remove timers for evading possible bugs
             return
         }
         sessionSecs+=1
-        sessionTimeSeconds-=1                                                  //Decrement Seconds
-        totalTimerSeconds+=1                                                   //Increment Seconds
+        sessionTimeSeconds-=1                                                               //Decrement Seconds
+        totalTimerSeconds+=1                                                                //Increment Seconds
         if(sessionTimeSeconds == 0 && sessionTimeMinute == 0){
             restartButton(UIButton())
             if(self.mantraAvailable == true){
@@ -453,9 +407,9 @@ class SquareBreathingViewController: UIViewController{
 
     
     
-    // scaleAnimationManager calls all four steps of animation in order which are fadein, scalex2, scale to original and fade out. SquareOrderManager function is used to track the current image
+    //scaleAnimationManager calls all four steps of animation in order which are fadein, scalex2, scale to original and fade out. SquareOrderManager function is used to track the current image
     func scaleAnimationManager(){
-        if self.reStartButtonText.currentTitle != "Stop" {
+        if self.reStartButtonText.currentTitle != "Stop" {          //Invalidate animation if process is stopped
             if(animationTimer != nil){
                 animationTimer!.invalidate()
                 animationTimer = nil
@@ -466,40 +420,40 @@ class SquareBreathingViewController: UIViewController{
             }
             return
         }
-        UIView.animate(withDuration: 2, delay: 0, options: .curveEaseOut, animations:{
+        UIView.animate(withDuration: 2, delay: 0, options: .curveEaseOut, animations:{          //Scale outer circles to 2
             AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
             self.isAnimating = true
             self.squareOrderManager(currentCircle: self.circleOrderTracker).transform = CGAffineTransform(scaleX: 2, y: 2) //Sets the selected image's scale to 2 in 2 seconds
 
         }, completion: { (finished: Bool) -> Void in
             if(self.sessionTracker != nil){
-                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))              //Vibrate the phone
             }
         })
         
-        UIView.animate(withDuration: 1.3, delay: 0.7, options: .curveEaseOut, animations:{
+        UIView.animate(withDuration: 1.3, delay: 0.7, options: .curveEaseOut, animations:{      //Scale inncer circles to 1.5
         self.innerOrderManager(currentCircle: self.circleOrderTracker).transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
             
         }, completion: nil)
         
         
         
-        UIView.animate(withDuration: 2, delay: 2.2, options: .curveEaseOut, animations:{
+        UIView.animate(withDuration: 2, delay: 2.2, options: .curveEaseOut, animations:{        //Reser outer circle scale
             self.squareOrderManager(currentCircle: self.circleOrderTracker).transform = CGAffineTransform(scaleX: 1, y: 1) //Rescales the image over time
         }, completion: {(finished: Bool) -> Void in
             self.isAnimating=false
         })
 
-        UIView.animate(withDuration: 1.3, delay: 2.69, options: .curveEaseOut, animations:{
+        UIView.animate(withDuration: 1.3, delay: 2.69, options: .curveEaseOut, animations:{     //Reser inncer circle scale
             self.innerOrderManager(currentCircle: self.circleOrderTracker).transform = CGAffineTransform(scaleX: 1, y: 1)
             
         }, completion: nil)
         
         
-        circleOrderTracker+=1 //Rotates between images
+        circleOrderTracker+=1                                                                   //Rotates between images
     }
     
-
+    // Tracks the current inner circle image with switch statement and returns it
     func innerOrderManager(currentCircle:Int) -> UIImageView{
         let orderNumber = currentCircle % 4
         
@@ -522,7 +476,7 @@ class SquareBreathingViewController: UIViewController{
         
     }
     
-    // Tracks the current image with switch statement and returns it
+    // Tracks the current outer circle image with switch statement and returns it
     func squareOrderManager(currentCircle:Int) -> UIImageView{
         let orderNumber = currentCircle % 4
 
@@ -549,8 +503,8 @@ class SquareBreathingViewController: UIViewController{
     @IBAction func restartButton(_ sender: Any) {               //Re/Start button
         // Present for first
         print(self.hasVisited)
-        self.statisticsButton.isHidden = false
-        self.statisticsButton.isEnabled = true
+        self.statisticsButton.isHidden = false                  //Show hidden statistics button
+        self.statisticsButton.isEnabled = true                  //Enable statistics button
         if(self.hasVisited == false){
             let firstUse = UIAlertController(title: "Welcome to SFUnwind", message: "Tap the info button to the top right of any screen for help", preferredStyle: .alert)
             let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -569,8 +523,8 @@ class SquareBreathingViewController: UIViewController{
         var _ = saveSecondsTimer(totalTimerSeconds:totalTimerSeconds)
         
         if(sesssionTrackerActive == true && self.isAnimating == false && sessionTracker == nil && animationTimer == nil){
-            sessionTimeSeconds = 60                             //Reset
-            sessionTimeMinute = 4
+            sessionTimeSeconds = 60                             //Reset timer to 60 secs
+            sessionTimeMinute = 4                               //Reset timer to 4 minutes
             while(reStartButtonText.currentTitle != "Stop"){
                 reStartButtonText.setTitle("Stop", for: .normal)
             }
@@ -584,29 +538,28 @@ class SquareBreathingViewController: UIViewController{
 
         }
         else if (sessionTracker != nil && animationTimer != nil){
-            sessionTracker!.invalidate()                         //Stops timer
-            sessionTimeSeconds = 0                             //Reset
+            sessionTracker!.invalidate()                        //Stops timer
+            sessionTimeSeconds = 0                              //Reset
             sessionTimeMinute = 5                               //Reset
             sessionTimer.text = "05:00"                         //Print to screen
             self.resetTimerColor()                              //Reset Timer Color
-            animationTimer!.invalidate()                         //Stops timer for animation
+            animationTimer!.invalidate()                        //Stops timer for animation
             circleOrderTracker = 1                              //Reset image number
-            reStartButtonText.setTitle("Start", for: .normal)//Set Reset button text
+            reStartButtonText.setTitle("Start", for: .normal)   //Set Reset button text
             sessionTracker = nil
             animationTimer = nil
-            setTotalStatistics(previousSesssion: loadTotalStatistics())
-            
-            syncStatistics()
-            totalSessions+=1
-            saveStatistics()
-            saveRecentSesionTracker()
+           
+            syncStatistics()                                    //Sync statistics
+            totalSessions+=1                                    //Increment session number
+            saveStatistics()                                    //Save session
+            saveRecentSesionTracker()                           //Update recent 10 value
             sessionSecs = 0
 
             
             
         
         }
-        self.reStartButtonText.isEnabled = true
+        self.reStartButtonText.isEnabled = true                 //Re-enable restart button
         
         
     }
