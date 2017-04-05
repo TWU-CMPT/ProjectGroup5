@@ -18,6 +18,9 @@ class PanicAlertViewControllerTests: XCTestCase {
     var thePanicAlertViewController: PanicAlertViewController? // Add an instance of the panic alert view controller object to this test class
 
     // Put setup code here. This method is called before the invocation of each test method in the class.
+    // Input: None
+    // Output: None
+    // No dependencies
     override func setUp() {
         super.setUp() // Call the superclass setup function
         
@@ -27,16 +30,20 @@ class PanicAlertViewControllerTests: XCTestCase {
         
         thePanicAlertViewController = theSFUnwindPageViewController?.theViewControllers[3] as! PanicAlertViewController? // Create a PanicAlertViewController object for our tests
     }
-    
+    // Tears down
+    // Input: None
+    // Output: None
+    // No dependencies
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
     
-    
     // Tests:
     //*****************
-    
+    // Input: None
+    // Output: None
+    // No dependencies
     func testContactCreateSendEditBtns(){
         let _ = thePanicAlertViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
         thePanicAlertViewController?.initializeAlertList() // Call the initializer function
@@ -69,6 +76,9 @@ class PanicAlertViewControllerTests: XCTestCase {
     }
     
     // Test the viewDidLoad() function:
+    // Input: None
+    // Output: None
+    // No dependencies
     func testViewDidLoad(){
         // We can tell that our viewDidLoad function has been called as our buttons are no longer nil:
         var result = (thePanicAlertViewController?.contact1CreateSendBtn.currentTitle != nil)
@@ -88,6 +98,9 @@ class PanicAlertViewControllerTests: XCTestCase {
     }
     
     // Test the getStoredAlerts() function:
+    // Input: None
+    // Output: None
+    // No dependencies
     func testGetStoredAlerts() {
         // Call the function we want to test and get it's return value:
         let alert01Result = thePanicAlertViewController?.getStoredAlerts(filename: "alert01")
@@ -115,6 +128,9 @@ class PanicAlertViewControllerTests: XCTestCase {
 
     
     // Test the UI Labels
+    // Input: None
+    // Output: None
+    // No dependencies
     func testInitializeAlertList(){
         let _ = thePanicAlertViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
         thePanicAlertViewController?.initializeAlertList() // Call the initializer function
@@ -143,6 +159,9 @@ class PanicAlertViewControllerTests: XCTestCase {
     }
     
     // Test the contact picker's cancel delegate function
+    // Input: None
+    // Output: None
+    // No dependencies
     func testContactPickerDidCancel(){
         _ = CNContactPickerViewController()
         //thePanicAlertViewController?.contactPickerDidCancel(fakeCntrl)
@@ -150,6 +169,9 @@ class PanicAlertViewControllerTests: XCTestCase {
     }
     
     // Test the contact picker's contact selection delegate function
+    // Input: None
+    // Output: None
+    // No dependencies
     func testContactPicker(){
         thePanicAlertViewController?.currentContact = 6 // Set an out of bounds value to make sure we handle it
         

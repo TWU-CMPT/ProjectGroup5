@@ -27,7 +27,8 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     //Create button
     // Input: Sender
     // Output: None
-    // No dependencies
+    // Dependency: viewDidLoad() has ran
+    // MANUALLY TESTED
     @IBAction func Create(_ sender: AnyObject) {
         // Create alerts
         // ---
@@ -131,7 +132,8 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     //Delete button
     // Input: Sender
     // Output: None
-    // No dependencies
+    // Dependency: viewDidLoad() has ran
+    // MANUALLY TESTED
     @IBAction func DeleteAlert(_ sender: AnyObject) {
         // Create alerts
          let alreadyInFile = UIAlertController(title: "Mantra already exists!", message: "This positive affirmation has already been entered.", preferredStyle: .alert)
@@ -211,7 +213,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     // Prepare for segue to help screen
     // Input: Storyboard Segue, Sender
     // Output: None
-    // No dependencies
+    // Dependency: viewDidLoad() has ran
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let nav = segue.destination as! HelpViewController
         nav.callingScreen = 2 // Notify the popup who's calling it: 0 = Square Breathing, 1 = Grounding, 2 = Positive Affirmations, 3 = Panic Alerts
@@ -220,7 +222,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     //Previous button
     // Input: Sender
     // Output: None
-    // No dependencies
+    // Dependency: viewDidLoad() has ran
     @IBAction func Previous(_ sender: AnyObject) {
         if(self.totalMantras > 0){
             self.currentIndex -= 1
@@ -234,7 +236,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     //Next button
     // Input: Sender
     // Output: None
-    // No dependencies
+    // Dependency: viewDidLoad() has ran
     @IBAction func Next(_ sender: AnyObject) {
         if(self.totalMantras > 0){
             self.currentIndex += 1
@@ -289,7 +291,8 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     // Operate on appearance of controller
     // Input: Animation Boolean
     // Output: None
-    // No dependencies
+    // Dependency: viewDidLoad() has ran
+    // TESTED ALONGSIDE viewDidLoad()
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.notificationSet.textAlignment = NSTextAlignment.center
@@ -455,7 +458,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     
     //return the components of data
     // Input: UIPickerView
-    // Output: None
+    // Output: Int
     // No dependencies
     public func numberOfComponents(in pickerView: UIPickerView) -> Int{
         return 1
@@ -464,7 +467,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     // Detect tap to remove all droppers
     // Input: None
     // Output: None
-    // No dependencies
+    // Dependency: viewDidLoad() has ran
     func detectTap(){
         let theTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.hideSelection))
         theTap.cancelsTouchesInView = false
@@ -474,7 +477,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     // Hide selection of droppers
     // Input: None
     // Output: None
-    // No dependencies
+    // Dependency: viewDidLoad() has ran
     func hideSelection(){
         if(dataDrop.isHidden == false){
             self.pickerView(dataDrop, didSelectRow: self.dataDrop.selectedRow(inComponent: 0), inComponent: 0)
@@ -494,9 +497,9 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     }
     
     //make the pickerview count rows in different textFields
-    // Input: None
-    // Output: None
-    // No dependencies
+    // Input: UIPickerView, Int
+    // Output: Int
+    // Dependency: viewDidLoad() has ran
     public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
         var countrows : Int = data.count
         // Check count of every dropper
@@ -521,8 +524,8 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     
     //return the option which the user selected in string type
     // Input: UIPickerView, row, component
-    // Output: None
-    // No dependencies
+    // Output: String?
+    // Dependency: viewDidLoad() has ran
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         // Update title row for each dropper
         if pickerView == dataDrop{
@@ -558,7 +561,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     //make the pickerView shows the option which the user selected
     // Input: UIPickerView, row, component
     // Output: None
-    // No dependencies
+    // Dependency: viewDidLoad() has ran
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == dataDrop{
             //hide certain picker views for different cases
@@ -647,7 +650,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     //hide the view picker when the textFiled end editing
     // Input: UITextField
     // Output: None
-    // No dependencies
+    // Dependency: viewDidLoad() has ran
     func textFieldDidBeginEditing(_ textFiled:UITextField){
         // Disables editing, rather, use textfield as button
         textFiled.isEnabled = false
@@ -680,7 +683,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     //Schedule Notification
     // Input: Sender
     // Output: None
-    // No dependencies
+    // Dependency: viewDidLoad() has ran
     @IBAction func scheduleNotification(_ sender: AnyObject) {
         // Create alerts
         // ---

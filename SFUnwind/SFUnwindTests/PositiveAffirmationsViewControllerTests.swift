@@ -3,7 +3,7 @@
 // SFUnwind
 // Project Group 5: SFU CMPT 276
 // Primary programmer: Joseph Zhou
-// Contributing Programmers:
+// Contributing Programmers: David Magaril
 //
 // Note: All files in this project conform to the coding standard included in the SFUnwind HW3 Quality Assurance Documentation
 
@@ -12,6 +12,10 @@ import XCTest
 
 class PositiveAffirmationViewControllerTests: XCTestCase {
     
+    // Sets up environment
+    // Input: Sender
+    // Output: None
+    // No dependencies
     override func setUp() {
         super.setUp()
         
@@ -22,6 +26,10 @@ class PositiveAffirmationViewControllerTests: XCTestCase {
         thePositiveAffirmationVIdeController = theSFUnwindViewViewController?.theViewControllers[2] as! PositiveAffirmationViewController?  // Create a PositiveAffirmationViewController object for our tests
     }
     
+    // For deconstruction
+    // Input: Sender
+    // Output: None
+    // No dependencies
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
@@ -32,6 +40,9 @@ class PositiveAffirmationViewControllerTests: XCTestCase {
     var thePositiveAffirmationVIdeController: PositiveAffirmationViewController?    // Add an instance of the positive affirmation view controller object to this test class
     
     //test the viewDidLoad function
+    // Input: Sender
+    // Output: None
+    // No dependencies
     func testViewDidLoad(){
         let _ = thePositiveAffirmationVIdeController?.view
         // We can tell that our viewDidLoad function has been called as our buttons are no longer nil:
@@ -41,21 +52,24 @@ class PositiveAffirmationViewControllerTests: XCTestCase {
         // Test initiale of variables
         //---
         XCTAssert(thePositiveAffirmationVIdeController?.currentIndex == 0)
-        XCTAssert(thePositiveAffirmationVIdeController?.notificationButton.layer.cornerRadius == 20)
-        XCTAssert(thePositiveAffirmationVIdeController?.createMantraButton.layer.cornerRadius == 20)
-        XCTAssert(thePositiveAffirmationVIdeController?.deleteMantraButton.layer.cornerRadius == 20)
-        XCTAssert(thePositiveAffirmationVIdeController?.previousButton.layer.cornerRadius == 20)
-        XCTAssert(thePositiveAffirmationVIdeController?.nextButton.layer.cornerRadius == 20)
+        XCTAssert(thePositiveAffirmationVIdeController?.notificationButton.layer.cornerRadius == 13)
+        XCTAssert(thePositiveAffirmationVIdeController?.createMantraButton.layer.cornerRadius == 13)
+        XCTAssert(thePositiveAffirmationVIdeController?.deleteMantraButton.layer.cornerRadius == 13)
+        XCTAssert(thePositiveAffirmationVIdeController?.previousButton.layer.cornerRadius == 13)
+        XCTAssert(thePositiveAffirmationVIdeController?.nextButton.layer.cornerRadius == 13)
         //---
         
         //Test if file exists
         XCTAssert(FileManager.default.fileExists(atPath: (thePositiveAffirmationVIdeController?.pathToAff)!))
-        
+        // Check index is not nil
         result = (thePositiveAffirmationVIdeController?.index != nil)
         XCTAssert(result)
     }
     
     // Test the previous button
+    // Input: Sender
+    // Output: None
+    // No dependencies
     func testPrevious(){
         // Start the view of the page.
         let _ = thePositiveAffirmationVIdeController?.view
@@ -64,6 +78,9 @@ class PositiveAffirmationViewControllerTests: XCTestCase {
     }
     
     // Test the next button
+    // Input: Sender
+    // Output: None
+    // No dependencies
     func testNext(){
         // Start the view of the page.
         let _ = thePositiveAffirmationVIdeController?.view
@@ -72,6 +89,9 @@ class PositiveAffirmationViewControllerTests: XCTestCase {
     }
     
     // Test the notifications UI
+    // Input: Sender
+    // Output: None
+    // No dependencies
     func testNotifications(){
         // Start the view of the page.
         let _ = thePositiveAffirmationVIdeController?.view
@@ -80,6 +100,9 @@ class PositiveAffirmationViewControllerTests: XCTestCase {
     }
     
     // Test the create mantra feature
+    // Input: Sender
+    // Output: None
+    // No dependencies
     func testCreateMantra(){
         // Start the view of the page.
         let _ = thePositiveAffirmationVIdeController?.view
@@ -88,6 +111,9 @@ class PositiveAffirmationViewControllerTests: XCTestCase {
     }
     
     // Test the delete mantra feature
+    // Input: Sender
+    // Output: None
+    // No dependencies
     func testDeleteMantra(){
         // Start the view of the page.
         let _ = thePositiveAffirmationVIdeController?.view
@@ -96,6 +122,9 @@ class PositiveAffirmationViewControllerTests: XCTestCase {
     }
     
     // Tests the pickerViewTitle()
+    // Input: Sender
+    // Output: None
+    // No dependencies
     func testPickerViewTitle(){
         let pickerview = UIPickerView()
         let titleForRow = 0
@@ -105,6 +134,9 @@ class PositiveAffirmationViewControllerTests: XCTestCase {
         XCTAssert(textTime == "")
     }
     // Tests the pickerViewDidSelect()
+    // Input: Sender
+    // Output: None
+    // No dependencies
     func testPickerViewDidSelect(){
         var didSelectRow = 1
         var inComponent = 0
@@ -136,7 +168,10 @@ class PositiveAffirmationViewControllerTests: XCTestCase {
         XCTAssert(thePositiveAffirmationVIdeController?.atLabelText.isHidden == true)
         XCTAssert(thePositiveAffirmationVIdeController?.sepLabel.isHidden == true)
     }
-
+    // Tests textFieldDidBeginEditing()
+    // Input: Sender
+    // Output: None
+    // No dependencies
     func testTextFieldDidBeginEditing(){
         let txtField = UITextField()
         _ = thePositiveAffirmationVIdeController?.view // Trigger the required view methods. Required to prevent erroneous nil returns

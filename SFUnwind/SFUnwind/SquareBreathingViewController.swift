@@ -51,11 +51,19 @@ class SquareBreathingViewController: UIViewController{
     
     @IBOutlet weak var topTitle: UILabel!
     
+    // Runs when will dissapear
+    // Input: Animated Bool
+    // Output: None
+    // No dependencies
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // Present for first
     }
     
+    // Runs when dissapeared
+    // Input: Animated Bool
+    // Output: None
+    // Dependency: viewDidLoad() has ran
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         if(sesssionTrackerActive == true || reStartButtonText.currentTitle == "Stop"){
@@ -72,6 +80,10 @@ class SquareBreathingViewController: UIViewController{
         }
     }
     
+    // Runs when appeared
+    // Input: Animated Bool
+    // Output: None
+    // Dependency: viewDidLoad() has ran
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // Present First Use
@@ -174,12 +186,19 @@ class SquareBreathingViewController: UIViewController{
     @IBOutlet weak var statisticsButton: UIButton!
     
     // Rotated the background image
+    // Input: UIView, Double
+    // Output: None
+    // No dependencies
     func rotateBG(targetView: UIView, duration: Double = 1.0){                                      //Rotate background image
         // Present for first
         UIView.animate(withDuration: duration, delay: 0.0, options: .curveLinear, animations: { targetView.transform = targetView.transform.rotated(by: CGFloat(M_PI))}) { finished in self.rotateBG(targetView: targetView, duration: duration)                                    //Animate the rotation
         }
     }
+    
     // Resets timer color
+    // Input: None
+    // Output: None
+    // No dependencies
     func resetTimerColor(){                                                                         //Reset the color
         let attAdd = NSMutableAttributedString.init(attributedString: self.sessionTimer.attributedText!)
         let range = ((self.sessionTimer.text as NSString?)!).range(of: self.sessionTimer.text!)
@@ -189,11 +208,12 @@ class SquareBreathingViewController: UIViewController{
         self.sessionTimer.attributedText = NSAttributedString(attributedString: attAdd)
     }
     
-    
-    
-
     @IBOutlet weak var bgMantra: UIImageView!
+    
     // Called once when this object is first instanciated
+    // Input: None
+    // Output: None
+    // No dependencies
     override func viewDidLoad() {
         super.viewDidLoad() // Call the super class
         self.reStartButtonText.layer.cornerRadius = 10
@@ -237,6 +257,9 @@ class SquareBreathingViewController: UIViewController{
     }
 
     //Saves recent 10 sessions to UserStandards, to be used in Statistics View Controller
+    // Input: None
+    // Output: None
+    // Dependency: viewDidLoad() has ran
     func saveRecentSesionTracker(){
         loadStatistics()                                                                            //Sync previous data
         
@@ -260,6 +283,9 @@ class SquareBreathingViewController: UIViewController{
 
     //This function saves the values that we want to keep track of.
     //Values are used in StatisticsViewControllerPage
+    // Input: None
+    // Output: None
+    // Dependency: viewDidLoad() has ran
     func saveStatistics(){
         if(sessionSecs != 0.0){                                                                     // Session secs being equal to 0.00 causes bugs, best solution is to totally ignore the person who achieves to press Re/Start button twice in literally 0 seconds 0 miliseconds
             UserDefaults.standard.set(averageSession, forKey: "averageSession")                     //Save seconds to userStandards for use in Statistics Page
@@ -271,6 +297,9 @@ class SquareBreathingViewController: UIViewController{
         }
     }
     //This function loads/sync's session data
+    // Input: None
+    // Output: None
+    // Dependency: viewDidLoad() has ran
     func loadStatistics(){
         if let avg:Double = UserDefaults.standard.value(forKey: "averageSession") as! Double?{      //Load average session
             averageSession = avg
@@ -289,6 +318,9 @@ class SquareBreathingViewController: UIViewController{
     
     
     //This function does necessary computation to sync average sessions and updates maxSession, minSession
+    // Input: None
+    // Output: None
+    // Dependency: viewDidLoad() has ran
     func syncStatistics(){
         if let numberOfSessions = UserDefaults.standard.value(forKey:  "totalSessions") as? Int{
          totalSessions = numberOfSessions
@@ -317,6 +349,9 @@ class SquareBreathingViewController: UIViewController{
     // Save the seconds value of the timer to the device
     //Input: passed seconds
     //Output: passed seconds (Output added to this function in order to make debugging more practical)
+    // Input: Int
+    // Output: Int
+    // No dependencies
     func saveSecondsTimer(totalTimerSeconds: Int) -> Int{
         UserDefaults.standard.set(totalTimerSeconds, forKey: "totalSecs")                   //Set Seconds
         UserDefaults.standard.synchronize()
@@ -325,8 +360,9 @@ class SquareBreathingViewController: UIViewController{
     
     
     // Save the minutes value of the timer to the device
-    //Input: passed minutes
-    //Output: passed minutes (Output added to this function in order to make debugging more practical)
+    // Input: Int
+    // Output: Int
+    // No dependencies
     func saveMinutesTimer(totalTimerMinute: Int) -> Int{
         UserDefaults.standard.set(totalTimerMinute, forKey: "totalMins")                    //Set Minutes
         UserDefaults.standard.synchronize()
@@ -334,7 +370,9 @@ class SquareBreathingViewController: UIViewController{
     }
     
     // Load the seconds data from the device
-    //Output: Seconds passed as an Integer
+    // Input: None
+    // Output: Int
+    // No dependencies
     func loadSecondsTimer() -> Int{
         if let loadedSecs = UserDefaults.standard.value(forKey: "totalSecs") as? Int{       //Load seconds
             totalTimerSeconds = loadedSecs
@@ -343,7 +381,9 @@ class SquareBreathingViewController: UIViewController{
     }
     
     // Load the minutes data from the device
-    //Output: Minutes passed as an Integer
+    // Input: None
+    // Output: Int
+    // No dependencies
     func loadMinutesTimer() -> Int{
         if let loadedMins = UserDefaults.standard.value(forKey:  "totalMins") as? Int{      //Load minutes
             totalTimerMinute = loadedMins
@@ -353,6 +393,9 @@ class SquareBreathingViewController: UIViewController{
     }
     
     // Handle the timer as it is being displayed on the screen:
+    // Input: None
+    // Output: None
+    // Dependency: viewDidLoad() and restartButton(...) has ran
     func timeManager(){
         if self.reStartButtonText.currentTitle != "Stop" {
             animationTimer!.invalidate()                                                    //Stop timer for animation
@@ -416,6 +459,9 @@ class SquareBreathingViewController: UIViewController{
     
     
     //scaleAnimationManager calls all four steps of animation in order which are fadein, scalex2, scale to original and fade out. SquareOrderManager function is used to track the current image
+    // Input: None
+    // Output: None
+    // Dependency: viewDidLoad() and restartButton(...) has ran
     func scaleAnimationManager(){
         if self.reStartButtonText.currentTitle != "Stop" {          //Invalidate animation if process is stopped
             if(animationTimer != nil){
@@ -462,8 +508,9 @@ class SquareBreathingViewController: UIViewController{
     }
     
     // Tracks the current inner circle image with switch statement and returns it
-    //Input: circle order number as an Integer
-    //Output: Corresponding UI Image View
+    // Input: circle order number as an Integer
+    // Output: Corresponding UI Image View
+    // Dependency: viewDidLoad() and restartButton(...) has ran
     func innerOrderManager(currentCircle:Int) -> UIImageView{
         let orderNumber = currentCircle % 4
         
@@ -487,8 +534,9 @@ class SquareBreathingViewController: UIViewController{
     }
     
     // Tracks the current outer circle image with switch statement and returns it
-    //Input: circle order number as an Integer
-    //Output: Corresponding UI Image View
+    // Input: circle order number as an Integer
+    // Output: Corresponding UI Image View
+    // Dependency: viewDidLoad() and restartButton(...) has ran
     func squareOrderManager(currentCircle:Int) -> UIImageView{
         let orderNumber = currentCircle % 4
 
@@ -512,6 +560,9 @@ class SquareBreathingViewController: UIViewController{
     }
     
     // Handle time control. Start/Restart the timer based on user input:
+    // Input: Sender
+    // Output: None
+    // Dependency: viewDidLoad() has ran
     @IBAction func restartButton(_ sender: Any) {               //Re/Start button
         // Present for first
 

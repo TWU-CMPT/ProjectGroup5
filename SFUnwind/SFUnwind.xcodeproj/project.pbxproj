@@ -15,6 +15,7 @@
 		80B7704F1E8A367600B327EC /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B7704E1E8A367600B327EC /* StatisticsViewController.swift */; };
 		823202151E8A98D30098964A /* mantraFinal2.png in Resources */ = {isa = PBXBuildFile; fileRef = 823202141E8A98D30098964A /* mantraFinal2.png */; };
 		828AB8101E8D2A0900F6170C /* infoi.png in Resources */ = {isa = PBXBuildFile; fileRef = 828AB80F1E8D2A0900F6170C /* infoi.png */; };
+		82D2C03E1E94FA8600515EB8 /* HelpViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D2C03D1E94FA8600515EB8 /* HelpViewControllerTests.swift */; };
 		EB04A46E1E6615F400BD2859 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB04A46D1E6615F400BD2859 /* AppDelegate.swift */; };
 		EB04A4731E6615F400BD2859 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB04A4711E6615F400BD2859 /* Main.storyboard */; };
 		EB04A4751E6615F400BD2859 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB04A4741E6615F400BD2859 /* Assets.xcassets */; };
@@ -63,6 +64,7 @@
 		80B7704E1E8A367600B327EC /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		823202141E8A98D30098964A /* mantraFinal2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mantraFinal2.png; path = graphics/mantraFinal2.png; sourceTree = "<group>"; };
 		828AB80F1E8D2A0900F6170C /* infoi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = infoi.png; sourceTree = "<group>"; };
+		82D2C03D1E94FA8600515EB8 /* HelpViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewControllerTests.swift; sourceTree = "<group>"; };
 		EB04A46A1E6615F400BD2859 /* SFUnwind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SFUnwind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB04A46D1E6615F400BD2859 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB04A4721E6615F400BD2859 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -71,7 +73,7 @@
 		EB04A4791E6615F400BD2859 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB04A47E1E6615F400BD2859 /* SFUnwindTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SFUnwindTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB04A4821E6615F400BD2859 /* SFUnwindTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFUnwindTests.swift; sourceTree = "<group>"; };
-		EB04A4841E6615F400BD2859 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EB04A4841E6615F400BD2859 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = SFUnwindTests/Info.plist; sourceTree = SOURCE_ROOT; };
 		EB04A4891E6615F400BD2859 /* SFUnwindUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SFUnwindUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB04A49B1E661A0300BD2859 /* SFUnwindPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SFUnwindPageViewController.swift; sourceTree = "<group>"; };
 		EB04C6311E7E2AAD005320F4 /* positiveAffirmations */ = {isa = PBXFileReference; lastKnownFileType = folder; path = positiveAffirmations; sourceTree = "<group>"; };
@@ -144,12 +146,12 @@
 				EB04A4711E6615F400BD2859 /* Main.storyboard */,
 				EB04A4741E6615F400BD2859 /* Assets.xcassets */,
 				EB04A4761E6615F400BD2859 /* LaunchScreen.storyboard */,
-				EB04A4791E6615F400BD2859 /* Info.plist */,
 				EB04A49B1E661A0300BD2859 /* SFUnwindPageViewController.swift */,
 				EB7359101E665162004A0EB0 /* SquareBreathingViewController.swift */,
 				80087C421E8A2D9900F6988C /* SquareBreathing.png */,
 				823202141E8A98D30098964A /* mantraFinal2.png */,
 				800067821E81B7C600F9AA50 /* outC.png */,
+				EB04A4791E6615F400BD2859 /* Info.plist */,
 				800067841E81B7FD00F9AA50 /* gray_line.png */,
 				800067801E81B77A00F9AA50 /* inC.png */,
 				828AB80F1E8D2A0900F6170C /* infoi.png */,
@@ -168,12 +170,13 @@
 			children = (
 				EB04A4821E6615F400BD2859 /* SFUnwindTests.swift */,
 				8063E1D41E938048007B3A5B /* StatisticsViewControllerTests.swift */,
-				EB04A4841E6615F400BD2859 /* Info.plist */,
 				EB0E51BA1E6CB59000180F9D /* PanicAlertViewControllerTests.swift */,
+				EB04A4841E6615F400BD2859 /* Info.plist */,
 				EB0E51BC1E6CB5FB00180F9D /* SquareBreathingViewControllerTests.swift */,
 				EB0E51BE1E6CB60C00180F9D /* GroundingExerciseViewControllerTests.swift */,
 				EB0E51C01E6CB61F00180F9D /* PositiveAffirmationsViewControllerTests.swift */,
 				EB1F89B81E81BB0000E91A8D /* PanicAlertPopupViewControllerTests.swift */,
+				82D2C03D1E94FA8600515EB8 /* HelpViewControllerTests.swift */,
 			);
 			path = SFUnwindTests;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 				EB1F89B91E81BB0000E91A8D /* PanicAlertPopupViewControllerTests.swift in Sources */,
 				8063E1D51E938048007B3A5B /* StatisticsViewControllerTests.swift in Sources */,
 				EB0E51C11E6CB61F00180F9D /* PositiveAffirmationsViewControllerTests.swift in Sources */,
+				82D2C03E1E94FA8600515EB8 /* HelpViewControllerTests.swift in Sources */,
 				EB0E51BF1E6CB60C00180F9D /* GroundingExerciseViewControllerTests.swift in Sources */,
 				EB0E51BD1E6CB5FB00180F9D /* SquareBreathingViewControllerTests.swift in Sources */,
 				EB04A4831E6615F400BD2859 /* SFUnwindTests.swift in Sources */,
@@ -554,7 +558,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = A6FY2U8DZM;
-				INFOPLIST_FILE = SFUnwindUITests/Info.plist;
+				INFOPLIST_FILE = SFUnwindTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Group5.SFUnwindUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -568,7 +572,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = A6FY2U8DZM;
-				INFOPLIST_FILE = SFUnwindUITests/Info.plist;
+				INFOPLIST_FILE = SFUnwindTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Group5.SFUnwindUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

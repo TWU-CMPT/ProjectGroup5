@@ -29,6 +29,10 @@ class GroundingFeatureViewControllerTests: XCTestCase {
         theGroundingExerciseViewController = theSFUnwindPageViewController?.theViewControllers[1] as! GroundingFeatureViewController? // Create a GroundingFeatureViewController object for our tests.
     }
     
+    //Destroys environment
+    // Input: Sender
+    // Output: None
+    // No dependencies
     override func tearDown() {
         super.tearDown()
     }

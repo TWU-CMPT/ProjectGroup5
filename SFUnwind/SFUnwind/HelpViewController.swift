@@ -37,6 +37,9 @@ class HelpViewController: UIViewController {
     //***************
     
     // Called once the first time this view is displayed
+    // Input: None
+    // Output: None
+    // No dependencies
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -62,10 +65,11 @@ class HelpViewController: UIViewController {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
     
+    // Populates text on controller
+    // Input: Int
+    // Output: None
+    // No dependencies
     func populateHelpText(screenNumber: Int){
         // Set some debug text, to make debugging easier:
         helpString = "Default help screen text. If you're seeing this, chances are the HelpViewController.swift populateHelpText() function had a problem!"

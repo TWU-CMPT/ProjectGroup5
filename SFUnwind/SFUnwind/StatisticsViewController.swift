@@ -30,10 +30,13 @@ class StatisticsViewController: UIViewController {
     @IBOutlet weak var restartButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
     
-    
+    // Restarts all statistics
+    // Input: Sender
+    // Output: None
+    // Dependency: viewDidLoad() has ran
     @IBAction func restartAllButton(_ sender: Any){
         
-        UserDefaults.standard.set(0, forKey: "averageSession")                  //Reset everything that is tracked
+        UserDefaults.standard.set(0, forKey: "averageSession")     //Reset everything that is tracked
         UserDefaults.standard.set(999, forKey: "minSession")
         UserDefaults.standard.set(0, forKey: "maxSession")
         UserDefaults.standard.set(0, forKey: "totalSessions")
@@ -41,9 +44,9 @@ class StatisticsViewController: UIViewController {
         UserDefaults.standard.set(0, forKey: "totalSecs")
         UserDefaults.standard.set(0, forKey: "totalMins")
         UserDefaults.standard.set([Double](), forKey: "previousSessions")
-        //self.totalTimer.text = "00:00"
         let allReset = UIAlertController(title: "Statistics Rest", message: "Your usage stats have been reset to default.", preferredStyle: .alert) //Set reset alert
-        let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)                                                                 //Set alert buttons
+        let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        //Set alert buttons
         allReset.addAction(theOkAction)                                                                                                             //Add action
         UserDefaults.standard.synchronize()
         for theView in self.allViews {
@@ -54,10 +57,14 @@ class StatisticsViewController: UIViewController {
         self.shortestSessionLabel.text = "Shortest: N/A"
         self.longestSessionLabel.text = "Longest: N/A"
         self.totalNumberOfSessionsLabel.text =  "Total Sessions: 0"
-        self.present(allReset, animated: true, completion: nil)                                                                                     //Present alert
+        self.present(allReset, animated: true, completion: nil)          //Present alert
         
     }
     
+    // Runs when loading
+    // Input: None
+    // Output: None
+    // No dependencies
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -124,11 +131,19 @@ class StatisticsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+    // Show any warnings
+    // Input: None
+    // Output: None
+    // No dependencies
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
+    // Dismisses self
+    // Input: None
+    // Output: None
+    // No dependencies
     @IBAction func closeScreen(_ sender: Any) {                                                         //Close the screen
         dismiss(animated: true, completion: nil)
     }

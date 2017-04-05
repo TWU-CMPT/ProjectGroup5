@@ -27,7 +27,12 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
     
     // UI buttons:
     //************
-
+    // For each:
+    //--
+    // Input: Sender
+    // Output: None
+    // No dependencies
+    //--
     // Contact 1: Create/send
     @IBOutlet weak var contact1CreateSendBtn: UIButton!
     @IBAction func contact1CreateSendBtn(_ sender: Any) {
@@ -114,6 +119,9 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
     // Counselling contact links
     // Open the SFU Counselling website:
     @IBOutlet weak var weblinkBtn: UIButton!
+    // Input: Sender
+    // Output: None
+    // No dependencies
     @IBAction func weblinkBtn(_ sender: Any) {
         
         let theUrl = URL(string: "https://www.sfu.ca/students/health/services/counselling.html")!
@@ -126,6 +134,9 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
 
     // Dial the SFU Counselling phone number:
     @IBOutlet weak var phoneLinkBtn: UIButton!
+    // Input: Sender
+    // Output: None
+    // No dependencies
     @IBAction func phoneLinkBtn(_ sender: Any) {
                
         let theNumber = URL(string: "tel://7787824615")
@@ -146,6 +157,9 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
     
     // ViewDidLoad: This function is called once when the PanicAlertViewController.swift object is first initialized.
     // This function is used to trigger the various UI updates required to set up the screen
+    // Input: None
+    // Output: None
+    // No dependencies
     override func viewDidLoad() {
         super.viewDidLoad() // Call the superclass's viewDidLoad function
         
@@ -185,6 +199,9 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
 
     
     // Handle the transition to the help / popup edit screens:
+    // Input: Storyboard Segue, Sender
+    // Output: None
+    // Dependency: viewDidLoad() has ran
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Handle the help screen:
         if let destinationView = segue.destination as? HelpViewController {
@@ -203,6 +220,9 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
     // Save alert contact text data to a txt file. Called when creating/editing an alert
     // Argument: contactProperty - A CNContactProperty object, recieved from the CNContactPicker as selected by the user
     // Note: This function requires UI interaction and must be manually tested on a physical iOS device
+    // Input: Stringx3, Int
+    // Output: None
+    // Dependency: viewDidLoad() has ran
     func setStoredAlert(theName: String, theNumber: String, theMessage: String, recievedAlertIndex: Int){
         
         // Get the documents directory:
@@ -248,13 +268,18 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
             }
         }
     } // End file writing
-
+    // Input: Animated Bool
+    // Output: None
+    // No dependencies
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         initializeAlertList()
     }
     
     // Initialize the alert list. Loads the alert details from file, and sets up the UI to display the correct values
+    // Input: None
+    // Output: None
+    // No dependencies
     func initializeAlertList() {
         
         // Load each alert file:
@@ -348,6 +373,7 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
     // Load alert text data stored in a txt file. Called once per alert at initialization, and whenever alerts are sent
     // Argument: filename - A string, containing the filename of the text file to be loaded. Note: Filename does NOT include the .txt extension, as this is passed as an argument to the iOS file manager bundle.
     // Return: An array of strings read line by line from the file, or nil if the file was empty
+    // Dependency: viewDidLoad() has ran
     func getStoredAlerts(filename: String) -> [String]? {
         
         // Attempt to open the file:
@@ -370,6 +396,7 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
     // Handle the create/send button functionality
     // Argument: contactIndex - The array index of the relevant alert file to use [0, 5]
     // Note: This function requires UI interaction and must be manually tested on a physical iOS device
+    // Dependency: viewDidLoad() has ran
     func handleCreateSendBtn(contactIndex: Int){
         // Create a new contact if none exists:
         if alertExists[contactIndex] == false {
@@ -387,6 +414,9 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
     
     // Send a pre-formatted alert message using the iOS messenger app:
     // Note: This function requires UI interaction and must be manually tested on a physical iOS device
+    // Input: String, String
+    // Output: None
+    // Dependency: viewDidLoad() has ran
     func sendAlertMessage(message: String, phoneNumber: String){
         // Create a text message view controller, and insert our alert data into it:
         if (MFMessageComposeViewController.canSendText() ){
@@ -404,10 +434,16 @@ class PanicAlertViewController: UIViewController, CNContactPickerDelegate, MFMes
     // MFMessageComposeViewControllerDelegate protocol functions:
     //***********************************************************
     // Handle dismissing:
+    // Input: Controller, MessageComposeResult
+    // Output: None
+    // No dependencies
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         self.dismiss(animated: true, completion: nil)
     }
     // Handle view removal:
+    // Input: Animated Bool
+    // Output: None
+    // No dependencies
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = false
     }

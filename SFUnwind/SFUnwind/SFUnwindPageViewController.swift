@@ -23,11 +23,17 @@ class SFUnwindPageViewController: UIPageViewController, UIPageViewControllerData
     // UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate protocol functions:
     //*******************************************************************************************************
     // Load the main storyboard:
+    // Input: String
+    // Output: UIViewController
+    // No dependencies
     private func VCInstance(name: String) -> UIViewController {
         return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: name)
     }
     
     // Called the first time this view controller loads:
+    // Input: None
+    // Output: None
+    // No dependencies
     override func viewDidLoad() {
         super.viewDidLoad()
         self.dataSource = self
@@ -38,6 +44,9 @@ class SFUnwindPageViewController: UIPageViewController, UIPageViewControllerData
     }
     
     // Move to previous page: Load the previous view controller
+    // Input: UIPageViewController, UIViewController
+    // Output: UIViewController
+    // Dependency: viewDidLoad() has ran
     public func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController?{
         guard let viewControllerIndex = theViewControllers.index(of: viewController) else {
             return nil
@@ -60,6 +69,9 @@ class SFUnwindPageViewController: UIPageViewController, UIPageViewControllerData
     }
     
     // Move to next page: Load the next view controller
+    // Input: UIPageViewController, UIViewController
+    // Output: UIViewController
+    // Dependency: viewDidLoad() has ran
     public func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController?{
         guard let viewControllerIndex = theViewControllers.index(of: viewController) else {
             return nil
@@ -81,11 +93,17 @@ class SFUnwindPageViewController: UIPageViewController, UIPageViewControllerData
     
     
     // Controls the number of page view Dots: PLACEHOLDER: To be updated with menu graphics
+    // Input: UIPageViewController
+    // Output: Int
+    // Dependency: viewDidLoad() has ran
     public func presentationCount(for pageViewController: UIPageViewController) -> Int {
         return theViewControllers.count
     }
     
     // Controls page view Dots: PLACEHOLDER: To be updated with menu graphics
+    // Input: None
+    // Output: None
+    // No dependencies
     public func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         guard let firstViewController = viewControllers?.first, let firstViewControllerIndex = theViewControllers.index(of: firstViewController) else {
             return 0

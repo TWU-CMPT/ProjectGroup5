@@ -1,5 +1,5 @@
 //
-// PanicAlertViewControllerTests.swift - Tests for the Panic Alert Feature screen
+// PanicAlertPopupViewViewControllerTests.swift - Tests for the Panic Alert Feature screen
 // SFUnwind
 // Project Group 5: SFU CMPT 276
 // Primary programmer: Adam Badke #301310785

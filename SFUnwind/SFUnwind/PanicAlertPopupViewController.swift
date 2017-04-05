@@ -28,6 +28,9 @@ class PanicAlertPopupViewController: UIViewController, CNContactPickerDelegate, 
     //*************
     
     // Handle the cancel button:
+    // Input: Sender
+    // Output: None
+    // No dependencies
     @IBAction func popupCancelBtn(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
@@ -39,6 +42,9 @@ class PanicAlertPopupViewController: UIViewController, CNContactPickerDelegate, 
     @IBOutlet weak var popupTextInput: UITextView!
     
     // Handle contact selection:
+    // Input: Sender
+    // Output: None
+    // Dependency: viewDidLoad() has ran
     @IBAction func popupSelectContactBtn(_ sender: Any) {
         
         let theContactView = CNContactPickerViewController()    // Create a CNContactPickerViewController object
@@ -52,6 +58,9 @@ class PanicAlertPopupViewController: UIViewController, CNContactPickerDelegate, 
     
     // Check the user has selected a contact name + number and input a message before allowing them to save
     // Note: This is a UI function, and must be tested manually using an iOS device
+    // Input: String, sender
+    // Output: Bool
+    // Dependency: viewDidLoad() has ran
     override func shouldPerformSegue(withIdentifier identifier: String?, sender: Any?) -> Bool {
         if let ident = identifier {
             print(ident)
@@ -65,6 +74,9 @@ class PanicAlertPopupViewController: UIViewController, CNContactPickerDelegate, 
     
     // Handle the transition back to the PanicAlertViewController
     // Note: This is a UI function, and must be tested manually using an iOS device
+    // Input: UIStoryboardSegue, sender
+    // Output: None
+    // Dependency: viewDidLoad() has ran
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Handle transitions:
         if let theDestination = segue.destination as? PanicAlertViewController {
@@ -87,6 +99,9 @@ class PanicAlertPopupViewController: UIViewController, CNContactPickerDelegate, 
     @IBOutlet weak var saveButton: UIButton!
     
     // Called once when the view is loaded
+    // Input: None
+    // Output: None
+    // No dependencies
     override func viewDidLoad() {
         super.viewDidLoad()
         self.cancelButton.layer.cornerRadius = 15
@@ -116,12 +131,18 @@ class PanicAlertPopupViewController: UIViewController, CNContactPickerDelegate, 
     
     
     // Handle the user tapping outside of the text field
+    // Input: None
+    // Output: None
+    // No dependencies
     func closeKeyboard() {
         view.endEditing(true)
     }
 
     // UITextView Delegate function: Catch newline characters, and close the keyboard:
     // Note: This is a UI function, and must be tested manually using an iOS device
+    // Input: UITextView, NSRange, String
+    // Output: Bool
+    // Dependency: viewDidLoad() has ran
     func textView(_ textView: UITextView, shouldChangeTextIn shouldChangeTextInRange: NSRange, replacementText: String) -> Bool {
         if(replacementText.isEqual("\n")) {
             textView.resignFirstResponder()
@@ -133,6 +154,9 @@ class PanicAlertPopupViewController: UIViewController, CNContactPickerDelegate, 
     
     // Update the UI when the user has made a new selection
     // Note: This is a UI function, and must be tested manually using an iOS device
+    // Input: None
+    // Output: None
+    // No dependencies
     func updateUI() {
         popupSelectContactBtn.setTitle(newContactName, for: .normal)
     }
@@ -141,6 +165,9 @@ class PanicAlertPopupViewController: UIViewController, CNContactPickerDelegate, 
     
     // Handle contact selection:
     // Note: This is a UI function, and must be tested manually using an iOS device
+    // Input: picker, CNContactProperty
+    // Output: None
+    // Dependency: viewDidLoad() has ran
     public func contactPicker(_ picker: CNContactPickerViewController, didSelect theContactProperty: CNContactProperty){
         
         // Ensure the user has selected a phone number:

@@ -123,7 +123,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
     // This function is used to reset goal indexes and remove current pictures
     // Input: Animation Boolean
     // Output: None
-    // No dependencies
+    // Dependency: viewDidLoad() has ran
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // Starts the camera session
@@ -417,7 +417,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
     // prepare: Modify help screen to the specific text for within
     // Input: Storyboard Segue, Sender
     // Output: None
-    // No dependencies
+    // Dependency: viewDidLoad() has ran
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let nav = segue.destination as? HelpViewController{
             nav.callingScreen = 1 // Notify the popup who's calling it: 0 = Square Breathing, 1 = Grounding, 2 = Positive Affirmations, 3 = Panic Alerts
@@ -427,7 +427,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
     // resetButtonAction: This function resets the controller to the initial state
     // Input: Sender
     // Output: None
-    // No dependencies
+    // Dependency: viewDidLoad() and captureButtonAction() has ran
     @IBAction func resetButtonAction(_ sender: UIButton) {
         // Alters the UI elements appropiately
         // Reset Button
@@ -492,7 +492,7 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
     // Allows user to take pictures, display grid and modify the appropiate indexes. Will display error if needed.
     // Input: Sender
     // Output: None
-    // Dependencies: Camera (otherwise warning showed).
+    // Dependencies: Camera (otherwise warning showed) and viewDidLoad() has ran
     @IBAction func cameraButtonAction(_ sender: UIButton) {
         // Create a lock for input.
         self.captureButton.isEnabled = false
