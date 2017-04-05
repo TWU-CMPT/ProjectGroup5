@@ -105,6 +105,7 @@ class PositiveAffirmationViewControllerTests: XCTestCase {
         XCTAssert(textTime == "")
     }
     // Tests the pickerViewDidSelect()
+    // included the hideSelection test
     func testPickerViewDidSelect(){
         var didSelectRow = 1
         var inComponent = 0
@@ -144,5 +145,6 @@ class PositiveAffirmationViewControllerTests: XCTestCase {
         XCTAssert(txtField.isEnabled == true)
         
     }
+    
 
 }

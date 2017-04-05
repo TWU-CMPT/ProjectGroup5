@@ -13,7 +13,7 @@ import UserNotifications
 
 class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
     
-    //variable for functions
+    //variables for functions
     var pathToAff: String? = nil
     var txtIndex = UITextField()
     var totalMantras: Int = 0
@@ -24,11 +24,13 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
    
     
     //Create button
+    //active a pop-out alert windows to let user to input text
     @IBAction func Create(_ sender: AnyObject) {
         let alreadyInFile = UIAlertController(title: "Mantra already exists!", message: "This positive affirmation has already been entered.", preferredStyle: .alert)
         let notInFile = UIAlertController(title: "Not in List", message: "Mantra not found.", preferredStyle: .alert)
         let notEntered = UIAlertController(title: "Mantra Missing", message: "You must enter a positive affirmation.", preferredStyle: .alert)
         let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        //add ok actions
         notEntered.addAction(theOkAction)
         notInFile.addAction(theOkAction)
         alreadyInFile.addAction(theOkAction)
@@ -80,6 +82,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
                             
                         }
                     }
+                    //error case
                     catch let error as NSError {
                         print("error loading contents of url \(self.pathToAff!)")
                         print(error.localizedDescription)
@@ -95,11 +98,13 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
                         let exportText = try String(contentsOfFile: self.pathToAff!)
                         self.arrayOfMantra = exportText.components(separatedBy: "\n")
                     }
+                    //error case
                     catch let error as NSError {
                         print("error writing to url \(self.pathToAff!)")
                         print(error.localizedDescription)
                     }
                 }
+                //change the label text
                 self.txt = self.txtIndex.text!
                 self.Label.text = saveText //change the label to the next same as the user input
             }
@@ -121,10 +126,12 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     }
     
     //Delete button
+    //delete the mantra which is appearing on the textField
     @IBAction func DeleteAlert(_ sender: AnyObject) {
          let alreadyInFile = UIAlertController(title: "Mantra already exists!", message: "This positive affirmation has already been entered.", preferredStyle: .alert)
         let notInFile = UIAlertController(title: "Not in List", message: "Mantra not found.", preferredStyle: .alert)
         let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        //add ok actions
         notInFile.addAction(theOkAction)
         alreadyInFile.addAction(theOkAction)
         
@@ -148,6 +155,8 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
                             toWrite += (stringInArray + "\n")
                         }
                     }
+                    //count total mantras
+                    //for deleting the right mantra
                     if(self.totalMantras > 0){
                         self.totalMantras-=1
                     }
@@ -172,12 +181,14 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
                     
                 }
             }
+            //error case
             catch let error as NSError {
                 print("error loading contents of url \(self.pathToAff!)")
                 print(error.localizedDescription)
             }
             
         }
+        //error case
         else {
             alreadyInFile.title = "Mantra Not Found"
             self.present(notInFile, animated: true, completion: nil) //Present alert
@@ -185,6 +196,8 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         
         
     }
+    //help buttom
+    //switch to the help screen
     @IBOutlet weak var helpButton: UIButton!
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let nav = segue.destination as! HelpViewController
@@ -192,6 +205,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     }
     
     //Previous button
+    //show previous text
     @IBAction func Previous(_ sender: AnyObject) {
         if(self.totalMantras > 0){
             self.currentIndex -= 1
@@ -203,6 +217,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     }
     
     //Next button
+    //show next text
     @IBAction func Next(_ sender: AnyObject) {
         if(self.totalMantras > 0){
             self.currentIndex += 1
@@ -243,7 +258,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     @IBOutlet weak var previousButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
     //--
-    
+    //viewdidappear function
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.notificationSet.textAlignment = NSTextAlignment.center
@@ -273,6 +288,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             var AMPM = "A.M"
             var minuteString: String
             var hourString: String
+            //set am/pm
             if(minute<=9){
                 minuteString = "0" + String(minute)
             }
@@ -294,6 +310,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
                 hourString = String(hour)
             }
             let weekday = NSCalendar.current.component(.weekday, from: notDate!)
+            //text appear after tapping the update schedule buttom
             if(setNot.repeatInterval == NSCalendar.Unit.hour){
                 self.notificationSet.text = "Active Reminder: Each hour at --:" + minuteString
             }
@@ -320,6 +337,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
                     self.Label.text = self.arrayOfMantra[0] //change label text as in array
                 }
             }
+            //error case
             catch {
                 print("error loading contents of url \(self.pathToAff!)")
                 print(error.localizedDescription)
@@ -390,13 +408,13 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
     public func numberOfComponents(in pickerView: UIPickerView) -> Int{
         return 1
     }
-    
+    //detect if users are tapping other place
     func detectTap(){
         let theTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.hideSelection))
         theTap.cancelsTouchesInView = false
         view.addGestureRecognizer(theTap)
     }
-    
+    //hide the pickerView after tapping other place
     func hideSelection(){
         if(dataDrop.isHidden == false){
             self.pickerView(dataDrop, didSelectRow: self.dataDrop.selectedRow(inComponent: 0), inComponent: 0)
@@ -415,7 +433,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         }
     }
     
-    //make the pickerview count rows in different textFields
+    //make the pickerview count rows in different textFields (4 cases)
     public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
         var countrows : Int = data.count
         if pickerView == weekdayDrop{
@@ -474,6 +492,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
             //hide certain picker views for different cases
             self.textTime.text = self.data[row]
             self.dataDrop.isHidden = true
+            //weekly case
             if textTime.text == "Weekly" {
                 weekday.isHidden = false
                 weekday.isEnabled = true
@@ -489,6 +508,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
                 hourTitle.isHidden = false
                 minuteTitle.isHidden = false
             }
+            //daily case
             else if textTime.text == "Daily" {
                 weekday.isHidden = true
                 weekday.isEnabled = false
@@ -504,6 +524,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
                 hourTitle.isHidden = false
                 minuteTitle.isHidden = false
             }
+            //hourly case
             else if textTime.text == "Hourly" {
                 weekday.isHidden = true
                 weekday.isEnabled = false
@@ -519,6 +540,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
                 hourTitle.isHidden = true
                 minuteTitle.isHidden = false
             }
+            //never case
             else {
                 weekday.isHidden = true
                 weekday.isEnabled = false
@@ -535,18 +557,22 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
                 minuteTitle.isHidden = true
             }
         }
+        //hide the pickerView
         else if pickerView == weekdayDrop{
             self.weekday.text = self.weekDay[row]
             self.weekdayDrop.isHidden = true
         }
+        //hide the pickerView
         else if pickerView == hourDrop{
             self.hour.text = self.hr[row]
             self.hourDrop.isHidden = true
         }
+        //hide the pickerView
         else if pickerView == minuteDrop{
             self.minute.text = self.min[row]
             self.minuteDrop.isHidden = true
         }
+        //hide the pickerView
         else if pickerView == AMPMSelPick{
             self.AMPMSel.text = self.mornAfter[row]
             self.AMPMSelPick.isHidden = true
@@ -589,14 +615,12 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
         let removeNot = UIAlertController(title: "Mantra Not Found", message: "Please enter a mantra.", preferredStyle: .alert)
         let theOkAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         let notiSent = UIAlertController(title: "Positive affirmation confirmed", message: "Your mantra reminder preferences have been saved.", preferredStyle: .alert)
-        
-        
-        
+        //add ok actions
         notBoth.addAction(theOkAction)
         notExist.addAction(theOkAction)
         removeNot.addAction(theOkAction)
         notiSent.addAction(theOkAction)
-        self.hideSelection()
+        self.hideSelection()//hide selection
         var calendar = Calendar.current
         calendar.locale = Locale(identifier: "en_POSIX_US")
         let weekDaySymbols = calendar.weekdaySymbols
@@ -683,6 +707,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
                 else {
                     minuteString = String(minute)
                 }
+                //set am/pm
                 var hour = NSCalendar.current.component(.hour, from: notDate!)
                 if(hour>=12){
                     hour = hour - 12
@@ -697,6 +722,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
                 else {
                     hourString = String(hour)
                 }
+                //set the text which will appear after tapping the update schedule buttom
                 let weekday = NSCalendar.current.component(.weekday, from: notDate!)
                 if(setNot.repeatInterval == NSCalendar.Unit.hour){
                     self.notificationSet.text = "Active Reminder: Each hour at ##:" + minuteString
@@ -709,6 +735,7 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
                 }
                 self.notificationSet.textAlignment = NSTextAlignment.center
             }
+            //error case
             else {
                 self.notificationSet.text = "ERROR!"
             }
