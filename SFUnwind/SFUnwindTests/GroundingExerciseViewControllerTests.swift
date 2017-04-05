@@ -16,6 +16,10 @@ class GroundingFeatureViewControllerTests: XCTestCase {
     
     var theGroundingExerciseViewController: GroundingFeatureViewController? // Add an instance of the panic alert view controller object to this test class.
     
+    // Sets up environment
+    // Input: None
+    // Output: None
+    // No dependencies
     override func setUp() {
         super.setUp()
         
@@ -34,6 +38,9 @@ class GroundingFeatureViewControllerTests: XCTestCase {
     //*****************
     
     // Test the viewDidLoad function
+    // Input: None
+    // Output: None
+    // No dependencies
     func testViewDidLoad() {
         // See if it's nil before loading page.
         XCTAssert(theGroundingExerciseViewController?.goalDisplay == nil)
@@ -56,6 +63,9 @@ class GroundingFeatureViewControllerTests: XCTestCase {
     }
     
     // Test the viewDidAppear function
+    // Input: None
+    // Output: None
+    // No dependencies
     func testViewDidAppear(){
         // Start the view of the page.
         let _ = theGroundingExerciseViewController?.view
@@ -72,6 +82,9 @@ class GroundingFeatureViewControllerTests: XCTestCase {
     }
     
     // Test the reset button
+    // Input: None
+    // Output: None
+    // No dependencies
     func testResetButtonAction(){
         // Start the view of the page.
         let _ = theGroundingExerciseViewController?.view
@@ -89,6 +102,9 @@ class GroundingFeatureViewControllerTests: XCTestCase {
     }
     
     // Test the imagePickerController view
+    // Input: None
+    // Output: None
+    // No dependencies
     func testCameraButtonAction(){
         // Start the view of the page.
         let _ = theGroundingExerciseViewController?.view

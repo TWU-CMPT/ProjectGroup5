@@ -13,18 +13,20 @@ import UserNotifications
 
 class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
     
-    //variable for functions
+    //Variables for functions
+    // String for path
     var pathToAff: String? = nil
-    var txtIndex = UITextField()
+    // Count of total mantras
     var totalMantras: Int = 0
+    // Current index of mantras
     var currentIndex: Int = 0
-    var txt = "rrr"
-    var blank = "\n"
+    // Current array of mantas
     var arrayOfMantra = [String]()
    
     
     //Create button
     @IBAction func Create(_ sender: AnyObject) {
+        // Create alerts
         let alreadyInFile = UIAlertController(title: "Mantra already exists!", message: "This positive affirmation has already been entered.", preferredStyle: .alert)
         let notInFile = UIAlertController(title: "Not in List", message: "Mantra not found.", preferredStyle: .alert)
         let notEntered = UIAlertController(title: "Mantra Missing", message: "You must enter a positive affirmation.", preferredStyle: .alert)
@@ -100,7 +102,6 @@ class PositiveAffirmationViewController: UIViewController, UIPickerViewDataSourc
                         print(error.localizedDescription)
                     }
                 }
-                self.txt = self.txtIndex.text!
                 self.Label.text = saveText //change the label to the next same as the user input
             }
             else {

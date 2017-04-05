@@ -121,6 +121,9 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
     
     // ViewDidAppear: This function is called every time GroundingExerciseViewController is accessed.
     // This function is used to reset goal indexes and remove current pictures
+    // Input: Animation Boolean
+    // Output: None
+    // No dependencies
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // Starts the camera session
@@ -280,6 +283,9 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
     
     // ViewDidLoad: This function is called once the GroundingExerciseViewController.swift object is first initialized.
     // This function is used to start up the UI elements, add the alert reply as needed, and sets up preview layer.
+    // Input: None
+    // Output: None
+    // No dependencies
     override func viewDidLoad() {
         super.viewDidLoad()
         // Add empty images to picture array
@@ -409,6 +415,9 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
     }
     
     // prepare: Modify help screen to the specific text for within
+    // Input: Storyboard Segue, Sender
+    // Output: None
+    // No dependencies
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let nav = segue.destination as? HelpViewController{
             nav.callingScreen = 1 // Notify the popup who's calling it: 0 = Square Breathing, 1 = Grounding, 2 = Positive Affirmations, 3 = Panic Alerts
@@ -416,6 +425,9 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
     }
     
     // resetButtonAction: This function resets the controller to the initial state
+    // Input: Sender
+    // Output: None
+    // No dependencies
     @IBAction func resetButtonAction(_ sender: UIButton) {
         // Alters the UI elements appropiately
         // Reset Button
@@ -478,6 +490,9 @@ class GroundingFeatureViewController: UIViewController, UIImagePickerControllerD
     
     // cameraButtonAction: This function is called when the user presses the capture button.
     // Allows user to take pictures, display grid and modify the appropiate indexes. Will display error if needed.
+    // Input: Sender
+    // Output: None
+    // Dependencies: Camera (otherwise warning showed).
     @IBAction func cameraButtonAction(_ sender: UIButton) {
         // Create a lock for input.
         self.captureButton.isEnabled = false
