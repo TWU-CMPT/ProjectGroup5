@@ -29,7 +29,10 @@ class SquareBreathingViewControllerTests: XCTestCase {
 
     }
     
-    
+    // Tears down
+    // Input: None
+    // Output: None
+    // Dependency: setUp() has ran
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
@@ -39,6 +42,9 @@ class SquareBreathingViewControllerTests: XCTestCase {
     // Tests:
     //*****************
     
+    // Input: None
+    // Output: None
+    // Dependency: setUp() has ran
     func testViewDidLoad(){
         let _ = theSquareBreathingViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
         // Check if the values for totalTime were set.
@@ -47,6 +53,9 @@ class SquareBreathingViewControllerTests: XCTestCase {
         
     }
     
+    // Input: None
+    // Output: None
+    // Dependency: setUp() has ran
     func testSaveSecondsTimer(){
         let _ = theSquareBreathingViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
         // Here we test valid and invalid data for this function.
@@ -55,6 +64,9 @@ class SquareBreathingViewControllerTests: XCTestCase {
         XCTAssert(0 == theSquareBreathingViewController?.saveSecondsTimer(totalTimerSeconds: 0))
     }
     
+    // Input: None
+    // Output: None
+    // Dependency: setUp() has ran
     func testSaveMinutesTimer(){
         let _ = theSquareBreathingViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
             theSquareBreathingViewController?.reStartButtonText.setTitle("Stop", for: .normal)
@@ -64,6 +76,9 @@ class SquareBreathingViewControllerTests: XCTestCase {
         XCTAssert(0 == theSquareBreathingViewController?.saveMinutesTimer(totalTimerMinute: 0))
     }
     
+    // Input: None
+    // Output: None
+    // Dependency: setUp() has ran
     func testLoadSecondsTimer(){
         let _ = theSquareBreathingViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
         // Here we test valid and invalid data for this function.
@@ -77,6 +92,9 @@ class SquareBreathingViewControllerTests: XCTestCase {
         XCTAssert(0 == theSquareBreathingViewController?.loadSecondsTimer())
     }
     
+    // Input: None
+    // Output: None
+    // Dependency: setUp() has ran
     func testLoadMinutesTimer(){
         let _ = theSquareBreathingViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
         // Here we test valid and invalid data for this function.
@@ -89,6 +107,9 @@ class SquareBreathingViewControllerTests: XCTestCase {
         XCTAssert(0 == theSquareBreathingViewController?.loadMinutesTimer())
     }
     
+    // Input: None
+    // Output: None
+    // Dependency: setUp() has ran
     func testSessionSecondsTimeManager(){
         let _ = theSquareBreathingViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
         
@@ -114,6 +135,9 @@ class SquareBreathingViewControllerTests: XCTestCase {
         
     }
 
+    // Input: None
+    // Output: None
+    // Dependency: setUp() has ran
     func testSessionMinutesTimeManager(){
         let _ = theSquareBreathingViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
             theSquareBreathingViewController?.reStartButtonText.setTitle("Stop", for: .normal)
@@ -131,6 +155,9 @@ class SquareBreathingViewControllerTests: XCTestCase {
     
     //Tests if after page is swiped does code in SquareBreathingViewController run
     //Also checks if timer stops
+    // Input: None
+    // Output: None
+    // Dependency: setUp() has ran
     func testViewDidDisappear(){
         let _ = theSquareBreathingViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
         theSquareBreathingViewController?.sesssionTrackerActive = true
@@ -146,6 +173,9 @@ class SquareBreathingViewControllerTests: XCTestCase {
     }
     //Tests if squareOrderManager() returns desired UIImageView
     //Also tests if switch functions correctly
+    // Input: None
+    // Output: None
+    // Dependency: setUp() has ran
     func testSquareOrderManager(){
         let _ = theSquareBreathingViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
         var orderNumber = 0
@@ -162,6 +192,9 @@ class SquareBreathingViewControllerTests: XCTestCase {
     
     //Tests if innerOrderManager() returns desired UIImageView
     //Also tests if switch functions correctly
+    // Input: None
+    // Output: None
+    // Dependency: setUp() has ran
     func testInnerOrderManager(){
         let _ = theSquareBreathingViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
         var orderNumber = 0
@@ -179,6 +212,9 @@ class SquareBreathingViewControllerTests: XCTestCase {
     
     
     //Tests button functionality when view appears
+    // Input: None
+    // Output: None
+    // Dependency: setUp() has ran
     func testViewDidAppear(){
         let _ = theSquareBreathingViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
         theSquareBreathingViewController?.sesssionTrackerActive = true
@@ -188,19 +224,18 @@ class SquareBreathingViewControllerTests: XCTestCase {
     }
     
     //Tests if array size doesnt exceeds 10
+    // Input: None
+    // Output: None
+    // Dependency: setUp() has ran
     func testSaveRecentSessionTracker(){
         let _ = theSquareBreathingViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
-        
-        var latestSessions = UserDefaults.standard.value(forKey: "previousSessions") as! [Double]
-
-        theSquareBreathingViewController?.saveRecentSesionTracker()
-        latestSessions = UserDefaults.standard.value(forKey: "previousSessions") as! [Double]
-        
-
-        XCTAssert(latestSessions.count >= 10)
+        XCTAssert((theSquareBreathingViewController?.latestSessions.count)! < 10)
 
     }
     //Tests if average functionality works
+    // Input: None
+    // Output: None
+    // Dependency: setUp() has ran
     func testSyncStatistics(){
         let _ = theSquareBreathingViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
         // Here we test valid and invalid data for this function.
@@ -229,14 +264,18 @@ class SquareBreathingViewControllerTests: XCTestCase {
         
     }
     
-    
     //Test if start button is initialized
+    // Input: None
+    // Output: None
+    // Dependency: setUp() has ran
     func testReStartButtonInitialized(){
         let _ = theSquareBreathingViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
         XCTAssertNotNil(theSquareBreathingViewController?.restartButton(sender: AnyClass.self))
     }
     
-    
+    // Input: None
+    // Output: None
+    // Dependency: setUp() has ran
     func testScaleAnimationManager(){
         let _ = theSquareBreathingViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns
         // Here we test valid and invalid data for this function.

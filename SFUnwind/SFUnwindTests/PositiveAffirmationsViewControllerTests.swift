@@ -27,9 +27,9 @@ class PositiveAffirmationViewControllerTests: XCTestCase {
     }
     
     // For deconstruction
-    // Input: Sender
+    // Input: None
     // Output: None
-    // No dependencies
+    // Dependency: setUp() has ran
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
@@ -40,9 +40,9 @@ class PositiveAffirmationViewControllerTests: XCTestCase {
     var thePositiveAffirmationVIdeController: PositiveAffirmationViewController?    // Add an instance of the positive affirmation view controller object to this test class
     
     //test the viewDidLoad function
-    // Input: Sender
+    // Input: None
     // Output: None
-    // No dependencies
+    // Dependency: setUp() has ran
     func testViewDidLoad(){
         let _ = thePositiveAffirmationVIdeController?.view
         // We can tell that our viewDidLoad function has been called as our buttons are no longer nil:
@@ -67,9 +67,9 @@ class PositiveAffirmationViewControllerTests: XCTestCase {
     }
     
     // Test the previous button
-    // Input: Sender
+    // Input: None
     // Output: None
-    // No dependencies
+    // Dependency: setUp() has ran
     func testPrevious(){
         // Start the view of the page.
         let _ = thePositiveAffirmationVIdeController?.view
@@ -78,9 +78,9 @@ class PositiveAffirmationViewControllerTests: XCTestCase {
     }
     
     // Test the next button
-    // Input: Sender
+    // Input: None
     // Output: None
-    // No dependencies
+    // Dependency: setUp() has ran
     func testNext(){
         // Start the view of the page.
         let _ = thePositiveAffirmationVIdeController?.view
@@ -89,9 +89,9 @@ class PositiveAffirmationViewControllerTests: XCTestCase {
     }
     
     // Test the notifications UI
-    // Input: Sender
+    // Input: None
     // Output: None
-    // No dependencies
+    // Dependency: setUp() has ran
     func testNotifications(){
         // Start the view of the page.
         let _ = thePositiveAffirmationVIdeController?.view
@@ -100,9 +100,9 @@ class PositiveAffirmationViewControllerTests: XCTestCase {
     }
     
     // Test the create mantra feature
-    // Input: Sender
+    // Input: None
     // Output: None
-    // No dependencies
+    // Dependency: setUp() has ran
     func testCreateMantra(){
         // Start the view of the page.
         let _ = thePositiveAffirmationVIdeController?.view
@@ -111,9 +111,9 @@ class PositiveAffirmationViewControllerTests: XCTestCase {
     }
     
     // Test the delete mantra feature
-    // Input: Sender
+    // Input: None
     // Output: None
-    // No dependencies
+    // Dependency: setUp() has ran
     func testDeleteMantra(){
         // Start the view of the page.
         let _ = thePositiveAffirmationVIdeController?.view
@@ -122,9 +122,9 @@ class PositiveAffirmationViewControllerTests: XCTestCase {
     }
     
     // Tests the pickerViewTitle()
-    // Input: Sender
+    // Input: None
     // Output: None
-    // No dependencies
+    // Dependency: setUp() has ran
     func testPickerViewTitle(){
         let pickerview = UIPickerView()
         let titleForRow = 0
@@ -134,9 +134,9 @@ class PositiveAffirmationViewControllerTests: XCTestCase {
         XCTAssert(textTime == "")
     }
     // Tests the pickerViewDidSelect()
-    // Input: Sender
+    // Input: None
     // Output: None
-    // No dependencies
+    // Dependency: setUp() has ran
     func testPickerViewDidSelect(){
         var didSelectRow = 1
         var inComponent = 0
@@ -169,9 +169,9 @@ class PositiveAffirmationViewControllerTests: XCTestCase {
         XCTAssert(thePositiveAffirmationVIdeController?.sepLabel.isHidden == true)
     }
     // Tests textFieldDidBeginEditing()
-    // Input: Sender
+    // Input: None
     // Output: None
-    // No dependencies
+    // Dependency: setUp() has ran
     func testTextFieldDidBeginEditing(){
         let txtField = UITextField()
         _ = thePositiveAffirmationVIdeController?.view // Trigger the required view methods. Required to prevent erroneous nil returns

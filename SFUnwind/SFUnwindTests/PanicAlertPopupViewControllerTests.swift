@@ -25,6 +25,10 @@ class PanicAlertPopupViewControllerTests: XCTestCase {
         theSFUnwindPageViewController = theStoryboard.instantiateInitialViewController() as! SFUnwindPageViewController? // Create a SFUnwindPageViewController object for our tests
     }
     
+    // Tear down
+    // Input: None
+    // Output: None
+    // Dependency: setUp() has ran
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
@@ -36,6 +40,9 @@ class PanicAlertPopupViewControllerTests: XCTestCase {
     
     
     // Test the viewDidLoad() function:
+    // Input: None
+    // Output: None
+    // Dependency: setUp() has ran
     func testViewDidLoad(){
         
         let _ = thePanicAlertPopupViewController?.view // Trigger the required view methods. Required to prevent erroneous nil returns

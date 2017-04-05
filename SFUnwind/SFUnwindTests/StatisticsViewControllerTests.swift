@@ -29,6 +29,10 @@ class StatisticsViewControllerTests: XCTestCase {
         
     }
     
+    // Tears down
+    // Input: None
+    // Output: None
+    // Dependency: setUp() has ran
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
@@ -37,6 +41,10 @@ class StatisticsViewControllerTests: XCTestCase {
     // Tests:
     //*****************
     
+    // Tests restart of statistics
+    // Input: None
+    // Output: None
+    // Dependency: setUp() has ran
     func testRestartAllButton(){
         let _ = theStatisticsViewContoller?.view // Trigger the required view methods. Required to prevent erroneous nil returns
         // Check if the values for totalTime were set.
